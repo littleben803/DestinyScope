@@ -19,6 +19,7 @@ struct MainContentView: View {
     // 评测结果
     @State private var result: String = ""
     @State private var errorMessage: String?
+    @State private var interpretation: FortuneInterpretation?
     
     let hours = Array(0...23)
 
@@ -90,6 +91,40 @@ struct MainContentView: View {
                 Text(result)
                     .font(.body)
                     .foregroundColor(.primary)
+
+                if let interpretation {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("总评")
+                            .font(.headline)
+                        Text(interpretation.summary)
+                            .font(.body)
+
+                        Text("性格")
+                            .font(.headline)
+                        Text(interpretation.personality)
+                            .font(.body)
+
+                        Text("事业")
+                            .font(.headline)
+                        Text(interpretation.career)
+                            .font(.body)
+
+                        Text("财运")
+                            .font(.headline)
+                        Text(interpretation.wealth)
+                            .font(.body)
+
+                        Text("关系")
+                            .font(.headline)
+                        Text(interpretation.relationship)
+                            .font(.body)
+
+                        Text(interpretation.safetyNotice)
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }
             .padding()
             .background(Color.white.opacity(0.9))
@@ -104,14 +139,17 @@ struct MainContentView: View {
         let engine = LifeWeightEngine(dataManager: dataManager)
         do {
             let calculation = try engine.calculate(birthDate: birthDate, selectedHour: selectedHour)
+            let fortuneInterpreter = TemplateFortuneInterpreter()
             errorMessage = nil
             lunarBirthDate = calculation.lunarBirthDate.displayText
             lifeTitle = calculation.title
             result = calculation.poem
+            interpretation = fortuneInterpreter.interpret(result: calculation)
         } catch {
             lifeTitle = ""
             lunarBirthDate = ""
             result = ""
+            interpretation = nil
             errorMessage = (error as? LocalizedError)?.errorDescription ?? "暂时无法计算，请稍后重试。"
         }
     }
