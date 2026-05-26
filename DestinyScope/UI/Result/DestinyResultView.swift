@@ -47,6 +47,11 @@ struct DestinyResultView: View {
                     AppCard {
                         interpretationSection
                     }
+
+                    Text("结果仅供娱乐、自我探索和传统文化学习参考。")
+                        .font(AppTheme.Typography.footnote)
+                        .foregroundColor(AppTheme.Colors.secondaryText)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding(AppTheme.Spacing.lg)
             }

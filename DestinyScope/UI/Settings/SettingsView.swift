@@ -15,25 +15,30 @@ struct SettingsView: View {
                     NavigationLink {
                         AboutView()
                     } label: {
-                        AppCard {
-                            HStack {
-                                VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                                    Text("关于 DestinyScope")
-                                        .font(AppTheme.Typography.sectionTitle)
-                                        .foregroundColor(AppTheme.Colors.primaryText)
+                        settingsRow(
+                            title: "关于 DestinyScope",
+                            subtitle: "本地传统命理数据与产品说明"
+                        )
+                    }
+                    .buttonStyle(.plain)
 
-                                    Text("本地传统命理数据与隐私说明")
-                                        .font(AppTheme.Typography.secondary)
-                                        .foregroundColor(AppTheme.Colors.secondaryText)
-                                }
+                    NavigationLink {
+                        PrivacyPolicyView()
+                    } label: {
+                        settingsRow(
+                            title: "隐私政策",
+                            subtitle: "无账号、无服务端、出生信息不上传"
+                        )
+                    }
+                    .buttonStyle(.plain)
 
-                                Spacer()
-
-                                Image(systemName: "chevron.right")
-                                    .font(AppTheme.Typography.caption)
-                                    .foregroundColor(AppTheme.Colors.secondaryText)
-                            }
-                        }
+                    NavigationLink {
+                        DisclaimerView()
+                    } label: {
+                        settingsRow(
+                            title: "免责声明",
+                            subtitle: "娱乐、自我探索和传统文化学习参考"
+                        )
                     }
                     .buttonStyle(.plain)
                 }
@@ -41,5 +46,27 @@ struct SettingsView: View {
             }
         }
         .navigationTitle("关于")
+    }
+
+    private func settingsRow(title: String, subtitle: String) -> some View {
+        AppCard {
+            HStack {
+                VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+                    Text(title)
+                        .font(AppTheme.Typography.sectionTitle)
+                        .foregroundColor(AppTheme.Colors.primaryText)
+
+                    Text(subtitle)
+                        .font(AppTheme.Typography.secondary)
+                        .foregroundColor(AppTheme.Colors.secondaryText)
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(AppTheme.Typography.caption)
+                    .foregroundColor(AppTheme.Colors.secondaryText)
+            }
+        }
     }
 }
