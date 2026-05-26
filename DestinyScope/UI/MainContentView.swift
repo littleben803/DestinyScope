@@ -88,51 +88,18 @@ struct MainContentView: View {
     }
 
     func calculateLifeWeight() {
-        // 拆分
-        let (yearIndex, monthIndex, dateIndex) = dataManager.getChineseCalendarComponents(from: birthDate)
-        guard let yearIndex, let monthIndex, let dateIndex else {
+        let engine = LifeWeightEngine(dataManager: dataManager)
+        guard let calculation = engine.calculate(birthDate: birthDate, selectedHour: selectedHour) else {
             return
         }
-        // 对应的农历日期
-        lunarBirthDate = ""
-        var lifeWeight = 0.0
-        if let index = dataManager.yearList.firstIndex(where: {$0.year == yearIndex}) {
-            print("yearIndex", index)
-            //zodiacImageView.image = UIImage(named: yearData[index].zodiacImageName)
-            lunarBirthDate.append(dataManager.yearList[index].yearString + "年")
-            lifeWeight += dataManager.yearList[index].weight
-        }
-        if let index = dataManager.monthList.firstIndex(where: {$0.month == monthIndex}) {
-            lunarBirthDate.append(dataManager.monthList[index].monthString)
-            lifeWeight += dataManager.monthList[index].weight
-        }
-        if let index = dataManager.dateList.firstIndex(where: {$0.date == dateIndex}) {
-            lunarBirthDate.append(dataManager.dateList[index].dateString)
-            lifeWeight += dataManager.dateList[index].weight
-        }
-        if let index = dataManager.hourList.firstIndex(where: {$0.hour == selectedHour}) {
-            lunarBirthDate.append(dataManager.hourList[index].hourString)
-            lifeWeight += dataManager.hourList[index].weight
-        }
 
-        // 生命重量
-        print("lifeWeight", lifeWeight)
-        
-        var poemTitle = ""
-        var poemContent = ""
-        let epsilon: Double = 0.0001
-        if let index = dataManager.poemList.firstIndex(where: { abs($0.weight - lifeWeight) < epsilon }) {
-            poemTitle = dataManager.poemList[index].title
-            poemContent = dataManager.poemList[index].content
+        lunarBirthDate = calculation.lunarBirthday
+        if !calculation.title.isEmpty {
+            lifeTitle = calculation.title
         }
-        
-        if !poemTitle.isEmpty {
-            lifeTitle = poemTitle
+        if !calculation.poemContent.isEmpty {
+            result = calculation.poemContent
         }
-        if !poemContent.isEmpty {
-            result = poemContent
-        }
-        print("poemTitle: \(poemTitle)\n, poemContent: \(poemContent)")
     }
 }
 
