@@ -18,6 +18,7 @@ struct MainContentView: View {
     @State private var lunarBirthDate: String = ""
     // 评测结果
     @State private var result: String = ""
+    @State private var errorMessage: String?
     
     let hours = Array(0...23)
 
@@ -66,7 +67,19 @@ struct MainContentView: View {
     
     @ViewBuilder
     private func resultView() -> some View {
-        if !result.isEmpty {
+        if let errorMessage {
+            VStack(alignment: .center, spacing: 12) {
+                Text(errorMessage)
+                    .font(.body)
+                    .foregroundColor(.primary)
+            }
+            .padding()
+            .background(Color.white.opacity(0.9))
+            .cornerRadius(16)
+            .padding(.horizontal)
+            .transition(.opacity.combined(with: .scale)) // 动画效果
+            .animation(.easeInOut, value: errorMessage)
+        } else if !result.isEmpty {
             VStack(alignment: .center, spacing: 12) {
                 Text(lifeTitle)
                     .font(.headline)
@@ -89,16 +102,17 @@ struct MainContentView: View {
 
     func calculateLifeWeight() {
         let engine = LifeWeightEngine(dataManager: dataManager)
-        guard let calculation = engine.calculate(birthDate: birthDate, selectedHour: selectedHour) else {
-            return
-        }
-
-        lunarBirthDate = calculation.lunarBirthday
-        if !calculation.title.isEmpty {
+        do {
+            let calculation = try engine.calculate(birthDate: birthDate, selectedHour: selectedHour)
+            errorMessage = nil
+            lunarBirthDate = calculation.lunarBirthDate.displayText
             lifeTitle = calculation.title
-        }
-        if !calculation.poemContent.isEmpty {
-            result = calculation.poemContent
+            result = calculation.poem
+        } catch {
+            lifeTitle = ""
+            lunarBirthDate = ""
+            result = ""
+            errorMessage = (error as? LocalizedError)?.errorDescription ?? "暂时无法计算，请稍后重试。"
         }
     }
 }
