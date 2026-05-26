@@ -14,28 +14,46 @@ struct KnowledgeListView: View {
     private let repository = KnowledgeRepository()
 
     var body: some View {
-        Group {
-            if let errorMessage {
-                Text(errorMessage)
-                    .padding()
-            } else if articles.isEmpty {
-                Text("暂无知识库内容")
-                    .foregroundColor(.secondary)
-                    .padding()
-            } else {
-                List(articles) { article in
-                    NavigationLink(destination: KnowledgeDetailView(article: article)) {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text(article.title)
-                                .font(.headline)
-                            Text(article.summary)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            Text(article.category)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+        AppBackground {
+            Group {
+                if let errorMessage {
+                    AppCard {
+                        AppSectionHeader(title: "加载失败")
+                        Text(errorMessage)
+                            .font(AppTheme.Typography.body)
+                            .foregroundColor(AppTheme.Colors.primaryText)
+                    }
+                    .padding(AppTheme.Spacing.lg)
+                } else if articles.isEmpty {
+                    AppCard {
+                        Text("暂无知识库内容")
+                            .font(AppTheme.Typography.body)
+                            .foregroundColor(AppTheme.Colors.secondaryText)
+                    }
+                    .padding(AppTheme.Spacing.lg)
+                } else {
+                    ScrollView {
+                        LazyVStack(spacing: AppTheme.Spacing.md) {
+                            ForEach(articles) { article in
+                                NavigationLink(destination: KnowledgeDetailView(article: article)) {
+                                    AppCard {
+                                        Text(article.category)
+                                            .font(AppTheme.Typography.caption)
+                                            .foregroundColor(AppTheme.Colors.darkGold)
+
+                                        Text(article.title)
+                                            .font(AppTheme.Typography.sectionTitle)
+                                            .foregroundColor(AppTheme.Colors.primaryText)
+
+                                        Text(article.summary)
+                                            .font(AppTheme.Typography.secondary)
+                                            .foregroundColor(AppTheme.Colors.secondaryText)
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                            }
                         }
-                        .padding(.vertical, 4)
+                        .padding(AppTheme.Spacing.lg)
                     }
                 }
             }

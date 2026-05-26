@@ -20,14 +20,18 @@ struct HomeView: View {
     private let hours = Array(0...23)
 
     var body: some View {
-        ZStack {
-            Color.red.ignoresSafeArea() // 设置整个背景色，便于调试
+        AppBackground {
+            ScrollView {
+                VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
+                    AppCard {
+                        AppSectionHeader(title: "出生信息")
 
-            VStack(spacing: 12) {
-                Form {
-                    Section(header: Text("").frame(height: 0)) {
                         DatePicker("出生日期", selection: $birthDate, displayedComponents: [.date])
                             .environment(\.locale, Locale(identifier: "zh_CN"))
+                            .foregroundColor(AppTheme.Colors.primaryText)
+
+                        Divider()
+                            .background(AppTheme.Colors.divider)
 
                         Picker("出生时辰", selection: $selectedHour) {
                             ForEach(hours, id: \.self) { hour in
@@ -35,42 +39,31 @@ struct HomeView: View {
                             }
                         }
                         .pickerStyle(.menu)
+                        .foregroundColor(AppTheme.Colors.primaryText)
                     }
-                }
-                .scrollContentBackground(.hidden)
-                .background(Color.white.opacity(0.9))
-                .frame(maxHeight: 140)
-                .scrollDisabled(true)
 
-                Button(action: calculateLifeWeight) {
-                    Text("查询")
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 10)
-                        .background(Color(red: 140/255, green: 32/255, blue: 32/255))
-                        .clipShape(Capsule())
-                }
+                    AppPrimaryButton(title: "查询", action: calculateLifeWeight)
 
-                if let errorMessage {
-                    VStack(alignment: .center, spacing: 12) {
-                        Text(errorMessage)
-                            .font(.body)
-                            .foregroundColor(.primary)
+                    if let errorMessage {
+                        AppCard {
+                            AppSectionHeader(title: "提示")
+                            Text(errorMessage)
+                                .font(AppTheme.Typography.body)
+                                .foregroundColor(AppTheme.Colors.primaryText)
+                        }
+                        .transition(.opacity.combined(with: .scale))
+                        .animation(.easeInOut, value: errorMessage)
                     }
-                    .padding()
-                    .background(Color.white.opacity(0.9))
-                    .cornerRadius(16)
-                    .padding(.horizontal)
-                    .transition(.opacity.combined(with: .scale))
-                    .animation(.easeInOut, value: errorMessage)
-                }
 
-                Spacer()
+                    Text("出生信息仅在设备端处理，结果仅供娱乐、自我探索和传统文化学习参考。")
+                        .font(AppTheme.Typography.footnote)
+                        .foregroundColor(AppTheme.Colors.secondaryText)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(AppTheme.Spacing.lg)
             }
-            .padding(.top)
-            .navigationTitle("测试程序")
-            .background(Color.clear)
         }
+        .navigationTitle("DestinyScope")
         .navigationDestination(isPresented: $shouldShowResult) {
             if let calculation, let interpretation {
                 DestinyResultView(result: calculation, interpretation: interpretation)

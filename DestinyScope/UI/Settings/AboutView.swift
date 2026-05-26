@@ -9,20 +9,23 @@ import SwiftUI
 
 struct AboutView: View {
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("DestinyScope")
-                    .font(.title)
-                    .fontWeight(.semibold)
+        AppBackground {
+            ScrollView {
+                AppCard {
+                    Text("DestinyScope")
+                        .font(AppTheme.Typography.pageTitle)
+                        .foregroundColor(AppTheme.Colors.primaryText)
 
-                Text("本应用基于本地传统命理数据生成结果，出生信息仅在设备端处理。")
-                    .font(.body)
+                    Text("本应用基于本地传统命理数据生成结果，出生信息仅在设备端处理。")
+                        .font(AppTheme.Typography.body)
+                        .foregroundColor(AppTheme.Colors.primaryText)
 
-                Text("内容仅供娱乐、自我探索和传统文化学习参考。")
-                    .font(.body)
-                    .foregroundColor(.secondary)
+                    Text("内容仅供娱乐、自我探索和传统文化学习参考。")
+                        .font(AppTheme.Typography.body)
+                        .foregroundColor(AppTheme.Colors.secondaryText)
+                }
+                .padding(AppTheme.Spacing.lg)
             }
-            .padding()
         }
         .navigationTitle("关于")
     }

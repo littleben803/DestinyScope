@@ -12,76 +12,90 @@ struct DestinyResultView: View {
     let interpretation: FortuneInterpretation
 
     var body: some View {
-        ZStack {
-            Color.red.ignoresSafeArea() // 设置整个背景色，便于调试
-
+        AppBackground {
             ScrollView {
-                VStack(alignment: .center, spacing: 12) {
-                    Text(result.title)
-                        .font(.headline)
+                VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
+                    AppCard {
+                        Text(result.title)
+                            .font(AppTheme.Typography.pageTitle)
+                            .foregroundColor(AppTheme.Colors.primaryText)
 
-                    Text(result.lunarBirthDate.displayText)
-                        .font(.subheadline)
+                        Text(result.lunarBirthDate.displayText)
+                            .font(AppTheme.Typography.secondary)
+                            .foregroundColor(AppTheme.Colors.secondaryText)
 
-                    Text("总重量：\(result.totalWeightText)")
-                        .font(.subheadline)
+                        Text("总重量：\(result.totalWeightText)")
+                            .font(AppTheme.Typography.sectionTitle)
+                            .foregroundColor(AppTheme.Colors.darkGold)
 
-                    Text(result.poem)
-                        .font(.body)
-                        .foregroundColor(.primary)
+                        Divider()
+                            .background(AppTheme.Colors.divider)
 
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("权重明细")
-                            .font(.headline)
+                        Text(result.poem)
+                            .font(AppTheme.Typography.body)
+                            .foregroundColor(AppTheme.Colors.primaryText)
+                    }
+
+                    AppCard {
+                        AppSectionHeader(title: "权重明细")
                         weightRow(result.breakdown.year)
                         weightRow(result.breakdown.month)
                         weightRow(result.breakdown.day)
                         weightRow(result.breakdown.hour)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                    interpretationSection
+                    AppCard {
+                        interpretationSection
+                    }
                 }
-                .padding()
-                .background(Color.white.opacity(0.9))
-                .cornerRadius(16)
-                .padding(.horizontal)
-                .padding(.top)
+                .padding(AppTheme.Spacing.lg)
             }
         }
         .navigationTitle("命理结果")
     }
 
     private var interpretationSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+            AppSectionHeader(title: "命理师解读")
+
             Text("总评")
-                .font(.headline)
+                .font(AppTheme.Typography.sectionTitle)
+                .foregroundColor(AppTheme.Colors.primaryText)
             Text(interpretation.summary)
-                .font(.body)
+                .font(AppTheme.Typography.body)
+                .foregroundColor(AppTheme.Colors.primaryText)
 
             Text("性格")
-                .font(.headline)
+                .font(AppTheme.Typography.sectionTitle)
+                .foregroundColor(AppTheme.Colors.primaryText)
             Text(interpretation.personality)
-                .font(.body)
+                .font(AppTheme.Typography.body)
+                .foregroundColor(AppTheme.Colors.primaryText)
 
             Text("事业")
-                .font(.headline)
+                .font(AppTheme.Typography.sectionTitle)
+                .foregroundColor(AppTheme.Colors.primaryText)
             Text(interpretation.career)
-                .font(.body)
+                .font(AppTheme.Typography.body)
+                .foregroundColor(AppTheme.Colors.primaryText)
 
             Text("财运")
-                .font(.headline)
+                .font(AppTheme.Typography.sectionTitle)
+                .foregroundColor(AppTheme.Colors.primaryText)
             Text(interpretation.wealth)
-                .font(.body)
+                .font(AppTheme.Typography.body)
+                .foregroundColor(AppTheme.Colors.primaryText)
 
             Text("关系")
-                .font(.headline)
+                .font(AppTheme.Typography.sectionTitle)
+                .foregroundColor(AppTheme.Colors.primaryText)
             Text(interpretation.relationship)
-                .font(.body)
+                .font(AppTheme.Typography.body)
+                .foregroundColor(AppTheme.Colors.primaryText)
 
             Text(interpretation.safetyNotice)
-                .font(.footnote)
-                .foregroundColor(.secondary)
+                .font(AppTheme.Typography.footnote)
+                .foregroundColor(AppTheme.Colors.secondaryText)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -92,6 +106,7 @@ struct DestinyResultView: View {
             Spacer()
             Text(item.weightText)
         }
-        .font(.body)
+        .font(AppTheme.Typography.body)
+        .foregroundColor(AppTheme.Colors.primaryText)
     }
 }

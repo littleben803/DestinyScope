@@ -31,6 +31,7 @@ struct MainContentView: View {
                 Label("关于", systemImage: "info.circle")
             }
         }
+        .tint(AppTheme.Colors.cinnabar)
     }
 }
 

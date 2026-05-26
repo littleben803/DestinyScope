@@ -11,34 +11,40 @@ struct KnowledgeDetailView: View {
     let article: KnowledgeArticle
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                Text(article.category)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+        AppBackground {
+            ScrollView {
+                AppCard {
+                    Text(article.category)
+                        .font(AppTheme.Typography.caption)
+                        .foregroundColor(AppTheme.Colors.darkGold)
 
-                Text(article.title)
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                    Text(article.title)
+                        .font(AppTheme.Typography.pageTitle)
+                        .foregroundColor(AppTheme.Colors.primaryText)
 
-                Text(article.summary)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    Text(article.summary)
+                        .font(AppTheme.Typography.secondary)
+                        .foregroundColor(AppTheme.Colors.secondaryText)
 
-                Text(article.body)
-                    .font(.body)
+                    Divider()
+                        .background(AppTheme.Colors.divider)
 
-                if !article.tags.isEmpty {
-                    Text("标签：\(article.tags.joined(separator: "、"))")
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
+                    Text(article.body)
+                        .font(AppTheme.Typography.body)
+                        .foregroundColor(AppTheme.Colors.primaryText)
+
+                    if !article.tags.isEmpty {
+                        Text("标签：\(article.tags.joined(separator: "、"))")
+                            .font(AppTheme.Typography.footnote)
+                            .foregroundColor(AppTheme.Colors.secondaryText)
+                    }
+
+                    Text("来源：\(article.source ?? "未注明") / 版本：\(article.version)")
+                        .font(AppTheme.Typography.footnote)
+                        .foregroundColor(AppTheme.Colors.secondaryText)
                 }
-
-                Text("来源：\(article.source ?? "未注明") / 版本：\(article.version)")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
+                .padding(AppTheme.Spacing.lg)
             }
-            .padding()
         }
         .navigationTitle(article.title)
     }
