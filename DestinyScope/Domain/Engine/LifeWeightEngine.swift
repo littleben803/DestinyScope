@@ -16,9 +16,11 @@ struct LifeWeightEngine {
     }
 
     private let dataManager: DataManager
+    private let repository: LifeWeightRepository
 
     init(dataManager: DataManager) {
         self.dataManager = dataManager
+        self.repository = LifeWeightRepository(dataManager: dataManager)
     }
 
     func calculate(birthDate: Date, selectedHour: Int) -> Result? {
@@ -30,35 +32,33 @@ struct LifeWeightEngine {
         var lunarBirthday = ""
         var totalWeight = 0.0
 
-        if let index = dataManager.yearList.firstIndex(where: { $0.year == yearIndex }) {
-            print("yearIndex", index)
-            lunarBirthday.append(dataManager.yearList[index].yearString + "年")
-            totalWeight += dataManager.yearList[index].weight
+        if let yearInfo = repository.yearInfo(for: yearIndex) {
+            lunarBirthday.append(yearInfo.yearString + "年")
+            totalWeight += yearInfo.weight
         }
 
-        if let index = dataManager.monthList.firstIndex(where: { $0.month == monthIndex }) {
-            lunarBirthday.append(dataManager.monthList[index].monthString)
-            totalWeight += dataManager.monthList[index].weight
+        if let monthInfo = repository.monthInfo(for: monthIndex) {
+            lunarBirthday.append(monthInfo.monthString)
+            totalWeight += monthInfo.weight
         }
 
-        if let index = dataManager.dateList.firstIndex(where: { $0.date == dateIndex }) {
-            lunarBirthday.append(dataManager.dateList[index].dateString)
-            totalWeight += dataManager.dateList[index].weight
+        if let dateInfo = repository.dateInfo(for: dateIndex) {
+            lunarBirthday.append(dateInfo.dateString)
+            totalWeight += dateInfo.weight
         }
 
-        if let index = dataManager.hourList.firstIndex(where: { $0.hour == selectedHour }) {
-            lunarBirthday.append(dataManager.hourList[index].hourString)
-            totalWeight += dataManager.hourList[index].weight
+        if let hourInfo = repository.hourInfo(for: selectedHour) {
+            lunarBirthday.append(hourInfo.hourString)
+            totalWeight += hourInfo.weight
         }
 
         print("lifeWeight", totalWeight)
 
         var poemTitle = ""
         var poemContent = ""
-        let epsilon: Double = 0.0001
-        if let index = dataManager.poemList.firstIndex(where: { abs($0.weight - totalWeight) < epsilon }) {
-            poemTitle = dataManager.poemList[index].title
-            poemContent = dataManager.poemList[index].content
+        if let poemInfo = repository.poemInfo(for: totalWeight) {
+            poemTitle = poemInfo.title
+            poemContent = poemInfo.content
         }
 
         print("poemTitle: \(poemTitle)\n, poemContent: \(poemContent)")
