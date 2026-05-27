@@ -79,6 +79,7 @@ struct HomeView: View {
             let calculation = try engine.calculate(birthDate: birthDate, selectedHour: selectedHour)
             let interpretation = TemplateFortuneInterpreter().interpret(result: calculation)
             let insight = LifeWeightInsightGenerator().generate(result: calculation)
+            saveHistoryRecord(result: calculation, insight: insight)
 
             self.calculation = calculation
             self.interpretation = interpretation
@@ -91,6 +92,26 @@ struct HomeView: View {
             insight = nil
             shouldShowResult = false
             errorMessage = (error as? LocalizedError)?.errorDescription ?? "暂时无法计算，请稍后重试。"
+        }
+    }
+
+    private func saveHistoryRecord(result: LifeWeightResult, insight: LifeWeightInsight) {
+        let record = HistoryRecord(
+            id: UUID(),
+            createdAt: Date(),
+            solarDate: result.birthProfile.solarDate,
+            hour: result.birthProfile.hour,
+            lunarBirthday: result.lunarBirthDate.displayText,
+            totalWeightText: result.totalWeightText,
+            title: result.title,
+            poem: result.poem,
+            tags: insight.tags
+        )
+
+        do {
+            try HistoryRecordStore().add(record)
+        } catch {
+            print("History record save failed: \(error.localizedDescription)")
         }
     }
 }

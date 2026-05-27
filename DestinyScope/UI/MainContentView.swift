@@ -25,6 +25,13 @@ struct MainContentView: View {
             }
 
             NavigationStack {
+                HistoryListView()
+            }
+            .tabItem {
+                Label("历史", systemImage: "clock")
+            }
+
+            NavigationStack {
                 SettingsView()
             }
             .tabItem {
