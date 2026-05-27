@@ -217,6 +217,10 @@ V1.1 上架风险提醒：
 - V1.2 阶段 3D 已以 Debug-only 方式接入仓库外 `llama.xcframework`，默认 `TextRefiner` 仍为 `TemplateTextRefiner`。
 - V1.2 阶段 3D 已通过仓库外 macOS smoke test 和 iOS Simulator Debug UI 验证同一个 GGUF 文件可以真实加载并生成短文本。
 - 2026-05-27 V1.2 阶段 3D 检查中，Debug 和 Release 模拟器构建均已通过；未新增模型文件、llama.cpp 源码或 `llama.xcframework` 到仓库。
+- V1.2 阶段 4 已将本地 llama.cpp PoC 接入 `TextRefining` 抽象，只在 Debug-only 实验入口中测试，不影响默认输出。
+- V1.2 阶段 4 已新增 PromptBuilder、SafetyRules 和 SafetyChecker；Debug UI 可触发 `LocalLlamaTextRefiner.refine` 并显示引擎、耗时、安全提示和回退状态。
+- V1.2 阶段 5 已优化提示词和安全过滤，新增 Debug-only 固定安全测试样例，安全检查失败时回退到本地模板文本。
+- V1.2 阶段 5 已新增 `docs/V1_2_SafetyEvaluation.md`，记录 Prompt 约束、安全检查、回退策略和生产前要求。
 - 真实本地模型尚未接入生产路径。
 - 当前 App 默认仍使用本地规则和模板输出，不接在线 AI，不接真实本地 LLM，不下载模型。
 

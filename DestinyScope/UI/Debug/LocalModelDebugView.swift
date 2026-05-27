@@ -16,6 +16,16 @@ struct LocalModelDebugView: View {
     @State private var outputText = "尚未生成"
     @State private var errorMessage: String?
     @State private var isRunning = false
+    @State private var refinedText = "尚未润色"
+    @State private var refineEngine = "未运行"
+    @State private var refineWasRefined = false
+    @State private var refineSafetyNotice = "未记录"
+    @State private var refineTime: TimeInterval?
+    @State private var refineErrorMessage: String?
+    @State private var didFallbackToTemplate = false
+    @State private var selectedTestCase = TextRefiningTestSuite.debugCases[0]
+    @State private var safetyCheckSummary = "未运行"
+    @State private var matchedRiskTerms = "无"
 
     private let config = LocalModelDebugConfig.current
 
@@ -60,6 +70,8 @@ struct LocalModelDebugView: View {
                     .disabled(isRunning)
 
                     statusCard
+
+                    refiningCard
                 }
                 .padding(AppTheme.Spacing.lg)
             }
@@ -67,6 +79,68 @@ struct LocalModelDebugView: View {
         .navigationTitle("本地模型 PoC")
         .onAppear {
             checkModelFiles()
+        }
+    }
+
+    private var refiningCard: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+                Text("TextRefining 润色测试")
+                    .font(AppTheme.Typography.sectionTitle)
+                    .foregroundColor(AppTheme.Colors.primaryText)
+
+                Text("安全测试样例")
+                    .font(AppTheme.Typography.caption)
+                    .foregroundColor(AppTheme.Colors.secondaryText)
+
+                ForEach(TextRefiningTestSuite.debugCases) { testCase in
+                    Button {
+                        selectedTestCase = testCase
+                        resetRefiningState()
+                    } label: {
+                        HStack {
+                            Text(testCase.title)
+                                .font(AppTheme.Typography.body)
+                                .foregroundColor(AppTheme.Colors.primaryText)
+                            Spacer()
+                            if selectedTestCase.id == testCase.id {
+                                Text("当前")
+                                    .font(AppTheme.Typography.caption)
+                                    .foregroundColor(AppTheme.Colors.darkGold)
+                            }
+                        }
+                        .padding(.vertical, AppTheme.Spacing.xs)
+                    }
+                    .buttonStyle(.plain)
+                }
+
+                infoRow(title: "测试名称", value: selectedTestCase.title)
+                infoRow(title: "sourceText", value: selectedTestCase.sourceText)
+
+                AppPrimaryButton(title: isRunning ? "润色中..." : "调用 TextRefining.refine") {
+                    runTextRefiningTest()
+                }
+                .disabled(isRunning)
+
+                infoRow(title: "refinedText", value: refinedText)
+                infoRow(title: "engine", value: refineEngine)
+                infoRow(title: "wasRefined", value: refineWasRefined ? "true" : "false")
+                infoRow(title: "safetyNotice", value: refineSafetyNotice)
+                infoRow(title: "耗时", value: formatDuration(refineTime))
+                infoRow(title: "回退状态", value: didFallbackToTemplate ? "已回退到模板文本" : "未回退")
+                infoRow(title: "safety check", value: safetyCheckSummary)
+                infoRow(title: "风险原因", value: matchedRiskTerms)
+
+                if let refineErrorMessage {
+                    Text("错误信息")
+                        .font(AppTheme.Typography.sectionTitle)
+                        .foregroundColor(AppTheme.Colors.primaryText)
+
+                    Text(refineErrorMessage)
+                        .font(AppTheme.Typography.body)
+                        .foregroundColor(AppTheme.Colors.cinnabar)
+                }
+            }
         }
     }
 
@@ -178,6 +252,82 @@ struct LocalModelDebugView: View {
                 isRunning = false
             }
         }
+    }
+
+    private func runTextRefiningTest() {
+        isRunning = true
+        refineErrorMessage = nil
+        refinedText = "测试中..."
+        refineEngine = "运行中"
+        refineWasRefined = false
+        refineSafetyNotice = "未记录"
+        refineTime = nil
+        didFallbackToTemplate = false
+        safetyCheckSummary = "未运行"
+        matchedRiskTerms = "无"
+
+        let input = TextRefiningInput(
+            sourceText: selectedTestCase.sourceText,
+            purpose: selectedTestCase.purpose,
+            tone: selectedTestCase.tone,
+            context: [
+                "场景": "DestinyScope V1.2 Debug-only TextRefining PoC",
+                "边界": "只能润色既有模板文本，不进入默认结果页"
+            ],
+            safetyRules: TextRefiningSafetyRules.defaultRules
+        )
+
+        Task {
+            let start = CFAbsoluteTimeGetCurrent()
+            let output: TextRefiningOutput
+            let errorText: String?
+            let fallbackUsed: Bool
+            let safetyResult: TextRefiningSafetyCheckResult
+
+            do {
+                output = try await TextRefinerFactory.makeDebugLocalLlamaRefiner().refine(input)
+                safetyResult = TextRefiningSafetyChecker().check(output.text, sourceText: input.sourceText)
+                errorText = output.engine.contains("fallback") ? output.safetyNotice : nil
+                fallbackUsed = output.engine.contains("fallback")
+            } catch {
+                output = (try? await TextRefinerFactory.makeTemplateRefiner().refine(input)) ?? TextRefiningOutput(
+                    text: input.sourceText,
+                    wasRefined: false,
+                    engine: "template",
+                    safetyNotice: TextRefiningSafetyRules.safetyNotice
+                )
+                errorText = (error as? LocalizedError)?.errorDescription ?? "TextRefining 测试失败，已回退到模板文本。"
+                fallbackUsed = true
+                safetyResult = TextRefiningSafetyChecker().check(output.text, sourceText: input.sourceText)
+            }
+
+            let elapsed = CFAbsoluteTimeGetCurrent() - start
+
+            await MainActor.run {
+                refinedText = output.text
+                refineEngine = output.engine
+                refineWasRefined = output.wasRefined
+                refineSafetyNotice = output.safetyNotice ?? "未记录"
+                refineTime = elapsed
+                refineErrorMessage = errorText
+                didFallbackToTemplate = fallbackUsed
+                safetyCheckSummary = safetyResult.isPassed ? "通过" : "未通过"
+                matchedRiskTerms = safetyResult.reasonText
+                isRunning = false
+            }
+        }
+    }
+
+    private func resetRefiningState() {
+        refinedText = "尚未润色"
+        refineEngine = "未运行"
+        refineWasRefined = false
+        refineSafetyNotice = "未记录"
+        refineTime = nil
+        refineErrorMessage = nil
+        didFallbackToTemplate = false
+        safetyCheckSummary = "未运行"
+        matchedRiskTerms = "无"
     }
 
     private func formatDuration(_ duration: TimeInterval?) -> String {

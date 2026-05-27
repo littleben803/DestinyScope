@@ -144,27 +144,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D51C3A2B2DAF000100000001 /* Embed Debug llama.xcframework */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(HOME)/LocalModels/DestinyScope/llama.xcframework",
-			);
-			name = "Embed Debug llama.xcframework";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/llama.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n  exit 0\nfi\n\nLLAMA_XCFRAMEWORK=\"$HOME/LocalModels/DestinyScope/llama.xcframework\"\nif [ ! -d \"$LLAMA_XCFRAMEWORK\" ]; then\n  echo \"warning: Debug llama.xcframework not found at $LLAMA_XCFRAMEWORK\"\n  exit 0\nfi\n\ncase \"$PLATFORM_NAME\" in\n  iphoneos)\n    LLAMA_SLICE=\"ios-arm64\"\n    ;;\n  iphonesimulator)\n    LLAMA_SLICE=\"ios-arm64_x86_64-simulator\"\n    ;;\n  *)\n    echo \"Skipping llama.xcframework embed for platform $PLATFORM_NAME\"\n    exit 0\n    ;;\nesac\n\nSRC_FRAMEWORK=\"$LLAMA_XCFRAMEWORK/$LLAMA_SLICE/llama.framework\"\nDST_DIR=\"$TARGET_BUILD_DIR/$FRAMEWORKS_FOLDER_PATH\"\nif [ ! -d \"$SRC_FRAMEWORK\" ]; then\n  echo \"warning: llama.framework slice not found at $SRC_FRAMEWORK\"\n  exit 0\nfi\n\nmkdir -p \"$DST_DIR\"\nrsync -a --delete \"$SRC_FRAMEWORK\" \"$DST_DIR/\"\n\nif [ \"$CODE_SIGNING_ALLOWED\" != \"NO\" ]; then\n  SIGN_IDENTITY=\"${EXPANDED_CODE_SIGN_IDENTITY:--}\"\n  /usr/bin/codesign --force --sign \"$SIGN_IDENTITY\" --timestamp=none \"$DST_DIR/llama.framework\" || true\nfi\n";
-		};
 		C793B05894A99A479BD08B72 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -186,6 +165,27 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D51C3A2B2DAF000100000001 /* Embed Debug llama.xcframework */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(HOME)/LocalModels/DestinyScope/llama.xcframework",
+			);
+			name = "Embed Debug llama.xcframework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/llama.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n  exit 0\nfi\n\nLLAMA_XCFRAMEWORK=\"$HOME/LocalModels/DestinyScope/llama.xcframework\"\nif [ ! -d \"$LLAMA_XCFRAMEWORK\" ]; then\n  echo \"warning: Debug llama.xcframework not found at $LLAMA_XCFRAMEWORK\"\n  exit 0\nfi\n\ncase \"$PLATFORM_NAME\" in\n  iphoneos)\n    LLAMA_SLICE=\"ios-arm64\"\n    ;;\n  iphonesimulator)\n    LLAMA_SLICE=\"ios-arm64_x86_64-simulator\"\n    ;;\n  *)\n    echo \"Skipping llama.xcframework embed for platform $PLATFORM_NAME\"\n    exit 0\n    ;;\nesac\n\nSRC_FRAMEWORK=\"$LLAMA_XCFRAMEWORK/$LLAMA_SLICE/llama.framework\"\nDST_DIR=\"$TARGET_BUILD_DIR/$FRAMEWORKS_FOLDER_PATH\"\nif [ ! -d \"$SRC_FRAMEWORK\" ]; then\n  echo \"warning: llama.framework slice not found at $SRC_FRAMEWORK\"\n  exit 0\nfi\n\nmkdir -p \"$DST_DIR\"\nrsync -a --delete \"$SRC_FRAMEWORK\" \"$DST_DIR/\"\n\nif [ \"$CODE_SIGNING_ALLOWED\" != \"NO\" ]; then\n  SIGN_IDENTITY=\"${EXPANDED_CODE_SIGN_IDENTITY:--}\"\n  /usr/bin/codesign --force --sign \"$SIGN_IDENTITY\" --timestamp=none \"$DST_DIR/llama.framework\" || true\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

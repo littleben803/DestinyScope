@@ -86,6 +86,12 @@ LocalModels/
 
 - `docs/V1_2_LlamaCppPoCResult.md`
 
+阶段 4 已将本地 llama.cpp PoC 接入 `TextRefining` 抽象，但仍只在 Debug-only 实验入口中验证。默认 `TextRefinerFactory.makeDefaultRefiner()` 仍返回 `TemplateTextRefiner`，普通 App 输出不受影响。
+
+阶段 4 结果记录见：
+
+- `docs/V1_2_TextRefiningPoCResult.md`
+
 ## 6. 安全边界
 
 本地模型未来只能用于润色和表达改善。
