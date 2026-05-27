@@ -41,6 +41,18 @@ struct SettingsView: View {
                         )
                     }
                     .buttonStyle(.plain)
+
+                    #if DEBUG
+                    NavigationLink {
+                        LocalModelDebugView()
+                    } label: {
+                        settingsRow(
+                            title: "本地模型 PoC",
+                            subtitle: "Debug-only，当前不加载模型"
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    #endif
                 }
                 .padding(AppTheme.Spacing.lg)
             }

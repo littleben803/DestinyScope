@@ -60,3 +60,12 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# Local model files
+*.gguf
+*.bin
+*.safetensors
+*.mlmodel
+*.mlmodelc
+Models/
+LocalModels/

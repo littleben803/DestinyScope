@@ -19,4 +19,10 @@ enum TextRefinerFactory {
     static func makeLocalLLMRefinerPlaceholder() -> TextRefining {
         LocalLLMTextRefiner()
     }
+
+    #if DEBUG
+    static func makeDebugLocalLlamaRefiner() -> TextRefining {
+        LocalLlamaTextRefiner()
+    }
+    #endif
 }

@@ -203,8 +203,14 @@ V1.1 上架风险提醒：
 - 已准备 `docs/V1_2_PoCPlan.md`，明确 PoC 只验证本地润色能力，不影响当前主流程。
 - 已准备 `docs/V1_2_Roadmap.md`，将 V1.2 拆分为调研、模型 license 检查、Debug-only 集成、TextRefining 接入、安全过滤、设备测试和生产决策。
 - 已准备 `docs/V1_2_ModelCandidates.md`，记录候选模型、GGUF / 4-bit 可用性、中文能力、license 和再分发风险。
+- 已准备 `docs/V1_2_LlamaCppPoCGuide.md`，记录 llama.cpp Debug-only PoC 骨架、后续 3B 指标和安全边界。
 - 推荐 PoC 路线为 llama.cpp + GGUF；MLX Swift 作为备选；Core ML 作为长期评估方向。
 - V1.2 阶段 2 初步推荐 P0 模型为 `Qwen2.5-0.5B-Instruct`，备选为 `Qwen2.5-1.5B-Instruct-GGUF`。
+- V1.2 阶段 3A 已新增 Debug-only 本地模型 PoC 入口和 `LocalLlamaTextRefiner` 骨架。
+- V1.2 阶段 3A 未接入 llama.cpp Swift Package，未加载 GGUF，未执行真实推理，未提交任何模型文件。
+- Release 下不应展示本地模型 PoC 入口；默认 TextRefiner 仍为 `TemplateTextRefiner`。
+- `.gitignore` 已增加 GGUF、bin、safetensors、Core ML 模型和本地模型目录忽略规则。
+- 2026-05-27 V1.2 阶段 3A 检查中，Debug 和 Release 模拟器构建均已通过。
 - 真实本地模型尚未接入生产路径。
 - 当前 App 默认仍使用本地规则和模板输出，不接在线 AI，不接真实本地 LLM，不下载模型。
 
