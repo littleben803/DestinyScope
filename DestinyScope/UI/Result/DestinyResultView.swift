@@ -50,6 +50,14 @@ struct DestinyResultView: View {
                     }
 
                     AppCard {
+                        FortuneQuestionView(
+                            result: result,
+                            interpretation: interpretation,
+                            insight: insight
+                        )
+                    }
+
+                    AppCard {
                         interpretationSection
                     }
 
