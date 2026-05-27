@@ -95,6 +95,7 @@
 - 称骨算命数据来自 App Bundle 内置 CSV。
 - 知识库来自 App Bundle 内置 JSON。
 - 出生日期和时辰仅用于本地计算。
+- V1.1 本地历史记录仅保存在设备端 Application Support 目录，不上传、不联网、不接账号或 iCloud 同步。
 
 上架前待办：
 
@@ -123,10 +124,9 @@
 - 已从 Debug 和 Release 的 `LIBRARY_SEARCH_PATHS` 中移除 `$(PROJECT_DIR)/DestinyScope/Lib`。
 - `LIBRARY_SEARCH_PATHS` 仍保留 `$(inherited)` 和 `$(PROJECT_DIR)/DestinyScope`。
 - 2026-05-26 阶段 12A 检查中，Debug 和 Release 模拟器构建均已通过。
+- 2026-05-27 V1.1 阶段 7 检查中，Debug 和 Release 模拟器构建均已通过。
 - `DestinyScope/Lib search path not found` warning 未复现。
-- 当前构建日志仍有非阻断环境提示：
-  - `IDERunDestination: Supported platforms for the buildables in the current scheme is empty.`
-  - `The domain/default pair of (com.bytedance.jojo, JoJoBuildVersion) does not exist`
+- 当前 V1.1 阶段 7 构建日志未发现新增 warning 或 error。
 
 上架前待办：
 
@@ -182,11 +182,14 @@
 - V1.1 阶段 4B 已将本地知识库扩充到 29 篇，并新增 `DestinyScope/Resources/Knowledge/rag_chunks.json` 作为未来本地 RAG 预留数据。
 - V1.1 阶段 5 已新增本地历史记录能力，记录仅保存到设备本地 Application Support 目录，不上传、不联网、不接账号或 iCloud 同步。
 - V1.1 阶段 6 已新增本地小模型文本润色接口预留，当前默认仍使用 `TemplateTextRefiner`，不接真实模型、不接 Core ML、MLX、llama.cpp、不下载模型、不请求网络。
+- V1.1 阶段 7 已完成自测报告：`docs/V1_1_TestReport.md`。
+- V1.1 阶段 7 检查确认：Debug / Release 构建通过，知识库 29 篇，RAG chunks 29 条，未发现网络请求、真实模型接入、权限申请、支付或广告追踪引用。
 
 V1.1 上架风险提醒：
 
 - 即使后续出现“命理问答”入口，也必须保持本地模板回答，不声称真实在线 AI。
 - 即使后续预留本地小模型接口，也不能在元数据中宣传真实 AI 推理，除非对应功能已经真实实现并完成隐私更新。
 - 本地历史记录上线前需要确认隐私政策是否需要补充“历史记录仅保存在设备端”。
+- 建议上架前补充 App 内隐私政策和 GitHub Pages 隐私政策，明确“历史记录仅保存在本地设备，可由用户删除，不上传、不同步”。
 - 如果后续新增历史记录同步、账号或云备份，需要同步更新隐私政策和 App Store 隐私说明。
 - 如果后续接入真实本地小模型，需要重新评估包体、耗电、设备兼容、隐私政策和审核备注，且模型只能负责文本润色，不能生成命理计算结论。

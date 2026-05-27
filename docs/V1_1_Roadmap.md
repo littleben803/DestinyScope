@@ -4,6 +4,17 @@
 
 V1.1 以小步可编译迁移为原则。每个阶段只解决一个明确目标，避免同时修改业务、UI、数据和架构边界。
 
+## 当前完成状态
+
+更新日期：2026-05-27
+
+- 阶段 2：已完成。已新增 `LifeWeightInsight` 并在结果页展示命格洞察。
+- 阶段 3：已完成。已新增命理问答入口，使用本地模板回答五个预设问题。
+- 阶段 4：已完成。已整理知识来源，知识库扩充到 29 篇，并新增 `rag_chunks.json` 作为未来 RAG 预留。
+- 阶段 5：已完成。已新增本地历史记录，数据仅保存在设备端 Application Support 目录。
+- 阶段 6：已完成。已新增 `TextRefining` 接口、`TemplateTextRefiner` 默认实现和 `LocalLLMTextRefiner` 占位实现，不接真实模型。
+- 阶段 7：已完成。已新增 `docs/V1_1_TestReport.md`，Debug / Release 构建通过，未发现阻断性小 bug。
+
 ## V1.1 阶段 2：增强结果页报告结构，新增 LifeWeightInsight
 
 阶段目标：

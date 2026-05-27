@@ -189,3 +189,35 @@ rg -n "UILaunchStoryboardName|LaunchScreen|ASSETCATALOG_COMPILER_APPICON_NAME|AS
 - 未发现需要本阶段修复的阻断性 Swift 小 bug。
 - 本阶段未修改 Swift 文件。
 - TestFlight 前仍必须人工确认：真机主流程、断网流程、App Icon 授权、App Store 隐私政策 URL、上架截图和元数据文案。
+
+## 10. V1.1 增量自测状态
+
+检查日期：2026-05-27
+
+新增报告：
+
+- 已新增 `docs/V1_1_TestReport.md`，覆盖 V1.1 阶段 2 到阶段 7 的构建、功能、离线、隐私、JSON 和文案安全检查。
+
+V1.1 当前检查结论：
+
+- Debug 构建通过。
+- Release 构建通过。
+- 结果页已展示 `LifeWeightInsight`：标签、权重侧重点、优势倾向、需要关注、行动建议。
+- 结果页已新增“命理问答”，五个预设问题均存在，回答由本地 `TemplateFortuneQuestionAnswerer` 生成。
+- 历史 Tab 已存在，历史记录保存在本地 Application Support 目录，支持删除单条和清空全部，最多保留 50 条。
+- 本地知识库已扩充到 29 篇。
+- `rag_chunks.json` 已存在且 JSON 合法，当前只作为未来 RAG 预留，不接检索。
+- `TextRefining` 接口已存在，默认实现为 `TemplateTextRefiner`，`LocalLLMTextRefiner` 仅为占位并抛出 `localModelNotAvailable`。
+- 静态扫描未发现网络请求、在线 AI、真实本地 LLM、Core ML、MLX、llama.cpp、模型文件下载、权限申请、StoreKit、广告追踪或 iCloud 同步。
+
+V1.1 真机前人工检查：
+
+- 首页查询到结果页完整链路。
+- 命理问答五个问题点击和回答展示。
+- 知识库列表和详情页长文滚动。
+- 历史记录新增、删除单条、清空全部。
+- 飞行模式下首页查询、知识库、历史记录和 Legal 页面。
+- 浅色 / 深色模式可读性。
+- 小屏 iPhone 和 iPad 基础适配。
+- App Icon 和 Launch Screen 真机显示。
+- 上架前补充或确认隐私政策中对“历史记录仅保存在本地设备”的说明。
