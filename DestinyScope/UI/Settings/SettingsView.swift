@@ -48,7 +48,7 @@ struct SettingsView: View {
                     } label: {
                         settingsRow(
                             title: "本地模型 PoC",
-                            subtitle: "Debug-only，当前不加载模型"
+                            subtitle: "Debug-only，本地 GGUF 加载测试"
                         )
                     }
                     .buttonStyle(.plain)
