@@ -1,19 +1,22 @@
 # DestinyScope App Store 上架检查清单
 
+更新日期：2026-05-27
+
 ## 1. App Icon
 
 当前状态：
 
 - `ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon` 已配置。
-- `AppIcon.appiconset/Contents.json` 存在。
-- AppIcon 目前只有占位 JSON 条目，未发现真实图片文件。
+- `AppIcon.appiconset/Contents.json` 已引用 `AppIcon-1024.png`。
+- `DestinyScope/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png` 已存在。
+- 当前工程内 App Icon 尺寸为 1024x1024。
+- 当前工程内 App Icon 无 alpha 通道。
 
 上架前待办：
 
-- 提供原创或已授权的 1024x1024 PNG。
-- 确认无透明背景、无 alpha 通道。
-- 确认小尺寸下主体可识别。
-- 接入 `AppIcon.appiconset` 并验证真机显示。
+- 人工确认 App Icon 为原创或已授权素材。
+- 真机检查小尺寸下主体是否清晰可识别。
+- 如需单独适配 dark/tinted 图标，可后续提供专门资源；当前先复用同一 1024 图标。
 
 ## 2. Launch Screen
 
@@ -35,10 +38,14 @@
 
 - App 内已有隐私政策页入口。
 - 文案已覆盖无账号、无登录、出生信息本地处理、不上传、无服务端、无在线 AI、无广告追踪、无敏感权限等 V1 特性。
+- 已准备 GitHub Pages 静态隐私政策网页文件：`docs/privacy/index.html`。
+- 已准备隐私政策 Markdown 源文件：`docs/privacy/privacy.md`。
+- 目标公开 URL 已规划为 `https://littleben803.github.io/DestinyScope/privacy/`。
 
 上架前待办：
 
-- 准备 App Store Connect 需要填写的隐私政策 URL。
+- 在 GitHub 仓库中启用 GitHub Pages，并确认公网 URL 可访问。
+- 将 `https://littleben803.github.io/DestinyScope/privacy/` 填入 App Store Connect 的 Privacy Policy URL。
 - 确认隐私政策 URL 内容与 App 内文案一致。
 - 如未来加入联网、账号、AI、订阅、数据同步，需要同步更新。
 
@@ -49,6 +56,7 @@
 - App 内已有免责声明页入口。
 - 结果页已有短免责声明提示。
 - 文案说明结果仅供娱乐、自我探索和传统文化学习参考。
+- 文案明确不构成医疗、法律、财务、投资、婚恋、职业等现实决策建议。
 
 上架前待办：
 
@@ -60,18 +68,20 @@
 当前状态：
 
 - V1 产品规划和隐私政策都说明无服务端。
-- 当前阶段未新增网络请求或服务端依赖。
+- 静态扫描未发现 `URLSession`、HTTP URL、网络连接库或服务端请求代码。
 
 上架前待办：
 
 - 在 App Store 审核备注中可说明：出生信息仅在设备端处理，V1 无账号、无服务端、无数据上传。
+- 真机断网测试核心功能是否可用。
 
 ## 6. 无在线 AI 说明
 
 当前状态：
 
 - V1 使用本地模板式命理师解读。
-- 隐私政策说明不接在线 AI。
+- 隐私政策说明不接在线 AI，不使用真实本地 LLM 推理。
+- 静态扫描未发现 OpenAI SDK、在线 AI SDK 或本地 LLM 推理接入。
 
 上架前待办：
 
@@ -95,12 +105,13 @@
 
 当前状态：
 
-- 本阶段未生成图片、未接入第三方素材。
-- 当前 AppIcon 缺少真实图片，因此暂不存在图标素材版权结论。
+- 本地知识库文案为项目内原创整理。
+- App Icon 已接入工程，但素材授权状态需要用户人工确认。
+- Launch Screen 当前只使用静态背景色和系统文本，不包含外部图片。
 
 上架前待办：
 
-- 确认 App Icon、Launch Logo、截图背景、任何图形纹样均为原创、已授权或系统资源。
+- 确认 App Icon、截图背景、任何图形纹样均为原创、已授权或系统资源。
 - 不使用来源不明的网络图、未经授权字体、第三方图标或含版权争议的传统纹样素材。
 - 本地知识库文案保持原创、简短、通俗，不复制来源不明的大段网络内容。
 
@@ -108,19 +119,18 @@
 
 当前状态：
 
-- 近期构建出现既有 warning：
-
-```text
-ld: warning: search path '/Users/bytedance/repo/lark/DestinyScope/DestinyScope/Lib' not found
-```
-
-- 工程配置中 `LIBRARY_SEARCH_PATHS` 包含 `$(PROJECT_DIR)/DestinyScope/Lib`。
+- 已确认 `DestinyScope/Lib` 目录不存在。
+- 已从 Debug 和 Release 的 `LIBRARY_SEARCH_PATHS` 中移除 `$(PROJECT_DIR)/DestinyScope/Lib`。
+- `LIBRARY_SEARCH_PATHS` 仍保留 `$(inherited)` 和 `$(PROJECT_DIR)/DestinyScope`。
+- 2026-05-26 阶段 12A 检查中，Debug 和 Release 模拟器构建均已通过。
+- `DestinyScope/Lib search path not found` warning 未复现。
+- 当前构建日志仍有非阻断环境提示：
+  - `IDERunDestination: Supported platforms for the buildables in the current scheme is empty.`
+  - `The domain/default pair of (com.bytedance.jojo, JoJoBuildVersion) does not exist`
 
 上架前待办：
 
-- 在后续工程清理阶段确认 `DestinyScope/Lib` 是否应该存在。
-- 如果不需要该路径，移除无效 search path。
-- 上架前至少跑一次 Release 构建，确保无阻断性 warning 或 error。
+- 上架前继续关注新增 warning，确保 Release Archive 无阻断性 warning 或 error。
 
 ## 10. TestFlight 前真机检查
 
@@ -135,11 +145,29 @@ ld: warning: search path '/Users/bytedance/repo/lark/DestinyScope/DestinyScope/L
 - 检查 App Store 截图和描述不包含绝对预测、恐吓式内容、医疗/投资/婚姻确定性承诺。
 - 检查版本号、构建号、Bundle ID、签名 Team 是否正确。
 
-## 11. 当前缺失资源汇总
+## 11. App Store 元数据与审核材料
 
-- 真实 App Icon PNG。
-- 可选 dark/tinted App Icon 资源。
-- 配置后的 AccentColor 资产颜色值。
+当前状态：
+
+- 已准备 `Docs/AppStoreMetadata.md`，包含 App 名称、副标题、宣传文本、描述、关键词、分类建议和高风险词避让清单。
+- 已准备 `Docs/AppReviewNotes.md`，包含中英文审核备注、无需测试账号说明、数据处理说明、网络说明、权限说明、免责声明和审核员测试步骤。
+- 已准备 `Docs/ScreenshotPlan.md`，包含 5 到 6 张截图的页面、标题、副文案和注意事项。
+- `Docs/AppStoreMetadata.md` 中的隐私政策 URL 已更新为 `https://littleben803.github.io/DestinyScope/privacy/`。
+
+上架前待办：
+
+- 在 App Store Connect 中创建 App 记录。
+- 将元数据按 App Store Connect 字段长度限制做最终裁剪。
+- 上传实际截图。
+- 确认截图、描述、关键词、审核备注都不包含高风险承诺文案。
+
+## 12. 当前缺失资源和人工确认项
+
+- 启用 GitHub Pages 并确认隐私政策公网 URL 可访问。
+- 将隐私政策 URL 填入 App Store Connect。
+- App Icon 素材原创或授权确认。
 - Launch Screen 真机截图确认。
-- App Store Connect 可访问的隐私政策 URL。
-- 上架截图、描述、关键词、审核备注。
+- App Store Connect 创建 App。
+- App Store 上架截图上传。
+- 真机断网完整主流程测试。
+- Bundle ID、签名 Team、版本号、构建号最终确认。
