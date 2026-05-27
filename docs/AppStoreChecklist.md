@@ -202,7 +202,9 @@ V1.1 上架风险提醒：
 - 已准备 `docs/V1_2_LocalLLMResearch.md`，对比 llama.cpp + GGUF、Core ML、MLX Swift 三条路线。
 - 已准备 `docs/V1_2_PoCPlan.md`，明确 PoC 只验证本地润色能力，不影响当前主流程。
 - 已准备 `docs/V1_2_Roadmap.md`，将 V1.2 拆分为调研、模型 license 检查、Debug-only 集成、TextRefining 接入、安全过滤、设备测试和生产决策。
+- 已准备 `docs/V1_2_ModelCandidates.md`，记录候选模型、GGUF / 4-bit 可用性、中文能力、license 和再分发风险。
 - 推荐 PoC 路线为 llama.cpp + GGUF；MLX Swift 作为备选；Core ML 作为长期评估方向。
+- V1.2 阶段 2 初步推荐 P0 模型为 `Qwen2.5-0.5B-Instruct`，备选为 `Qwen2.5-1.5B-Instruct-GGUF`。
 - 真实本地模型尚未接入生产路径。
 - 当前 App 默认仍使用本地规则和模板输出，不接在线 AI，不接真实本地 LLM，不下载模型。
 
@@ -211,5 +213,7 @@ V1.2 上架风险提醒：
 - V1.2 PoC 不应进入 App Store 生产版本，除非完成性能、license、隐私、文案安全和人工验收。
 - 如果未来接入真实本地模型，需要更新 App 内隐私政策、GitHub Pages 隐私政策、App Store 元数据和审核备注。
 - 如果模型文件随 App 分发，需要人工确认模型 license 允许 App 分发和商业使用。
+- Gemma 3 1B、Llama 3.2 1B 等非 Apache 或 gated/license 复杂模型，必须人工确认使用、商用、再分发、署名和 acceptable use 条款后才能进入 PoC 或生产。
+- V1.2 阶段 3 如使用模型文件，只允许开发者手动下载到本地 Debug 测试环境，不提交仓库，不进入 Release 默认路径。
 - App Store 元数据不得提前宣传真实 AI 推理，不得宣称精准预测、改命、化解或确定性现实建议。
 - 本地模型只能润色已生成文本，不能负责命理计算、农历转换、称骨权重、诗文匹配或最终命理结论。
