@@ -14,6 +14,7 @@ struct HomeView: View {
     @State private var selectedHour = 0
     @State private var calculation: LifeWeightResult?
     @State private var interpretation: FortuneInterpretation?
+    @State private var insight: LifeWeightInsight?
     @State private var errorMessage: String?
     @State private var shouldShowResult = false
 
@@ -65,8 +66,8 @@ struct HomeView: View {
         }
         .navigationTitle("DestinyScope")
         .navigationDestination(isPresented: $shouldShowResult) {
-            if let calculation, let interpretation {
-                DestinyResultView(result: calculation, interpretation: interpretation)
+            if let calculation, let interpretation, let insight {
+                DestinyResultView(result: calculation, interpretation: interpretation, insight: insight)
             }
         }
     }
@@ -77,14 +78,17 @@ struct HomeView: View {
         do {
             let calculation = try engine.calculate(birthDate: birthDate, selectedHour: selectedHour)
             let interpretation = TemplateFortuneInterpreter().interpret(result: calculation)
+            let insight = LifeWeightInsightGenerator().generate(result: calculation)
 
             self.calculation = calculation
             self.interpretation = interpretation
+            self.insight = insight
             errorMessage = nil
             shouldShowResult = true
         } catch {
             calculation = nil
             interpretation = nil
+            insight = nil
             shouldShowResult = false
             errorMessage = (error as? LocalizedError)?.errorDescription ?? "暂时无法计算，请稍后重试。"
         }
