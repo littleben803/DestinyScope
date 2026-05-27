@@ -1,0 +1,292 @@
+[
+  {
+    "id": "life_weight_intro_chunk_001",
+    "articleId": "life_weight_intro",
+    "category": "称骨算命",
+    "title": "称骨算命是什么",
+    "text": "称骨算命把出生年、农历月、农历日和出生时辰对应到重量，合计后匹配传统诗文。它适合作为传统民俗文本和自我观察角度，不适合作为人生结论。",
+    "tags": ["称骨", "命格", "传统文化"],
+    "source": "DestinyScope 内置称骨数据与民间称骨算法流传资料整理",
+    "version": "1.1"
+  },
+  {
+    "id": "life_weight_calculation_method_chunk_001",
+    "articleId": "life_weight_calculation_method",
+    "category": "称骨算命",
+    "title": "称骨算命的计算方式",
+    "text": "称骨计算先把公历生日转换成农历生日，再查询年、月、日、时四项权重，最后按总重量查找诗文。结果页展示明细，有助于理解计算来源。",
+    "tags": ["称骨", "计算", "权重"],
+    "source": "DestinyScope 内置称骨数据与民间称骨算法流传资料整理",
+    "version": "1.1"
+  },
+  {
+    "id": "life_weight_rational_view_chunk_001",
+    "articleId": "life_weight_rational_view",
+    "category": "使用边界",
+    "title": "称骨结果如何理性看待",
+    "text": "称骨结果应作为传统文化参考。诗文语气可能较强，现代使用时更适合转化为节奏、沟通、边界和长期行动等自我观察提示。",
+    "tags": ["理性使用", "使用边界", "自我探索"],
+    "source": "DestinyScope 原创整理",
+    "version": "1.1"
+  },
+  {
+    "id": "life_weight_poem_interpretation_chunk_001",
+    "articleId": "life_weight_poem_interpretation",
+    "category": "称骨算命",
+    "title": "称骨诗文为什么需要解释",
+    "text": "称骨诗文多为传统短句，含有象征和概括表达。解释诗文的目的，是把古典语气转化为现代人能理解的自我观察材料。",
+    "tags": ["诗文", "解释", "传统文本"],
+    "source": "DestinyScope 内置称骨数据与民间称骨算法流传资料整理",
+    "version": "1.1"
+  },
+  {
+    "id": "lunar_calendar_basics_chunk_001",
+    "articleId": "lunar_calendar_basics",
+    "category": "农历时辰",
+    "title": "农历基础",
+    "text": "农历是传统时间表达方式，常用于节日、民俗和部分命理规则。称骨计算需要先把公历生日转换成农历生日，再进入权重查询。",
+    "tags": ["农历", "历法", "传统文化"],
+    "source": "中国哲学书电子化计划 CText https://ctext.org/zhs；DestinyScope 原创整理",
+    "version": "1.1"
+  },
+  {
+    "id": "twelve_hours_chunk_001",
+    "articleId": "twelve_hours",
+    "category": "农历时辰",
+    "title": "十二时辰",
+    "text": "十二时辰把一天分为十二段，每段约等于现在两个小时，并与十二地支相连。出生时辰为传统命理提供更细的时间层次。",
+    "tags": ["时辰", "地支", "时间"],
+    "source": "中国文艺网十二生肖与时辰资料 https://www.cflac.org.cn/wywzt/2014/2014chunjie/chunjie/201401/t20140124_241521.html；CCTV 生肖资料 https://www.cctv.com/geography/news/20021202/25.html",
+    "version": "1.1"
+  },
+  {
+    "id": "heavenly_stems_basics_chunk_001",
+    "articleId": "heavenly_stems_basics",
+    "category": "天干地支",
+    "title": "天干基础",
+    "text": "天干由十个符号组成，常与地支配合表达时间循环。入门阶段可把它理解为传统纪时和象征语言的一部分。",
+    "tags": ["天干", "纪时", "入门"],
+    "source": "中国哲学书电子化计划 CText https://ctext.org/zhs；DestinyScope 原创整理",
+    "version": "1.1"
+  },
+  {
+    "id": "earthly_branches_basics_chunk_001",
+    "articleId": "earthly_branches_basics",
+    "category": "天干地支",
+    "title": "地支基础",
+    "text": "地支由十二个符号组成，可用于纪年、十二时辰和生肖对应。它首先是一套传统时间符号，不是个人标签。",
+    "tags": ["地支", "生肖", "时辰"],
+    "source": "中国文艺网十二生肖与时辰资料 https://www.cflac.org.cn/wywzt/2014/2014chunjie/chunjie/201401/t20140124_241521.html；中国哲学书电子化计划 CText https://ctext.org/zhs",
+    "version": "1.1"
+  },
+  {
+    "id": "stems_branches_combination_chunk_001",
+    "articleId": "stems_branches_combination",
+    "category": "天干地支",
+    "title": "天干地支组合",
+    "text": "天干和地支按顺序相配，形成传统时间循环中的组合结构。理解组合规则，比过早记忆复杂解释更适合入门。",
+    "tags": ["天干", "地支", "组合"],
+    "source": "中国哲学书电子化计划 CText https://ctext.org/zhs；DestinyScope 原创整理",
+    "version": "1.1"
+  },
+  {
+    "id": "sexagenary_cycle_intro_chunk_001",
+    "articleId": "sexagenary_cycle_intro",
+    "category": "天干地支",
+    "title": "六十甲子入门",
+    "text": "六十甲子由十天干和十二地支依序相配形成，是传统纪年和时间表达的重要循环结构。",
+    "tags": ["六十甲子", "纪年", "循环"],
+    "source": "中国哲学书电子化计划 CText https://ctext.org/zhs；DestinyScope 原创整理",
+    "version": "1.1"
+  },
+  {
+    "id": "zodiac_basics_chunk_001",
+    "articleId": "zodiac_basics",
+    "category": "生肖",
+    "title": "十二生肖基础",
+    "text": "十二生肖是民俗中常见的文化符号，常用于年份记忆、节庆祝福和故事表达。它应作为文化象征理解，不适合评价个人。",
+    "tags": ["生肖", "地支", "民俗"],
+    "source": "CCTV 生肖资料 https://www.cctv.com/geography/news/20021202/25.html；中国文艺网十二生肖与时辰资料 https://www.cflac.org.cn/wywzt/2014/2014chunjie/chunjie/201401/t20140124_241521.html",
+    "version": "1.1"
+  },
+  {
+    "id": "zodiac_earthly_branches_chunk_001",
+    "articleId": "zodiac_earthly_branches",
+    "category": "生肖",
+    "title": "生肖与地支的关系",
+    "text": "生肖与十二地支一一对应，让传统时间符号更便于记忆和讲述。理解这层关系，有助于连接生肖、时辰和纪年文化。",
+    "tags": ["生肖", "地支", "民俗"],
+    "source": "CCTV 生肖资料 https://www.cctv.com/geography/news/20021202/25.html；中国文艺网十二生肖与时辰资料 https://www.cflac.org.cn/wywzt/2014/2014chunjie/chunjie/201401/t20140124_241521.html",
+    "version": "1.1"
+  },
+  {
+    "id": "five_elements_basics_chunk_001",
+    "articleId": "five_elements_basics",
+    "category": "五行",
+    "title": "五行基础",
+    "text": "五行是木、火、土、金、水五类传统象征概念，用来描述关系、变化和节奏，不是现代科学意义上的物质分类。",
+    "tags": ["五行", "传统文化", "入门"],
+    "source": "五行资料 https://zh.wikipedia.org/wiki/五行；CText 五行生克片段 https://ctext.org/wiki.pl?chapter=120081&if=gb&remap=gb",
+    "version": "1.1"
+  },
+  {
+    "id": "five_elements_generating_chunk_001",
+    "articleId": "five_elements_generating",
+    "category": "五行",
+    "title": "五行相生",
+    "text": "五行相生描述支持、延展和转化关系。用于自我观察时，它可以提醒资源如何积累，行动如何延续。",
+    "tags": ["五行", "相生", "变化"],
+    "source": "CText 五行生克片段 https://ctext.org/wiki.pl?chapter=120081&if=gb&remap=gb；五行资料 https://zh.wikipedia.org/wiki/五行",
+    "version": "1.1"
+  },
+  {
+    "id": "five_elements_overcoming_chunk_001",
+    "articleId": "five_elements_overcoming",
+    "category": "五行",
+    "title": "五行相克",
+    "text": "五行相克更适合理解为制约、边界和调节。它提供一种观察平衡的语言，而不是好坏判断。",
+    "tags": ["五行", "相克", "平衡"],
+    "source": "CText 五行生克片段 https://ctext.org/wiki.pl?chapter=120081&if=gb&remap=gb；五行资料 https://zh.wikipedia.org/wiki/五行",
+    "version": "1.1"
+  },
+  {
+    "id": "five_elements_self_observation_chunk_001",
+    "articleId": "five_elements_self_observation",
+    "category": "五行",
+    "title": "五行与自我观察",
+    "text": "五行可作为五种观察角度：生长、表达、承载、边界和流动。它帮助描述状态，不用于给人贴标签。",
+    "tags": ["五行", "自我观察", "平衡"],
+    "source": "五行资料 https://zh.wikipedia.org/wiki/五行；DestinyScope 原创整理",
+    "version": "1.1"
+  },
+  {
+    "id": "bagua_basics_chunk_001",
+    "articleId": "bagua_basics",
+    "category": "八卦周易",
+    "title": "八卦基础",
+    "text": "八卦包括乾、坤、震、巽、坎、离、艮、兑，可作为理解变化和象征思维的传统入口。",
+    "tags": ["八卦", "周易", "入门"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "qian_hexagram_self_strengthening_chunk_001",
+    "articleId": "qian_hexagram_self_strengthening",
+    "category": "八卦周易",
+    "title": "乾卦：刚健与自强",
+    "text": "乾卦可作为刚健、主动和持续行动的象征。现代理解中，它提醒目标、动力和长期调整。",
+    "tags": ["乾卦", "八卦", "自强"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "kun_hexagram_receptive_chunk_001",
+    "articleId": "kun_hexagram_receptive",
+    "category": "八卦周易",
+    "title": "坤卦：承载与包容",
+    "text": "坤卦可理解为承载、包容和稳定支持。它提醒耐心、协作和基础建设，也需要注意自身边界。",
+    "tags": ["坤卦", "八卦", "包容"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "zhen_hexagram_action_chunk_001",
+    "articleId": "zhen_hexagram_action",
+    "category": "八卦周易",
+    "title": "震卦：行动与启动",
+    "text": "震卦可作为启动和变化的象征，提醒人在新阶段中观察环境、采取行动，并保留反馈和调整。",
+    "tags": ["震卦", "八卦", "行动"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "xun_hexagram_communication_chunk_001",
+    "articleId": "xun_hexagram_communication",
+    "category": "八卦周易",
+    "title": "巽卦：入微与沟通",
+    "text": "巽卦可作为入微、柔和和沟通的象征，提醒细节处理、语言方式和逐步建立信任。",
+    "tags": ["巽卦", "八卦", "沟通"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "kan_hexagram_risk_chunk_001",
+    "articleId": "kan_hexagram_risk",
+    "category": "八卦周易",
+    "title": "坎卦：风险与深思",
+    "text": "坎卦可作为复杂处境和审慎思考的象征，提醒在信息不足时先观察边界、收集信息，再逐步行动。",
+    "tags": ["坎卦", "八卦", "深思"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "li_hexagram_expression_chunk_001",
+    "articleId": "li_hexagram_expression",
+    "category": "八卦周易",
+    "title": "离卦：光明与表达",
+    "text": "离卦可作为光明、呈现和表达的象征，提醒清楚表达、辨认重点，并让想法形成可沟通的形式。",
+    "tags": ["离卦", "八卦", "表达"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "gen_hexagram_boundary_chunk_001",
+    "articleId": "gen_hexagram_boundary",
+    "category": "八卦周易",
+    "title": "艮卦：停止与边界",
+    "text": "艮卦可作为停止、边界和安定的象征，提醒在继续行动前确认方向、资源和分寸。",
+    "tags": ["艮卦", "八卦", "边界"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "dui_hexagram_exchange_chunk_001",
+    "articleId": "dui_hexagram_exchange",
+    "category": "八卦周易",
+    "title": "兑卦：悦纳与交流",
+    "text": "兑卦可作为交流、悦纳和开放的象征，提醒沟通不仅是表达，也包括倾听、回应和边界。",
+    "tags": ["兑卦", "八卦", "交流"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "zhouyi_intro_chunk_001",
+    "articleId": "zhouyi_intro",
+    "category": "八卦周易",
+    "title": "周易入门",
+    "text": "《周易》可作为观察变化、关系和处境的传统文本。入门时可先理解卦象、爻辞和变化观念。",
+    "tags": ["周易", "八卦", "经典"],
+    "source": "CText《周易》 https://ctext.org/book-of-changes/zhs；维基文库《周易》 https://zh.wikisource.org/wiki/周易",
+    "version": "1.1"
+  },
+  {
+    "id": "meihua_yishu_intro_chunk_001",
+    "articleId": "meihua_yishu_intro",
+    "category": "梅花易数",
+    "title": "梅花易数入门",
+    "text": "梅花易数是传统象数体系之一。V1.1 只做文化入门介绍，不实现起卦、断卦或个人事件判断。",
+    "tags": ["梅花易数", "易学", "入门"],
+    "source": "维基文库《梅花易数》 https://zh.wikisource.org/zh-hans/梅花易數",
+    "version": "1.1"
+  },
+  {
+    "id": "metaphysics_self_exploration_chunk_001",
+    "articleId": "metaphysics_self_exploration",
+    "category": "使用边界",
+    "title": "命理与自我探索",
+    "text": "命理内容可以提供观察语言，帮助用户整理沟通、节奏、边界、积累和行动方式。价值在于反思和实践。",
+    "tags": ["自我探索", "传统文化", "观察"],
+    "source": "DestinyScope 原创整理",
+    "version": "1.1"
+  },
+  {
+    "id": "rational_use_boundary_chunk_001",
+    "articleId": "rational_use_boundary",
+    "category": "使用边界",
+    "title": "命理结果的使用边界",
+    "text": "命理结果可作为文化学习和自我观察参考，不应替代现实信息、专业判断和个人责任，也不应用来评价他人。",
+    "tags": ["使用边界", "免责声明", "理性参考"],
+    "source": "DestinyScope 原创整理",
+    "version": "1.1"
+  }
+]

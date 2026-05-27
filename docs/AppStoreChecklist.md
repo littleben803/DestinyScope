@@ -179,6 +179,7 @@
 - 已准备 `docs/V1_1_ProductPlan.md`，明确 V1.1 是离线体验增强版，不接服务端、在线 AI 或真实本地 LLM。
 - 已准备 `docs/V1_1_Roadmap.md`，将 V1.1 拆分为结果页增强、命理问答、知识库扩充、本地历史记录、小模型润色接口预留和自测阶段。
 - 已准备 `docs/V1_1_KnowledgePlan.md`，规划知识库从 5 篇扩充到至少 20 篇，并为未来 RAG 保留资料结构。
+- V1.1 阶段 4B 已将本地知识库扩充到 29 篇，并新增 `DestinyScope/Resources/Knowledge/rag_chunks.json` 作为未来本地 RAG 预留数据。
 
 V1.1 上架风险提醒：
 
