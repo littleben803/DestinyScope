@@ -22,6 +22,7 @@ V1.2 阶段 3D 已修复 Codex shell 找不到 CMake 的 PATH 问题，在仓库
 - 阶段 3B 新增 `docs/V1_2_ModelFileSetup.md` 和 `docs/V1_2_LlamaCppIntegrationPlan.md`，用于约束模型文件、license、路径和阶段 3C 接入路线。
 - 阶段 3C 新增 `LlamaCppSession` 和 `LlamaCppModelInfo`，并增强 `LocalModelDebugView` 的模型检查、耗时展示和错误展示。
 - 阶段 3D 在仓库外生成 `~/LocalModels/DestinyScope/llama.xcframework`，Debug 配置下链接 `llama.framework`，Release 不链接、不展示、不调用本地模型实验入口。
+- 阶段 6A 增加 Debug-only GGUF 文件导入能力。真机可通过 Files App 选择 `.gguf` 文件，并复制到 App Documents 沙盒目录；Release 不展示该入口。
 
 ## 3. 当前不做
 
@@ -50,7 +51,7 @@ V1.2 阶段 3D 已修复 Codex shell 找不到 CMake 的 PATH 问题，在仓库
 
 模型文件不得提交仓库，也不得进入 Release 默认路径。PoC 阶段由开发者手动放入本地测试目录。
 
-推荐本地路径：
+推荐 Simulator / Mac 本地路径：
 
 ```text
 ~/LocalModels/DestinyScope/
@@ -63,6 +64,14 @@ LocalModels/
 ```
 
 `LocalModels/` 已被 `.gitignore` 忽略，但仍建议优先使用仓库外路径。
+
+真机 Debug 测试路径：
+
+```text
+Documents/LocalModels/DestinyScope/qwen2.5-0.5b-instruct-q4_k_m.gguf
+```
+
+真机无法访问 Mac 的 `~/LocalModels`。在 Debug App 的“本地模型 PoC”页面点击“导入 GGUF 模型”，从 Files App 选择 `.gguf` 文件后，App 会复制到上述 Documents 路径。如果目标文件已存在，会覆盖旧文件。
 
 ## 5. 阶段 3B 记录项
 

@@ -1,6 +1,6 @@
 # DestinyScope V1.2 TextRefining PoC Result
 
-更新日期：2026-05-27
+更新日期：2026-05-29
 
 ## 1. 阶段目标
 
@@ -153,3 +153,20 @@ Prompt 明确要求：
 可以进入 V1.2 阶段 6：设备性能测试。
 
 不建议进入生产路径。生产化前仍需完成真机性能、内存、耗电、模型 license、隐私政策和 App Store 元数据更新。
+
+## 10. 阶段 6B 真机 benchmark 更新
+
+阶段 6B 已完成首轮 iPhone 真机 Debug-only benchmark。
+
+| 项目 | 结果 |
+| --- | --- |
+| 设备 | iPhone，具体型号未细化 |
+| 系统 | `iOS 26.2` |
+| 模型 | `qwen2.5-0.5b-instruct-q4_k_m.gguf` |
+| 模型大小 | `491.4 MB` |
+| 正常样例平均 total | 约 `1.09` 秒 |
+| 高风险样例回退 | 已触发 |
+| 默认输出 | 未改变，仍为 `TemplateTextRefiner` |
+| Release | 不暴露本地模型 PoC |
+
+结论：0.5B Q4 模型在本轮真机测试中的短文本润色速度可接受，安全检查可以拦截高风险输出并回退到模板文本。但当前只覆盖一台 iPhone，尚未记录 Instruments 的内存、CPU、Energy 和 Thermal 数据，不建议进入生产路径。

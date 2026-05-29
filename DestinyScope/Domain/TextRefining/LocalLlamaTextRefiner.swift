@@ -53,8 +53,46 @@ struct LocalLlamaTextRefiner: TextRefining {
     }
 
     #if DEBUG
+    struct DebugRefiningResult {
+        let output: TextRefiningOutput
+        let loadTime: TimeInterval
+        let generationTime: TimeInterval
+    }
+
     func runDebugGeneration() throws -> LlamaCppGenerationResult {
         try runDebugGeneration(prompt: testPrompt, maxTokens: 96)
+    }
+
+    func refineWithDebugMetrics(_ input: TextRefiningInput) async throws -> DebugRefiningResult {
+        guard !input.sourceText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            throw TextRefiningError.emptyInput
+        }
+
+        let prompt = try promptBuilder.buildPrompt(from: input)
+        let result = try runDebugGeneration(prompt: prompt, maxTokens: 96)
+        let refinedText = cleanRefinedText(result.output, fallback: input.sourceText)
+        let safetyResult = safetyChecker.check(refinedText, sourceText: input.sourceText)
+
+        let output: TextRefiningOutput
+        if safetyResult.isPassed {
+            output = TextRefiningOutput(
+                text: refinedText,
+                wasRefined: true,
+                engine: "llama.cpp-qwen2.5-0.5b-q4-debug",
+                safetyNotice: TextRefiningSafetyRules.safetyNotice
+            )
+        } else {
+            output = fallbackOutput(
+                sourceText: input.sourceText,
+                reason: safetyResult.reasonText
+            )
+        }
+
+        return DebugRefiningResult(
+            output: output,
+            loadTime: result.loadTime,
+            generationTime: result.generateTime
+        )
     }
 
     func runDebugGeneration(prompt: String, maxTokens: Int) throws -> LlamaCppGenerationResult {

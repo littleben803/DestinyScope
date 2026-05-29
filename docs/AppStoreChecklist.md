@@ -221,14 +221,20 @@ V1.1 上架风险提醒：
 - V1.2 阶段 4 已新增 PromptBuilder、SafetyRules 和 SafetyChecker；Debug UI 可触发 `LocalLlamaTextRefiner.refine` 并显示引擎、耗时、安全提示和回退状态。
 - V1.2 阶段 5 已优化提示词和安全过滤，新增 Debug-only 固定安全测试样例，安全检查失败时回退到本地模板文本。
 - V1.2 阶段 5 已新增 `docs/V1_2_SafetyEvaluation.md`，记录 Prompt 约束、安全检查、回退策略和生产前要求。
+- V1.2 阶段 6 已新增 Debug-only 设备性能测试准备，包括固定 benchmark 样例、单条 / 批量运行和结果摘要复制能力。
+- V1.2 阶段 6 已新增 `docs/V1_2_DeviceBenchmark.md`，用于人工记录真机加载、生成、内存、耗电和发热结果。
+- V1.2 阶段 6A 已新增 Debug-only GGUF 文件导入能力，真机可从 Files App 选择模型并复制到 App Documents 沙盒；Release 不展示该入口。
+- V1.2 阶段 6B 已完成一台 iPhone 的 Debug-only 真机 benchmark：0.5B Q4 模型正常样例平均 total 约 `1.09` 秒，高风险样例可触发 fallback。
 - 真实本地模型尚未接入生产路径。
 - 当前 App 默认仍使用本地规则和模板输出，不接在线 AI，不接真实本地 LLM，不下载模型。
 
 V1.2 上架风险提醒：
 
 - V1.2 PoC 不应进入 App Store 生产版本，除非完成性能、license、隐私、文案安全和人工验收。
+- 当前本地模型只完成 Debug-only 真机 PoC，隐私政策和 App Store 元数据仍不应宣传本地 AI 功能。
 - 如果未来接入真实本地模型，需要更新 App 内隐私政策、GitHub Pages 隐私政策、App Store 元数据和审核备注。
 - 如果模型文件随 App 分发，需要人工确认模型 license 允许 App 分发和商业使用。
+- 如果未来进入生产路径，需要补充本地模型处理说明、模型 license / notice、商业使用、再分发和 App 内分发确认。
 - Gemma 3 1B、Llama 3.2 1B 等非 Apache 或 gated/license 复杂模型，必须人工确认使用、商用、再分发、署名和 acceptable use 条款后才能进入 PoC 或生产。
 - V1.2 阶段 3 如使用模型文件，只允许开发者手动下载到本地 Debug 测试环境，不提交仓库，不进入 Release 默认路径。
 - 进入生产路径前必须人工确认目标 GGUF 的 license、notice、商业使用、再分发和 App 内分发条件。
