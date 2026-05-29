@@ -251,6 +251,13 @@ V1.1 真机前人工检查：
 - 测试人员说明文案明确：不上传出生信息、命理结果、模型输入输出或历史记录。
 - 测试人员说明文案避免“AI 算命”“精准预测”“改命”“化解”“保证转运”等表述。
 - 本地润色实验隐私说明可见，且与 `docs/V1_3_PrivacyPolicyDraft.md` 保持一致。
+- 模型来源已确认，记录实际 GGUF 文件 URL。
+- Qwen base repo license 已截图或归档。
+- Qwen GGUF repo license 已截图或归档。
+- llama.cpp license 已截图或归档。
+- 已确认 TestFlight 分发是否允许携带模型文件。
+- 已确认是否需要 App 内“开源许可”入口。
+- 如果 TestFlight 包含模型或 framework，license / notice 已随包或在 App 内可见。
 
 本地润色预览卡片测试项：
 

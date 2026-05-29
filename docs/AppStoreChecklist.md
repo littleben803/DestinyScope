@@ -263,6 +263,7 @@ V1.2 上架风险提醒：
 - 已准备 `docs/V1_3_PrivacyPolicyDraft.md`，记录当前 Release、本地模型实验和未来模型下载的隐私政策草案。
 - 已准备 `docs/V1_3_AppReviewNotesDraft.md`，记录 TestFlight 和 App Store 审核备注草案。
 - 已准备 `docs/V1_3_MetadataGuidelines.md`，记录 App Store 元数据和截图文案限制。
+- 已准备 `docs/V1_3_LicenseNoticeAudit.md`，记录 Qwen2.5、GGUF、llama.cpp 和 ggml / gguf 的 license / notice 审计。
 - iPhone 12 mini / A14 级别设备暂不建议默认开启本地模型，未来生产化应默认关闭或禁用。
 - 真实本地模型仍不是当前 Release 功能。
 - 当前 App Store 元数据仍不应宣传 AI、本地模型或本地 LLM。
@@ -272,8 +273,10 @@ V1.2 上架风险提醒：
 - 如果未来 TestFlight 开启本地润色入口，仍不得在 App Store 正式元数据中宣传为 AI 算命。
 - 本地润色不生成命理结论，不替代称骨计算、农历转换、诗文匹配或命理问答结论。
 - 如果未来开放生产功能，需要正式更新 App 内隐私政策、GitHub Pages 隐私页、App Store 元数据和 Review Notes。
+- 进入 TestFlight 或 App Store 前必须完成 license / notice 人工确认。
+- 当前 Release 不含模型和 `llama.xcframework`，因此当前正式版不应宣传本地模型。
+- 如果未来包含模型或 framework，需要 App 内“开源许可”入口或等价 notice 展示。
 
 V1.3 后续必须完成：
 
-- 模型 license / notice 审计。
 - 是否允许进入 TestFlight 内测的决策文档。

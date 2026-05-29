@@ -13,6 +13,7 @@ V1.3 目标是本地模型生产化方案设计，不是立即把本地模型接
 - V1.3 阶段 3 已完成：TestFlight 内测开关设计。
 - V1.3 阶段 4 已完成：本地模型润色入口设计，不进入默认主流程。
 - V1.3 阶段 5 已完成：隐私政策和审核材料更新草案。
+- V1.3 阶段 6 已完成：license / notice 审计。
 - 当前 Release 仍不包含本地模型功能。
 - 当前 App Store 元数据不应宣传 AI / 本地模型。
 
@@ -205,7 +206,7 @@ Draft local model privacy and review notes
 
 允许修改范围：
 
-- `docs/V1_3_ModelLicenseAudit.md`
+- `docs/V1_3_LicenseNoticeAudit.md`
 - `docs/V1_3_ModelDistributionPlan.md`
 - `docs/AppStoreChecklist.md`
 
@@ -220,6 +221,8 @@ Draft local model privacy and review notes
 - 记录模型 repo URL 和 GGUF 文件 URL。
 - 记录 license 类型和人工确认人 / 日期。
 - 明确是否允许商业使用、再分发和 App 内分发。
+- 已新增 `docs/V1_3_LicenseNoticeAudit.md`，记录 Qwen2.5、GGUF、llama.cpp、ggml / gguf 的 license / notice 风险和人工确认清单。
+- 下一阶段为 V1.3 阶段 7：是否允许进入 TestFlight 内测。
 
 建议 commit message：
 
