@@ -14,6 +14,9 @@ V1.3 目标是本地模型生产化方案设计，不是立即把本地模型接
 - V1.3 阶段 4 已完成：本地模型润色入口设计，不进入默认主流程。
 - V1.3 阶段 5 已完成：隐私政策和审核材料更新草案。
 - V1.3 阶段 6 已完成：license / notice 审计。
+- V1.3 阶段 7 已完成：是否允许进入 TestFlight 内测决策。
+- V1.3 总体结论：Conditional Go for limited TestFlight，不进入 App Store 正式发布，不默认开启本地模型。
+- 下一步建议：V1.4 / TestFlight 本地模型内测实现准备。
 - 当前 Release 仍不包含本地模型功能。
 - 当前 App Store 元数据不应宣传 AI / 本地模型。
 
@@ -254,6 +257,8 @@ Document local model license audit
 - 明确是否允许开始 TestFlight 内测实现。
 - 明确仍不能默认进入主流程。
 - 明确失败回退和设备分级要求。
+- 已新增 `docs/V1_3_TestFlightDecision.md`，结论为 Conditional Go for limited TestFlight。
+- App Store 正式发布仍为 No-Go。
 
 建议 commit message：
 

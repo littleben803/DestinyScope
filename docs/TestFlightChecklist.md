@@ -259,6 +259,31 @@ V1.1 真机前人工检查：
 - 已确认是否需要 App 内“开源许可”入口。
 - 如果 TestFlight 包含模型或 framework，license / notice 已随包或在 App 内可见。
 
+V1.3 TestFlight Decision：
+
+- 已阅读 `docs/V1_3_TestFlightDecision.md`。
+- 结论为 Conditional Go for limited TestFlight。
+- 确认 App Store 正式发布仍为 No-Go。
+- 确认本地模型默认关闭。
+- 确认本地模型不接入默认结果页。
+- 确认本地模型只用于 `TextRefining` 润色。
+- 确认 Release 默认隐藏本地模型入口。
+
+进入内测前置项：
+
+- Qwen base repo license 已人工确认。
+- Qwen GGUF repo license 已人工确认。
+- llama.cpp license 已人工确认。
+- App 内开源许可 / notice 页面方案已准备。
+- 模型分发或测试人员导入方案已确认。
+- 已确认模型不会误提交仓库。
+- 设备 tier 检测方案已准备。
+- 低电量 / 过热 / 超时回退方案已准备。
+- 本地润色预览卡片方案已准备。
+- App 内隐私政策页面更新草案已准备。
+- GitHub Pages 隐私页更新草案已准备。
+- TestFlight 测试说明已更新。
+
 本地润色预览卡片测试项：
 
 - 实验开关关闭时，结果页不展示“本地润色预览”入口。
@@ -276,3 +301,27 @@ V1.1 真机前人工检查：
 - 小屏 iPhone 和 iPad 基础适配。
 - App Icon 和 Launch Screen 真机显示。
 - 上架前补充或确认隐私政策中对“历史记录仅保存在本地设备”的说明。
+
+## 12. V1.4 TestFlight 实现准备检查项
+
+当前状态：
+
+- 已准备 `docs/V1_4_TestFlightImplementationPlan.md`。
+- 已准备 `docs/V1_4_Roadmap.md`。
+- 已准备 `docs/V1_4_RiskChecklist.md`。
+- V1.4 阶段 1 仅为实现拆解文档，尚未修改 Swift 代码。
+
+进入 V1.4 阶段 2 前检查：
+
+- 实验开关默认关闭。
+- Release 默认隐藏实验入口。
+- `makeDefaultRefiner()` 仍应返回 `TemplateTextRefiner`。
+- 模型文件不提交仓库。
+- `llama.xcframework` 不提交仓库。
+- 设备 tier 检测设计已明确。
+- 模型可用性检测路径已明确。
+- 低电量 / 过热 / 超时回退策略已明确。
+- 本地润色预览卡片只作为用户手动触发入口。
+- 本地润色结果不覆盖原始结果。
+- 本地润色结果不写入历史记录。
+- 不上传用户数据或模型输入输出。

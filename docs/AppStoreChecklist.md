@@ -264,6 +264,7 @@ V1.2 上架风险提醒：
 - 已准备 `docs/V1_3_AppReviewNotesDraft.md`，记录 TestFlight 和 App Store 审核备注草案。
 - 已准备 `docs/V1_3_MetadataGuidelines.md`，记录 App Store 元数据和截图文案限制。
 - 已准备 `docs/V1_3_LicenseNoticeAudit.md`，记录 Qwen2.5、GGUF、llama.cpp 和 ggml / gguf 的 license / notice 审计。
+- 已准备 `docs/V1_3_TestFlightDecision.md`，结论为允许进入受限 TestFlight 内测实现准备，但 App Store 正式发布仍为 No-Go。
 - iPhone 12 mini / A14 级别设备暂不建议默认开启本地模型，未来生产化应默认关闭或禁用。
 - 真实本地模型仍不是当前 Release 功能。
 - 当前 App Store 元数据仍不应宣传 AI、本地模型或本地 LLM。
@@ -276,7 +277,30 @@ V1.2 上架风险提醒：
 - 进入 TestFlight 或 App Store 前必须完成 license / notice 人工确认。
 - 当前 Release 不含模型和 `llama.xcframework`，因此当前正式版不应宣传本地模型。
 - 如果未来包含模型或 framework，需要 App 内“开源许可”入口或等价 notice 展示。
+- TestFlight 内测前需要完成 license / notice、隐私说明、设备分级、回退机制和测试说明。
+- App Store 正式发布仍为 No-Go，正式元数据不得宣传 AI / 本地模型。
+- V1.4 已进入 TestFlight 本地模型内测实现准备阶段，仅新增实现拆解和风险文档。
+- 当前正式 Release 仍不包含本地模型正式功能。
+- 当前 App Store 元数据仍不宣传 AI / 本地模型。
 
 V1.3 后续必须完成：
 
-- 是否允许进入 TestFlight 内测的决策文档。
+- V1.4 / TestFlight 本地模型内测实现准备。
+
+## 16. V1.4 TestFlight 本地模型内测实现准备
+
+当前状态：
+
+- 已准备 `docs/V1_4_TestFlightImplementationPlan.md`，拆解实验开关、设备 tier、模型检测、润色卡片、回退、开源许可和隐私说明。
+- 已准备 `docs/V1_4_Roadmap.md`，将 V1.4 拆为 8 个小阶段。
+- 已准备 `docs/V1_4_RiskChecklist.md`，覆盖技术、设备、隐私、审核、license、用户误解、输出安全、包体和回退风险。
+- 当前阶段未修改 Swift 代码、工程配置、资源、依赖或模型文件。
+
+V1.4 进入实现前仍必须确认：
+
+- license / notice。
+- 隐私说明。
+- 设备分级。
+- 失败回退。
+- TestFlight 测试说明。
+- 模型不会误提交仓库。
