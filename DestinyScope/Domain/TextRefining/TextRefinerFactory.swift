@@ -24,5 +24,9 @@ enum TextRefinerFactory {
     static func makeDebugLocalLlamaRefiner() -> TextRefining {
         LocalLlamaTextRefiner()
     }
+
+    static func makeLocalExperimentRefiner() -> TextRefining {
+        LocalLlamaTextRefiner()
+    }
     #endif
 }

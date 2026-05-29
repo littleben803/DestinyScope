@@ -61,6 +61,11 @@ struct DestinyResultView: View {
                         interpretationSection
                     }
 
+                    LocalRefiningPreviewCard(
+                        interpretation: interpretation,
+                        insight: insight
+                    )
+
                     Text("结果仅供娱乐、自我探索和传统文化学习参考。")
                         .font(AppTheme.Typography.footnote)
                         .foregroundColor(AppTheme.Colors.secondaryText)
