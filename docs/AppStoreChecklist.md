@@ -280,8 +280,11 @@ V1.2 上架风险提醒：
 - TestFlight 内测前需要完成 license / notice、隐私说明、设备分级、回退机制和测试说明。
 - App Store 正式发布仍为 No-Go，正式元数据不得宣传 AI / 本地模型。
 - V1.4 已进入 TestFlight 本地模型内测实现准备阶段，仅新增实现拆解和风险文档。
+- V1.4 阶段 2 已新增本地模型润色实验开关配置；当前只是开关状态和说明页，不调用模型，不接结果页。
 - 当前正式 Release 仍不包含本地模型正式功能。
 - 当前 App Store 元数据仍不宣传 AI / 本地模型。
+- Release 默认不展示本地模型润色实验入口。
+- 默认输出路径不变，`makeDefaultRefiner()` 仍应返回 `TemplateTextRefiner`。
 
 V1.3 后续必须完成：
 

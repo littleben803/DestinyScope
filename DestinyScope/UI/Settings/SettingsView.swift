@@ -44,6 +44,16 @@ struct SettingsView: View {
 
                     #if DEBUG
                     NavigationLink {
+                        LocalModelExperimentSettingsView()
+                    } label: {
+                        settingsRow(
+                            title: "本地模型润色实验",
+                            subtitle: "Debug/TestFlight 内测开关，默认关闭"
+                        )
+                    }
+                    .buttonStyle(.plain)
+
+                    NavigationLink {
                         LocalModelDebugView()
                     } label: {
                         settingsRow(
