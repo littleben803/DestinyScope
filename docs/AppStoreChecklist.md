@@ -228,6 +228,8 @@ V1.1 上架风险提醒：
 - V1.2 阶段 7 已完成生产路径决策文档：`docs/V1_2_ProductionDecision.md`。
 - V1.2 最终结论为 Conditional Go：PoC 成功，但不直接进入生产路径；下一步建议进入 V1.3 生产化方案设计。
 - V1.2 阶段 7B 已补充双设备 benchmark：iPhone 17 Pro Max 约 1 秒级，iPhone 12 mini 可运行但正常短文本可能达到 4 到 5 秒。
+- V1.2 PoC 已完成，最终决策为 Conditional Go，不直接进入生产路径。
+- V1.3 已进入本地模型生产化方案设计阶段，当前只新增规划文档，不修改生产代码。
 - 真实本地模型尚未接入生产路径。
 - 当前 App 默认仍使用本地规则和模板输出，不接在线 AI，不接真实本地 LLM，不下载模型。
 
@@ -246,3 +248,23 @@ V1.2 上架风险提醒：
 - 进入生产路径前必须人工确认目标 GGUF 的 license、notice、商业使用、再分发和 App 内分发条件。
 - App Store 元数据不得提前宣传真实 AI 推理，不得宣称精准预测、改命、化解或确定性现实建议。
 - 本地模型只能润色已生成文本，不能负责命理计算、农历转换、称骨权重、诗文匹配或最终命理结论。
+
+## 15. V1.3 本地模型生产化方案状态
+
+当前状态：
+
+- 已准备 `docs/V1_3_LocalModelProductionPlan.md`，建议本地模型只作为默认关闭的可选实验功能，不进入默认主流程。
+- 已准备 `docs/V1_3_ModelDistributionPlan.md`，记录内置模型、手动导入和按需下载三种分发路线。
+- 已准备 `docs/V1_3_PrivacyAndReviewPlan.md`，记录未来需要补充的隐私政策、审核备注、元数据限制和 license / notice 要求。
+- 已准备 `docs/V1_3_Roadmap.md`，将 V1.3 拆分为生产化方案、设备分级、TestFlight 开关、润色入口、隐私审核草案、license 审计和 TestFlight 决策。
+- 真实本地模型仍不是当前 Release 功能。
+- 当前 App Store 元数据仍不应宣传 AI、本地模型或本地 LLM。
+
+V1.3 后续必须完成：
+
+- 设备分级和最低设备策略。
+- TestFlight 内测开关方案。
+- 本地模型只做 `TextRefining` 润色的入口方案。
+- 隐私政策、审核备注和 App Store 元数据草案。
+- 模型 license / notice 审计。
+- 是否允许进入 TestFlight 内测的决策文档。
