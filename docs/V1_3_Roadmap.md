@@ -11,6 +11,8 @@ V1.3 目标是本地模型生产化方案设计，不是立即把本地模型接
 - V1.3 阶段 1 已启动：生产化方案设计。
 - V1.3 阶段 2 已完成：设备分级与最低设备策略。
 - V1.3 阶段 3 已完成：TestFlight 内测开关设计。
+- V1.3 阶段 4 已完成：本地模型润色入口设计，不进入默认主流程。
+- V1.3 阶段 5 已完成：隐私政策和审核材料更新草案。
 - 当前 Release 仍不包含本地模型功能。
 - 当前 App Store 元数据不应宣传 AI / 本地模型。
 
@@ -133,7 +135,7 @@ Document TestFlight local model toggle plan
 
 允许修改范围：
 
-- `docs/V1_3_TextRefiningEntryPlan.md`
+- `docs/V1_3_LocalRefiningEntryPlan.md`
 - `docs/V1_3_Roadmap.md`
 
 不允许做的事：
@@ -148,6 +150,8 @@ Document TestFlight local model toggle plan
 - 明确输入只来自已生成模板文本。
 - 明确输出必须经过 SafetyChecker。
 - 明确失败时回退 `TemplateTextRefiner`。
+- 已新增 `docs/V1_3_LocalRefiningEntryPlan.md`，推荐结果页底部“本地润色预览”卡片，用户手动触发，不保存、不覆盖、不参与命理结论。
+- 下一阶段为 V1.3 阶段 5：隐私政策和审核材料更新草案。
 
 建议 commit message：
 
@@ -166,8 +170,9 @@ Document local model text refining entry
 允许修改范围：
 
 - `docs/V1_3_PrivacyAndReviewPlan.md`
-- `docs/AppReviewNotes_LocalModelDraft.md`
-- `docs/PrivacyPolicy_LocalModelDraft.md`
+- `docs/V1_3_AppReviewNotesDraft.md`
+- `docs/V1_3_PrivacyPolicyDraft.md`
+- `docs/V1_3_MetadataGuidelines.md`
 - `docs/AppStoreChecklist.md`
 
 不允许做的事：
@@ -181,6 +186,8 @@ Document local model text refining entry
 - 草案覆盖本地处理、无上传、失败回退和免责声明。
 - 草案不宣传精准预测或 AI 决定命运。
 - 明确正式启用前才更新生产文案。
+- 已新增 `docs/V1_3_PrivacyPolicyDraft.md`、`docs/V1_3_AppReviewNotesDraft.md` 和 `docs/V1_3_MetadataGuidelines.md`。
+- 下一阶段为 V1.3 阶段 6：license / notice 审计。
 
 建议 commit message：
 

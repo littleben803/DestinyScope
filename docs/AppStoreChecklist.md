@@ -259,15 +259,21 @@ V1.2 上架风险提醒：
 - 已准备 `docs/V1_3_Roadmap.md`，将 V1.3 拆分为生产化方案、设备分级、TestFlight 开关、润色入口、隐私审核草案、license 审计和 TestFlight 决策。
 - 已准备 `docs/V1_3_DeviceTierPlan.md`，记录本地模型生产化必须按设备分级。
 - 已准备 `docs/V1_3_TestFlightExperimentPlan.md`，记录 TestFlight 本地模型润色实验开关设计。
+- 已准备 `docs/V1_3_LocalRefiningEntryPlan.md`，推荐结果页底部“本地润色预览”卡片作为 TestFlight 可选入口。
+- 已准备 `docs/V1_3_PrivacyPolicyDraft.md`，记录当前 Release、本地模型实验和未来模型下载的隐私政策草案。
+- 已准备 `docs/V1_3_AppReviewNotesDraft.md`，记录 TestFlight 和 App Store 审核备注草案。
+- 已准备 `docs/V1_3_MetadataGuidelines.md`，记录 App Store 元数据和截图文案限制。
 - iPhone 12 mini / A14 级别设备暂不建议默认开启本地模型，未来生产化应默认关闭或禁用。
 - 真实本地模型仍不是当前 Release 功能。
 - 当前 App Store 元数据仍不应宣传 AI、本地模型或本地 LLM。
 - 当前 App Store Release 不应展示或宣传本地模型实验功能。
 - TestFlight 内测若开放，需要在审核备注中说明本地处理、默认关闭、只做文本润色和失败回退机制。
+- TestFlight 内测若开放，需要同步使用隐私草案说明：不上传出生信息、命理结果、模型输入输出或历史记录。
+- 如果未来 TestFlight 开启本地润色入口，仍不得在 App Store 正式元数据中宣传为 AI 算命。
+- 本地润色不生成命理结论，不替代称骨计算、农历转换、诗文匹配或命理问答结论。
+- 如果未来开放生产功能，需要正式更新 App 内隐私政策、GitHub Pages 隐私页、App Store 元数据和 Review Notes。
 
 V1.3 后续必须完成：
 
-- 本地模型只做 `TextRefining` 润色的入口方案。
-- 隐私政策、审核备注和 App Store 元数据草案。
 - 模型 license / notice 审计。
 - 是否允许进入 TestFlight 内测的决策文档。

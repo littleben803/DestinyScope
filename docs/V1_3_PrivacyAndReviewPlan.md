@@ -82,3 +82,21 @@
 V1.3 的隐私和审核工作应先产出草案，不直接修改 App 内隐私政策、GitHub Pages 隐私页或 App Store 元数据生产文案。
 
 只有当本地模型确定进入 TestFlight 或生产路径时，才执行正式文案更新。
+
+## 6. 阶段 5 草案汇总
+
+已新增草案文档：
+
+- `docs/V1_3_PrivacyPolicyDraft.md`：隐私政策草案，覆盖当前 Release、TestFlight 本地模型实验和未来模型下载占位。
+- `docs/V1_3_AppReviewNotesDraft.md`：TestFlight 和 App Store 审核备注草案。
+- `docs/V1_3_MetadataGuidelines.md`：App Store 标题、副标题、描述、截图和本地模型表述限制。
+
+当前阶段只写草案：
+
+- 不更新 App 内 `PrivacyPolicyView`。
+- 不更新 App 内 `DisclaimerView`。
+- 不更新 GitHub Pages 隐私页。
+- 不更新 App Store Connect 元数据。
+- 不接入生产入口。
+
+正式启用本地模型前，必须先完成 license / notice 审计，再将草案同步到正式隐私政策、审核备注和元数据。
