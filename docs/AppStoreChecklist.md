@@ -227,6 +227,7 @@ V1.1 上架风险提醒：
 - V1.2 阶段 6B 已完成一台 iPhone 的 Debug-only 真机 benchmark：0.5B Q4 模型正常样例平均 total 约 `1.09` 秒，高风险样例可触发 fallback。
 - V1.2 阶段 7 已完成生产路径决策文档：`docs/V1_2_ProductionDecision.md`。
 - V1.2 最终结论为 Conditional Go：PoC 成功，但不直接进入生产路径；下一步建议进入 V1.3 生产化方案设计。
+- V1.2 阶段 7B 已补充双设备 benchmark：iPhone 17 Pro Max 约 1 秒级，iPhone 12 mini 可运行但正常短文本可能达到 4 到 5 秒。
 - 真实本地模型尚未接入生产路径。
 - 当前 App 默认仍使用本地规则和模板输出，不接在线 AI，不接真实本地 LLM，不下载模型。
 
@@ -235,6 +236,7 @@ V1.2 上架风险提醒：
 - V1.2 PoC 不应进入 App Store 生产版本，除非完成性能、license、隐私、文案安全和人工验收。
 - 当前本地模型只完成 Debug-only 真机 PoC，隐私政策和 App Store 元数据仍不应宣传本地 AI 功能。
 - 当前本地模型仍不是 Release 功能，不应在当前 App Store 元数据、截图、关键词或审核备注中宣传 AI、本地模型或本地 LLM。
+- iPhone 12 mini / A14 级别设备性能较慢，未来生产化必须做设备分级，不宜默认全量开启。
 - 如果未来接入真实本地模型，需要更新 App 内隐私政策、GitHub Pages 隐私政策、App Store 元数据和审核备注。
 - 如果未来进入生产路径，需要补充本地模型处理说明、模型 license / notice、商业使用、再分发、App 内分发条件和安全回退说明。
 - 如果模型文件随 App 分发，需要人工确认模型 license 允许 App 分发和商业使用。
