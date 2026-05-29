@@ -349,3 +349,14 @@ V1.4 阶段 3 设备 tier 检查项：
 - 未识别设备应显示为 `Unknown`，默认禁用。
 - Tier C 或 `Unknown` 设备不能开启本地模型润色实验。
 - 设备 tier 检测不调用模型、不接结果页、不改变默认输出。
+
+V1.4 阶段 4 模型文件状态测试项：
+
+- App Documents 存在 `qwen2.5-0.5b-instruct-q4_k_m.gguf` 时可识别为可用。
+- App Documents 存在 alias `qwen2_5_0_5b_instruct_q4.gguf` 时可识别。
+- Developer LocalModels 路径在 Debug / Simulator 可识别。
+- 模型不存在时显示不可用原因。
+- 非 `.gguf` 文件不能导入。
+- 导入会复制到 App Documents/LocalModels/DestinyScope/。
+- 导入不会上传、不会下载、不会写入 App Bundle。
+- 模型文件状态检测不调用模型、不接结果页、不改变默认输出。

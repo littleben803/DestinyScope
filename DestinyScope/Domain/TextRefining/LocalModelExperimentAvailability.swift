@@ -16,17 +16,21 @@ struct LocalModelExperimentAvailability {
     let isBuildAvailable: Bool
     let isDeviceAllowed: Bool
     let hasAcceptedNotice: Bool
+    let modelFileStatus: LocalModelFileStatus
+    let isModelFileUsable: Bool
 
     static func current(
         settings: LocalModelExperimentSettings? = nil,
         config: LocalModelExperimentConfig = .current,
-        deviceTierService: DeviceTierService = DeviceTierService()
+        deviceTierService: DeviceTierService = DeviceTierService(),
+        modelFileResolver: LocalModelFileResolver = LocalModelFileResolver()
     ) -> LocalModelExperimentAvailability {
         let deviceIdentifier = DeviceModelIdentifier.currentIdentifier()
         let deviceTier = deviceTierService.tier(for: deviceIdentifier)
         let isSimulator = DeviceModelIdentifier.isSimulatorIdentifier(deviceIdentifier)
         let isDeviceAllowed = deviceTier.isLocalModelExperimentAllowed || debugAllowsSimulator(isSimulator)
         let hasAcceptedNotice = settings?.hasAcceptedExperimentNotice ?? !config.requiresUserConsent
+        let modelFileStatus = modelFileResolver.resolveModelFileStatus()
 
         guard config.isAvailableInCurrentBuild else {
             return LocalModelExperimentAvailability(
@@ -37,7 +41,9 @@ struct LocalModelExperimentAvailability {
                 timeoutSeconds: nil,
                 isBuildAvailable: false,
                 isDeviceAllowed: isDeviceAllowed,
-                hasAcceptedNotice: hasAcceptedNotice
+                hasAcceptedNotice: hasAcceptedNotice,
+                modelFileStatus: modelFileStatus,
+                isModelFileUsable: modelFileStatus.isUsable
             )
         }
 
@@ -50,7 +56,9 @@ struct LocalModelExperimentAvailability {
                 timeoutSeconds: nil,
                 isBuildAvailable: true,
                 isDeviceAllowed: false,
-                hasAcceptedNotice: hasAcceptedNotice
+                hasAcceptedNotice: hasAcceptedNotice,
+                modelFileStatus: modelFileStatus,
+                isModelFileUsable: modelFileStatus.isUsable
             )
         }
 
@@ -63,7 +71,24 @@ struct LocalModelExperimentAvailability {
                 timeoutSeconds: timeoutSeconds(for: deviceTier, isSimulator: isSimulator),
                 isBuildAvailable: true,
                 isDeviceAllowed: true,
-                hasAcceptedNotice: false
+                hasAcceptedNotice: false,
+                modelFileStatus: modelFileStatus,
+                isModelFileUsable: modelFileStatus.isUsable
+            )
+        }
+
+        guard modelFileStatus.isUsable else {
+            return LocalModelExperimentAvailability(
+                isAvailable: false,
+                reason: modelFileStatus.reason ?? "未找到本地模型文件。",
+                deviceIdentifier: deviceIdentifier,
+                deviceTier: deviceTier,
+                timeoutSeconds: timeoutSeconds(for: deviceTier, isSimulator: isSimulator),
+                isBuildAvailable: true,
+                isDeviceAllowed: true,
+                hasAcceptedNotice: true,
+                modelFileStatus: modelFileStatus,
+                isModelFileUsable: false
             )
         }
 
@@ -75,7 +100,9 @@ struct LocalModelExperimentAvailability {
             timeoutSeconds: timeoutSeconds(for: deviceTier, isSimulator: isSimulator),
             isBuildAvailable: true,
             isDeviceAllowed: true,
-            hasAcceptedNotice: true
+            hasAcceptedNotice: true,
+            modelFileStatus: modelFileStatus,
+            isModelFileUsable: true
         )
     }
 

@@ -8,10 +8,10 @@
 import Foundation
 
 struct LocalModelFileImporter {
-    private let config: LocalModelDebugConfig
+    private let resolver: LocalModelFileResolver
 
-    init(config: LocalModelDebugConfig = .current) {
-        self.config = config
+    init(resolver: LocalModelFileResolver = LocalModelFileResolver()) {
+        self.resolver = resolver
     }
 
     func importModel(from sourceURL: URL) throws -> URL {
@@ -26,9 +26,9 @@ struct LocalModelFileImporter {
             }
         }
 
-        try config.ensureAppDocumentsModelDirectoryExists()
+        try resolver.ensureAppDocumentsModelDirectoryExists()
 
-        let destinationURL = config.appDocumentsModelFileURL()
+        let destinationURL = resolver.appDocumentsModelFileURL()
         if FileManager.default.fileExists(atPath: destinationURL.path) {
             try FileManager.default.removeItem(at: destinationURL)
         }
@@ -48,4 +48,3 @@ enum LocalModelFileImportError: LocalizedError, Equatable {
         }
     }
 }
-

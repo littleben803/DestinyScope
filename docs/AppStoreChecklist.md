@@ -285,6 +285,8 @@ V1.2 上架风险提醒：
 - `unknown` 和 Tier C 设备默认不允许本地模型实验。
 - `iPhone13,1` / iPhone 12 mini 按当前策略归入 Tier C，默认禁用。
 - Simulator 仅允许 Debug 测试，不代表真机性能。
+- V1.4 阶段 4 已新增模型文件可用性检测；当前只检测 App Documents 和开发者本地路径，不下载模型，不接结果页。
+- 模型导入仅复制用户选择的 `.gguf` 到 App Documents，不上传、不联网、不写入 Bundle。
 - 当前正式 Release 仍不包含本地模型正式功能。
 - 当前 App Store 元数据仍不宣传 AI / 本地模型。
 - Release 默认不展示本地模型润色实验入口。

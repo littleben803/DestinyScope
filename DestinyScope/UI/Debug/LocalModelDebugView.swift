@@ -351,7 +351,7 @@ struct LocalModelDebugView: View {
             }
 
             do {
-                let destinationURL = try LocalModelFileImporter(config: config).importModel(from: sourceURL)
+                let destinationURL = try LocalModelFileImporter().importModel(from: sourceURL)
                 importedModelPath = destinationURL.path
                 importedModelSize = fileSizeDescription(at: destinationURL)
                 importStatusMessage = "导入成功，已覆盖旧文件（如存在）。"
