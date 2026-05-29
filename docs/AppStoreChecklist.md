@@ -257,13 +257,16 @@ V1.2 上架风险提醒：
 - 已准备 `docs/V1_3_ModelDistributionPlan.md`，记录内置模型、手动导入和按需下载三种分发路线。
 - 已准备 `docs/V1_3_PrivacyAndReviewPlan.md`，记录未来需要补充的隐私政策、审核备注、元数据限制和 license / notice 要求。
 - 已准备 `docs/V1_3_Roadmap.md`，将 V1.3 拆分为生产化方案、设备分级、TestFlight 开关、润色入口、隐私审核草案、license 审计和 TestFlight 决策。
+- 已准备 `docs/V1_3_DeviceTierPlan.md`，记录本地模型生产化必须按设备分级。
+- 已准备 `docs/V1_3_TestFlightExperimentPlan.md`，记录 TestFlight 本地模型润色实验开关设计。
+- iPhone 12 mini / A14 级别设备暂不建议默认开启本地模型，未来生产化应默认关闭或禁用。
 - 真实本地模型仍不是当前 Release 功能。
 - 当前 App Store 元数据仍不应宣传 AI、本地模型或本地 LLM。
+- 当前 App Store Release 不应展示或宣传本地模型实验功能。
+- TestFlight 内测若开放，需要在审核备注中说明本地处理、默认关闭、只做文本润色和失败回退机制。
 
 V1.3 后续必须完成：
 
-- 设备分级和最低设备策略。
-- TestFlight 内测开关方案。
 - 本地模型只做 `TextRefining` 润色的入口方案。
 - 隐私政策、审核备注和 App Store 元数据草案。
 - 模型 license / notice 审计。

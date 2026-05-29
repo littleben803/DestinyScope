@@ -120,12 +120,23 @@ V1.3 推荐采用模式 B 的生产化设计方向：
 - 先设计“本地润色实验开关”。
 - 仅 Debug / TestFlight 内测开放。
 - 默认关闭。
+- 用户手动开启。
+- 首次开启必须展示实验说明和用户确认。
 - 只用于 `TextRefining` 润色。
 - 不生成命理结论。
 - 不替代 `LifeWeightEngine`、`TemplateFortuneInterpreter` 或 `TemplateFortuneQuestionAnswerer`。
 - 模型失败、安全检查失败或设备不满足条件时，回退 `TemplateTextRefiner`。
 
 该方案保留 V1.2 PoC 的技术价值，同时避免直接影响 Release 用户路径。
+
+阶段 3 结论：
+
+- TestFlight 实验开关是 V1.3 推荐路线。
+- 开关默认关闭，用户手动开启。
+- 开关只影响 `TextRefining` 润色和可选的润色预览。
+- 开关不影响称骨计算、农历转换、诗文匹配、`LifeWeightResult`、`LifeWeightInsight`、命理问答结论、历史记录原始结果或知识库内容。
+- App Store Release 默认不展示该实验开关，除非后续单独决策。
+- 详细策略见 `docs/V1_3_TestFlightExperimentPlan.md`。
 
 ## 4. 设备分级策略
 
@@ -135,6 +146,16 @@ V1.3 推荐采用模式 B 的生产化设计方向：
 - iPhone 12 mini：部分正常样例约 4 到 5 秒，可运行但不适合默认开启。
 
 因此 V1.3 设备分级策略必须重点考虑 A14 / 小内存设备默认关闭或仅实验开启。
+
+阶段 2 结论：
+
+- V1.3 不应全量默认启用本地模型。
+- 推荐先只对 Tier A 高性能设备开放 TestFlight 实验开关。
+- iPhone 17 Pro Max 可作为 Tier A 参考设备，适合进入内测验证。
+- iPhone 12 mini benchmark 支持“不能默认全量开启”的判断。
+- iPhone 12 mini / A14 级别设备应归入“谨慎启用 / 默认关闭 / 低端禁用”候选。
+- 任何无法识别的设备默认禁用本地模型，继续使用模板。
+- 详细策略见 `docs/V1_3_DeviceTierPlan.md`。
 
 后续需要：
 
@@ -154,6 +175,12 @@ V1.3 推荐采用模式 B 的生产化设计方向：
 | 中端设备 | 可评估是否显示实验开关，默认关闭 |
 | A14 / 小内存设备 | 谨慎或默认关闭，只使用模板 |
 | 更老设备 | 隐藏本地模型能力，只使用模板 |
+
+初步超时建议：
+
+- Tier A：生成超过 3 秒回退模板。
+- Tier B：生成超过 5 秒回退模板。
+- Tier C：不启用本地模型。
 
 ## 5. 回退策略
 

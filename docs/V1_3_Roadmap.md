@@ -9,6 +9,8 @@ V1.3 目标是本地模型生产化方案设计，不是立即把本地模型接
 - V1.2 PoC 已完成。
 - V1.2 最终决策为 Conditional Go。
 - V1.3 阶段 1 已启动：生产化方案设计。
+- V1.3 阶段 2 已完成：设备分级与最低设备策略。
+- V1.3 阶段 3 已完成：TestFlight 内测开关设计。
 - 当前 Release 仍不包含本地模型功能。
 - 当前 App Store 元数据不应宣传 AI / 本地模型。
 
@@ -60,7 +62,7 @@ Document V1.3 local model production plan
 
 允许修改范围：
 
-- `docs/V1_3_DevicePolicy.md`
+- `docs/V1_3_DeviceTierPlan.md`
 - `docs/V1_2_DeviceBenchmark.md`
 - `docs/V1_3_Roadmap.md`
 
@@ -76,6 +78,8 @@ Document V1.3 local model production plan
 - 明确最低设备建议。
 - 明确哪些设备隐藏或禁用本地模型。
 - 明确 Instruments 观察项。
+- 已新增 `docs/V1_3_DeviceTierPlan.md`，建议 Tier A 进入 TestFlight 实验，iPhone 12 mini / A14 级别默认关闭或禁用。
+- 下一阶段为 V1.3 阶段 3：TestFlight 内测开关设计。
 
 建议 commit message：
 
@@ -94,7 +98,7 @@ Document local model device policy
 
 允许修改范围：
 
-- `docs/V1_3_TestFlightTogglePlan.md`
+- `docs/V1_3_TestFlightExperimentPlan.md`
 - `docs/V1_3_Roadmap.md`
 - `docs/AppStoreChecklist.md`
 
@@ -109,6 +113,8 @@ Document local model device policy
 - 开关默认状态明确。
 - 设备不满足条件时的行为明确。
 - 回退和错误提示策略明确。
+- 已新增 `docs/V1_3_TestFlightExperimentPlan.md`，明确默认关闭、用户手动开启、只影响 `TextRefining` 润色。
+- 下一阶段为 V1.3 阶段 4：本地模型润色入口设计，不进入默认主流程。
 
 建议 commit message：
 
