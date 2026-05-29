@@ -11,7 +11,10 @@ struct LocalModelExperimentSettingsView: View {
     @StateObject private var settings = LocalModelExperimentSettings()
 
     private let config = LocalModelExperimentConfig.current
-    private let availability = LocalModelExperimentAvailability.current()
+
+    private var availability: LocalModelExperimentAvailability {
+        LocalModelExperimentAvailability.current(settings: settings)
+    }
 
     var body: some View {
         AppBackground {
@@ -34,6 +37,7 @@ struct LocalModelExperimentSettingsView: View {
                     AppCard {
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
                             statusRow
+                            deviceTierSection
 
                             Text("说明")
                                 .font(AppTheme.Typography.sectionTitle)
@@ -49,7 +53,7 @@ struct LocalModelExperimentSettingsView: View {
                         }
                     }
 
-                    if !availability.isAvailable {
+                    if !availability.isBuildAvailable || !availability.isDeviceAllowed {
                         unavailableCard
                     } else if !settings.hasAcceptedExperimentNotice {
                         consentCard
@@ -61,6 +65,7 @@ struct LocalModelExperimentSettingsView: View {
             }
         }
         .navigationTitle(config.featureName)
+        .onAppear(perform: enforceAvailability)
     }
 
     private var statusRow: some View {
@@ -76,7 +81,7 @@ struct LocalModelExperimentSettingsView: View {
     }
 
     private var statusText: String {
-        if let reason = availability.reason {
+        if !availability.isAvailable, let reason = availability.reason {
             return "不可用：\(reason)"
         }
         return settings.isExperimentEnabled ? "已开启" : "已关闭"
@@ -87,6 +92,36 @@ struct LocalModelExperimentSettingsView: View {
             return AppTheme.Colors.secondaryText
         }
         return settings.isExperimentEnabled ? AppTheme.Colors.darkGold : AppTheme.Colors.secondaryText
+    }
+
+    private var deviceTierSection: some View {
+        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+            Text("设备分级")
+                .font(AppTheme.Typography.sectionTitle)
+                .foregroundColor(AppTheme.Colors.primaryText)
+
+            infoRow(title: "设备标识", value: availability.deviceIdentifier)
+            infoRow(title: "当前分级", value: availability.deviceTier.displayName)
+            infoRow(title: "分级说明", value: availability.deviceTier.description)
+            infoRow(
+                title: "是否允许实验",
+                value: availability.isDeviceAllowed ? "允许" : "不允许"
+            )
+            infoRow(
+                title: "推荐超时",
+                value: availability.timeoutSeconds.map { "\(Int($0)) 秒" } ?? "不启用"
+            )
+
+            Text(availability.deviceTier.userFacingNotice)
+                .font(AppTheme.Typography.secondary)
+                .foregroundColor(AppTheme.Colors.secondaryText)
+
+            if availability.isAvailable, let reason = availability.reason {
+                Text(reason)
+                    .font(AppTheme.Typography.secondary)
+                    .foregroundColor(AppTheme.Colors.secondaryText)
+            }
+        }
     }
 
     private var unavailableCard: some View {
@@ -128,6 +163,10 @@ struct LocalModelExperimentSettingsView: View {
                     get: { settings.isExperimentEnabled },
                     set: { isOn in
                         if isOn {
+                            guard availability.isAvailable else {
+                                settings.disableExperiment()
+                                return
+                            }
                             settings.enableExperiment()
                         } else {
                             settings.disableExperiment()
@@ -139,11 +178,25 @@ struct LocalModelExperimentSettingsView: View {
                         .foregroundColor(AppTheme.Colors.primaryText)
                 }
                 .tint(AppTheme.Colors.cinnabar)
+                .disabled(!availability.isAvailable)
 
                 AppPrimaryButton(title: "重置实验确认") {
                     settings.reset()
                 }
             }
+        }
+    }
+
+    private func infoRow(title: String, value: String) -> some View {
+        HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
+            Text(title)
+                .font(AppTheme.Typography.secondary)
+                .foregroundColor(AppTheme.Colors.secondaryText)
+                .frame(width: 88, alignment: .leading)
+
+            Text(value)
+                .font(AppTheme.Typography.body)
+                .foregroundColor(AppTheme.Colors.primaryText)
         }
     }
 
@@ -156,6 +209,12 @@ struct LocalModelExperimentSettingsView: View {
             Text(text)
                 .font(AppTheme.Typography.body)
                 .foregroundColor(AppTheme.Colors.primaryText)
+        }
+    }
+
+    private func enforceAvailability() {
+        if settings.isExperimentEnabled && !availability.isAvailable {
+            settings.disableExperiment()
         }
     }
 }
