@@ -451,3 +451,16 @@ V1.5 阶段 2 前置检查：
 - `LocalModels/`、`/Models/`、`DestinyScope/LocalModels/`、模型扩展名和 `*.xcframework` 规则仍必须被忽略。
 - 仓库内当前未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc` 或 `.xcframework`。
 - source-control 风险已修复，可进入 V1.5 阶段 3：UI / UX 全量审计。
+
+V1.5 阶段 3 UI / UX 人工检查项：
+
+- 结果页长滚动是否易读。
+- 权重明细和标签在小屏是否截断。
+- 命理问答是否占用过多页面空间。
+- 本地润色预览是否明确为临时预览，不覆盖原始结果。
+- 知识库 29 篇文章是否需要分类筛选或搜索。
+- 历史记录是否清楚说明仅本地保存。
+- 清空历史是否需要二次确认。
+- 设置 / 关于 / Legal / 开源许可是否过长且难以快速定位。
+- 本地模型实验入口是否会误导用户以为模型参与命理结论。
+- 深色模式、Dynamic Type、VoiceOver 和 iPad 留白需要专项检查。

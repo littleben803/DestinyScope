@@ -359,3 +359,12 @@ V1.5 上架风险提醒：
 - 当前正式 Release 仍不应展示本地模型实验入口。
 - V1.5 只优化普通用户路径和产品体验，不扩大本地模型生产化范围。
 - 如后续恢复 TestFlight 或 App Store 上架准备，必须重新执行 V1.4 readiness 检查。
+
+V1.5 UI / UX 审计状态：
+
+- V1.5 阶段 3 已完成 UI / UX 全量审计。
+- 已新增 `docs/V1_5_PageInventory.md`。
+- 已新增 `docs/V1_5_UXAuditReport.md`。
+- 已新增 `docs/V1_5_UXIssueBacklog.md`。
+- 下一步会优先优化结果页阅读体验、知识库浏览、历史记录和 Legal 体验。
+- 本地模型仍不是默认功能，后续优化只能改善受控实验说明和预览体验，不能把本地模型变成默认输出路径。
