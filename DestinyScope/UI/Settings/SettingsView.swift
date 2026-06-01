@@ -23,6 +23,17 @@ struct SettingsView: View {
                         ) {
                             AboutView()
                         }
+
+                        Divider()
+                            .background(AppTheme.Colors.divider)
+
+                        settingsLink(
+                            title: "使用说明",
+                            subtitle: "查看首次使用说明、隐私和结果边界",
+                            accessibilityHint: "打开 DestinyScope 使用说明页面。"
+                        ) {
+                            OnboardingView(isReviewMode: true)
+                        }
                     }
 
                     SettingsSectionCard(

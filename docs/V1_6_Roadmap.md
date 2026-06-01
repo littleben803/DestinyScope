@@ -33,6 +33,16 @@
 
 ## V1.6 阶段 2：首次使用说明 / Onboarding
 
+状态：
+
+- 已完成。
+- 新增 `OnboardingStateStore`，使用 `UserDefaults` 保存 `hasCompletedOnboarding`。
+- 新增 `OnboardingPage`、`OnboardingView` 和 `OnboardingPageCard`。
+- 首次启动时由 `MainContentView` 通过 `fullScreenCover` 展示。
+- 用户点击“开始使用”后标记完成，后续启动不再自动展示。
+- 设置页和关于页均提供“使用说明”入口，可再次查看，不重置完成状态。
+- 未改默认主流程、命理计算、本地模型实验逻辑或 `makeDefaultRefiner()`。
+
 阶段目标：
 
 - 增加轻量首次使用说明，让新用户理解 App 定位、隐私和使用边界。
@@ -63,6 +73,10 @@
 建议 commit message：
 
 - `feat: add local-first onboarding`
+
+下一阶段：
+
+- V1.6 阶段 3：常用出生资料 / 本地 Profile。
 
 ## V1.6 阶段 3：常用出生资料 / 本地 Profile
 
@@ -290,4 +304,3 @@
 建议 commit message：
 
 - `docs: add v1.6 test report and decision`
-

@@ -8,6 +8,15 @@
 import SwiftUI
 
 struct MainContentView: View {
+    private let onboardingStore: OnboardingStateStore
+
+    @State private var isOnboardingPresented: Bool
+
+    init(onboardingStore: OnboardingStateStore = OnboardingStateStore()) {
+        self.onboardingStore = onboardingStore
+        _isOnboardingPresented = State(initialValue: !onboardingStore.hasCompletedOnboarding)
+    }
+
     var body: some View {
         TabView {
             NavigationStack {
@@ -39,6 +48,12 @@ struct MainContentView: View {
             }
         }
         .tint(AppTheme.Colors.cinnabar)
+        .fullScreenCover(isPresented: $isOnboardingPresented) {
+            OnboardingView {
+                onboardingStore.markCompleted()
+                isOnboardingPresented = false
+            }
+        }
     }
 }
 
