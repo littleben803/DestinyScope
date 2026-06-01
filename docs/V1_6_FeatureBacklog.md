@@ -3,7 +3,7 @@
 | id | feature | priority | userValue | dataImpact | privacyRisk | implementationRisk | targetStage | decision |
 |---|---|---|---|---|---|---|---|---|
 | F-001 | Onboarding | P0 | 帮助新用户理解 App 定位、隐私和使用边界 | `UserDefaults` onboarding flag | Low | Low | V1.6 阶段 2 | Implemented |
-| F-002 | Local Birth Profile | P0 | 常用出生资料可快速复用，减少重复输入 | Application Support JSON，包含出生日期和时辰 | High | Medium | V1.6 阶段 3 | Do with local-delete requirement |
+| F-002 | Local Birth Profile | P0 | 常用出生资料可快速复用，减少重复输入 | Application Support JSON，包含显示名、出生日期和时辰 | High | Medium | V1.6 阶段 3 | Implemented |
 | F-003 | Result Text Copy | P0 | 用户可复制结果摘要用于保存或分享 | 无持久化或仅复制到剪贴板 | Low | Low | V1.6 阶段 4 | Do |
 | F-004 | Result Share Text | P0 | 用户可用纯文本分享结果摘要 | 分享时临时生成文本 | Medium | Medium | V1.6 阶段 4 | Do, no image share |
 | F-005 | Knowledge Favorite | P0 | 用户可保存感兴趣文章 | article id 列表 | Low | Medium | V1.6 阶段 5 | Do |

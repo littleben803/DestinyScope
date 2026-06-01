@@ -40,17 +40,22 @@ V1.6 新增数据必须遵守：
 
 ### Local Birth Profiles
 
+- 状态：已实现。
 - 存储：Application Support JSON。
-- 建议字段：
+- 文件：`Application Support/DestinyScope/saved_birth_profiles.json`。
+- 字段：
   - id
   - displayName
-  - solarDate
+  - birthDate
   - hour
   - createdAt
   - updatedAt
-- 删除：必须支持单条删除和全部清空。
+- 数量限制：最多保留 20 条，按更新时间倒序。
+- 删除：支持单条删除和全部清空。
+- 首页行为：选择常用出生资料只填入出生日期和时辰，不自动查询、不重新计算、不自动保存历史。
 - 风险：高于普通偏好，因为出生资料属于敏感个人信息。
 - 文案要求：明确仅本地保存，不上传、不同步、不登录。
+- 当前隐私说明：App 内隐私政策和 GitHub Pages 隐私页已补充常用出生资料仅本地保存、不上传、不同步、可删除说明。
 
 ### Favorite Knowledge Article IDs
 
@@ -114,4 +119,3 @@ V1.6 新增数据必须遵守：
 本地数据管理：
 
 > 你可以在本地数据管理中删除历史记录、收藏、最近阅读和常用出生资料。删除后仅影响本设备，且无法恢复。
-

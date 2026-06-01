@@ -117,7 +117,11 @@ V1.6：核心产品功能打磨。
 - Onboarding 使用 `UserDefaults` key `hasCompletedOnboarding` 保存完成状态。
 - 首次启动自动展示，完成后不再自动展示。
 - 设置页和关于页可再次打开使用说明。
-- 当前下一阶段建议：V1.6 阶段 3：常用出生资料 / 本地 Profile。
+- 阶段 3：常用出生资料 / 本地 Profile 已完成。
+- 常用出生资料使用 Application Support 下 `DestinyScope/saved_birth_profiles.json` 本地保存，最多 20 条。
+- 首页可保存当前出生资料，也可选择常用资料填入输入；不会自动查询或保存历史。
+- 设置页可管理常用出生资料，支持删除单条和清空全部。
+- 当前下一阶段建议：V1.6 阶段 4：结果页复制与纯文本分享文案。
 
 ## 当前硬边界
 

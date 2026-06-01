@@ -71,6 +71,19 @@ struct SettingsView: View {
                         }
                     }
 
+                    SettingsSectionCard(
+                        title: "本地数据",
+                        subtitle: "管理仅保存在当前设备上的资料。"
+                    ) {
+                        settingsLink(
+                            title: "常用出生资料",
+                            subtitle: "管理保存在本机的出生日期和时辰",
+                            accessibilityHint: "打开常用出生资料管理页面。"
+                        ) {
+                            SavedBirthProfileListView()
+                        }
+                    }
+
                     #if DEBUG
                     SettingsSectionCard(
                         title: "实验功能",

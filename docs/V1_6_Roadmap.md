@@ -80,6 +80,17 @@
 
 ## V1.6 阶段 3：常用出生资料 / 本地 Profile
 
+状态：
+
+- 已完成。
+- 新增 `SavedBirthProfile`，字段包括 `id`、`displayName`、`birthDate`、`hour`、`createdAt`、`updatedAt`。
+- 新增 `SavedBirthProfileStore`，使用 Application Support 下 `DestinyScope/saved_birth_profiles.json` 保存，最多保留 20 条。
+- 首页新增“常用资料”区域，可保存当前出生日期和时辰，也可选择资料填入输入。
+- 选择常用资料只填入首页输入，不自动查询、不保存历史、不重新计算。
+- 设置页新增“常用出生资料”管理入口，可查看、删除单条和清空全部。
+- App 内隐私政策和 GitHub Pages 隐私页已补充常用出生资料仅本地保存、不上传、不同步、可删除说明。
+- 未改命理计算、历史记录保存逻辑、本地模型实验路径或 `makeDefaultRefiner()`。
+
 阶段目标：
 
 - 设计并实现本地常用出生资料，用于快速复用输入。
@@ -110,6 +121,10 @@
 建议 commit message：
 
 - `feat: add local birth profiles`
+
+下一阶段：
+
+- V1.6 阶段 4：结果页复制与纯文本分享文案。
 
 ## V1.6 阶段 4：结果页复制与纯文本分享文案
 

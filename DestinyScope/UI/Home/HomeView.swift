@@ -16,9 +16,13 @@ struct HomeView: View {
     @State private var interpretation: FortuneInterpretation?
     @State private var insight: LifeWeightInsight?
     @State private var errorMessage: String?
+    @State private var profileMessage: String?
+    @State private var savedProfiles: [SavedBirthProfile] = []
+    @State private var isShowingSaveProfileSheet = false
     @State private var shouldShowResult = false
 
     private let hours = Array(0...23)
+    private let savedProfileStore = SavedBirthProfileStore()
 
     var body: some View {
         AppBackground {
@@ -41,6 +45,21 @@ struct HomeView: View {
                         }
                         .pickerStyle(.menu)
                         .foregroundColor(AppTheme.Colors.primaryText)
+                    }
+
+                    HomeBirthProfilePickerView(
+                        profiles: savedProfiles,
+                        onSelect: applySavedProfile,
+                        onSaveCurrent: {
+                            isShowingSaveProfileSheet = true
+                        }
+                    )
+
+                    if let profileMessage {
+                        Text(profileMessage)
+                            .font(AppTheme.Typography.footnote)
+                            .foregroundColor(AppTheme.Colors.secondaryText)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
 
                     AppPrimaryButton(title: "查询", action: calculateLifeWeight)
@@ -68,6 +87,12 @@ struct HomeView: View {
         .navigationDestination(isPresented: $shouldShowResult) {
             if let calculation, let interpretation, let insight {
                 DestinyResultView(result: calculation, interpretation: interpretation, insight: insight)
+            }
+        }
+        .onAppear(perform: loadSavedProfiles)
+        .sheet(isPresented: $isShowingSaveProfileSheet) {
+            SaveBirthProfileSheet(birthDate: birthDate, hour: selectedHour) { displayName in
+                saveCurrentBirthProfile(displayName: displayName)
             }
         }
     }
@@ -112,6 +137,44 @@ struct HomeView: View {
             try HistoryRecordStore().add(record)
         } catch {
             print("History record save failed: \(error.localizedDescription)")
+        }
+    }
+
+    private func loadSavedProfiles() {
+        do {
+            savedProfiles = try savedProfileStore.load()
+        } catch {
+            savedProfiles = []
+            profileMessage = "常用出生资料加载失败，请稍后重试。"
+        }
+    }
+
+    private func applySavedProfile(_ profile: SavedBirthProfile) {
+        birthDate = profile.birthDate
+        selectedHour = profile.hour
+        profileMessage = "已填入“\(profile.displayName)”，请确认后点击查询。"
+        errorMessage = nil
+    }
+
+    private func saveCurrentBirthProfile(displayName: String) {
+        let trimmedName = displayName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let finalName = trimmedName.isEmpty ? "常用资料" : String(trimmedName.prefix(20))
+        let now = Date()
+        let profile = SavedBirthProfile(
+            id: UUID(),
+            displayName: finalName,
+            birthDate: birthDate,
+            hour: selectedHour,
+            createdAt: now,
+            updatedAt: now
+        )
+
+        do {
+            try savedProfileStore.add(profile)
+            loadSavedProfiles()
+            profileMessage = "已保存“\(finalName)”，资料仅保存在本机。"
+        } catch {
+            profileMessage = "常用出生资料保存失败，请稍后重试。"
         }
     }
 }
