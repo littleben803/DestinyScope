@@ -185,6 +185,8 @@
 
 ## V1.5 阶段 5：知识库浏览体验优化
 
+状态：已完成。
+
 阶段目标：
 
 - 优化知识库列表和详情页的浏览体验。
@@ -206,6 +208,28 @@
 - 29 篇知识库可正常加载。
 - 分类、摘要、标签、source/version 展示清晰。
 - 空状态和错误状态友好。
+
+完成记录：
+
+- 已新增 `KnowledgeArticleFilter`，在本地数组中完成分类、计数和搜索过滤，不请求网络。
+- 已新增 `KnowledgeCategoryFilterView`，基于文章 `category` 动态生成分类 chips，第一个分类为“全部”，并显示每类文章数量。
+- 已新增 `KnowledgeArticleRowView`，列表项展示 category、title、summary 和最多 3 个 tags，弱化 source/version，提升扫读效率。
+- 已新增 `KnowledgeTagFlowView`，用于列表和详情页 tags 换行展示。
+- `KnowledgeListView` 已接入本地搜索，搜索范围覆盖 title、summary、category、tags 和 body，并在当前分类内搜索。
+- `KnowledgeDetailView` 已拆分为标题摘要、正文和元信息卡片；正文按换行或句组拆分为段落，source/version 置于底部弱化区域。
+- 未修改 `knowledge_articles.json` 内容。
+- 未修改 `KnowledgeRepository` 读取逻辑。
+- Debug / Release 模拟器构建通过。
+
+仍需人工检查：
+
+- 小屏 iPhone 上分类横向滚动、搜索框和 tag chip 是否拥挤。
+- 深色模式下 category / tag chip 对比度。
+- 长 source URL 在详情页底部的换行可读性。
+
+下一阶段：
+
+- V1.5 阶段 6：历史记录体验优化。
 
 建议 commit message：
 
