@@ -130,8 +130,35 @@ V1.6 新增数据必须遵守：
 
 ### Local Data Management State
 
-- 存储：按具体字段选择 `UserDefaults` 或 JSON。
-- 原则：不保存完整模型输入输出，不保存不必要的个人信息。
+- 状态：已实现。
+- 数据模型：`LocalDataSummary`，只用于展示本地数据数量。
+- 展示字段：
+  - historyRecordCount
+  - savedBirthProfileCount
+  - favoriteKnowledgeCount
+  - recentKnowledgeCount
+  - favoriteHistoryCount
+  - pinnedHistoryCount
+  - hasCompletedOnboarding
+- 存储：不新增独立持久化文件；由 `LocalDataManagementService` 从既有本地 store 汇总。
+- 可清理：
+  - 历史记录
+  - 历史收藏 / 置顶状态
+  - 常用出生资料
+  - 知识库收藏
+  - 知识库最近阅读
+  - 首次使用说明状态
+  - 上述全部本地用户数据
+- 不清理：
+  - App Bundle 内置 `knowledge_articles.json`
+  - App Bundle 内置 `rag_chunks.json`
+  - CSV 称骨计算数据
+  - App 内置资源
+  - `.gguf` 模型文件
+  - `llama.xcframework`
+  - 本地模型实验开关和模型文件状态
+- 删除边界：删除仅影响当前设备，无法恢复；不上传、不同步、不接账号。
+- 风险：中，因为会集中删除本地用户数据，必须有确认弹窗和清晰文案。
 
 ## 4. 风险提示
 

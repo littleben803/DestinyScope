@@ -76,6 +76,17 @@ struct SettingsView: View {
                         subtitle: "管理仅保存在当前设备上的资料。"
                     ) {
                         settingsLink(
+                            title: "本地数据管理",
+                            subtitle: "查看和清理保存在本机的历史、常用资料和知识库状态",
+                            accessibilityHint: "打开本地数据管理页面。"
+                        ) {
+                            LocalDataManagementView()
+                        }
+
+                        Divider()
+                            .background(AppTheme.Colors.divider)
+
+                        settingsLink(
                             title: "常用出生资料",
                             subtitle: "管理保存在本机的出生日期和时辰",
                             accessibilityHint: "打开常用出生资料管理页面。"

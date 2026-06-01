@@ -11,7 +11,7 @@
 | F-007 | History Pin / Favorite | P0 | 用户可整理重要历史记录 | Application Support JSON，仅 history record id 集合 | Medium | Medium | V1.6 阶段 6 | Implemented, core history payload unchanged |
 | F-008 | History Quick Re-run | P0 | 用户可快速复用历史记录的出生日期和时辰重新查询 | 内存态 HomeInputDraft，使用现有 history record 字段填充首页 | Medium | Medium | V1.6 阶段 6 | Implemented, no auto calculation |
 | F-009 | Home Dashboard Recent Record | P1 | 首页可提示最近记录，提高回访效率 | 读取本地 history summary | Medium | Medium | V1.6 阶段 7 | Evaluate |
-| F-010 | Local Data Management | P1 | 用户可统一删除历史、收藏、最近阅读和 Profile | 删除本地 JSON / UserDefaults | Medium | Medium | V1.6 阶段 8 | Do after data features |
+| F-010 | Local Data Management | P1 | 用户可统一删除历史、收藏、最近阅读和 Profile | 删除本地 JSON / UserDefaults，不新增上传或同步 | Medium | Medium | V1.6 阶段 8 | Implemented |
 | F-011 | Related Knowledge From Result | P1 | 从结果页跳到相关知识文章，提升学习体验 | 不新增用户数据，可基于 tags/category | Low | Medium | V1.6 阶段 5 或 7 | Evaluate |
 | F-012 | Result Disclosure State Optimization | P1 | 结果页展开折叠更符合阅读习惯 | 可无持久化，或 `UserDefaults` 偏好 | Low | Low | V1.6 阶段 4 或 7 | Evaluate |
 | F-013 | Knowledge Beginner Path | P1 | 新用户有入门阅读路径 | 可不持久化，或本地最近进度 | Low | Medium | V1.6 阶段 5 | Evaluate |
