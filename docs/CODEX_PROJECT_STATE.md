@@ -127,7 +127,11 @@ V1.6：核心产品功能打磨。
 - 知识库收藏和最近阅读使用 Application Support 下 `DestinyScope/knowledge_library_state.json` 本地保存。
 - 收藏只保存 `articleId` 列表，最近阅读只保存 `articleId` 和 `viewedAt`；不保存文章全文或搜索关键词。
 - 文章详情页支持收藏 / 取消收藏，知识库列表支持“收藏”分类、“我的知识库”摘要和最近阅读入口。
-- 当前下一阶段建议：V1.6 阶段 6：历史记录收藏 / 置顶 / 快速复查。
+- 阶段 6：历史记录收藏 / 置顶 / 快速复查已完成。
+- 历史收藏和置顶使用 Application Support 下 `DestinyScope/history_record_user_state.json` 本地保存，只保存 `HistoryRecord.id` 集合和 `updatedAt`。
+- 历史列表按置顶优先展示，历史详情页可收藏、置顶，并可把记录中的出生日期和时辰填回首页输入。
+- 快速复查通过内存态 `HomeInputDraft` 传递，不自动查询、不重新计算、不保存新历史。
+- 当前下一阶段建议：V1.6 阶段 7：首页信息架构优化。
 
 ## 当前硬边界
 

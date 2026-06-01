@@ -500,3 +500,16 @@ V1.6 知识库收藏与最近阅读状态：
 - 知识库收藏和最近阅读不上传、不同步、不需要账号，不保存文章全文或搜索关键词。
 - App 内隐私政策和 GitHub Pages 隐私页已补充知识库收藏 / 最近阅读本地保存说明。
 - `knowledge_articles.json` 内容未修改，`KnowledgeRepository` 读取逻辑未修改。
+
+V1.6 历史收藏 / 置顶 / 快速复查状态：
+
+- V1.6 阶段 6 已加入历史记录收藏、置顶和快速复查。
+- 历史收藏 / 置顶状态只保存 `HistoryRecord.id` 集合和 `updatedAt`。
+- 存储位置为当前设备 Application Support 下 `DestinyScope/history_record_user_state.json`。
+- 历史列表按置顶优先展示，置顶内部和非置顶记录均按创建时间倒序。
+- 历史详情页可收藏 / 取消收藏、置顶 / 取消置顶。
+- 历史详情页“填入首页重新查询”只把该记录的出生日期和时辰填回首页输入，不自动查询、不自动保存历史、不重新计算。
+- 删除单条历史或清空全部历史时，会同步清理对应收藏 / 置顶状态。
+- 快速复查通过内存态 `HomeInputDraft` 传递，不落盘、不上传、不写入 UserDefaults。
+- 未改变 `HistoryRecord` 存储字段，未改变 `HistoryRecordStore` 核心字段。
+- App 内隐私政策和 GitHub Pages 隐私页已补充历史收藏 / 置顶 / 快速复查本地处理说明。

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var dataManager: DataManager
+    @EnvironmentObject private var homeInputDraftStore: HomeInputDraftStore
 
     @State private var birthDate = Date()
     @State private var selectedHour = 0
@@ -89,7 +90,14 @@ struct HomeView: View {
                 DestinyResultView(result: calculation, interpretation: interpretation, insight: insight)
             }
         }
-        .onAppear(perform: loadSavedProfiles)
+        .onAppear {
+            loadSavedProfiles()
+            applyPendingDraftIfNeeded()
+        }
+        .onReceive(homeInputDraftStore.$pendingDraft) { draft in
+            guard draft != nil else { return }
+            applyPendingDraftIfNeeded()
+        }
         .sheet(isPresented: $isShowingSaveProfileSheet) {
             SaveBirthProfileSheet(birthDate: birthDate, hour: selectedHour) { displayName in
                 saveCurrentBirthProfile(displayName: displayName)
@@ -156,6 +164,18 @@ struct HomeView: View {
         errorMessage = nil
     }
 
+    private func applyPendingDraftIfNeeded() {
+        guard let draft = homeInputDraftStore.consumeDraft() else {
+            return
+        }
+
+        birthDate = draft.birthDate
+        selectedHour = draft.hour
+        shouldShowResult = false
+        profileMessage = "已从\(draft.source)填入出生日期和时辰，请确认后点击查询。"
+        errorMessage = nil
+    }
+
     private func saveCurrentBirthProfile(displayName: String) {
         let trimmedName = displayName.trimmingCharacters(in: .whitespacesAndNewlines)
         let finalName = trimmedName.isEmpty ? "常用资料" : String(trimmedName.prefix(20))
@@ -183,5 +203,6 @@ struct HomeView: View {
     NavigationStack {
         HomeView()
             .environmentObject(DataManager.shared)
+            .environmentObject(HomeInputDraftStore())
     }
 }

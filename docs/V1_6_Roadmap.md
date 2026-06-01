@@ -225,6 +225,20 @@
 
 ## V1.6 阶段 6：历史记录收藏 / 置顶 / 快速复查
 
+状态：
+
+- 已完成。
+- 新增 `HistoryRecordUserState` 和 `HistoryRecordUserStateStore`，使用 Application Support 下 `DestinyScope/history_record_user_state.json` 保存历史记录收藏 / 置顶状态。
+- 收藏 / 置顶状态只保存 `HistoryRecord.id` 集合和 `updatedAt`，不保存命理结果、诗文、出生日期、本地模型输出或用户自由输入。
+- 历史列表按置顶优先展示，置顶内部和非置顶记录均按 `createdAt` 倒序。
+- 历史列表和详情页展示置顶 / 收藏 badge。
+- 历史详情页新增收藏 / 取消收藏、置顶 / 取消置顶、填入首页重新查询。
+- 新增 `HomeInputDraft` 和 `HomeInputDraftStore`，用于从历史详情向首页传递一次性内存草稿。
+- 快速复查只把历史记录中的 `solarDate` 和 `hour` 填回首页输入，不自动查询、不保存历史、不重新计算、不调用模型。
+- 删除单条历史或清空全部历史时，会同步清理对应收藏 / 置顶状态。
+- App 内隐私政策和 GitHub Pages 隐私页已补充历史收藏 / 置顶 / 快速复查本地处理说明。
+- 未改变 `HistoryRecord` 存储字段、`HistoryRecordStore` 核心字段、本地模型路径或 `makeDefaultRefiner()`。
+
 阶段目标：
 
 - 增强历史记录管理能力。
@@ -255,6 +269,10 @@
 建议 commit message：
 
 - `feat: improve local history reuse`
+
+下一阶段：
+
+- V1.6 阶段 7：首页信息架构优化。
 
 ## V1.6 阶段 7：首页信息架构优化
 

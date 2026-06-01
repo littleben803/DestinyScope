@@ -8,8 +8,8 @@
 | F-004 | Result Share Text | P0 | 用户可用纯文本分享结果摘要 | 分享时临时生成文本，不保存分享记录 | Medium | Medium | V1.6 阶段 4 | Implemented, no image share |
 | F-005 | Knowledge Favorite | P0 | 用户可保存感兴趣文章 | Application Support JSON，article id 列表 | Low | Medium | V1.6 阶段 5 | Implemented |
 | F-006 | Knowledge Recent Reads | P0 | 用户可回到最近阅读文章 | Application Support JSON，article id + viewedAt | Low | Medium | V1.6 阶段 5 | Implemented |
-| F-007 | History Pin / Favorite | P0 | 用户可整理重要历史记录 | history record id 集合 | Medium | Medium | V1.6 阶段 6 | Do, avoid changing core history payload if possible |
-| F-008 | History Quick Re-run | P0 | 用户可快速复用历史记录的出生日期和时辰重新查询 | 使用现有 history record 字段填充首页 | Medium | Medium | V1.6 阶段 6 | Do, no auto recalculation in detail |
+| F-007 | History Pin / Favorite | P0 | 用户可整理重要历史记录 | Application Support JSON，仅 history record id 集合 | Medium | Medium | V1.6 阶段 6 | Implemented, core history payload unchanged |
+| F-008 | History Quick Re-run | P0 | 用户可快速复用历史记录的出生日期和时辰重新查询 | 内存态 HomeInputDraft，使用现有 history record 字段填充首页 | Medium | Medium | V1.6 阶段 6 | Implemented, no auto calculation |
 | F-009 | Home Dashboard Recent Record | P1 | 首页可提示最近记录，提高回访效率 | 读取本地 history summary | Medium | Medium | V1.6 阶段 7 | Evaluate |
 | F-010 | Local Data Management | P1 | 用户可统一删除历史、收藏、最近阅读和 Profile | 删除本地 JSON / UserDefaults | Medium | Medium | V1.6 阶段 8 | Do after data features |
 | F-011 | Related Knowledge From Result | P1 | 从结果页跳到相关知识文章，提升学习体验 | 不新增用户数据，可基于 tags/category | Low | Medium | V1.6 阶段 5 或 7 | Evaluate |

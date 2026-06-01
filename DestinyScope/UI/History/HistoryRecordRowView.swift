@@ -9,10 +9,24 @@ import SwiftUI
 
 struct HistoryRecordRowView: View {
     let record: HistoryRecord
+    var isFavorite = false
+    var isPinned = false
 
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+                if isPinned || isFavorite {
+                    HStack(spacing: AppTheme.Spacing.sm) {
+                        if isPinned {
+                            HistoryRecordStateBadgeView(title: "置顶", systemImageName: "pin.fill")
+                        }
+
+                        if isFavorite {
+                            HistoryRecordStateBadgeView(title: "收藏", systemImageName: "star.fill")
+                        }
+                    }
+                }
+
                 Text(record.title)
                     .font(AppTheme.Typography.sectionTitle)
                     .foregroundColor(AppTheme.Colors.primaryText)

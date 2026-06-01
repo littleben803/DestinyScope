@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct MainContentView: View {
+    private enum MainTab: Hashable {
+        case home
+        case knowledge
+        case history
+        case settings
+    }
+
     private let onboardingStore: OnboardingStateStore
 
+    @StateObject private var homeInputDraftStore = HomeInputDraftStore()
     @State private var isOnboardingPresented: Bool
+    @State private var selectedTab: MainTab = .home
 
     init(onboardingStore: OnboardingStateStore = OnboardingStateStore()) {
         self.onboardingStore = onboardingStore
@@ -18,13 +27,14 @@ struct MainContentView: View {
     }
 
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             NavigationStack {
                 HomeView()
             }
             .tabItem {
                 Label("首页", systemImage: "house")
             }
+            .tag(MainTab.home)
 
             NavigationStack {
                 KnowledgeListView()
@@ -32,13 +42,17 @@ struct MainContentView: View {
             .tabItem {
                 Label("知识库", systemImage: "book")
             }
+            .tag(MainTab.knowledge)
 
             NavigationStack {
-                HistoryListView()
+                HistoryListView {
+                    selectedTab = .home
+                }
             }
             .tabItem {
                 Label("历史", systemImage: "clock")
             }
+            .tag(MainTab.history)
 
             NavigationStack {
                 SettingsView()
@@ -46,8 +60,10 @@ struct MainContentView: View {
             .tabItem {
                 Label("关于", systemImage: "info.circle")
             }
+            .tag(MainTab.settings)
         }
         .tint(AppTheme.Colors.cinnabar)
+        .environmentObject(homeInputDraftStore)
         .fullScreenCover(isPresented: $isOnboardingPresented) {
             OnboardingView {
                 onboardingStore.markCompleted()

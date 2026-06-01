@@ -8,13 +8,43 @@
 import SwiftUI
 
 struct HistoryListView: View {
+    let onRequestHomeTab: () -> Void
+
     @State private var records: [HistoryRecord] = []
+    @State private var userState = HistoryRecordUserState.empty
     @State private var errorMessage: String?
+    @State private var stateMessage: String?
     @State private var recordPendingDeletion: HistoryRecord?
     @State private var isShowingDeleteConfirmation = false
     @State private var isShowingDeleteAllConfirmation = false
 
     private let store = HistoryRecordStore()
+    private let userStateStore = HistoryRecordUserStateStore()
+
+    init(onRequestHomeTab: @escaping () -> Void = {}) {
+        self.onRequestHomeTab = onRequestHomeTab
+    }
+
+    private var sortedRecords: [HistoryRecord] {
+        let pinnedIDs = Set(userState.pinnedRecordIDs)
+        return records.sorted { lhs, rhs in
+            let lhsPinned = pinnedIDs.contains(lhs.id)
+            let rhsPinned = pinnedIDs.contains(rhs.id)
+
+            if lhsPinned != rhsPinned {
+                return lhsPinned
+            }
+            return lhs.createdAt > rhs.createdAt
+        }
+    }
+
+    private var favoriteIDs: Set<UUID> {
+        Set(userState.favoriteRecordIDs)
+    }
+
+    private var pinnedIDs: Set<UUID> {
+        Set(userState.pinnedRecordIDs)
+    }
 
     var body: some View {
         AppBackground {
@@ -38,6 +68,14 @@ struct HistoryListView: View {
                         VStack(spacing: AppTheme.Spacing.md) {
                             HistoryEmptyStateView()
                             HistoryLocalNoticeView()
+                            if let stateMessage {
+                                AppCard {
+                                    Text(stateMessage)
+                                        .font(AppTheme.Typography.footnote)
+                                        .foregroundColor(AppTheme.Colors.secondaryText)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
                         }
                         .padding(AppTheme.Spacing.lg)
                     }
@@ -46,10 +84,28 @@ struct HistoryListView: View {
                         LazyVStack(spacing: AppTheme.Spacing.md) {
                             HistoryLocalNoticeView()
 
-                            ForEach(records) { record in
+                            if let stateMessage {
+                                AppCard {
+                                    Text(stateMessage)
+                                        .font(AppTheme.Typography.footnote)
+                                        .foregroundColor(AppTheme.Colors.secondaryText)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+
+                            ForEach(sortedRecords) { record in
                                 HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
-                                    NavigationLink(destination: HistoryDetailView(record: record)) {
-                                        HistoryRecordRowView(record: record)
+                                    NavigationLink(
+                                        destination: HistoryDetailView(
+                                            record: record,
+                                            onRequestHomeTab: onRequestHomeTab
+                                        )
+                                    ) {
+                                        HistoryRecordRowView(
+                                            record: record,
+                                            isFavorite: favoriteIDs.contains(record.id),
+                                            isPinned: pinnedIDs.contains(record.id)
+                                        )
                                     }
                                     .buttonStyle(.plain)
 
@@ -91,7 +147,10 @@ struct HistoryListView: View {
             }
         }
         .navigationTitle("历史记录")
-        .onAppear(perform: loadRecords)
+        .onAppear {
+            loadRecords()
+            loadUserState()
+        }
         .alert("删除这条历史记录？", isPresented: $isShowingDeleteConfirmation) {
             Button("删除", role: .destructive) {
                 if let recordPendingDeletion {
@@ -127,10 +186,29 @@ struct HistoryListView: View {
         }
     }
 
+    private func loadUserState() {
+        do {
+            userState = try userStateStore.load()
+            stateMessage = nil
+        } catch {
+            userState = .empty
+            stateMessage = "历史记录收藏和置顶状态加载失败，请稍后重试。"
+        }
+    }
+
     private func delete(_ record: HistoryRecord) {
         do {
             try store.delete(id: record.id)
+            let cleanupMessage: String?
+            do {
+                try userStateStore.remove(id: record.id)
+                cleanupMessage = nil
+            } catch {
+                cleanupMessage = "历史记录已删除，但收藏 / 置顶状态清理失败，请稍后重试。"
+            }
+            loadUserState()
             loadRecords()
+            stateMessage = cleanupMessage
         } catch {
             errorMessage = "历史记录删除失败，请稍后重试。"
         }
@@ -139,7 +217,16 @@ struct HistoryListView: View {
     private func deleteAll() {
         do {
             try store.deleteAll()
+            let cleanupMessage: String?
+            do {
+                try userStateStore.clearAll()
+                cleanupMessage = nil
+            } catch {
+                cleanupMessage = "历史记录已清空，但收藏 / 置顶状态清理失败，请稍后重试。"
+            }
+            loadUserState()
             loadRecords()
+            stateMessage = cleanupMessage
         } catch {
             errorMessage = "历史记录清空失败，请稍后重试。"
         }
@@ -149,5 +236,6 @@ struct HistoryListView: View {
 #Preview {
     NavigationStack {
         HistoryListView()
+            .environmentObject(HomeInputDraftStore())
     }
 }

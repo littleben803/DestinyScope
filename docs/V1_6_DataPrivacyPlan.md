@@ -85,11 +85,31 @@ V1.6 新增数据必须遵守：
 
 ### Pinned / Favorite History Record IDs
 
-- 存储方案 A：额外 JSON 保存 record id 集合。
-- 存储方案 B：扩展 `HistoryRecord` 字段。
-- 推荐：优先使用额外 JSON 保存 UI 状态，避免改变历史记录存储结构。
-- 删除：历史记录删除时应同步清理 pin/favorite id。
+- 状态：已实现。
+- 存储：Application Support JSON。
+- 文件：`Application Support/DestinyScope/history_record_user_state.json`。
+- 字段：
+  - favoriteRecordIDs
+  - pinnedRecordIDs
+  - updatedAt
+- 内容：只保存 `HistoryRecord.id` 集合，不保存出生日期、命理结果、诗文、本地模型输出或用户自由输入。
+- 删除：删除单条历史记录时同步清理对应 favorite / pinned id；清空全部历史记录时同步清空 user state。
+- 页面行为：历史列表置顶记录优先展示，置顶内部和非置顶记录均按 `createdAt` 倒序；历史详情页可收藏 / 取消收藏、置顶 / 取消置顶。
 - 风险：中，因为与历史查询记录关联。
+
+### Home Input Draft
+
+- 状态：已实现。
+- 存储：内存态 `ObservableObject`，不落盘。
+- 字段：
+  - id
+  - birthDate
+  - hour
+  - source
+  - createdAt
+- 用途：从历史详情页“填入首页重新查询”向首页传递一次性输入草稿。
+- 行为：首页消费草稿后只更新出生日期和时辰，并显示提示；不自动查询、不自动保存历史、不上传、不写入 UserDefaults。
+- 风险：中，因为包含出生日期和时辰，但生命周期短且不持久化。
 
 ### Share Template Preference
 
