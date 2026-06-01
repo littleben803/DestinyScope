@@ -424,3 +424,29 @@ V1.4 阶段 8 TestFlight readiness 决策项：
 - App Icon 授权已确认。
 - TestFlight 审核备注已准备。
 - 测试人员说明已准备。
+
+## 13. V1.5 暂停上传与体验优化检查项
+
+当前状态：
+
+- V1.5 暂停 TestFlight 上传。
+- V1.5 暂不进入 App Store 上架。
+- V1.5 聚焦产品体验优化、source-control 风险修复、UX 审计和质量门槛完善。
+- 本地模型实验仍保持默认关闭、受控展示、失败回退。
+
+后续如恢复 TestFlight，需要重新执行：
+
+- V1.4 TestFlight readiness 检查。
+- Debug / Release 构建检查。
+- Release Archive 检查。
+- license / notice 人工确认。
+- GitHub Pages 隐私页公网访问确认。
+- TestFlight 审核备注和测试人员说明确认。
+- 仓库内无 `.gguf`、`.xcframework`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc`。
+
+V1.5 阶段 2 前置检查：
+
+- `git check-ignore -v DestinyScope/Domain/Models/OpenSourceLicenseItem.swift` 不应命中误伤规则。
+- `OpenSourceLicenseItem.swift` 必须可被 git 跟踪。
+- `LocalModels/`、`*.gguf`、`*.xcframework` 等仍必须被忽略。
+- 修复 source-control 风险后再进入 UI 修改阶段。

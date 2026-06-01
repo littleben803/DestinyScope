@@ -328,3 +328,32 @@ V1.4 进入实现前仍必须确认：
 - 失败回退。
 - TestFlight 测试说明。
 - 模型不会误提交仓库。
+
+## 17. V1.5 产品体验优化状态
+
+当前状态：
+
+- V1.5 进入产品体验优化与上架前产品打磨阶段。
+- 当前不准备上传 TestFlight。
+- 当前不准备 App Store 上架。
+- 本地模型仍不是正式发布功能。
+- 默认输出路径仍应保持本地规则引擎和模板系统。
+- `makeDefaultRefiner()` 仍不得改为默认返回本地模型实现。
+- 已准备 `docs/V1_5_ProductExperiencePlan.md`，冻结 V1.5 目标、P0 / P1 和明确不做事项。
+- 已准备 `docs/V1_5_Roadmap.md`，将 V1.5 拆分为 source-control、UX 审计、结果页、知识库、历史、Legal、适配、截图文案和自测决策阶段。
+- 已准备 `docs/V1_5_UXAuditPlan.md`，定义页面审计范围、维度和输出格式。
+- 已准备 `docs/V1_5_QualityGate.md`，定义构建、静态扫描、source-control 和人工测试质量门槛。
+
+V1.5 P0 风险：
+
+- 必须优先解决 `.gitignore` 中 `Models/` 规则误伤 Swift 源码目录的问题。
+- `DestinyScope/Domain/Models/OpenSourceLicenseItem.swift` 必须可被 git 跟踪。
+- 未来新增 Swift 文件不能被 `Models/` 规则误忽略。
+- `LocalModels/`、`*.gguf`、`*.xcframework` 等模型和 framework 文件仍必须继续忽略。
+
+V1.5 上架风险提醒：
+
+- 当前 App Store 元数据仍不应宣传 AI / 本地模型。
+- 当前正式 Release 仍不应展示本地模型实验入口。
+- V1.5 只优化普通用户路径和产品体验，不扩大本地模型生产化范围。
+- 如后续恢复 TestFlight 或 App Store 上架准备，必须重新执行 V1.4 readiness 检查。
