@@ -276,6 +276,19 @@
 
 ## V1.6 阶段 7：首页信息架构优化
 
+状态：
+
+- 已完成。
+- 首页已拆分为 `HomeHeroCard`、`HomePrivacyNoticeCard`、`HomeInputDraftBanner`、`HomeInputCard`、`HomeRecentHistoryCard` 和 `HomeKnowledgeEntryCard`。
+- 顶部先说明 DestinyScope 的定位：东方命理、自我探索、本地模板参考性解读。
+- 本地隐私提示独立展示，说明出生日期和时辰仅用于本机计算，不需要账号、不上传到服务端。
+- 历史详情填入首页后，首页展示一次性草稿提示；不会自动查询、不会自动保存历史、不会重新计算。
+- 常用出生资料区域只负责复用资料；保存当前出生资料入口已收拢到输入卡片内。
+- 查询输入、时辰选择、查询按钮、保存当前资料和错误提示统一在 `HomeInputCard` 中展示。
+- 首页读取最近 1 条本地历史记录做轻量摘要提示，不重新计算、不自动填入、不写历史。
+- 首页提供轻量知识库入口提示，不请求网络、不加载文章全文。
+- 未修改查询逻辑、称骨计算、本地模型实验路径或 `makeDefaultRefiner()`。
+
 阶段目标：
 
 - 优化首页结构，让输入、常用资料、最近记录、隐私提示更清晰。
@@ -304,6 +317,10 @@
 建议 commit message：
 
 - `ui: refine home information architecture`
+
+下一阶段：
+
+- V1.6 阶段 8：本地数据管理入口。
 
 ## V1.6 阶段 8：本地数据管理入口
 

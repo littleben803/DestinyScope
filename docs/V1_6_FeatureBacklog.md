@@ -20,6 +20,7 @@
 | F-016 | Cloud Sync | No | 跨设备同步 | 需要账号 / 网络 / 隐私更新 | High | High | None | Not in V1.6 |
 | F-017 | Model Download | No | 降低包体并支持模型更新 | 网络、存储、license、隐私复杂 | High | High | None | Not in V1.6 |
 | F-018 | Open Chat | No | 互动性强 | 自由输入和模型输出风险高 | High | High | None | Not in V1.6 |
+| F-019 | Home Information Architecture | P0 | 首页更清楚地说明产品定位、本地处理、常用资料、历史草稿和查询路径 | 读取本地最近历史摘要，不新增持久化数据 | Low | Low | V1.6 阶段 7 | Implemented |
 
 ## P0 排序建议
 

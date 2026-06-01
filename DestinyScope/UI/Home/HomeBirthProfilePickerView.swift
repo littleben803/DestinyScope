@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeBirthProfilePickerView: View {
     let profiles: [SavedBirthProfile]
     let onSelect: (SavedBirthProfile) -> Void
-    let onSaveCurrent: () -> Void
 
     var body: some View {
         AppCard {
@@ -31,7 +30,7 @@ struct HomeBirthProfilePickerView: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 if profiles.isEmpty {
-                    Text("暂无常用出生资料。你可以先保存当前输入，方便之后快速填写。")
+                    Text("暂无常用出生资料。你可以在查询输入区保存当前出生日期和时辰，方便之后快速填写。")
                         .font(AppTheme.Typography.body)
                         .foregroundColor(AppTheme.Colors.primaryText)
                         .fixedSize(horizontal: false, vertical: true)
@@ -52,22 +51,6 @@ struct HomeBirthProfilePickerView: View {
                         .padding(.vertical, AppTheme.Spacing.xs)
                     }
                 }
-
-                Button(action: onSaveCurrent) {
-                    HStack {
-                        Image(systemName: "plus.circle")
-                        Text("保存当前出生资料")
-                    }
-                    .font(AppTheme.Typography.body.weight(.semibold))
-                    .foregroundColor(AppTheme.Colors.cinnabar)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, AppTheme.Spacing.md)
-                    .background(AppTheme.Colors.secondaryBackground.opacity(0.45))
-                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.card, style: .continuous))
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("保存当前出生资料")
-                .accessibilityHint("输入本地显示名后，将当前出生日期和时辰保存到本机。")
             }
         }
     }

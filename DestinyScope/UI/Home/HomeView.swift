@@ -18,42 +18,33 @@ struct HomeView: View {
     @State private var insight: LifeWeightInsight?
     @State private var errorMessage: String?
     @State private var profileMessage: String?
+    @State private var draftBannerMessage: String?
     @State private var savedProfiles: [SavedBirthProfile] = []
+    @State private var recentHistoryRecord: HistoryRecord?
     @State private var isShowingSaveProfileSheet = false
     @State private var shouldShowResult = false
 
     private let hours = Array(0...23)
     private let savedProfileStore = SavedBirthProfileStore()
+    private let historyRecordStore = HistoryRecordStore()
 
     var body: some View {
         AppBackground {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-                    AppCard {
-                        AppSectionHeader(title: "出生信息")
+                    HomeHeroCard()
 
-                        DatePicker("出生日期", selection: $birthDate, displayedComponents: [.date])
-                            .environment(\.locale, Locale(identifier: "zh_CN"))
-                            .foregroundColor(AppTheme.Colors.primaryText)
+                    HomePrivacyNoticeCard()
 
-                        Divider()
-                            .background(AppTheme.Colors.divider)
-
-                        Picker("出生时辰", selection: $selectedHour) {
-                            ForEach(hours, id: \.self) { hour in
-                                Text(String(format: "%02d 时", hour)).tag(hour)
-                            }
+                    if let draftBannerMessage {
+                        HomeInputDraftBanner(message: draftBannerMessage) {
+                            self.draftBannerMessage = nil
                         }
-                        .pickerStyle(.menu)
-                        .foregroundColor(AppTheme.Colors.primaryText)
                     }
 
                     HomeBirthProfilePickerView(
                         profiles: savedProfiles,
-                        onSelect: applySavedProfile,
-                        onSaveCurrent: {
-                            isShowingSaveProfileSheet = true
-                        }
+                        onSelect: applySavedProfile
                     )
 
                     if let profileMessage {
@@ -63,23 +54,22 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
 
-                    AppPrimaryButton(title: "查询", action: calculateLifeWeight)
+                    HomeInputCard(
+                        birthDate: $birthDate,
+                        selectedHour: $selectedHour,
+                        hours: hours,
+                        errorMessage: errorMessage,
+                        onSaveCurrent: {
+                            isShowingSaveProfileSheet = true
+                        },
+                        onCalculate: calculateLifeWeight
+                    )
+                    .transition(.opacity.combined(with: .scale))
+                    .animation(.easeInOut, value: errorMessage)
 
-                    if let errorMessage {
-                        AppCard {
-                            AppSectionHeader(title: "提示")
-                            Text(errorMessage)
-                                .font(AppTheme.Typography.body)
-                                .foregroundColor(AppTheme.Colors.primaryText)
-                        }
-                        .transition(.opacity.combined(with: .scale))
-                        .animation(.easeInOut, value: errorMessage)
-                    }
+                    HomeRecentHistoryCard(record: recentHistoryRecord)
 
-                    Text("出生信息仅在设备端处理，结果仅供娱乐、自我探索和传统文化学习参考。")
-                        .font(AppTheme.Typography.footnote)
-                        .foregroundColor(AppTheme.Colors.secondaryText)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HomeKnowledgeEntryCard()
                 }
                 .padding(AppTheme.Spacing.lg)
             }
@@ -92,6 +82,7 @@ struct HomeView: View {
         }
         .onAppear {
             loadSavedProfiles()
+            loadRecentHistory()
             applyPendingDraftIfNeeded()
         }
         .onReceive(homeInputDraftStore.$pendingDraft) { draft in
@@ -112,12 +103,16 @@ struct HomeView: View {
             let calculation = try engine.calculate(birthDate: birthDate, selectedHour: selectedHour)
             let interpretation = TemplateFortuneInterpreter().interpret(result: calculation)
             let insight = LifeWeightInsightGenerator().generate(result: calculation)
-            saveHistoryRecord(result: calculation, insight: insight)
+            let savedRecord = saveHistoryRecord(result: calculation, insight: insight)
 
             self.calculation = calculation
             self.interpretation = interpretation
             self.insight = insight
             errorMessage = nil
+            draftBannerMessage = nil
+            if let savedRecord {
+                recentHistoryRecord = savedRecord
+            }
             shouldShowResult = true
         } catch {
             calculation = nil
@@ -128,7 +123,8 @@ struct HomeView: View {
         }
     }
 
-    private func saveHistoryRecord(result: LifeWeightResult, insight: LifeWeightInsight) {
+    @discardableResult
+    private func saveHistoryRecord(result: LifeWeightResult, insight: LifeWeightInsight) -> HistoryRecord? {
         let record = HistoryRecord(
             id: UUID(),
             createdAt: Date(),
@@ -142,9 +138,11 @@ struct HomeView: View {
         )
 
         do {
-            try HistoryRecordStore().add(record)
+            try historyRecordStore.add(record)
+            return record
         } catch {
             print("History record save failed: \(error.localizedDescription)")
+            return nil
         }
     }
 
@@ -157,10 +155,19 @@ struct HomeView: View {
         }
     }
 
+    private func loadRecentHistory() {
+        do {
+            recentHistoryRecord = try historyRecordStore.load().first
+        } catch {
+            recentHistoryRecord = nil
+        }
+    }
+
     private func applySavedProfile(_ profile: SavedBirthProfile) {
         birthDate = profile.birthDate
         selectedHour = profile.hour
         profileMessage = "已填入“\(profile.displayName)”，请确认后点击查询。"
+        draftBannerMessage = nil
         errorMessage = nil
     }
 
@@ -172,7 +179,8 @@ struct HomeView: View {
         birthDate = draft.birthDate
         selectedHour = draft.hour
         shouldShowResult = false
-        profileMessage = "已从\(draft.source)填入出生日期和时辰，请确认后点击查询。"
+        draftBannerMessage = "已从\(draft.source)填入出生日期和时辰，请确认后点击查询。"
+        profileMessage = nil
         errorMessage = nil
     }
 
