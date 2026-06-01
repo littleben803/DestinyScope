@@ -27,6 +27,30 @@
 - `LocalModels/` 和模型文件仍必须被忽略。
 - 仓库外模型文件不能进入 git。
 
+V1.5 阶段 2 最终确认规则：
+
+```gitignore
+# Local model artifacts
+*.gguf
+*.bin
+*.safetensors
+*.mlmodel
+*.mlmodelc
+*.xcframework
+
+# Local model directories at repository root only.
+/Models/
+/LocalModels/
+
+# Optional app-local model test directories
+DestinyScope/LocalModels/
+```
+
+注意：
+
+- 不再使用宽泛的 `Models/`，避免误忽略 `DestinyScope/Domain/Models`。
+- `OpenSourceLicenseItem.swift` 已从 ignored 状态恢复为可跟踪源码。
+
 ## 3. 静态扫描命令建议
 
 ```bash
@@ -35,6 +59,18 @@ git status
 
 ```bash
 git check-ignore -v DestinyScope/Domain/Models/OpenSourceLicenseItem.swift
+```
+
+```bash
+find DestinyScope/Domain/Models -name "*.swift" -print0 | xargs -0 -I{} sh -c 'git check-ignore -v "{}" || true'
+```
+
+```bash
+git check-ignore -v test.gguf || true
+git check-ignore -v LocalModels/test.gguf || true
+git check-ignore -v Models/test.gguf || true
+git check-ignore -v DestinyScope/LocalModels/test.gguf || true
+git check-ignore -v test.xcframework || true
 ```
 
 ```bash

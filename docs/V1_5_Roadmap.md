@@ -34,6 +34,8 @@
 
 ## V1.5 阶段 2：source-control 与工程卫生修复
 
+状态：已完成。
+
 阶段目标：
 
 - 优先修复 `.gitignore` 中 `Models/` 规则误伤 Swift 源码目录的问题。
@@ -58,6 +60,19 @@
 - `OpenSourceLicenseItem.swift` 可被 git 跟踪。
 - `LocalModels/`、`*.gguf`、`*.xcframework` 等仍被忽略。
 - Debug / Release 构建通过。
+
+完成记录：
+
+- 已将 `.gitignore` 中宽泛的 `Models/` / `LocalModels/` 收窄为仓库根目录规则 `/Models/` / `/LocalModels/`。
+- 已保留 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc`、`.xcframework` 等模型和 framework 文件忽略规则。
+- 已补充 `DestinyScope/LocalModels/` 忽略规则。
+- `DestinyScope/Domain/Models/OpenSourceLicenseItem.swift` 不再被忽略，并已加入 git 索引。
+- 已新增 `docs/V1_5_SourceControlAudit.md` 记录本阶段审计和验证结果。
+- Debug / Release 模拟器构建通过。
+
+下一阶段：
+
+- V1.5 阶段 3：UI / UX 全量审计。
 
 建议 commit message：
 

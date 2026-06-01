@@ -446,7 +446,8 @@ V1.4 阶段 8 TestFlight readiness 决策项：
 
 V1.5 阶段 2 前置检查：
 
-- `git check-ignore -v DestinyScope/Domain/Models/OpenSourceLicenseItem.swift` 不应命中误伤规则。
-- `OpenSourceLicenseItem.swift` 必须可被 git 跟踪。
-- `LocalModels/`、`*.gguf`、`*.xcframework` 等仍必须被忽略。
-- 修复 source-control 风险后再进入 UI 修改阶段。
+- `git check-ignore -v DestinyScope/Domain/Models/OpenSourceLicenseItem.swift` 已不再命中误伤规则。
+- `OpenSourceLicenseItem.swift` 已加入 git 索引，后续应随源码提交。
+- `LocalModels/`、`/Models/`、`DestinyScope/LocalModels/`、模型扩展名和 `*.xcframework` 规则仍必须被忽略。
+- 仓库内当前未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc` 或 `.xcframework`。
+- source-control 风险已修复，可进入 V1.5 阶段 3：UI / UX 全量审计。

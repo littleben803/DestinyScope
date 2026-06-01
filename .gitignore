@@ -61,11 +61,18 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
-# Local model files
+# Local model artifacts
 *.gguf
 *.bin
 *.safetensors
 *.mlmodel
 *.mlmodelc
-Models/
-LocalModels/
+*.xcframework
+
+# Local model directories at repository root only.
+# Do not use broad "Models/" because it also ignores DestinyScope/Domain/Models Swift sources.
+/Models/
+/LocalModels/
+
+# Optional app-local model test directories
+DestinyScope/LocalModels/

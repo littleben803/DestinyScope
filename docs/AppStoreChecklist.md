@@ -346,10 +346,12 @@ V1.4 进入实现前仍必须确认：
 
 V1.5 P0 风险：
 
-- 必须优先解决 `.gitignore` 中 `Models/` 规则误伤 Swift 源码目录的问题。
-- `DestinyScope/Domain/Models/OpenSourceLicenseItem.swift` 必须可被 git 跟踪。
-- 未来新增 Swift 文件不能被 `Models/` 规则误忽略。
-- `LocalModels/`、`*.gguf`、`*.xcframework` 等模型和 framework 文件仍必须继续忽略。
+- `.gitignore` 中 `Models/` 规则误伤 Swift 源码目录的问题已在 V1.5 阶段 2 修复。
+- `DestinyScope/Domain/Models/OpenSourceLicenseItem.swift` 已不再被忽略，并已加入 git 索引。
+- 未来新增 `DestinyScope/Domain/Models/*.swift` 不应再被 `Models/` 规则误忽略。
+- `LocalModels/`、`/Models/`、`DestinyScope/LocalModels/`、模型扩展名和 `*.xcframework` 规则仍继续保护本地模型 / framework 文件不进入仓库。
+- 当前仓库扫描未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc` 或 `.xcframework`。
+- 已新增 `docs/V1_5_SourceControlAudit.md` 记录 source-control 审计结果。
 
 V1.5 上架风险提醒：
 
