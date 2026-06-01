@@ -561,3 +561,20 @@ V1.5 阶段 10 自测与决策：
 - license / notice 人工留档。
 - TestFlight Review Notes 和测试人员说明。
 - Bundle ID / Signing / Version / Build / Archive 检查。
+
+V1.6 产品功能打磨状态：
+
+- V1.6 暂停 TestFlight 上传。
+- 当前不创建 App Store Connect 记录。
+- 当前不修改 Bundle ID / Signing / Team / Version / Build。
+- 当前不默认启用本地模型。
+- 当前不接模型下载、云端 AI、RAG、开放聊天或付费订阅。
+- 后续如恢复 TestFlight，需要在 V1.6 新增功能完成后重新执行 readiness 检查。
+- V1.6 新增的本地数据能力需要重点测试：
+  - onboarding flag 默认行为和重看入口。
+  - local birth profiles 的新增、复用、删除。
+  - 结果文本复制 / 分享文案安全边界。
+  - 知识库收藏和最近阅读的本地保存与清空。
+  - 历史记录收藏 / 置顶 / 快速复查是否不重新计算历史详情。
+  - 本地数据管理入口是否能删除历史、收藏、最近阅读和 Profile。
+  - 所有新增数据均不上传、不同步、不登录。

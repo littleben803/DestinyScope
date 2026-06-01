@@ -438,3 +438,27 @@ V1.5 自测与决策状态：
 - 当前仍不上传 TestFlight。
 - App Store 元数据仍不应宣传 AI / 本地模型。
 - 上架前仍需完成 Accessibility、Dynamic Type、深色模式、小屏、iPad、GitHub Pages 隐私页一致性、license / notice、App Icon 授权、签名和 Archive 人工检查。
+
+## 18. V1.6 产品功能打磨状态
+
+当前状态：
+
+- V1.6 进入产品功能打磨阶段。
+- 当前仍不准备上传 TestFlight。
+- 当前仍不准备 App Store 上架。
+- 当前仍不默认启用本地模型。
+- 当前仍不把本地模型接入默认结果页。
+- V1.6 重点是首次使用体验、常用出生资料、结果文本复制 / 分享、知识库收藏 / 最近阅读、历史记录整理和本地数据管理。
+- 已新增 `docs/V1_6_ProductFeaturePlan.md`。
+- 已新增 `docs/V1_6_Roadmap.md`。
+- 已新增 `docs/V1_6_DataPrivacyPlan.md`。
+- 已新增 `docs/V1_6_FeatureBacklog.md`。
+
+V1.6 隐私和上架边界：
+
+- 新增功能必须保持本地处理和隐私友好。
+- 出生 Profile、历史收藏、知识库收藏、最近阅读等新增数据必须只保存在设备端。
+- 不接账号、不同步、不接 iCloud、不接分析 SDK、不接广告追踪。
+- 用户必须能够删除新增本地数据。
+- 分享文案不得包含精准预测、改命、化解、避灾、必然发财等高风险表达。
+- 本地模型仍不是当前 Release 正式功能，App Store 元数据仍不应宣传 AI / 本地模型。
