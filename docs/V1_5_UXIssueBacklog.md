@@ -25,10 +25,20 @@
 | UX-021 | 隐私政策 | 内容完整但长，缺少顶部摘要 / 目录 | P0 | addressed | 已增加 `LegalSummaryCard`，并按账号、出生信息、历史记录、本地模型实验、网络、权限、追踪、未来变更和联系方式分区 | 是 | 隐私理解成本 | V1.5 阶段 7 |
 | UX-022 | 免责声明 | 长卡片阅读效率一般 | P1 | addressed | 已增加摘要卡，并按传统文化、使用边界、非专业建议、健康、财务、婚恋、本地润色和重大决策分区 | 是 | 审核边界需保持 | V1.5 阶段 7 |
 | UX-023 | 开源许可 | 技术内容对普通用户偏重 | P1 | addressed | 已增加开源许可摘要，license item 改为卡片化展示 name、license、source URL 和说明，强调仍需人工复核 | 是 | 审核 / license 透明度 | V1.5 阶段 7 |
-| UX-024 | 首页 | 时辰选择只显示小时，不解释传统时辰 | P1 | 增加轻量说明或显示时辰别名，不改计算逻辑 | 是 | 用户理解成本 | V1.5 阶段 8 |
-| UX-025 | 首页 | DatePicker / Picker 在小屏和 Dynamic Type 下可能拥挤 | P0 | 做小屏和 Dynamic Type 验证，必要时调整布局 | 是 | 小屏截断 | V1.5 阶段 8 |
-| UX-026 | DesignSystem | `AppPrimaryButton` disabled 状态视觉可能不明显 | P1 | 增加 disabled token 或样式 | 是 | 操作反馈不足 | V1.5 阶段 8 |
-| UX-027 | DesignSystem | 深色模式下 shadow / 暗金 / 朱砂对比度需人工确认 | P0 | 真机检查并调整必要色值 | 是 | 深色可读性 | V1.5 阶段 8 |
-| UX-028 | 全局 | VoiceOver 标签未系统性补充 | P0 | 为删除、生成、导入、导航等关键按钮补充 accessibility label / hint | 是 | 可访问性 | V1.5 阶段 8 |
-| UX-029 | 全局 | iPad 留白和卡片宽度未专项优化 | P2 | 评估 max content width | 是 | iPad 视觉松散 | V1.5 阶段 8 |
-| UX-030 | 截图 / 文案 | 截图规划需随 V1.5 页面优化更新 | P2 | 更新截图规划和文案复查清单 | 否 | 上架素材质量 | V1.5 阶段 9 |
+| UX-024 | 首页 | 时辰选择只显示小时，不解释传统时辰 | P1 | not addressed | 增加轻量说明或显示时辰别名，不改计算逻辑 | 是 | 用户理解成本 | V1.5 阶段 8 |
+| UX-025 | 首页 | DatePicker / Picker 在小屏和 Dynamic Type 下可能拥挤 | P0 | planned | 已纳入 `V1_5_AccessibilityDarkModeSmallScreenPlan.md` 和 `V1_5_QAChecklist.md`；后续需真机 / 模拟器验证 | 是 | 小屏截断 | V1.5 阶段 9 |
+| UX-026 | DesignSystem | `AppPrimaryButton` disabled 状态视觉可能不明显 | P1 | not addressed | 增加 disabled token 或样式 | 是 | 操作反馈不足 | V1.5 阶段 8 |
+| UX-027 | DesignSystem | 深色模式下 shadow / 暗金 / 朱砂对比度需人工确认 | P0 | planned | 已纳入深色模式 QA gate，需覆盖背景、卡片、朱砂红、暗金、错误提示和 Legal 长文 | 是 | 深色可读性 | V1.5 阶段 9 |
+| UX-028 | 全局 | VoiceOver 标签未系统性补充 | P0 | planned | 已纳入 Accessibility QA gate，重点检查删除、生成、导入、导航、Legal 入口等 label / hint | 是 | 可访问性 | V1.5 阶段 9 |
+| UX-029 | 全局 | iPad 留白和卡片宽度未专项优化 | P2 | planned | 已纳入设备测试矩阵，需在 iPad 上检查内容宽度和横竖屏留白 | 是 | iPad 视觉松散 | V1.5 阶段 9 |
+| UX-030 | 截图 / 文案 | 截图规划需随 V1.5 页面优化更新 | P2 | deferred | 阶段 9 调整为可访问性 / 适配 / QA 规划；截图和文案复查后续并入阶段 10 或上架资源确认 | 否 | 上架素材质量 | V1.5 阶段 10 |
+| UX-031 | 全局 | Dynamic Type 未覆盖默认、Large、Extra Large、Accessibility Large 全量检查 | P0 | planned | 使用 `V1_5_QAChecklist.md` 对首页、结果页、知识库、历史、Legal 和实验页做字体尺寸检查 | 是 | 大字号截断 / 可访问性不足 | V1.5 阶段 9 |
+| UX-032 | 结果页 | 长结果页在 VoiceOver 下的分区朗读顺序需要确认 | P0 | planned | 检查顶部摘要、诗文、权重、洞察、解读、问答、润色预览、免责声明的焦点顺序 | 是 | 结果理解困难 | V1.5 阶段 9 |
+| UX-033 | 知识库 | 分类 chips 和搜索在 Dynamic Type / 小屏下可能拥挤 | P1 | planned | 检查横向滚动、搜索框高度、无结果状态和 tags 换行 | 是 | 浏览效率下降 | V1.5 阶段 9 |
+| UX-034 | 历史记录 | 删除 / 清空确认在 VoiceOver 下需要确认不可恢复提示 | P0 | planned | 检查 confirmationDialog / alert 的 label、hint 和取消路径 | 是 | 误删风险 | V1.5 阶段 9 |
+| UX-035 | Legal | 隐私政策、免责声明、开源许可长文在 Accessibility Large 下可能阅读压力大 | P1 | planned | 检查摘要卡、分区标题、长 URL 和邮箱换行 | 是 | 合规信息难以阅读 | V1.5 阶段 9 |
+| UX-036 | 本地模型实验 | 实验开关、模型状态、导入和生成按钮在 VoiceOver 下可能不够明确 | P0 | planned | 检查 label / hint 明确说明实验性质、设备端处理、失败回退和不生成命理结论 | 是 | 用户误解实验功能 | V1.5 阶段 9 |
+| UX-037 | 本地模型实验 | Release 隐藏、Tier C 不可用、模型不存在回退需要纳入 QA gate | P0 | planned | 使用 `V1_5_QAChecklist.md` 和设备矩阵覆盖受控实验路径 | 是 | 实验能力泄露到默认路径 | V1.5 阶段 9 |
+| UX-038 | 全局 | 错误状态和空状态是否被 VoiceOver 正确读出未系统验证 | P1 | planned | 检查首页错误、知识库空状态、历史空状态、本地模型不可用原因 | 是 | 异常状态不可理解 | V1.5 阶段 9 |
+| UX-039 | 全局 | iPhone SE / mini / Pro Max / iPad 设备矩阵尚未执行 | P0 | planned | 按 `V1_5_DeviceTestMatrix.md` 执行人工设备测试 | 否 | 上架前适配风险 | V1.5 阶段 9 |
+| UX-040 | 全局 | QA 结果尚未形成 V1.5 自测报告和下一步决策 | P0 | planned | 阶段 10 输出 V1.5 自测报告和是否恢复 TestFlight / 上架准备决策 | 否 | 下一步决策依据不足 | V1.5 阶段 10 |

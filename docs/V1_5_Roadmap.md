@@ -344,6 +344,11 @@
 
 ## V1.5 阶段 8：可访问性、深色模式、小屏适配
 
+状态：
+
+- 暂未执行 Swift 实现。本阶段仍作为后续代码优化阶段保留。
+- V1.5 阶段 9 已先完成可访问性、深色模式、小屏适配及 QA 检查规划，后续若进入代码优化，应以阶段 9 输出的 `V1_5_AccessibilityDarkModeSmallScreenPlan.md`、`V1_5_QAChecklist.md` 和 `V1_5_DeviceTestMatrix.md` 为准。
+
 阶段目标：
 
 - 检查并优化 Dynamic Type、VoiceOver 标签、深色模式、小屏 iPhone 和 iPad 适配。
@@ -370,32 +375,55 @@
 
 - `ui: improve accessibility and responsive layout`
 
-## V1.5 阶段 9：截图规划和产品文案复查
+## V1.5 阶段 9：可访问性、深色模式、小屏适配及 QA 检查规划
+
+状态：
+
+- 已完成规划。
+- 已新增 `docs/V1_5_AccessibilityDarkModeSmallScreenPlan.md`。
+- 已新增 `docs/V1_5_QAChecklist.md`。
+- 已新增 `docs/V1_5_DeviceTestMatrix.md`。
+- 本阶段只修改文档，未修改 Swift 代码、工程配置、资源、CSV、JSON、依赖或模型文件。
 
 阶段目标：
 
-- 更新截图规划和产品文案检查清单。
-- 确保截图、描述、提示文案不包含高风险承诺。
+- 制定 Accessibility、Dark Mode、小屏适配、Dynamic Type、VoiceOver 和 QA 测试规划。
+- 明确页面范围、P0 QA 检查项、设备测试矩阵和本地模型实验路径 QA。
+- 为 V1.5 阶段 10 自测与下一步决策准备执行清单。
 
 允许修改范围：
 
 - Docs 文档。
-- 如需微调截图相关页面文案，必须小范围且单独说明。
 
 不允许做的事：
 
-- 不生成图片。
-- 不上传 App Store Connect。
-- 不宣传 AI / 本地模型为正式功能。
+- 不修改 Swift 代码。
+- 不修改 UI 页面。
+- 不修改工程配置、资源、CSV、JSON、依赖或模型文件。
+- 不默认启用本地模型。
+- 不改变默认输出路径。
 
 验收标准：
 
-- 截图规划覆盖首页、结果、知识库、历史、隐私和免责声明。
-- 文案不包含精准预测、改命、化解、必然发财等词。
+- Accessibility 检查范围覆盖首页、结果页、知识库、历史、设置、Legal 和本地模型实验路径。
+- Dynamic Type 检查覆盖默认、Large、Extra Large 和 Accessibility Large。
+- 深色模式检查覆盖主要页面、Legal 长文、tag / chip / badge 和错误状态。
+- 小屏适配检查覆盖 iPhone SE、iPhone mini、标准 iPhone、Pro Max 和 iPad。
+- 本地模型实验 QA 保持 Release 隐藏、默认关闭、失败回退、不写历史记录。
+
+仍需后续执行：
+
+- 按 `docs/V1_5_QAChecklist.md` 做人工 QA。
+- 按 `docs/V1_5_DeviceTestMatrix.md` 做设备覆盖。
+- 截图规划和产品文案复查可作为 V1.5 阶段 10 或后续上架资源确认的一部分继续处理。
+
+下一阶段：
+
+- V1.5 阶段 10：V1.5 自测与下一步决策。
 
 建议 commit message：
 
-- `docs: refresh screenshot and copy review plan`
+- `docs: add v1.5 accessibility and qa plan`
 
 ## V1.5 阶段 10：V1.5 自测与下一步决策
 

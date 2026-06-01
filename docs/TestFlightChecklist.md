@@ -520,3 +520,20 @@ V1.5 阶段 7 设置 / Legal 页面测试项：
 - 开源许可中的 URL 只作为文本显示，不打开外链、不请求网络。
 - 本地模型实验入口文案不暗示模型生成命理结论。
 - 小屏、深色模式、Dynamic Type 和 VoiceOver 仍需人工验证。
+
+V1.5 阶段 9 Accessibility / Dark Mode / Small Screen QA 项：
+
+- VoiceOver 可按合理顺序读出首页、结果页、知识库、历史、设置和 Legal 页面。
+- 首页查询按钮、结果页问答按钮、本地润色预览按钮、知识库搜索、历史删除 / 清空、Legal 入口具备可理解的 label / hint。
+- Dynamic Type 默认、Large、Extra Large、Accessibility Large 均需检查。
+- iPhone SE / mini 上首页输入、结果页卡片、知识库 chips、历史记录卡片和 Legal 长文不明显截断。
+- iPhone 17 Pro Max 上结果页长滚动和卡片间距舒适。
+- iPad 上内容宽度和留白需要人工确认。
+- 深色模式下背景、卡片、朱砂红、暗金、tag / chip / badge、错误提示和 Legal 长文可读。
+- 本地模型实验开关默认关闭，未接受说明不能开启。
+- Tier C / unknown 设备不应启用本地模型实验。
+- 模型不存在、低电量、过热、超时、安全检查失败时必须回退。
+- Release 不展示本地模型实验入口。
+- `makeDefaultRefiner()` 默认仍应返回 `TemplateTextRefiner`。
+- 润色结果不覆盖原始文本、不写入历史记录。
+- 按 `docs/V1_5_DeviceTestMatrix.md` 记录设备、系统、屏幕类别、测试重点和问题。

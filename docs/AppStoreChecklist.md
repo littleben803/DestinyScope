@@ -411,3 +411,13 @@ V1.5 设置 / Legal 体验状态：
 - 本地模型仍不是默认功能，`makeDefaultRefiner()` 仍应返回 `TemplateTextRefiner`。
 - 本阶段未修改 GitHub Pages 隐私页；上架前仍需人工复核 App 内隐私页和公网隐私页一致性。
 - 隐私和免责声明文案仍需上架前人工复核。
+
+V1.5 可访问性与适配规划状态：
+
+- V1.5 阶段 9 已完成 Accessibility、Dark Mode、小屏适配、Dynamic Type、VoiceOver 和 QA 检查规划。
+- 已新增 `docs/V1_5_AccessibilityDarkModeSmallScreenPlan.md`，覆盖首页、结果页、知识库、历史、设置、Legal 和本地模型实验路径。
+- 已新增 `docs/V1_5_QAChecklist.md`，用于后续 V1.5 自测和人工 QA。
+- 已新增 `docs/V1_5_DeviceTestMatrix.md`，覆盖 iPhone SE、iPhone 12 mini、iPhone 17 Pro Max、iPad、Simulator、低电量模式、深色模式、VoiceOver 和 Dynamic Type Accessibility Large。
+- App Store 上架前必须完成人工适配检查，尤其是小屏、深色模式、Dynamic Type、VoiceOver 和 Legal 长文可读性。
+- 当前仍不准备上传 TestFlight，也不准备 App Store 上架。
+- 本地模型仍不是当前 Release 正式功能，当前 App Store 元数据仍不应宣传 AI / 本地模型能力。

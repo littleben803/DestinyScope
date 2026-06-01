@@ -101,7 +101,57 @@ rg -n "精准预测|改命|化解|避灾|必然发财|保证转运|疾病预测|
 - 小屏设备。
 - 飞行模式。
 
-## 5. V1.5 决策门槛
+## 5. Accessibility / Dark Mode / Small Screen Gate
+
+V1.5 进入下一步决策前，应至少完成以下人工 gate：
+
+Accessibility：
+
+- VoiceOver 可按合理顺序读出首页、结果页、知识库、历史、设置和 Legal 页面。
+- 删除、清空、导入、生成、重新生成等关键按钮具备可理解的 label / hint。
+- 错误状态和空状态可被读出，且说明下一步。
+- 本地模型实验路径不会被朗读成默认命理能力。
+
+Dynamic Type：
+
+- 默认、Large、Extra Large、Accessibility Large 至少各检查一次。
+- 首页输入区不挤压。
+- 结果页卡片、tags、按钮和免责声明不截断。
+- 知识库分类 chips、搜索、详情页 source URL 不溢出。
+- 历史记录列表和详情仍可读。
+- Legal 页面长文可完整滚动。
+
+Dark Mode：
+
+- 背景、卡片、主文字、次文字对比足够。
+- 朱砂红、暗金、tag / chip / badge、divider 在深色模式下可读。
+- 错误提示和 fallback 提示在深色模式下明显但不刺眼。
+- Legal 长文不出现低对比度段落。
+
+Small Screen / iPad：
+
+- iPhone SE / mini 上 DatePicker、Picker、按钮、TabView 不明显截断。
+- 结果页长文可完整滚动。
+- 知识库分类 chips 可横向滚动。
+- 开源许可长 URL 可换行。
+- iPad 上内容宽度和留白需要人工确认。
+
+Local Model Experiment：
+
+- Release 不展示实验入口。
+- `makeDefaultRefiner()` 仍返回 `TemplateTextRefiner`。
+- 实验开关默认关闭，未接受说明不能开启。
+- Tier C / unknown 不可用。
+- 模型不存在、低电量、过热、超时、安全检查失败时回退。
+- 润色结果不覆盖原始文本、不写入历史记录。
+
+参考文档：
+
+- `docs/V1_5_AccessibilityDarkModeSmallScreenPlan.md`
+- `docs/V1_5_QAChecklist.md`
+- `docs/V1_5_DeviceTestMatrix.md`
+
+## 6. V1.5 决策门槛
 
 V1.5 结束时必须给出下一步决策：
 
