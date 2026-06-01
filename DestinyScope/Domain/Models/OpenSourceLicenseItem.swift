@@ -14,3 +14,9 @@ struct OpenSourceLicenseItem: Identifiable, Equatable {
     let license: String
     let description: String
 }
+
+extension OpenSourceLicenseItem {
+    var sourceDisplayText: String {
+        sourceURLs.joined(separator: "\n")
+    }
+}

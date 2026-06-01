@@ -290,6 +290,8 @@
 
 ## V1.5 阶段 7：设置 / 关于 / Legal / 开源许可体验优化
 
+状态：已完成。
+
 阶段目标：
 
 - 优化设置、关于、隐私政策、免责声明、开源许可的阅读和入口层级。
@@ -312,6 +314,29 @@
 - 隐私政策、免责声明、开源许可均可打开。
 - 文案不包含高风险营销词。
 - 本地模型实验仍默认关闭。
+
+完成记录：
+
+- 已新增 `SettingsSectionCard`，设置页按“应用信息”“隐私与安全”“实验功能”分区展示入口。
+- `SettingsView` 标题调整为“设置”，普通 Legal 入口和 Debug 实验入口不再混排。
+- `AboutView` 已拆分为 App 定位、当前能力、使用边界和法律与隐私入口，减少长段落堆叠。
+- 已新增 `LegalSummaryCard`、`LegalSectionCard`、`LegalInfoRow`，统一 Legal 长文的摘要、分区和信息行样式。
+- `PrivacyPolicyView` 已按账号与登录、出生信息、本地历史记录、本地模型实验、网络与服务端、系统权限、广告分析与追踪、本地资源、未来版本和联系方式分区。
+- `DisclaimerView` 已按使用边界、传统文化、自我探索、非专业建议、健康、财务、婚恋、本地模型润色和重大决策分区。
+- `OpenSourceLicensesView` 已增加顶部摘要，每个 license item 使用卡片展示 name、license、source URL 和说明；URL 仍只作为文本显示，不打开外链。
+- `OpenSourceLicenseItem` 仅新增展示用 computed 属性 `sourceDisplayText`，未改变存储含义。
+- 本地模型实验逻辑、默认输出路径、`makeDefaultRefiner()` 均未改变。
+- Debug / Release 模拟器构建通过。
+
+仍需人工检查：
+
+- 深色模式下 Legal 摘要卡、长段落、source URL 和分区标题的对比度。
+- Dynamic Type 下长标题、邮箱、URL 是否换行稳定。
+- VoiceOver 对设置入口、Legal 分区和开源许可信息的朗读顺序。
+
+下一阶段：
+
+- V1.5 阶段 8：可访问性、深色模式、小屏适配。
 
 建议 commit message：
 

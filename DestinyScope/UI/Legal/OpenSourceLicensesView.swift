@@ -38,64 +38,37 @@ struct OpenSourceLicensesView: View {
     var body: some View {
         AppBackground {
             ScrollView {
-                VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-                    AppCard {
-                        Text("开源许可")
-                            .font(AppTheme.Typography.pageTitle)
-                            .foregroundColor(AppTheme.Colors.primaryText)
-
-                        Text("本页面用于记录 DestinyScope 本地模型实验相关的开源许可草案，不构成法律意见。当前正式功能仍可在不启用本地模型实验的情况下使用。")
-                            .font(AppTheme.Typography.body)
-                            .foregroundColor(AppTheme.Colors.secondaryText)
-                    }
+                VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+                    LegalSummaryCard(
+                        title: "开源许可",
+                        bodyText: "本页面用于记录 DestinyScope 本地模型实验相关的开源许可草案，不构成法律意见。",
+                        highlights: [
+                            "当前正式功能仍可在不启用本地模型实验的情况下使用。",
+                            "如果未来 App 正式包含模型或框架，会继续补充对应 license / notice。",
+                            "进入分发前仍需人工复核具体来源、许可、署名和再分发条件。"
+                        ]
+                    )
 
                     ForEach(items) { item in
                         AppCard {
                             AppSectionHeader(title: item.name)
 
                             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                                labeledText(title: "License", body: item.license)
-
-                                VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                                    Text("来源")
-                                        .font(AppTheme.Typography.secondary)
-                                        .foregroundColor(AppTheme.Colors.secondaryText)
-
-                                    ForEach(item.sourceURLs, id: \.self) { url in
-                                        Text(url)
-                                            .font(AppTheme.Typography.footnote)
-                                            .foregroundColor(AppTheme.Colors.primaryText)
-                                            .textSelection(.enabled)
-                                    }
-                                }
-
-                                labeledText(title: "说明", body: item.description)
+                                LegalInfoRow(title: "License", value: item.license)
+                                LegalInfoRow(title: "来源", value: item.sourceDisplayText, allowsSelection: true)
+                                LegalInfoRow(title: "说明", value: item.description)
                             }
                         }
                     }
 
-                    AppCard {
-                        AppSectionHeader(title: "后续要求")
-                        Text("如果未来 App 正式包含模型或框架，需要继续补充相应 license / notice，并在发布前人工复核来源、许可、署名、再分发和 App 内分发条件。")
-                            .font(AppTheme.Typography.body)
-                            .foregroundColor(AppTheme.Colors.primaryText)
-                    }
+                    LegalSectionCard(
+                        title: "后续要求",
+                        bodyText: "如果未来 App 正式包含模型或框架，需要继续补充相应 license / notice，并在发布前人工复核来源、许可、署名、再分发和 App 内分发条件。"
+                    )
                 }
                 .padding(AppTheme.Spacing.lg)
             }
         }
         .navigationTitle("开源许可")
-    }
-
-    private func labeledText(title: String, body: String) -> some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-            Text(title)
-                .font(AppTheme.Typography.secondary)
-                .foregroundColor(AppTheme.Colors.secondaryText)
-
-            Text(body)
-                .font(AppTheme.Typography.body)
-                .foregroundColor(AppTheme.Colors.primaryText)
-        }
     }
 }
