@@ -421,3 +421,20 @@ V1.5 可访问性与适配规划状态：
 - App Store 上架前必须完成人工适配检查，尤其是小屏、深色模式、Dynamic Type、VoiceOver 和 Legal 长文可读性。
 - 当前仍不准备上传 TestFlight，也不准备 App Store 上架。
 - 本地模型仍不是当前 Release 正式功能，当前 App Store 元数据仍不应宣传 AI / 本地模型能力。
+
+V1.5 自测与决策状态：
+
+- V1.5 阶段 10 已完成自测与下一步决策。
+- 已新增 `docs/V1_5_TestReport.md`。
+- 已新增 `docs/V1_5_ReleaseReadinessDecision.md`。
+- Debug build：通过。
+- Release build：通过。
+- Product Experience Optimization: Pass。
+- TestFlight Upload: Not Now。
+- App Store Release: No-Go。
+- Local Model Default Enablement: No-Go。
+- Continue Product Polish: Go。
+- 当前仍不准备上架 App Store。
+- 当前仍不上传 TestFlight。
+- App Store 元数据仍不应宣传 AI / 本地模型。
+- 上架前仍需完成 Accessibility、Dynamic Type、深色模式、小屏、iPad、GitHub Pages 隐私页一致性、license / notice、App Icon 授权、签名和 Archive 人工检查。

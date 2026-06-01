@@ -427,6 +427,14 @@
 
 ## V1.5 阶段 10：V1.5 自测与下一步决策
 
+状态：
+
+- 已完成。
+- 已新增 `docs/V1_5_TestReport.md`。
+- 已新增 `docs/V1_5_ReleaseReadinessDecision.md`。
+- Debug / Release 构建通过。
+- V1.5 总体标记为产品体验优化通过。
+
 阶段目标：
 
 - 完成 V1.5 自测报告。
@@ -452,6 +460,38 @@
 - 本地模型实验路径受控。
 - source-control 风险已关闭。
 - 下一步决策明确。
+
+自测结果摘要：
+
+- Debug build：通过。
+- Release build：通过。
+- 既有非阻断提示仍存在，包括 AppIntents metadata skipped、JoJoBuildVersion default 不存在、Debug llama embed 脚本每次运行提示。
+- Release 日志仍会调度 `Embed Debug llama.xcframework` 脚本阶段，但脚本在非 Debug 配置下立即退出；llama framework search path 仅配置在 Debug build settings。
+- `makeDefaultRefiner()` 仍返回 `TemplateTextRefiner`。
+- 仓库内未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc` 或 `.xcframework`。
+- `DestinyScope/Domain/Models/*.swift` 未被 `.gitignore` 误忽略。
+- Swift 源码未发现新增网络请求、在线 AI、StoreKit、CloudKit、追踪或敏感权限申请。
+- 高风险词命中集中在安全规则、测试样例和文档禁止事项说明，不是营销文案。
+
+最终决策：
+
+- Product Experience Optimization: Pass。
+- TestFlight Upload: Not Now。
+- App Store Release: No-Go。
+- Local Model Default Enablement: No-Go。
+- Continue Product Polish: Go。
+
+V1.5 完成状态：
+
+- V1.5 已完成产品体验优化和自测决策。
+- 尚未完成完整人工 Accessibility / Dynamic Type / Dark Mode / Small Screen / iPad 验证。
+- 尚未进入 TestFlight 上传或 App Store 上架准备。
+
+下一步建议：
+
+- V1.6：可访问性和多设备人工验收。
+- 或 V1.6：截图与上架素材准备。
+- 如果目标是短期上架，优先执行可访问性和多设备人工验收。
 
 建议 commit message：
 

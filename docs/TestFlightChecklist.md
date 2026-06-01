@@ -537,3 +537,27 @@ V1.5 阶段 9 Accessibility / Dark Mode / Small Screen QA 项：
 - `makeDefaultRefiner()` 默认仍应返回 `TemplateTextRefiner`。
 - 润色结果不覆盖原始文本、不写入历史记录。
 - 按 `docs/V1_5_DeviceTestMatrix.md` 记录设备、系统、屏幕类别、测试重点和问题。
+
+V1.5 阶段 10 自测与决策：
+
+- 已新增 `docs/V1_5_TestReport.md`。
+- 已新增 `docs/V1_5_ReleaseReadinessDecision.md`。
+- Debug build 通过。
+- Release build 通过。
+- 当前暂不上传 TestFlight。
+- 当前不进入 App Store Release。
+- 本地模型默认启用仍为 No-Go。
+- `makeDefaultRefiner()` 仍应返回 `TemplateTextRefiner`。
+- 默认主流程不依赖本地模型。
+- 仓库内未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc`、`.xcframework`。
+- Swift 源码未发现新增网络请求、在线 AI、StoreKit、CloudKit、广告追踪或敏感权限申请。
+
+如恢复 TestFlight，需要重新执行：
+
+- V1.4 readiness 检查。
+- V1.5 QA checklist。
+- 多设备人工验收。
+- GitHub Pages 隐私页公网访问和内容一致性确认。
+- license / notice 人工留档。
+- TestFlight Review Notes 和测试人员说明。
+- Bundle ID / Signing / Version / Build / Archive 检查。

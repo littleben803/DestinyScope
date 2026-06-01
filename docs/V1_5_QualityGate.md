@@ -161,3 +161,49 @@ V1.5 结束时必须给出下一步决策：
 - 暂停本地模型相关推进。
 
 任何进入 TestFlight 或 App Store 的决策，都必须重新执行 V1.4 readiness 检查，并确认 license / notice、隐私政策、GitHub Pages、公网 URL、签名和测试说明。
+
+## 7. V1.5 自测结果记录
+
+V1.5 阶段 10 已完成自测与决策，详见：
+
+- `docs/V1_5_TestReport.md`
+- `docs/V1_5_ReleaseReadinessDecision.md`
+
+结果：
+
+- Debug build：通过。
+- Release build：通过。
+- `makeDefaultRefiner()`：仍返回 `TemplateTextRefiner`。
+- 默认主流程：未接入本地模型默认路径。
+- 本地模型实验：仍是受控实验路径，默认关闭。
+- 模型 / framework 文件：仓库内未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc`、`.xcframework`。
+- `Domain/Models`：Swift 源码未被误忽略。
+- 网络 / 支付 / 权限 / 追踪：Swift 源码未发现新增 `URLSession`、OpenAI、StoreKit、CloudKit、AppTrackingTransparency、CLLocation 或敏感权限 key。
+- 高风险词：Swift 命中集中在安全规则和测试样例；docs 命中集中在禁止事项和风险说明，未发现作为营销宣传使用。
+
+既有非阻断提示：
+
+- `IDERunDestination: Supported platforms for the buildables in the current scheme is empty.`
+- `The domain/default pair of (com.bytedance.jojo, JoJoBuildVersion) does not exist`
+- `Metadata extraction skipped. No AppIntents.framework dependency found.`
+- `Embed Debug llama.xcframework` 脚本阶段会被调度；脚本在非 Debug 配置下 no-op。后续可优化脚本命名或构建阶段配置，减少 Release 日志混淆。
+
+待人工验证：
+
+- VoiceOver 焦点顺序。
+- 关键按钮 label / hint。
+- Dynamic Type 默认、Large、Extra Large、Accessibility Large。
+- 深色模式。
+- iPhone SE / mini 小屏。
+- iPhone 17 Pro Max。
+- iPad。
+- Legal 长文可读性。
+- 开源许可长 URL 换行。
+
+V1.5 最终决策：
+
+- Product Experience Optimization: Pass。
+- TestFlight Upload: Not Now。
+- App Store Release: No-Go。
+- Local Model Default Enablement: No-Go。
+- Continue Product Polish: Go。
