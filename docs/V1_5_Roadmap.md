@@ -129,6 +129,8 @@
 
 ## V1.5 阶段 4：结果页阅读体验优化
 
+状态：已完成。
+
 阶段目标：
 
 - 优化结果页信息层级、长文本阅读、区块顺序和小屏展示。
@@ -154,6 +156,28 @@
 - 长结果页仍可滚动。
 - 小屏不明显截断。
 - 本地润色预览仍只在受控条件下展示。
+
+完成记录：
+
+- 已新增 `ResultSummaryCard`，将命格标题、农历生日、出生时辰、总重量和短提示作为顶部摘要。
+- 已将称骨诗文独立为结果页卡片，原始诗文文案不变。
+- 已新增 `WeightBreakdownCard`，用两列紧凑卡片展示年 / 月 / 日 / 时权重。
+- 已新增 `InsightTagsView`，用 adaptive grid 展示命格标签，改善小屏换行。
+- 已新增 `InterpretationCard`，将五类解读放入同一张卡，并使用轻量 `DisclosureGroup` 降低长文压迫感。
+- `FortuneQuestionView` 逻辑保持不变。
+- `LocalRefiningPreviewCard` 仍靠后展示，展示条件、调用逻辑、失败回退和历史写入边界均未改变。
+- 未修改任何命理计算逻辑、数据模型含义、历史记录结构或默认 TextRefiner。
+- Debug / Release 模拟器构建通过。
+
+仍需人工检查：
+
+- 小屏 iPhone 的两列权重卡片、标签 grid、DisclosureGroup 是否拥挤。
+- 深色模式下暗金 / 朱砂对比度。
+- Dynamic Type 下结果页长标题、按钮和折叠区是否稳定。
+
+下一阶段：
+
+- V1.5 阶段 5：知识库浏览体验优化。
 
 建议 commit message：
 

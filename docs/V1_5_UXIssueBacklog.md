@@ -1,15 +1,15 @@
 # DestinyScope V1.5 UX Issue Backlog
 
-| id | page | issue | priority | suggestedFix | requiresCodeChange | risk | targetStage |
-|---|---|---|---|---|---:|---|---|
-| UX-001 | 结果页 | 页面内容过长，结果、洞察、问答、解读、润色预览和免责声明集中在一条长滚动中 | P0 | 重构阅读层级，增加更清晰 section、折叠 / 展开或摘要区 | 是 | 长页压迫感影响主流程理解 | V1.5 阶段 4 |
-| UX-002 | 结果页 | 权重明细 HStack 在小屏可能挤压 | P0 | 改为更稳定的两行或 grid-like 布局 | 是 | 小屏截断 | V1.5 阶段 4 |
-| UX-003 | 结果页 | tagList 当前不是真正自动换行，标签多时可能拥挤 | P0 | 使用真正的自适应换行布局或 LazyVGrid | 是 | 小屏可读性 | V1.5 阶段 4 |
-| UX-004 | 结果页 | 多处 safetyNotice 分散且可能重复 | P1 | 统一免责声明策略，保留底部短提示和关键区块提示 | 是 | 审核边界不能削弱 | V1.5 阶段 4 |
-| UX-005 | 命理问答 | 五个问题按钮占用空间较大 | P1 | 改为紧凑 chips 或折叠问答区 | 是 | 长页加重 | V1.5 阶段 4 |
-| UX-006 | 本地润色预览 | 卡片展示 engine / wasRefined / 耗时等技术字段，TestFlight 用户可能困惑 | P0 | Debug 展示详细字段，TestFlight / 普通实验展示简化字段 | 是 | 用户误以为模型参与结论 | V1.5 阶段 4 |
-| UX-007 | 本地润色预览 | “使用原始文本”可能被理解为关闭实验或覆盖结果 | P1 | 改为“收起预览”或补充说明原始结果始终保留 | 是 | 语义误解 | V1.5 阶段 4 |
-| UX-008 | 知识库列表 | 29 篇文章缺少分类筛选 | P0 | 增加本地分类筛选 segmented/chips | 是 | 浏览效率低 | V1.5 阶段 5 |
+| id | page | issue | priority | status | suggestedFix | requiresCodeChange | risk | targetStage |
+|---|---|---|---|---|---|---:|---|---|
+| UX-001 | 结果页 | 页面内容过长，结果、洞察、问答、解读、润色预览和免责声明集中在一条长滚动中 | P0 | partially addressed | 已拆分顶部摘要、诗文卡、权重卡、五类解读卡并调整展示顺序；仍需真机检查长页体感 | 是 | 长页压迫感影响主流程理解 | V1.5 阶段 4 |
+| UX-002 | 结果页 | 权重明细 HStack 在小屏可能挤压 | P0 | addressed | 已改为 `WeightBreakdownCard` 两列紧凑展示年 / 月 / 日 / 时 | 是 | 小屏截断 | V1.5 阶段 4 |
+| UX-003 | 结果页 | tagList 当前不是真正自动换行，标签多时可能拥挤 | P0 | addressed | 已新增 `InsightTagsView`，使用 adaptive grid 改善小屏换行 | 是 | 小屏可读性 | V1.5 阶段 4 |
+| UX-004 | 结果页 | 多处 safetyNotice 分散且可能重复 | P1 | partially addressed | 顶部摘要和底部保留短提示，五类解读内保留原 safetyNotice；仍需人工检查重复感 | 是 | 审核边界不能削弱 | V1.5 阶段 4 |
+| UX-005 | 命理问答 | 五个问题按钮占用空间较大 | P1 | not addressed | 阶段 4 保持现有逻辑，后续可改为紧凑 chips 或折叠问答区 | 是 | 长页加重 | V1.5 阶段 4 |
+| UX-006 | 本地润色预览 | 卡片展示 engine / wasRefined / 耗时等技术字段，TestFlight 用户可能困惑 | P0 | not addressed | 阶段 4 仅保持靠后展示，不改模型调用逻辑；后续阶段 7 做 Debug/TestFlight 信息分层 | 是 | 用户误以为模型参与结论 | V1.5 阶段 7 |
+| UX-007 | 本地润色预览 | “使用原始文本”可能被理解为关闭实验或覆盖结果 | P1 | not addressed | 阶段 4 未改 `LocalRefiningPreviewCard` 交互；后续可改为“收起预览”并补充说明 | 是 | 语义误解 | V1.5 阶段 7 |
+| UX-008 | 知识库列表 | 29 篇文章缺少分类筛选 | P0 | not addressed | 增加本地分类筛选 segmented/chips | 是 | 浏览效率低 | V1.5 阶段 5 |
 | UX-009 | 知识库列表 | 缺少搜索 | P1 | 增加本地标题/摘要/标签搜索 | 是 | 文章增多后发现困难 | V1.5 阶段 5 |
 | UX-010 | 知识库列表 | category 只是文本，不够像可扫读标签 | P2 | 使用统一 tag 样式 | 是 | 视觉层级一般 | V1.5 阶段 5 |
 | UX-011 | 知识库详情 | 正文为单个长 Text，段落层级弱 | P1 | 保留数据不变，在 UI 层按段落拆分显示 | 是 | 长文阅读疲劳 | V1.5 阶段 5 |
