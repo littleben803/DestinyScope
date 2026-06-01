@@ -42,6 +42,16 @@ struct SettingsView: View {
                     }
                     .buttonStyle(.plain)
 
+                    NavigationLink {
+                        OpenSourceLicensesView()
+                    } label: {
+                        settingsRow(
+                            title: "开源许可",
+                            subtitle: "本地模型实验相关 license / notice 草案"
+                        )
+                    }
+                    .buttonStyle(.plain)
+
                     #if DEBUG
                     NavigationLink {
                         LocalModelExperimentSettingsView()

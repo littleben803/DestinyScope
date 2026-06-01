@@ -45,6 +45,16 @@ struct AboutView: View {
                             legalRow(title: "免责声明", subtitle: "仅供娱乐、自我探索和传统文化学习参考")
                         }
                         .buttonStyle(.plain)
+
+                        Divider()
+                            .background(AppTheme.Colors.divider)
+
+                        NavigationLink {
+                            OpenSourceLicensesView()
+                        } label: {
+                            legalRow(title: "开源许可", subtitle: "本地模型实验相关许可与 notice 草案")
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
                 .padding(AppTheme.Spacing.lg)

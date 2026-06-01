@@ -292,6 +292,10 @@ V1.2 上架风险提醒：
 - 本地润色预览由用户手动触发，不自动生成，也不上传模型输入输出。
 - V1.4 阶段 6 已为本地润色预览增加低电量、过热、超时和连续失败回退保护。
 - 运行时保护只影响实验卡片，不进入默认输出路径；失败时继续保留原始模板文本。
+- V1.4 阶段 7 已新增 App 内“开源许可”页面，覆盖 llama.cpp、ggml / GGUF、Qwen2.5-0.5B-Instruct / GGUF 的许可草案。
+- V1.4 阶段 7 已更新 App 内隐私政策，补充本地历史记录和本地模型润色实验说明。
+- V1.4 阶段 7 已更新 GitHub Pages 隐私页文件：`docs/privacy/index.html` 和 `docs/privacy/privacy.md`。
+- 本地模型进入 TestFlight 或 App Store 分发前，仍必须人工确认 license / notice、实际 GGUF 来源、商业使用、再分发和 App 内分发条件。
 - 当前正式 Release 仍不包含本地模型正式功能。
 - 当前 App Store 元数据仍不宣传 AI / 本地模型。
 - Release 默认不展示本地模型润色实验入口。
