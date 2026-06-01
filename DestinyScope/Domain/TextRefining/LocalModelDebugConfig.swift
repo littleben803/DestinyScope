@@ -34,7 +34,9 @@ struct LocalModelDebugConfig: Equatable {
             fallbackModelPath: "/Users/bytedance/LocalModels/DestinyScope/qwen2_5_0_5b_instruct_q4.gguf",
             sandboxModelPaths: [],
             llamaFrameworkPath: "/Users/bytedance/LocalModels/DestinyScope/llama.xcframework",
-            modelDirectoryDescription: "Simulator 可用 Mac 本地路径；真机必须把模型手工放入 App 沙盒 Documents/LocalModels/DestinyScope。模型文件不得提交仓库或进入 Release 默认路径。"
+            modelDirectoryDescription: DeviceModelIdentifier.isRunningOnSimulator
+                ? "当前为模拟器：直接读取 Mac 本地 ~/LocalModels/DestinyScope 下的 GGUF 文件。"
+                : "当前为真机：需要从 Files App 手动导入 GGUF 到 App Documents/LocalModels/DestinyScope。模型文件不得提交仓库或进入 Release 默认路径。"
         )
     }
 

@@ -403,3 +403,24 @@ V1.4 阶段 7 Legal 页面测试项：
 - 隐私政策说明润色结果默认不保存到历史记录。
 - GitHub Pages 隐私页内容已同步更新。
 - 发布前人工确认 `https://littleben803.github.io/DestinyScope/privacy/` 可访问且无 404。
+
+V1.4 阶段 8 TestFlight readiness 决策项：
+
+- 已阅读 `docs/V1_4_TestFlightReadinessReport.md`。
+- 已阅读 `docs/V1_4_TestFlightDecision.md`。
+- 确认结论为 Conditional Go for internal TestFlight preparation。
+- 确认 App Store 正式发布仍为 No-Go。
+- 确认本地模型默认开启仍为 No-Go。
+- 确认替换默认结果页输出仍为 No-Go。
+- Debug 构建通过。
+- Release 构建通过。
+- `makeDefaultRefiner()` 仍返回 `TemplateTextRefiner()`。
+- 仓库内无 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc`、`.xcframework`。
+- Apple Developer Program 账号状态已确认。
+- Bundle ID / Signing / Team / Version / Build 已确认。
+- Release Archive 已完成。
+- GitHub Pages 隐私页公网 URL 可访问。
+- license / notice 已人工留档。
+- App Icon 授权已确认。
+- TestFlight 审核备注已准备。
+- 测试人员说明已准备。

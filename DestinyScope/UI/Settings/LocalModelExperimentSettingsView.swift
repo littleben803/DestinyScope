@@ -19,6 +19,10 @@ struct LocalModelExperimentSettingsView: View {
         LocalModelExperimentAvailability.current(settings: settings)
     }
 
+    private var isSimulator: Bool {
+        DeviceModelIdentifier.isRunningOnSimulator
+    }
+
     var body: some View {
         AppBackground {
             ScrollView {
@@ -158,18 +162,28 @@ struct LocalModelExperimentSettingsView: View {
                     .foregroundColor(AppTheme.Colors.secondaryText)
             }
 
-            Text("请先通过 Debug 导入或开发者本地路径准备模型。本页面只检测文件状态，不会加载模型。")
+            Text(modelFileHelpText)
                 .font(AppTheme.Typography.secondary)
                 .foregroundColor(AppTheme.Colors.secondaryText)
 
-            AppPrimaryButton(title: "导入 GGUF 模型") {
-                isModelImporterPresented = true
+            if !isSimulator {
+                AppPrimaryButton(title: "导入 GGUF 模型") {
+                    isModelImporterPresented = true
+                }
+
+                Text(importStatusMessage)
+                    .font(AppTheme.Typography.secondary)
+                    .foregroundColor(AppTheme.Colors.secondaryText)
             }
-
-            Text(importStatusMessage)
-                .font(AppTheme.Typography.secondary)
-                .foregroundColor(AppTheme.Colors.secondaryText)
         }
+    }
+
+    private var modelFileHelpText: String {
+        if isSimulator {
+            return "当前为模拟器：直接读取 Mac 本地 ~/LocalModels/DestinyScope 下的 GGUF 文件。本页面只展示解析结果，不需要导入。"
+        }
+
+        return "当前为真机：请从 Files App 手动导入 GGUF 模型到 App Documents/LocalModels/DestinyScope。本页面只检测文件状态，不会加载模型。"
     }
 
     private var unavailableCard: some View {

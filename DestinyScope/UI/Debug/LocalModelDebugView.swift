@@ -39,6 +39,10 @@ struct LocalModelDebugView: View {
 
     private let config = LocalModelDebugConfig.current
 
+    private var isSimulator: Bool {
+        DeviceModelIdentifier.isRunningOnSimulator
+    }
+
     var body: some View {
         AppBackground {
             ScrollView {
@@ -47,13 +51,17 @@ struct LocalModelDebugView: View {
 
                     AppCard {
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+                            infoRow(title: "运行环境", value: isSimulator ? "模拟器：直接读取 Mac 本地模型路径" : "真机：需要手动导入模型到 App Documents")
                             infoRow(title: "当前默认输出", value: "TemplateTextRefiner")
                             infoRow(title: "推荐模型", value: "Qwen2.5-0.5B-Instruct GGUF 4-bit")
                             infoRow(title: "llama.xcframework", value: config.llamaFrameworkExists() ? "已配置" : "未找到")
                             infoRow(title: "framework 路径", value: config.llamaFrameworkPath)
-                            infoRow(title: "App Documents 目标路径", value: config.appDocumentsModelFileURL().path)
-                            infoRow(title: "主路径", value: config.primaryModelPath)
-                            infoRow(title: "备用路径", value: config.fallbackModelPath)
+                            if isSimulator {
+                                infoRow(title: "Mac 主路径", value: config.primaryModelPath)
+                                infoRow(title: "Mac 备用路径", value: config.fallbackModelPath)
+                            } else {
+                                infoRow(title: "App Documents 目标路径", value: config.appDocumentsModelFileURL().path)
+                            }
                             infoRow(title: "文件位置", value: config.modelDirectoryDescription)
                         }
                     }
@@ -70,12 +78,16 @@ struct LocalModelDebugView: View {
                         }
                     }
 
-                    AppPrimaryButton(title: "检查模型文件") {
-                        checkModelFiles()
-                    }
-                    .disabled(isRunning)
+                    if !isSimulator {
+                        AppPrimaryButton(title: "检查模型文件") {
+                            checkModelFiles()
+                        }
+                        .disabled(isRunning)
 
-                    importCard
+                        importCard
+                    } else {
+                        simulatorModelCard
+                    }
 
                     AppPrimaryButton(title: isRunning ? "加载中..." : "加载并生成测试文本") {
                         runGenerationTest()
@@ -124,6 +136,25 @@ struct LocalModelDebugView: View {
                 infoRow(title: "导入路径", value: importedModelPath)
                 infoRow(title: "导入文件大小", value: importedModelSize)
                 infoRow(title: "Documents 模型是否存在", value: config.modelExistsInAppDocuments() ? "存在" : "未找到")
+            }
+        }
+    }
+
+    private var simulatorModelCard: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+                Text("模拟器模型路径")
+                    .font(AppTheme.Typography.sectionTitle)
+                    .foregroundColor(AppTheme.Colors.primaryText)
+
+                Text("当前为模拟器，PoC 会直接读取 Mac 本地指定路径的 GGUF 文件，不需要检查按钮，也不需要导入模型。")
+                    .font(AppTheme.Typography.secondary)
+                    .foregroundColor(AppTheme.Colors.secondaryText)
+
+                let status = config.currentModelFileStatuses().first
+                infoRow(title: "当前路径", value: status?.resolvedURL?.path ?? config.primaryModelPath)
+                infoRow(title: "文件状态", value: status?.isUsable == true ? "可用" : "未找到或不可用")
+                infoRow(title: "文件大小", value: status?.fileSizeText ?? "未知")
             }
         }
     }

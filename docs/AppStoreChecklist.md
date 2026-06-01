@@ -300,6 +300,12 @@ V1.2 上架风险提醒：
 - 当前 App Store 元数据仍不宣传 AI / 本地模型。
 - Release 默认不展示本地模型润色实验入口。
 - 默认输出路径不变，`makeDefaultRefiner()` 仍应返回 `TemplateTextRefiner`。
+- V1.4 阶段 8 已新增 `docs/V1_4_TestFlightReadinessReport.md` 和 `docs/V1_4_TestFlightDecision.md`。
+- V1.4 TestFlight 决策为 Conditional Go for internal TestFlight preparation。
+- 公开 App Store 发布仍为 No-Go。
+- 默认启用本地模型仍为 No-Go。
+- 替换默认结果页输出仍为 No-Go。
+- TestFlight 上传前仍需确认 Apple Developer Program、Bundle ID、Signing、Team、Version、Build、Release Archive、GitHub Pages 公网隐私 URL、license / notice、App Icon 授权和测试人员说明。
 
 V1.3 后续必须完成：
 

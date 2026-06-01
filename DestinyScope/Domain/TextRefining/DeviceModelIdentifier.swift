@@ -9,6 +9,14 @@ import Darwin
 import Foundation
 
 enum DeviceModelIdentifier {
+    static var isRunningOnSimulator: Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
+        return false
+        #endif
+    }
+
     static func currentIdentifier() -> String {
         #if targetEnvironment(simulator)
         if let simulatorIdentifier = ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"],

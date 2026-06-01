@@ -42,7 +42,7 @@ struct LocalModelFileResolver {
     }
 
     func developerLocalModelsDirectoryURL() -> URL {
-        URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true)
+        developerHomeDirectoryURL()
             .appendingPathComponent("LocalModels", isDirectory: true)
             .appendingPathComponent("DestinyScope", isDirectory: true)
     }
@@ -84,12 +84,30 @@ struct LocalModelFileResolver {
     }
 
     private func candidateURLs() -> [(url: URL, source: LocalModelFileSource)] {
-        [
+        if DeviceModelIdentifier.isRunningOnSimulator {
+            return [
+                (developerLocalModelsFileURL(), .developerLocalModels),
+                (developerLocalModelsAliasFileURL(), .developerLocalModels)
+            ]
+        }
+
+        return [
             (appDocumentsModelFileURL(), .appDocuments),
-            (appDocumentsAliasFileURL(), .appDocuments),
-            (developerLocalModelsFileURL(), .developerLocalModels),
-            (developerLocalModelsAliasFileURL(), .developerLocalModels)
+            (appDocumentsAliasFileURL(), .appDocuments)
         ]
+    }
+
+    private func developerHomeDirectoryURL() -> URL {
+        #if targetEnvironment(simulator)
+        if let simulatorHostHome = ProcessInfo.processInfo.environment["SIMULATOR_HOST_HOME"],
+           !simulatorHostHome.isEmpty {
+            return URL(fileURLWithPath: simulatorHostHome, isDirectory: true)
+        }
+
+        return URL(fileURLWithPath: "/Users/bytedance", isDirectory: true)
+        #else
+        return URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true)
+        #endif
     }
 
     private func status(for url: URL, source: LocalModelFileSource) -> LocalModelFileStatus {
