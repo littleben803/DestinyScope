@@ -546,3 +546,23 @@ V1.6 自测与决策状态：
 - 当前仍不准备上传 TestFlight，也不准备上架 App Store。
 - 当前 App Store 元数据仍不应宣传 AI / 本地模型。
 - 上架前仍需完成人工适配验收、GitHub Pages 隐私 URL 公网确认、App Icon 授权确认、license / notice 留档、签名和 Archive 检查。
+
+## 19. V1.7 多设备人工验收与无障碍修复状态
+
+当前状态：
+
+- V1.7 进入多设备人工验收与无障碍修复阶段。
+- 已新增 `docs/V1_7_AccessibilityDeviceQAPlan.md`，明确 V1.7 验收范围、设备范围、Accessibility、Dynamic Type、深色模式、小屏和本地模型实验路径检查项。
+- 已新增 `docs/V1_7_Roadmap.md`，将 V1.7 拆分为计划、人工验收记录、P0 修复、深色模式 / Dynamic Type 修复、Legal 可读性修复、核心路径回归和自测决策。
+- 已新增 `docs/V1_7_DeviceTestMatrix.md`，覆盖 iPhone SE、iPhone 12 mini、标准 iPhone、iPhone 17 Pro Max、iPad、Simulator、VoiceOver、Dynamic Type、Dark Mode、Low Power Mode、本地模型关闭状态和本地数据管理危险操作。
+- 已新增 `docs/V1_7_AccessibilityIssueBacklog.md`，初始记录待人工验证的问题。
+- 已新增 `docs/V1_7_ManualTestTemplate.md`，用于记录每次人工测试。
+
+当前决策：
+
+- 仍不准备上架 App Store。
+- 仍不上传 TestFlight。
+- 仍不默认启用本地模型。
+- 仍不把本地模型接入默认结果页。
+- 上架前必须完成多设备、VoiceOver、Dynamic Type、深色模式、小屏和 iPad 验证。
+- App Store 元数据仍不应宣传 AI / 本地模型能力。

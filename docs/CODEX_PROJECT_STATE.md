@@ -15,7 +15,7 @@
 
 当前重点：
 
-- 继续产品功能打磨
+- 继续产品功能打磨和多设备人工验收
 - 保持默认主流程稳定
 - 保持本地优先
 - 保持隐私友好
@@ -108,6 +108,17 @@ V1.7：多设备人工验收与无障碍修复。
 - 深色模式和小屏布局修复。
 - Legal 长文、开源许可长 URL 和本地数据管理页可读性复查。
 - 继续保持不上传 TestFlight、不准备 App Store 上架，除非另行决策。
+
+当前 V1.7 进度：
+
+- 阶段 1：多设备人工验收与无障碍修复计划已完成。
+- 已新增 `docs/V1_7_AccessibilityDeviceQAPlan.md`。
+- 已新增 `docs/V1_7_Roadmap.md`。
+- 已新增 `docs/V1_7_DeviceTestMatrix.md`。
+- 已新增 `docs/V1_7_AccessibilityIssueBacklog.md`。
+- 已新增 `docs/V1_7_ManualTestTemplate.md`。
+- 本阶段只修改 docs，没有修改 Swift、工程配置、资源、CSV、JSON、依赖或模型文件。
+- 当前下一阶段建议：V1.7 阶段 2：人工验收记录汇总。
 
 当前 V1.6 进度：
 

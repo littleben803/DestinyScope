@@ -707,3 +707,14 @@ V1.7 建议人工验收项：
 - Dynamic Type 默认、Large、Extra Large、Accessibility Large。
 - 浅色 / 深色模式。
 - 首页、结果页、知识库、历史、设置、Legal、本地数据管理完整流程。
+
+V1.7 阶段 1 多设备人工验收与无障碍修复计划：
+
+- 已新增 `docs/V1_7_AccessibilityDeviceQAPlan.md`。
+- 已新增 `docs/V1_7_Roadmap.md`。
+- 已新增 `docs/V1_7_DeviceTestMatrix.md`。
+- 已新增 `docs/V1_7_AccessibilityIssueBacklog.md`。
+- 已新增 `docs/V1_7_ManualTestTemplate.md`。
+- 当前仍不上传 TestFlight。
+- 若未来恢复 TestFlight，需要先完成 V1.7 多设备人工验收，关闭 P0 问题，并重新执行 V1.4 readiness、V1.5 QA 和 V1.6 新增功能测试。
+- TestFlight 前必须确认 Release 不展示本地模型实验入口，`makeDefaultRefiner()` 仍返回 `TemplateTextRefiner`。
