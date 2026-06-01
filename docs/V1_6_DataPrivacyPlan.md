@@ -59,17 +59,28 @@ V1.6 新增数据必须遵守：
 
 ### Favorite Knowledge Article IDs
 
-- 存储：`UserDefaults` 或 JSON。
+- 状态：已实现。
+- 存储：Application Support JSON。
+- 文件：`Application Support/DestinyScope/knowledge_library_state.json`。
 - 内容：article id 列表。
+- 数量限制：最多保留 100 个收藏 id。
 - 删除：支持取消收藏和清空全部收藏。
+- 页面行为：文章详情页可收藏 / 取消收藏；知识库列表显示“收藏”分类和收藏状态。
+- 不保存：文章全文、搜索关键词、模型输入输出。
+- 隐私说明：App 内隐私政策和 GitHub Pages 隐私页已补充知识库收藏仅本地保存、不上传、不同步说明。
 - 风险：低。
 
 ### Recently Viewed Knowledge Article IDs
 
-- 存储：`UserDefaults` 或 JSON。
+- 状态：已实现。
+- 存储：Application Support JSON。
+- 文件：`Application Support/DestinyScope/knowledge_library_state.json`。
 - 内容：article id + viewedAt。
-- 策略：限制数量，例如最近 20 条。
+- 策略：最近阅读按 `viewedAt` 倒序保存，最多保留 20 条。
 - 删除：支持清空最近阅读。
+- 页面行为：打开知识库文章详情时记录最近阅读；知识库列表顶部展示最近阅读摘要。
+- 不保存：文章全文、搜索关键词、用户自由输入、模型输入输出。
+- 隐私说明：App 内隐私政策和 GitHub Pages 隐私页已补充最近阅读仅本地保存、不上传、不同步说明。
 - 风险：低。
 
 ### Pinned / Favorite History Record IDs

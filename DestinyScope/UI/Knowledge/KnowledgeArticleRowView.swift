@@ -9,6 +9,7 @@ import SwiftUI
 
 struct KnowledgeArticleRowView: View {
     let article: KnowledgeArticle
+    var isFavorite = false
 
     var body: some View {
         AppCard {
@@ -23,6 +24,16 @@ struct KnowledgeArticleRowView: View {
                     .clipShape(Capsule())
 
                 Spacer(minLength: AppTheme.Spacing.sm)
+
+                if isFavorite {
+                    HStack(spacing: AppTheme.Spacing.xs) {
+                        Image(systemName: "star.fill")
+                        Text("已收藏")
+                    }
+                    .font(AppTheme.Typography.caption.weight(.semibold))
+                    .foregroundColor(AppTheme.Colors.cinnabar)
+                    .accessibilityLabel("已收藏")
+                }
             }
 
             Text(article.title)

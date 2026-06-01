@@ -9,8 +9,9 @@ import Foundation
 
 struct KnowledgeArticleFilter {
     static let allCategory = "全部"
+    static let favoriteCategory = "收藏"
 
-    func categories(from articles: [KnowledgeArticle]) -> [String] {
+    func categories(from articles: [KnowledgeArticle], includeFavorites: Bool = false) -> [String] {
         var seen = Set<String>()
         let categories = articles.compactMap { article -> String? in
             let category = article.category.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -20,12 +21,16 @@ struct KnowledgeArticleFilter {
             seen.insert(category)
             return category
         }
-        return [Self.allCategory] + categories
+        return includeFavorites ? [Self.allCategory, Self.favoriteCategory] + categories : [Self.allCategory] + categories
     }
 
-    func articleCount(for category: String, in articles: [KnowledgeArticle]) -> Int {
+    func articleCount(for category: String, in articles: [KnowledgeArticle], favoriteArticleIDs: [String] = []) -> Int {
         if category == Self.allCategory {
             return articles.count
+        }
+        if category == Self.favoriteCategory {
+            let favoriteIDs = Set(favoriteArticleIDs)
+            return articles.filter { favoriteIDs.contains($0.id) }.count
         }
         return articles.filter { $0.category == category }.count
     }
@@ -33,11 +38,18 @@ struct KnowledgeArticleFilter {
     func filteredArticles(
         articles: [KnowledgeArticle],
         selectedCategory: String,
-        searchText: String
+        searchText: String,
+        favoriteArticleIDs: [String] = []
     ) -> [KnowledgeArticle] {
-        let categoryFiltered = selectedCategory == Self.allCategory
-            ? articles
-            : articles.filter { $0.category == selectedCategory }
+        let favoriteIDs = Set(favoriteArticleIDs)
+        let categoryFiltered: [KnowledgeArticle]
+        if selectedCategory == Self.allCategory {
+            categoryFiltered = articles
+        } else if selectedCategory == Self.favoriteCategory {
+            categoryFiltered = articles.filter { favoriteIDs.contains($0.id) }
+        } else {
+            categoryFiltered = articles.filter { $0.category == selectedCategory }
+        }
 
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty else {

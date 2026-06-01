@@ -176,6 +176,18 @@
 
 ## V1.6 阶段 5：知识库收藏与最近阅读
 
+状态：
+
+- 已完成。
+- 新增 `KnowledgeLibraryStateStore`，使用 Application Support 下 `DestinyScope/knowledge_library_state.json` 保存知识库收藏和最近阅读状态。
+- 收藏只保存 `articleId` 列表，最多保留 100 个；最近阅读只保存 `articleId` 和 `viewedAt`，最多保留 20 条。
+- 文章详情页可收藏 / 取消收藏，并在打开详情时记录最近阅读。
+- 知识库列表新增“我的知识库”摘要，展示收藏数量、最近阅读数量和最近阅读文章入口。
+- 知识库分类新增“收藏”，列表行可显示收藏状态。
+- 支持清空最近阅读和清空收藏，均仅影响本机状态。
+- App 内隐私政策和 GitHub Pages 隐私页已补充知识库收藏与最近阅读仅本地保存、不上传、不同步说明。
+- 未修改知识库 JSON、`KnowledgeRepository` 读取逻辑、本地模型路径或 `makeDefaultRefiner()`。
+
 阶段目标：
 
 - 支持收藏知识文章。
@@ -206,6 +218,10 @@
 建议 commit message：
 
 - `feat: add local knowledge favorites`
+
+下一阶段：
+
+- V1.6 阶段 6：历史记录收藏 / 置顶 / 快速复查。
 
 ## V1.6 阶段 6：历史记录收藏 / 置顶 / 快速复查
 
