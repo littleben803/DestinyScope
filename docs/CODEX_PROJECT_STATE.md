@@ -98,17 +98,16 @@ TestFlight 本地模型内测实现准备：
 
 ## 当前推荐下一版本
 
-V1.6：核心产品功能打磨。
+V1.7：多设备人工验收与无障碍修复。
 
 候选方向：
 
-- 首次使用说明 / Onboarding
-- 常用出生资料 / 本地 Profile
-- 结果页复制与纯文本分享
-- 知识库收藏与最近阅读
-- 历史记录收藏 / 置顶 / 快速复查
-- 首页信息架构优化
-- 本地数据管理入口
+- iPhone SE / mini / Pro Max / iPad 多设备验收。
+- VoiceOver 焦点顺序和按钮 label / hint 修复。
+- Dynamic Type 默认、Large、Extra Large、Accessibility Large 验收。
+- 深色模式和小屏布局修复。
+- Legal 长文、开源许可长 URL 和本地数据管理页可读性复查。
+- 继续保持不上传 TestFlight、不准备 App Store 上架，除非另行决策。
 
 当前 V1.6 进度：
 
@@ -139,7 +138,16 @@ V1.6：核心产品功能打磨。
 - 设置页新增“本地数据管理”，可查看历史记录、常用资料、知识库收藏、最近阅读、历史收藏、历史置顶和首次使用说明状态。
 - 支持清理历史记录、历史收藏 / 置顶、常用出生资料、知识库收藏、知识库最近阅读、首次使用说明状态和全部本地用户数据。
 - 每个清理操作均需要确认，只影响当前设备，不删除内置知识库、称骨数据、模型文件或 App 资源。
-- 当前下一阶段建议：V1.6 阶段 9：V1.6 自测与下一步决策。
+- 阶段 9：V1.6 自测与下一步决策已完成。
+- Debug build：通过。
+- Release build：通过。
+- 已新增 `docs/V1_6_TestReport.md` 和 `docs/V1_6_NextStepDecision.md`。
+- V1.6 Product Feature Polish：Pass。
+- TestFlight Upload：Not Now。
+- App Store Release：No-Go。
+- Local Model Default Enablement：No-Go。
+- Continue Product Polish：Go。
+- 当前下一阶段建议：V1.7 多设备人工验收与无障碍修复。
 
 ## 当前硬边界
 

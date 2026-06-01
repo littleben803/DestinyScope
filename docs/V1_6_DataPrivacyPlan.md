@@ -188,3 +188,17 @@ V1.6 新增数据必须遵守：
 本地数据管理：
 
 > 你可以在本地数据管理中删除历史记录、收藏、最近阅读和常用出生资料。删除后仅影响本设备，且无法恢复。
+
+## 6. V1.6 自测结论
+
+检查日期：2026-06-02
+
+- Onboarding flag、常用出生资料、知识库收藏 / 最近阅读、历史收藏 / 置顶、首页快速复查草稿、结果复制 / 分享、本地数据管理均已按 V1.6 本地优先原则落地。
+- 常用出生资料保存到 Application Support 下 `DestinyScope/saved_birth_profiles.json`，最多 20 条。
+- 知识库收藏和最近阅读保存到 Application Support 下 `DestinyScope/knowledge_library_state.json`。
+- 历史收藏和置顶保存到 Application Support 下 `DestinyScope/history_record_user_state.json`。
+- 首页快速复查草稿为内存态，不落盘。
+- 结果复制 / 分享由用户手动触发，不保存分享记录，不上传分享内容。
+- 本地数据管理只汇总和清理当前设备本地数据，不删除内置知识库、称骨数据、App 资源、`.gguf` 模型文件或 `llama.xcframework`。
+- 静态扫描未发现新增网络请求、账号同步、iCloud / CloudKit、分析 SDK、广告追踪、StoreKit 或敏感权限申请。
+- 后续若新增同步、账号、云备份、模型下载或上传日志，需要重新更新隐私政策和 App Store 隐私说明。

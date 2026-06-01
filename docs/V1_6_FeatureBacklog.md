@@ -38,3 +38,13 @@
 - 涉及历史记录的功能不能重新计算历史详情。
 - 涉及知识库的功能只能读取本地文章。
 - 涉及本地模型的功能不得扩大默认路径。
+
+## V1.6 自测后状态
+
+检查日期：2026-06-02
+
+- P0 功能均已完成：Onboarding、Local Birth Profile、Result Text Copy / Share Text、Knowledge Favorite / Recent Reads、History Pin / Favorite / Quick Re-run、Home Information Architecture。
+- P1 中 `Local Data Management` 已完成，用于集中查看和清理本机用户数据。
+- `Related Knowledge From Result`、`Result Disclosure State Optimization`、`Knowledge Beginner Path`、`Share Template Variants` 仍保留为后续候选。
+- 明确不做项保持不变：不做图片分享、Cloud Sync、模型下载、开放聊天、付费订阅或本地模型默认启用。
+- V1.6 下一步建议进入 V1.7 多设备人工验收与无障碍修复。

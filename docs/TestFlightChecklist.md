@@ -684,3 +684,26 @@ V1.6 阶段 8 本地数据管理测试项：
 - 清理后内置知识库仍可打开，默认主流程仍可查询。
 - 清理操作不删除 `.gguf` 模型文件，不删除 `llama.xcframework`。
 - 清理操作不请求网络、不上传、不同步、不需要账号。
+
+V1.6 阶段 9 自测与决策：
+
+- 已新增 `docs/V1_6_TestReport.md`。
+- 已新增 `docs/V1_6_NextStepDecision.md`。
+- Debug build 通过。
+- Release build 通过。
+- `makeDefaultRefiner()` 仍返回 `TemplateTextRefiner`。
+- 默认主流程不依赖本地模型。
+- 仓库内未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc` 或 `.xcframework`。
+- Swift 源码未发现新增网络请求、在线 AI、StoreKit、CloudKit、广告追踪或敏感权限申请。
+- 当前暂不上传 TestFlight。
+- 当前 App Store Release 仍为 No-Go。
+- 本地模型默认启用仍为 No-Go。
+- 如恢复 TestFlight，需要重新执行 V1.4 readiness、V1.5 QA、V1.6 新增功能测试，以及多设备人工验收。
+
+V1.7 建议人工验收项：
+
+- iPhone SE / mini / Pro Max / iPad 多设备验收。
+- VoiceOver 焦点顺序。
+- Dynamic Type 默认、Large、Extra Large、Accessibility Large。
+- 浅色 / 深色模式。
+- 首页、结果页、知识库、历史、设置、Legal、本地数据管理完整流程。

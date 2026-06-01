@@ -373,6 +373,19 @@
 
 ## V1.6 阶段 9：V1.6 自测与下一步决策
 
+状态：
+
+- 已完成。
+- 已新增 `docs/V1_6_TestReport.md`，记录 V1.6 构建、默认主流程、Onboarding、常用出生资料、结果复制 / 分享、知识库收藏 / 最近阅读、历史整理、首页信息架构、本地数据管理、Legal、本地模型实验路径和静态扫描结果。
+- 已新增 `docs/V1_6_NextStepDecision.md`。
+- Debug build：通过。
+- Release build：通过。
+- `makeDefaultRefiner()` 仍返回 `TemplateTextRefiner()`。
+- 仓库内未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc` 或 `.xcframework`。
+- Swift 源码未发现新增网络请求、StoreKit、CloudKit、广告追踪或敏感权限申请。
+- 决策结论：V1.6 Product Feature Polish 为 Pass；TestFlight Upload 为 Not Now；App Store Release 为 No-Go；Local Model Default Enablement 为 No-Go；Continue Product Polish 为 Go。
+- 下一阶段建议：V1.7 多设备人工验收与无障碍修复。
+
 阶段目标：
 
 - 完成 V1.6 自测报告。
@@ -402,3 +415,7 @@
 建议 commit message：
 
 - `docs: add v1.6 test report and decision`
+
+## V1.6 总结
+
+V1.6 已完成核心产品功能打磨，默认主流程仍保持本地规则引擎和模板输出，不依赖本地模型，不上传数据，不接服务端。当前不上传 TestFlight，不进入 App Store 上架；下一步优先做 V1.7 多设备人工验收、无障碍、深色模式和小屏修复。

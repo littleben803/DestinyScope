@@ -532,3 +532,17 @@ V1.6 本地数据管理状态：
 - 清空全部本地用户数据不会删除内置知识库、称骨数据、App 内置资源、`.gguf` 模型文件或 `llama.xcframework`。
 - 本阶段不上传、不同步、不请求网络、不接账号、不接服务端。
 - App 内隐私政策和 GitHub Pages 隐私页已补充本地数据管理说明。
+
+V1.6 自测与决策状态：
+
+- V1.6 阶段 9 已新增 `docs/V1_6_TestReport.md` 和 `docs/V1_6_NextStepDecision.md`。
+- Debug build：通过。
+- Release build：通过。
+- V1.6 Product Feature Polish：Pass。
+- TestFlight Upload：Not Now。
+- App Store Release：No-Go。
+- Local Model Default Enablement：No-Go。
+- Continue Product Polish：Go。
+- 当前仍不准备上传 TestFlight，也不准备上架 App Store。
+- 当前 App Store 元数据仍不应宣传 AI / 本地模型。
+- 上架前仍需完成人工适配验收、GitHub Pages 隐私 URL 公网确认、App Icon 授权确认、license / notice 留档、签名和 Archive 检查。
