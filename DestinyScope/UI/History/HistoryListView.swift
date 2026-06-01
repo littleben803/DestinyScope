@@ -10,6 +10,9 @@ import SwiftUI
 struct HistoryListView: View {
     @State private var records: [HistoryRecord] = []
     @State private var errorMessage: String?
+    @State private var recordPendingDeletion: HistoryRecord?
+    @State private var isShowingDeleteConfirmation = false
+    @State private var isShowingDeleteAllConfirmation = false
 
     private let store = HistoryRecordStore()
 
@@ -22,24 +25,58 @@ struct HistoryListView: View {
                         Text(errorMessage)
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
+
+                        Button("重新加载") {
+                            loadRecords()
+                        }
+                        .font(AppTheme.Typography.body.weight(.semibold))
+                        .foregroundColor(AppTheme.Colors.cinnabar)
                     }
                     .padding(AppTheme.Spacing.lg)
                 } else if records.isEmpty {
-                    AppCard {
-                        AppSectionHeader(title: "历史记录")
-                        Text("暂无历史记录，完成一次查询后会保存在本地。")
-                            .font(AppTheme.Typography.body)
-                            .foregroundColor(AppTheme.Colors.secondaryText)
+                    ScrollView {
+                        VStack(spacing: AppTheme.Spacing.md) {
+                            HistoryEmptyStateView()
+                            HistoryLocalNoticeView()
+                        }
+                        .padding(AppTheme.Spacing.lg)
                     }
-                    .padding(AppTheme.Spacing.lg)
                 } else {
                     ScrollView {
                         LazyVStack(spacing: AppTheme.Spacing.md) {
+                            HistoryLocalNoticeView()
+
                             ForEach(records) { record in
-                                recordCard(record)
+                                HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
+                                    NavigationLink(destination: HistoryDetailView(record: record)) {
+                                        HistoryRecordRowView(record: record)
+                                    }
+                                    .buttonStyle(.plain)
+
+                                    Button(role: .destructive) {
+                                        recordPendingDeletion = record
+                                        isShowingDeleteConfirmation = true
+                                    } label: {
+                                        Image(systemName: "trash")
+                                            .font(AppTheme.Typography.secondary)
+                                            .foregroundColor(AppTheme.Colors.cinnabar)
+                                            .padding(AppTheme.Spacing.sm)
+                                            .background(AppTheme.Colors.cardBackground)
+                                            .clipShape(Circle())
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(AppTheme.Colors.divider.opacity(0.55), lineWidth: 1)
+                                            )
+                                    }
+                                    .buttonStyle(.plain)
+                                    .accessibilityLabel("删除历史记录")
+                                    .accessibilityHint("删除这条本机历史记录，删除后无法恢复。")
+                                }
                             }
 
-                            Button(role: .destructive, action: deleteAll) {
+                            Button(role: .destructive) {
+                                isShowingDeleteAllConfirmation = true
+                            } label: {
                                 Text("清空全部")
                                     .font(AppTheme.Typography.body)
                                     .foregroundColor(AppTheme.Colors.cinnabar)
@@ -55,56 +92,28 @@ struct HistoryListView: View {
         }
         .navigationTitle("历史记录")
         .onAppear(perform: loadRecords)
-    }
-
-    private func recordCard(_ record: HistoryRecord) -> some View {
-        AppCard {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                    Text(record.title)
-                        .font(AppTheme.Typography.sectionTitle)
-                        .foregroundColor(AppTheme.Colors.primaryText)
-
-                    Text(createdAtText(record.createdAt))
-                        .font(AppTheme.Typography.caption)
-                        .foregroundColor(AppTheme.Colors.secondaryText)
-
-                    Text("出生：\(solarDateText(record.solarDate)) \(String(format: "%02d 时", record.hour))")
-                        .font(AppTheme.Typography.secondary)
-                        .foregroundColor(AppTheme.Colors.primaryText)
-
-                    Text(record.lunarBirthday)
-                        .font(AppTheme.Typography.secondary)
-                        .foregroundColor(AppTheme.Colors.secondaryText)
-
-                    Text("总重量：\(record.totalWeightText)")
-                        .font(AppTheme.Typography.secondary)
-                        .foregroundColor(AppTheme.Colors.darkGold)
-
-                    if !record.tags.isEmpty {
-                        Text("标签：\(record.tags.joined(separator: "、"))")
-                            .font(AppTheme.Typography.footnote)
-                            .foregroundColor(AppTheme.Colors.secondaryText)
-                    }
-
-                    Text(record.poem)
-                        .font(AppTheme.Typography.footnote)
-                        .foregroundColor(AppTheme.Colors.secondaryText)
-                        .lineLimit(3)
+        .alert("删除这条历史记录？", isPresented: $isShowingDeleteConfirmation) {
+            Button("删除", role: .destructive) {
+                if let recordPendingDeletion {
+                    delete(recordPendingDeletion)
                 }
-
-                Spacer()
-
-                Button(role: .destructive) {
-                    delete(record)
-                } label: {
-                    Image(systemName: "trash")
-                        .font(AppTheme.Typography.secondary)
-                        .foregroundColor(AppTheme.Colors.cinnabar)
-                        .padding(AppTheme.Spacing.sm)
-                }
-                .buttonStyle(.plain)
+                recordPendingDeletion = nil
             }
+
+            Button("取消", role: .cancel) {
+                recordPendingDeletion = nil
+            }
+        } message: {
+            Text("此操作只会删除本机记录，无法恢复。")
+        }
+        .alert("清空全部历史记录？", isPresented: $isShowingDeleteAllConfirmation) {
+            Button("清空", role: .destructive) {
+                deleteAll()
+            }
+
+            Button("取消", role: .cancel) {}
+        } message: {
+            Text("此操作只会清空本机记录，无法恢复。")
         }
     }
 
@@ -134,20 +143,6 @@ struct HistoryListView: View {
         } catch {
             errorMessage = "历史记录清空失败，请稍后重试。"
         }
-    }
-
-    private func createdAtText(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "zh_CN")
-        formatter.dateFormat = "yyyy年M月d日 HH:mm"
-        return formatter.string(from: date)
-    }
-
-    private func solarDateText(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "zh_CN")
-        formatter.dateFormat = "yyyy年M月d日"
-        return formatter.string(from: date)
     }
 }
 

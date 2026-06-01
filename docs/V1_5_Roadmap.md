@@ -237,6 +237,8 @@
 
 ## V1.5 阶段 6：历史记录体验优化
 
+状态：已完成。
+
 阶段目标：
 
 - 优化历史记录列表、删除、清空和本地保存说明。
@@ -259,6 +261,28 @@
 - 历史记录新增、删除、清空可靠。
 - 用户能理解历史记录仅本地保存。
 - 最多 50 条策略不变。
+
+完成记录：
+
+- 已新增 `HistoryLocalNoticeView`，在历史列表、空状态和详情页明确说明当前版本历史记录仅保存在本设备，不上传、不同步，也不会用于在线服务。
+- 已新增 `HistoryEmptyStateView`，空状态说明完成一次查询后会以轻量记录保存在本机。
+- 已新增 `HistoryRecordRowView`，列表卡片展示命格标题、创建时间、出生日期和时辰、农历生日、总重量和最多 3 个 tags，不再在列表里展示长诗文。
+- 已新增 `HistoryDetailView`，点击历史记录可进入轻量详情页，展示已保存字段：标题、查询时间、出生信息、农历生日、总重量、称骨诗文、tags 和本地保存说明。
+- 详情页不重新调用 `LifeWeightEngine`、`TemplateFortuneInterpreter`、`LifeWeightInsightGenerator` 或本地模型。
+- 删除单条和清空全部均增加确认弹窗，取消不会删除。
+- 已为删除按钮增加基础 accessibility label / hint。
+- 未修改历史记录存储字段、保存时机、最多 50 条策略或本地模型路径。
+- Debug / Release 模拟器构建通过。
+
+仍需人工检查：
+
+- 小屏 iPhone 上删除按钮和列表卡片是否拥挤。
+- 深色模式下本地保存说明、tag chip 和 destructive 按钮对比度。
+- Dynamic Type / VoiceOver 对历史列表和确认弹窗的表现。
+
+下一阶段：
+
+- V1.5 阶段 7：设置 / 关于 / Legal / 开源许可体验优化。
 
 建议 commit message：
 
