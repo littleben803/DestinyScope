@@ -11,8 +11,10 @@ enum LocalRefiningPreviewState: Equatable {
     case idle
     case generating
     case success
-    case fallback
-    case failed
+    case blocked(reason: String)
+    case timeout
+    case fallback(reason: String)
+    case failed(reason: String)
 
     var displayName: String {
         switch self {
@@ -22,10 +24,25 @@ enum LocalRefiningPreviewState: Equatable {
             return "生成中"
         case .success:
             return "已生成"
+        case .blocked:
+            return "暂不可用"
+        case .timeout:
+            return "已超时回退"
         case .fallback:
             return "已回退"
         case .failed:
-            return "生成失败"
+            return "暂不可用"
+        }
+    }
+
+    var message: String? {
+        switch self {
+        case .blocked(let reason), .fallback(let reason), .failed(let reason):
+            return reason
+        case .timeout:
+            return LocalModelRuntimeError.timeout.userFriendlyMessage
+        case .idle, .generating, .success:
+            return nil
         }
     }
 }
