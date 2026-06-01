@@ -128,6 +128,17 @@
 
 ## V1.6 阶段 4：结果页复制与纯文本分享文案
 
+状态：
+
+- 已完成。
+- 新增 `ResultShareTextBuilder`，基于 `LifeWeightResult`、`FortuneInterpretation` 和 `LifeWeightInsight` 生成纯文本摘要。
+- 新增 `ClipboardWriter`，仅在用户点击“复制摘要”时写入剪贴板，不读取剪贴板。
+- 新增 `ResultTextShareCard`，在结果页命理问答之后、本地润色预览之前展示。
+- 分享文本包含 App 名称、命格标题、总重量、称骨诗文、简要解读、行动建议和安全提示。
+- 分享文本默认不包含完整公历出生日期、完整农历生日、具体出生时辰、历史记录、常用出生资料显示名或本地模型润色结果。
+- 分享使用系统 `ShareLink`，不做图片分享、不保存分享记录、不上传、不请求网络。
+- 未改命理计算、命理问答、本地润色预览、历史记录或 `makeDefaultRefiner()`。
+
 阶段目标：
 
 - 提供结果摘要复制能力。
@@ -158,6 +169,10 @@
 建议 commit message：
 
 - `feat: add result text copy`
+
+下一阶段：
+
+- V1.6 阶段 5：知识库收藏与最近阅读。
 
 ## V1.6 阶段 5：知识库收藏与最近阅读
 

@@ -36,6 +36,12 @@ struct DestinyResultView: View {
                         )
                     }
 
+                    ResultTextShareCard(
+                        result: result,
+                        interpretation: interpretation,
+                        insight: insight
+                    )
+
                     LocalRefiningPreviewCard(
                         interpretation: interpretation,
                         insight: insight
