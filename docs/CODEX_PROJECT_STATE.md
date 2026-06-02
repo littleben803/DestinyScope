@@ -2,24 +2,39 @@
 
 ## 当前方向
 
-当前暂不准备：
+当前 V1.8 方向已经发生用户明确变更：
+
+- 本地模型从 Debug / TestFlight 风格实验能力升级为生产候选能力。
+- 设备评分达到标准时默认启用本地 AI 润色能力和入口。
+- 模拟器默认启用本地 AI 能力。
+- 模型文件计划直接打包进 App 安装包。
+- 首页第一屏必须聚焦生辰查询，查询按钮应尽量首屏可见。
+- 阶段缩短，加速实现。
+
+当前仍暂不准备：
 
 - 上传 TestFlight
 - 上架 App Store
-- 默认启用本地模型
-- 将本地模型接入默认结果页
 - 增加服务端
 - 增加在线 AI
 - 增加登录
 - 增加支付订阅
+- 做模型下载
+- 做 RAG
+- 做开放聊天
+- 做流式 UI
 
 当前重点：
 
-- 继续产品功能打磨和多设备人工验收
+- V1.8 生产环境本地 AI 润色与首页主路径强化
+- 让首页第一屏更聚焦出生日期、出生时辰和查询按钮
+- 通过设备评分决定是否默认启用本地 AI 润色
+- 将本地模型作为生产候选能力接入结果页润色展示
 - 保持默认主流程稳定
 - 保持本地优先
 - 保持隐私友好
-- 保持本地模型实验受控、默认关闭、失败回退
+- 保持本地模型只做表达润色，不生成新的命理结论
+- 保持失败、超时、低电量、过热、设备不达标和安全检查失败时回退模板
 
 ## 已完成版本
 
@@ -98,16 +113,29 @@ TestFlight 本地模型内测实现准备：
 
 ## 当前推荐下一版本
 
-V1.7：多设备人工验收与无障碍修复。
+V1.8：生产环境本地 AI 润色与首页主路径强化。
 
 候选方向：
 
-- iPhone SE / mini / Pro Max / iPad 多设备验收。
-- VoiceOver 焦点顺序和按钮 label / hint 修复。
-- Dynamic Type 默认、Large、Extra Large、Accessibility Large 验收。
-- 深色模式和小屏布局修复。
-- Legal 长文、开源许可长 URL 和本地数据管理页可读性复查。
-- 继续保持不上传 TestFlight、不准备 App Store 上架，除非另行决策。
+- 模型内置到 App Bundle。
+- llama framework 生产候选接入。
+- 设备评分默认启用。
+- 模拟器默认启用。
+- 首页第一屏重构，聚焦生辰查询。
+- 结果页展示本地润色版，模板结果始终保留。
+- 失败回退模板。
+- 继续不接服务端、在线 AI、模型下载、RAG、开放聊天、流式 UI 或付费订阅。
+
+当前 V1.8 进度：
+
+- 阶段 1：生产本地 AI 与首页主路径方案冻结已完成。
+- 已新增 `docs/V1_8_ProductionLocalAIPlan.md`。
+- 已新增 `docs/V1_8_DeviceScoringPlan.md`。
+- 已新增 `docs/V1_8_BundledModelPlan.md`。
+- 已新增 `docs/V1_8_HomeFirstScreenPlan.md`。
+- 已新增 `docs/V1_8_Roadmap.md`。
+- 本阶段只修改 docs，没有修改 Swift、工程配置、资源、CSV、JSON、依赖或模型文件。
+- 当前下一阶段建议：V1.8 阶段 2，模型内置、llama framework 生产化、设备评分默认启用。
 
 当前 V1.7 进度：
 
@@ -124,6 +152,23 @@ V1.7：多设备人工验收与无障碍修复。
 - 当前没有已确认 P0 issue；V1.7 阶段 3 暂无需要修复的问题，可跳过到阶段 6 回归测试或阶段 7 自测与下一步决策。
 - 本阶段只修改 docs，没有修改 Swift、工程配置、资源、CSV、JSON、依赖或模型文件。
 - 当前下一阶段建议：如不需要补录更多设备细节，可进入 V1.7 阶段 6：首页 / 结果页 / 知识库 / 历史回归测试，或阶段 7：V1.7 自测与下一步决策。
+- 阶段 3：人工验收结果复核与修复范围冻结已完成。
+- 已新增 `docs/V1_7_FixTriageDecision.md`。
+- V1.7 阶段 3 为 no-op：当前无 P0 / P1 / P2 修复项。
+- V1.7 阶段 4 / 5 当前 skipped：无深色模式、Dynamic Type、Legal 长文或开源许可可读性修复项。
+- 阶段 6：回归测试已合并到阶段 7。
+- 阶段 7：V1.7 自测与下一步决策已完成。
+- 已新增 `docs/V1_7_TestReport.md`。
+- 已新增 `docs/V1_7_NextStepDecision.md`。
+- Debug build：通过。
+- Release build：通过。
+- 当前无 P0 / P1 / P2 修复项。
+- V1.7 Accessibility & Multi-device QA：Pass。
+- TestFlight Upload：Not Now。
+- App Store Release：No-Go。
+- Local Model Default Enablement：No-Go。
+- Continue Product Polish：Go。
+- 当前下一阶段建议：V1.8 产品细节继续打磨。
 
 当前 V1.6 进度：
 
@@ -173,7 +218,7 @@ V1.7：多设备人工验收与无障碍修复。
 - 不加分析或追踪
 - 不做付费订阅
 - 不做模型下载
-- 不默认启用本地模型
+- V1.8 范围内允许按设备评分默认启用本地 AI 润色
 - 不把本地模型输出作为命理结论
 - 不把本地模型润色结果写入历史记录
 - 不做 TestFlight 上传
@@ -194,3 +239,10 @@ V1.7：多设备人工验收与无障碍修复。
 3. 每阶段跑 Debug / Release build
 4. 每阶段检查模型文件和 framework 是否进入仓库
 5. 每阶段确认 `makeDefaultRefiner()` 默认仍是 `TemplateTextRefiner`
+
+当前建议下一步：
+
+- V1.8 阶段 2：模型内置、llama framework 生产化、设备评分默认启用。
+- 仍不上传 TestFlight。
+- 仍不准备 App Store 上架。
+- 仍不接服务端、在线 AI、模型下载、RAG、开放聊天、流式 UI 或付费订阅。

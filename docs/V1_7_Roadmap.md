@@ -85,6 +85,13 @@
 
 ## V1.7 阶段 3：P0 可访问性与小屏修复
 
+状态：
+
+- No-op，已完成修复范围复核。
+- 已新增 `docs/V1_7_FixTriageDecision.md`。
+- 当前无已确认 P0 issue。
+- 本阶段不需要代码修复，不修改 Swift、工程配置、资源、CSV、JSON、依赖或模型文件。
+
 阶段目标：
 
 - 修复阻断主流程、危险误触、读屏无法使用、Release 暴露实验入口等 P0 问题。
@@ -115,6 +122,12 @@
 
 ## V1.7 阶段 4：深色模式与 Dynamic Type 修复
 
+状态：
+
+- Skipped。
+- 原因：V1.7 阶段 2 人工验收反馈深色模式和 Dynamic Type 均 OK，阶段 3 复核确认无对应修复项。
+- 如后续新增真实问题，再重新打开本阶段。
+
 阶段目标：
 
 - 修复深色模式对比不足、Dynamic Type 截断、固定高度导致内容不可见等 P1 问题。
@@ -141,6 +154,12 @@
 - `fix: improve dark mode and dynamic type`
 
 ## V1.7 阶段 5：Legal 长文与开源许可可读性修复
+
+状态：
+
+- Skipped。
+- 原因：V1.7 阶段 2 人工验收反馈 Legal 长文、开源许可、VoiceOver 和深色模式均 OK，阶段 3 复核确认无对应修复项。
+- 如后续新增真实问题，再重新打开本阶段。
 
 阶段目标：
 
@@ -170,7 +189,17 @@
 
 - `fix: improve legal readability`
 
+当前下一阶段：
+
+- V1.7 阶段 6：首页 / 结果页 / 知识库 / 历史回归测试。
+- 如需要节省步骤，也可合并进入 V1.7 阶段 7：V1.7 自测与下一步决策。
+
 ## V1.7 阶段 6：首页 / 结果页 / 知识库 / 历史回归测试
+
+状态：
+
+- Merged into V1.7 阶段 7。
+- 本轮无单独代码修复项，回归结果随阶段 7 构建检查、静态扫描和人工验收回顾一起记录。
 
 阶段目标：
 
@@ -200,6 +229,18 @@
 
 ## V1.7 阶段 7：V1.7 自测与下一步决策
 
+状态：
+
+- 已完成。
+- 已新增 `docs/V1_7_TestReport.md`。
+- 已新增 `docs/V1_7_NextStepDecision.md`。
+- Debug build：通过。
+- Release build：通过。
+- 仓库内未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc` 或 `.xcframework`。
+- `makeDefaultRefiner()` 仍返回 `TemplateTextRefiner()`。
+- 当前无 P0 / P1 / P2 issue。
+- V1.7 总体完成。
+
 阶段目标：
 
 - 汇总 V1.7 修复和人工验收结果。
@@ -226,3 +267,18 @@
 建议 commit message：
 
 - `docs: add v1.7 qa decision`
+
+## V1.7 总结
+
+最终结论：
+
+- V1.7 Accessibility & Multi-device QA：Pass。
+- P0 / P1 / P2 Fix Required：No。
+- TestFlight Upload：Not Now。
+- App Store Release：No-Go。
+- Local Model Default Enablement：No-Go。
+- Continue Product Polish：Go。
+
+下一步建议：
+
+- V1.8：产品细节继续打磨。

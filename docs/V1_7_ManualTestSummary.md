@@ -48,3 +48,34 @@
 1. 如准备 TestFlight 或上架前复核，补齐具体 iOS 版本、App build 和 iPad 型号。
 2. 继续保留 `docs/V1_7_ManualTestRecords.md` 作为后续人工复测记录入口。
 3. 当前没有真实 P0 issue，可跳过 V1.7 阶段 3 的修复实现，进入 V1.7 阶段 6 回归测试或阶段 7 自测与下一步决策。
+
+## 6. 修复范围复核结果
+
+- 当前无 P0 / P1 / P2 issue。
+- 本轮不需要代码修复。
+- V1.7 阶段 3 可标记为 no-op：已完成修复范围复核，无 P0 修复项。
+- V1.7 阶段 4 可标记为 skipped：无深色模式 / Dynamic Type 修复项。
+- V1.7 阶段 5 可标记为 skipped：无 Legal 长文 / 开源许可可读性修复项。
+- 如后续新增真实人工反馈问题，再按问题类型重新打开对应修复阶段。
+
+## 7. V1.7 最终自测结果
+
+- Debug build：通过。
+- Release build：通过。
+- `git diff --check`：通过。
+- 仓库内未发现 `.gguf`、`.bin`、`.safetensors`、`.mlmodel`、`.mlmodelc` 或 `.xcframework`。
+- `DestinyScope/Domain/Models/*.swift` 未被 `.gitignore` 误忽略。
+- `makeDefaultRefiner()` 仍返回 `TemplateTextRefiner()`。
+- Swift 源码未发现新增网络请求、在线 AI、StoreKit、CloudKit、追踪或敏感权限关键字。
+- 高风险词扫描命中集中在禁止事项说明、安全规则和测试样例语境，不属于营销文案或功能承诺。
+- 当前无 P0 / P1 / P2 issue。
+- 当前无需代码修复。
+- V1.7 可以收尾。
+
+最终决策：
+
+- V1.7 Accessibility & Multi-device QA：Pass。
+- TestFlight Upload：Not Now。
+- App Store Release：No-Go。
+- Local Model Default Enablement：No-Go。
+- Continue Product Polish：Go。

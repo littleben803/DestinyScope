@@ -574,3 +574,50 @@ V1.7 阶段 2 人工验收记录状态：
 - 当前未发现 P0 / P1 / P2 问题。
 - 当前 App Store Release 仍为 No-Go。
 - 上架前仍建议补齐具体 iOS 版本、App build、iPad 型号和最终 Release Archive 验收记录。
+
+V1.7 阶段 3 修复范围复核：
+
+- 已新增 `docs/V1_7_FixTriageDecision.md`。
+- 当前无 P0 / P1 / P2 issue 需要代码修复。
+- V1.7 阶段 4 / 5 当前无需执行修复。
+- 当前仍不准备 App Store 上架。
+- 上架前仍需最终 Release Archive、签名、版本号、GitHub Pages 隐私 URL、公网可访问性和素材授权复核。
+
+V1.7 阶段 7 自测与下一步决策：
+
+- 已新增 `docs/V1_7_TestReport.md` 和 `docs/V1_7_NextStepDecision.md`。
+- Debug build：通过。
+- Release build：通过。
+- V1.7 多设备和无障碍人工验收已完成，用户反馈 iPhone 17 Pro Max、iPhone 12 mini、VoiceOver、Dynamic Type、深色模式、小屏、iPad、本地模型加载和运行均 OK。
+- 当前无 P0 / P1 / P2 issue。
+- 当前 App Store Release 仍为 No-Go。
+- 当前仍不准备上架 App Store。
+- 上架前仍需重新执行 release readiness，包括签名、版本号、Archive、GitHub Pages 隐私 URL、公网可访问性、license / notice、素材授权、Review Notes 和截图元数据复核。
+
+## 20. V1.8 生产本地 AI 与首页主路径强化状态
+
+V1.8 方向变更：
+
+- 用户已明确要求将本地模型从 Debug 实验路径升级为生产候选能力。
+- 用户已明确要求设备评分达标时默认启用本地 AI 润色能力和入口。
+- 用户已明确要求模拟器默认启用本地 AI 能力。
+- 用户已明确要求模型文件直接打包到 App 安装包中。
+- 用户已明确要求首页第一屏聚焦生辰查询，查询按钮尽量首屏可见。
+- 本地模型仍只能做表达润色，不能生成新的命理结论。
+
+V1.8 上架风险新增项：
+
+- App 包将内置 GGUF 模型，包体会显著增大。
+- 需要使用 Git LFS 管理指定 `.gguf` 模型。
+- 需要更新 license / notice，并人工确认 Qwen2.5 GGUF 文件来源、Apache 2.0 状态、商业使用和 App 内分发条件。
+- 需要更新 App 内开源许可页面。
+- 需要更新隐私说明，明确本地模型设备端处理、不上传输入输出。
+- 需要记录最终 Archive 体积、安装体积和用户下载成本。
+- 需要重新执行 release readiness。
+
+当前状态：
+
+- V1.8 阶段 1 只完成方案冻结。
+- 当前仍未上传 App Store。
+- 当前仍未创建 App Store Connect 记录。
+- 当前仍未修改签名、Bundle ID、Version / Build。

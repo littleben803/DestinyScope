@@ -725,3 +725,31 @@ V1.7 阶段 2 人工记录状态：
 - 当前仍不上传 TestFlight。
 - 用户已反馈 iPhone 17 Pro Max、iPhone 12 mini、VoiceOver、Dynamic Type、深色模式、小屏、iPad、本地模型加载和运行等均已人工自测 OK。
 - 若未来恢复 TestFlight，仍建议补齐具体 iOS 版本、App build、iPad 型号和最终 Release 构建验收记录。
+
+V1.7 阶段 3 修复范围复核：
+
+- 当前无 P0 / P1 / P2 issue。
+- V1.7 阶段 3 为 no-op，阶段 4 / 5 当前 skipped。
+- 当前仍不上传 TestFlight。
+- 如未来恢复 TestFlight，需要重新执行 readiness 检查，至少包括 Release 构建、签名、版本号、审核备注、测试人员说明和本地模型边界复核。
+
+V1.7 阶段 7 自测与下一步决策：
+
+- 已新增 `docs/V1_7_TestReport.md` 和 `docs/V1_7_NextStepDecision.md`。
+- Debug build：通过。
+- Release build：通过。
+- V1.7 人工验收完成，用户反馈多设备、VoiceOver、Dynamic Type、深色模式、小屏、iPad、本地模型加载和运行均 OK。
+- 当前无 P0 / P1 / P2 issue。
+- 当前仍不上传 TestFlight。
+- 如未来恢复 TestFlight，需要重新执行 TestFlight readiness 检查，包括 Release 构建、签名、版本号、测试人员说明、审核备注、本地模型边界、隐私说明和 license / notice 复核。
+
+V1.8 生产本地模型候选状态：
+
+- 用户已明确要求 V1.8 推进生产本地模型候选。
+- 本地模型将从 Debug 实验路径升级为生产候选能力。
+- 设备评分达标时默认启用本地 AI 润色。
+- 模拟器默认启用本地 AI 能力。
+- 计划将 `qwen2.5-0.5b-instruct-q4_k_m.gguf` 内置到 App Bundle。
+- TestFlight 前必须重新执行 readiness 检查。
+- TestFlight 前必须确认 Git LFS、license / notice、开源许可、隐私说明、App size、设备评分、fallback、安全检查和 Release 行为。
+- 当前仍未上传 TestFlight。
