@@ -117,8 +117,13 @@ V1.7：多设备人工验收与无障碍修复。
 - 已新增 `docs/V1_7_DeviceTestMatrix.md`。
 - 已新增 `docs/V1_7_AccessibilityIssueBacklog.md`。
 - 已新增 `docs/V1_7_ManualTestTemplate.md`。
+- 阶段 2：人工验收记录汇总框架已完成。
+- 已新增 `docs/V1_7_ManualTestRecords.md`。
+- 已新增 `docs/V1_7_ManualTestSummary.md`。
+- 用户已反馈 iPhone 17 Pro Max、iPhone 12 mini、VoiceOver、Dynamic Type、深色模式、小屏、iPad、本地模型加载和运行等均已人工自测 OK。
+- 当前没有已确认 P0 issue；V1.7 阶段 3 暂无需要修复的问题，可跳过到阶段 6 回归测试或阶段 7 自测与下一步决策。
 - 本阶段只修改 docs，没有修改 Swift、工程配置、资源、CSV、JSON、依赖或模型文件。
-- 当前下一阶段建议：V1.7 阶段 2：人工验收记录汇总。
+- 当前下一阶段建议：如不需要补录更多设备细节，可进入 V1.7 阶段 6：首页 / 结果页 / 知识库 / 历史回归测试，或阶段 7：V1.7 自测与下一步决策。
 
 当前 V1.6 进度：
 

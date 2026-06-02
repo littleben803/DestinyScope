@@ -46,6 +46,14 @@
 
 ## V1.7 阶段 2：人工验收记录汇总
 
+状态：
+
+- 记录框架已完成，并已根据用户人工自测反馈更新验收状态。
+- 已新增 `docs/V1_7_ManualTestRecords.md`。
+- 已新增 `docs/V1_7_ManualTestSummary.md`。
+- 用户反馈 iPhone 17 Pro Max、iPhone 12 mini、VoiceOver、Dynamic Type、深色模式、小屏、iPad、本地模型加载和运行等均已人工自测 OK。
+- 当前没有已确认 P0 issue；阶段 3 暂无需要修复的问题，可跳过到阶段 6 回归测试或阶段 7 自测与下一步决策。
+
 阶段目标：
 
 - 基于 `docs/V1_7_ManualTestTemplate.md` 汇总人工测试记录。

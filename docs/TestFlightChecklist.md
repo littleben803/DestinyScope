@@ -718,3 +718,10 @@ V1.7 阶段 1 多设备人工验收与无障碍修复计划：
 - 当前仍不上传 TestFlight。
 - 若未来恢复 TestFlight，需要先完成 V1.7 多设备人工验收，关闭 P0 问题，并重新执行 V1.4 readiness、V1.5 QA 和 V1.6 新增功能测试。
 - TestFlight 前必须确认 Release 不展示本地模型实验入口，`makeDefaultRefiner()` 仍返回 `TemplateTextRefiner`。
+
+V1.7 阶段 2 人工记录状态：
+
+- 已建立 `docs/V1_7_ManualTestRecords.md` 和 `docs/V1_7_ManualTestSummary.md`。
+- 当前仍不上传 TestFlight。
+- 用户已反馈 iPhone 17 Pro Max、iPhone 12 mini、VoiceOver、Dynamic Type、深色模式、小屏、iPad、本地模型加载和运行等均已人工自测 OK。
+- 若未来恢复 TestFlight，仍建议补齐具体 iOS 版本、App build、iPad 型号和最终 Release 构建验收记录。

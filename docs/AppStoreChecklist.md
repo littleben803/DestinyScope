@@ -566,3 +566,11 @@ V1.6 自测与决策状态：
 - 仍不把本地模型接入默认结果页。
 - 上架前必须完成多设备、VoiceOver、Dynamic Type、深色模式、小屏和 iPad 验证。
 - App Store 元数据仍不应宣传 AI / 本地模型能力。
+
+V1.7 阶段 2 人工验收记录状态：
+
+- 已建立 `docs/V1_7_ManualTestRecords.md` 和 `docs/V1_7_ManualTestSummary.md`。
+- 用户已反馈 iPhone 17 Pro Max、iPhone 12 mini、VoiceOver、Dynamic Type、深色模式、小屏、iPad、本地模型加载和运行等均已人工自测 OK。
+- 当前未发现 P0 / P1 / P2 问题。
+- 当前 App Store Release 仍为 No-Go。
+- 上架前仍建议补齐具体 iOS 版本、App build、iPad 型号和最终 Release Archive 验收记录。
