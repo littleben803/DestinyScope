@@ -42,7 +42,7 @@ struct DestinyResultView: View {
                         insight: insight
                     )
 
-                    LocalRefiningPreviewCard(
+                    ProductionLocalRefiningCard(
                         interpretation: interpretation,
                         insight: insight
                     )

@@ -69,6 +69,13 @@ fastlane/test_output
 *.mlmodelc
 *.xcframework
 
+# Production bundled local model candidate tracked by Git LFS
+!DestinyScope/Resources/Models/
+!DestinyScope/Resources/Models/*.gguf
+!DestinyScope/Frameworks/
+!DestinyScope/Frameworks/llama.xcframework/
+!DestinyScope/Frameworks/llama.xcframework/**
+
 # Local model directories at repository root only.
 # Do not use broad "Models/" because it also ignores DestinyScope/Domain/Models Swift sources.
 /Models/

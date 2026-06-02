@@ -98,23 +98,12 @@ struct SettingsView: View {
                     #if DEBUG
                     SettingsSectionCard(
                         title: "实验功能",
-                        subtitle: "仅用于 Debug/TestFlight 内测；默认关闭，不影响正式结果。"
+                        subtitle: "仅用于 Debug 观察内置模型加载、润色和回退状态。"
                     ) {
                         settingsLink(
-                            title: "本地模型润色实验",
-                            subtitle: "只对已有模板文本做表达润色，不生成新的命理结论",
-                            accessibilityHint: "打开本地模型润色实验设置页面。"
-                        ) {
-                            LocalModelExperimentSettingsView()
-                        }
-
-                        Divider()
-                            .background(AppTheme.Colors.divider)
-
-                        settingsLink(
-                            title: "本地模型 PoC",
-                            subtitle: "Debug-only，本地 GGUF 加载测试",
-                            accessibilityHint: "打开开发者本地模型 PoC 调试页面。"
+                            title: "本地模型状态与测试",
+                            subtitle: "查看内置模型后台加载、润色输出和模板回退",
+                            accessibilityHint: "打开本地模型状态与测试页面。"
                         ) {
                             LocalModelDebugView()
                         }

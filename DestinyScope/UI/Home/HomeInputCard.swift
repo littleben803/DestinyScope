@@ -35,6 +35,18 @@ struct HomeInputCard: View {
                 }
                 .pickerStyle(.menu)
                 .foregroundColor(AppTheme.Colors.primaryText)
+
+                HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
+                    Image(systemName: "lock.shield")
+                        .font(.footnote)
+                        .foregroundColor(AppTheme.Colors.cinnabar)
+                        .accessibilityHidden(true)
+
+                    Text("出生日期和时辰仅用于本机计算，不需要账号，也不会上传。")
+                        .font(AppTheme.Typography.footnote)
+                        .foregroundColor(AppTheme.Colors.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
 
             AppPrimaryButton(title: "查询", action: onCalculate)
@@ -44,7 +56,7 @@ struct HomeInputCard: View {
             Button(action: onSaveCurrent) {
                 HStack {
                     Image(systemName: "plus.circle")
-                    Text("保存当前出生资料")
+                    Text("保存为常用资料")
                 }
                 .font(AppTheme.Typography.body.weight(.semibold))
                 .foregroundColor(AppTheme.Colors.cinnabar)

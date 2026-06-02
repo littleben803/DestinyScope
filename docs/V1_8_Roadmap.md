@@ -45,6 +45,17 @@
 
 ## V1.8 阶段 2：模型内置、llama framework 生产化、设备评分默认启用
 
+状态：
+
+- 已完成。
+- 根据用户“加快进度，缩短阶段”的明确要求，本阶段同时完成首页第一屏重构和结果页本地润色默认接入。
+- 已新增 `docs/V1_8_ProductionLocalAIImplementationReport.md`。
+- Debug build：通过。
+- Release build：通过。
+- 旧的手工 `Embed llama.xcframework` 脚本阶段已移除，改由 Xcode 标准 `ProcessXCFramework` 处理。
+- `makeDefaultRefiner()` 已在 V1.8 范围内调整为 `AutoLocalTextRefiner()`：设备评分达标时走本地模型，不达标或失败时回退模板。
+- 模板结果始终保留，本地模型只做表达润色，不生成新的命理结论。
+
 目标：
 
 - 将 `qwen2.5-0.5b-instruct-q4_k_m.gguf` 作为生产候选内置模型。
@@ -98,6 +109,11 @@
 - `feat: enable bundled local ai refiner candidate`
 
 ## V1.8 阶段 3：首页第一屏重构、结果页本地润色默认接入
+
+状态：
+
+- 核心实现已并入 V1.8 阶段 2。
+- 后续如继续执行本阶段，只做人工回归、细节修正或文案微调，不再重复接入默认路径。
 
 目标：
 
@@ -176,4 +192,3 @@
 建议 commit message：
 
 - `docs: add v1.8 production candidate decision`
-

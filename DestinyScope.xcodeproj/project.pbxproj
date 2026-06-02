@@ -8,12 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		A12E4B5B403A9CD8B4A63D82 /* Pods_DestinyScope.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDC288C955D7168B0E4C9911 /* Pods_DestinyScope.framework */; };
+		D51C3A2B2DAF000100000002 /* llama.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D51C3A2B2DAF000100000003 /* llama.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D51C3A2B2DAF000100000001 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D51C3A2B2DAF000100000002 /* llama.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1535C521D7C8BD7D08BCD7D3 /* Pods-DestinyScope.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DestinyScope.release.xcconfig"; path = "Target Support Files/Pods-DestinyScope/Pods-DestinyScope.release.xcconfig"; sourceTree = "<group>"; };
 		2B15D60D2DA53E4A00F7FF73 /* DestinyScope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DestinyScope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9EE1593C26B136AD69EA95 /* Pods-DestinyScope.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DestinyScope.debug.xcconfig"; path = "Target Support Files/Pods-DestinyScope/Pods-DestinyScope.debug.xcconfig"; sourceTree = "<group>"; };
+		D51C3A2B2DAF000100000003 /* llama.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = llama.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC288C955D7168B0E4C9911 /* Pods_DestinyScope.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DestinyScope.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -40,6 +56,7 @@
 		0CA5CEE722C26C1520D4AEA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D51C3A2B2DAF000100000003 /* llama.framework */,
 				DDC288C955D7168B0E4C9911 /* Pods_DestinyScope.framework */,
 			);
 			name = Frameworks;
@@ -82,7 +99,7 @@
 				C793B05894A99A479BD08B72 /* [CP] Check Pods Manifest.lock */,
 				2B15D6092DA53E4A00F7FF73 /* Sources */,
 				2B15D60A2DA53E4A00F7FF73 /* Frameworks */,
-				D51C3A2B2DAF000100000001 /* Embed Debug llama.xcframework */,
+				D51C3A2B2DAF000100000001 /* Embed Frameworks */,
 				2B15D60B2DA53E4A00F7FF73 /* Resources */,
 			);
 			buildRules = (
@@ -165,27 +182,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D51C3A2B2DAF000100000001 /* Embed Debug llama.xcframework */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(HOME)/LocalModels/DestinyScope/llama.xcframework",
-			);
-			name = "Embed Debug llama.xcframework";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/llama.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n  exit 0\nfi\n\nLLAMA_XCFRAMEWORK=\"$HOME/LocalModels/DestinyScope/llama.xcframework\"\nif [ ! -d \"$LLAMA_XCFRAMEWORK\" ]; then\n  echo \"warning: Debug llama.xcframework not found at $LLAMA_XCFRAMEWORK\"\n  exit 0\nfi\n\ncase \"$PLATFORM_NAME\" in\n  iphoneos)\n    LLAMA_SLICE=\"ios-arm64\"\n    ;;\n  iphonesimulator)\n    LLAMA_SLICE=\"ios-arm64_x86_64-simulator\"\n    ;;\n  *)\n    echo \"Skipping llama.xcframework embed for platform $PLATFORM_NAME\"\n    exit 0\n    ;;\nesac\n\nSRC_FRAMEWORK=\"$LLAMA_XCFRAMEWORK/$LLAMA_SLICE/llama.framework\"\nDST_DIR=\"$TARGET_BUILD_DIR/$FRAMEWORKS_FOLDER_PATH\"\nif [ ! -d \"$SRC_FRAMEWORK\" ]; then\n  echo \"warning: llama.framework slice not found at $SRC_FRAMEWORK\"\n  exit 0\nfi\n\nmkdir -p \"$DST_DIR\"\nrsync -a --delete \"$SRC_FRAMEWORK\" \"$DST_DIR/\"\n\nif [ \"$CODE_SIGNING_ALLOWED\" != \"NO\" ]; then\n  SIGN_IDENTITY=\"${EXPANDED_CODE_SIGN_IDENTITY:--}\"\n  /usr/bin/codesign --force --sign \"$SIGN_IDENTITY\" --timestamp=none \"$DST_DIR/llama.framework\" || true\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -333,11 +329,11 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
-					"$(HOME)/LocalModels/DestinyScope/llama.xcframework/ios-arm64",
+					"$(PROJECT_DIR)/DestinyScope/Frameworks/llama.xcframework/ios-arm64",
 				);
 				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
 					"$(inherited)",
-					"$(HOME)/LocalModels/DestinyScope/llama.xcframework/ios-arm64_x86_64-simulator",
+					"$(PROJECT_DIR)/DestinyScope/Frameworks/llama.xcframework/ios-arm64_x86_64-simulator",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "";
@@ -381,6 +377,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"DestinyScope/Preview Content\"";
 				DEVELOPMENT_TEAM = X9455LZ5KX;
 				ENABLE_PREVIEWS = YES;
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DestinyScope/Frameworks/llama.xcframework/ios-arm64",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DestinyScope/Frameworks/llama.xcframework/ios-arm64_x86_64-simulator",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -397,6 +401,11 @@
 					"$(PROJECT_DIR)/DestinyScope",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					llama,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.edu.seu.DestinyScope;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

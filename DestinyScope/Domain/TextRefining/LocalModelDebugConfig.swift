@@ -27,16 +27,20 @@ struct LocalModelDebugConfig: Equatable {
         let isEnabled = false
         #endif
 
+        let bundledFrameworkPath = Bundle.main.privateFrameworksURL?
+            .appendingPathComponent("llama.framework")
+            .path ?? "App Bundle Frameworks/llama.framework"
+
         return LocalModelDebugConfig(
             isDebugFeatureEnabled: isEnabled,
             expectedModelFileName: LocalModelFileResolver.expectedFileName,
             primaryModelPath: "/Users/bytedance/LocalModels/DestinyScope/qwen2.5-0.5b-instruct-q4_k_m.gguf",
             fallbackModelPath: "/Users/bytedance/LocalModels/DestinyScope/qwen2_5_0_5b_instruct_q4.gguf",
             sandboxModelPaths: [],
-            llamaFrameworkPath: "/Users/bytedance/LocalModels/DestinyScope/llama.xcframework",
+            llamaFrameworkPath: bundledFrameworkPath,
             modelDirectoryDescription: DeviceModelIdentifier.isRunningOnSimulator
-                ? "当前为模拟器：直接读取 Mac 本地 ~/LocalModels/DestinyScope 下的 GGUF 文件。"
-                : "当前为真机：需要从 Files App 手动导入 GGUF 到 App Documents/LocalModels/DestinyScope。模型文件不得提交仓库或进入 Release 默认路径。"
+                ? "当前为模拟器：优先读取 App Bundle 内置模型，必要时 fallback 到 Mac 本地 ~/LocalModels/DestinyScope。"
+                : "当前为真机：优先读取 App Bundle 内置模型，也可在 Debug 下从 Files App 手动导入 GGUF 到 App Documents/LocalModels/DestinyScope。"
         )
     }
 

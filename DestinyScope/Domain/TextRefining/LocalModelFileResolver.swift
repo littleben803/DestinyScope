@@ -31,6 +31,21 @@ struct LocalModelFileResolver {
             .appendingPathComponent("DestinyScope", isDirectory: true)
     }
 
+    func bundledModelFileURL() -> URL? {
+        Bundle.main.url(
+            forResource: Self.expectedFileName.replacingOccurrences(of: ".gguf", with: ""),
+            withExtension: "gguf"
+        ) ?? Bundle.main.url(
+            forResource: Self.expectedFileName.replacingOccurrences(of: ".gguf", with: ""),
+            withExtension: "gguf",
+            subdirectory: "Models"
+        ) ?? Bundle.main.url(
+            forResource: Self.expectedFileName.replacingOccurrences(of: ".gguf", with: ""),
+            withExtension: "gguf",
+            subdirectory: "Resources/Models"
+        )
+    }
+
     func appDocumentsModelFileURL() -> URL {
         appDocumentsModelDirectoryURL()
             .appendingPathComponent(Self.expectedFileName)
@@ -84,17 +99,25 @@ struct LocalModelFileResolver {
     }
 
     private func candidateURLs() -> [(url: URL, source: LocalModelFileSource)] {
-        if DeviceModelIdentifier.isRunningOnSimulator {
-            return [
-                (developerLocalModelsFileURL(), .developerLocalModels),
-                (developerLocalModelsAliasFileURL(), .developerLocalModels)
-            ]
+        var candidates: [(url: URL, source: LocalModelFileSource)] = []
+
+        if let bundledModelURL = bundledModelFileURL() {
+            candidates.append((bundledModelURL, .appBundle))
         }
 
-        return [
+        candidates.append(contentsOf: [
             (appDocumentsModelFileURL(), .appDocuments),
             (appDocumentsAliasFileURL(), .appDocuments)
-        ]
+        ])
+
+        if DeviceModelIdentifier.isRunningOnSimulator {
+            candidates.append(contentsOf: [
+                (developerLocalModelsFileURL(), .developerLocalModels),
+                (developerLocalModelsAliasFileURL(), .developerLocalModels)
+            ])
+        }
+
+        return candidates
     }
 
     private func developerHomeDirectoryURL() -> URL {

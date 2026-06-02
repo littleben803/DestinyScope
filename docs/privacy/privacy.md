@@ -4,7 +4,7 @@
 
 最后更新：2026-06-01
 
-DestinyScope 是一款完全 Native、本地运行的东方命理自我探索与传统文化学习 App。当前正式功能以设备端本地处理为基础，不创建账号，不接服务端，不接在线 AI。本地模型润色仍属于受控实验路径，默认关闭，只用于文本表达润色。
+DestinyScope 是一款完全 Native、本地运行的东方命理自我探索与传统文化学习 App。当前正式功能以设备端本地处理为基础，不创建账号，不接服务端，不接在线 AI。本地模型润色作为生产候选能力时，也仅在设备端运行，只用于文本表达润色。
 
 ## 中文隐私政策
 
@@ -48,15 +48,15 @@ DestinyScope 当前版本不接入广告追踪，不接入分析 SDK，也不包
 
 DestinyScope 当前版本不包含付费订阅、内购或支付功能。
 
-### 11. 本地模型润色实验
+### 11. 本地模型润色
 
-DestinyScope 可能在 Debug/TestFlight 或受控实验开关下提供本地模型润色实验。该功能默认关闭，需要用户手动开启。本地模型仅在设备端运行，只对已有模板文本做表达润色，不生成新的命理结论，不替代称骨计算、诗文匹配、命格洞察或模板问答。
+DestinyScope 当前版本可能内置本地模型作为生产候选能力。设备评分达标时，App 可在设备端默认使用本地模型对已有模板文本做表达润色；设备不达标、低电量、过热、模型不可用、超时或安全检查失败时，会自动回退到本地模板文本。
 
-本地模型实验不上传模型输入，不上传模型输出，不上传出生信息，不上传命理结果，也不上传历史记录。润色结果默认不保存到历史记录。失败、超时、低电量、过热或安全检查失败时，App 会回退到本地模板文本。
+本地模型仅用于表达润色，不生成新的命理结论，不替代称骨计算、诗文匹配、命格洞察或模板问答。当前版本不上传模型输入，不上传模型输出，不上传出生信息，不上传命理结果，也不上传历史记录。润色结果默认不保存到历史记录。
 
 ### 12. 模型下载
 
-当前版本不提供正式模型下载功能。如果未来支持模型下载，隐私政策会补充网络请求、模型文件大小、存储位置、删除方式和校验机制等说明。
+当前版本不提供模型下载功能。本地模型文件如随 App 分发，会作为 App Bundle 内置资源在设备端读取。如果未来支持模型下载，隐私政策会补充网络请求、模型文件大小、存储位置、删除方式和校验机制等说明。
 
 ### 13. 本地资源
 
@@ -86,8 +86,8 @@ This privacy policy applies to the current version of DestinyScope. DestinyScope
 - DestinyScope does not request Location, Camera, Photos, Contacts, Microphone, or other sensitive permissions.
 - DestinyScope does not include ad tracking, analytics SDKs, subscriptions, or in-app purchases.
 - Fortune data is bundled as local CSV files, and knowledge articles are bundled as local JSON files.
-- The local text refining experiment, when available in Debug/TestFlight or a controlled experiment switch, runs on device, is off by default, and does not upload model input or output.
-- The local text refining experiment only rewrites existing template text and does not create new fortune conclusions.
+- Local text refining, when available as a production candidate feature, runs on device and does not upload model input or output.
+- Local text refining only rewrites existing template text and does not create new fortune conclusions.
 - If future versions add networking, accounts, subscriptions, model downloads, or data sync, this privacy policy will be updated.
 
 Contact: littleben803@gmail.com

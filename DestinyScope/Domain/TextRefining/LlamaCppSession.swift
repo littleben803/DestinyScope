@@ -5,7 +5,6 @@
 //  Created by Codex on 2026/5/27.
 //
 
-#if DEBUG
 import Foundation
 
 #if canImport(llama)
@@ -40,6 +39,14 @@ struct LlamaCppGenerationResult: Equatable {
 }
 
 final class LlamaCppSession {
+    static var isFrameworkAvailable: Bool {
+        #if canImport(llama)
+        return true
+        #else
+        return false
+        #endif
+    }
+
     #if canImport(llama)
     private var model: OpaquePointer?
     private var context: OpaquePointer?
@@ -297,4 +304,3 @@ final class LlamaCppSession {
     }
     #endif
 }
-#endif

@@ -24,13 +24,13 @@ struct HomeBirthProfilePickerView: View {
                         .foregroundColor(AppTheme.Colors.darkGold)
                 }
 
-                Text("资料仅保存在本机，不会上传或同步。选择后只会填入首页输入，不会自动查询。")
+                Text("选择后只填入出生日期和时辰，不会自动查询。")
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
 
                 if profiles.isEmpty {
-                    Text("暂无常用出生资料。你可以在查询输入区保存当前出生日期和时辰，方便之后快速填写。")
+                    Text("暂无常用资料。可在查询卡片中保存当前输入，方便下次快速填写。")
                         .font(AppTheme.Typography.body)
                         .foregroundColor(AppTheme.Colors.primaryText)
                         .fixedSize(horizontal: false, vertical: true)

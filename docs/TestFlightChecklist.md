@@ -753,3 +753,18 @@ V1.8 生产本地模型候选状态：
 - TestFlight 前必须重新执行 readiness 检查。
 - TestFlight 前必须确认 Git LFS、license / notice、开源许可、隐私说明、App size、设备评分、fallback、安全检查和 Release 行为。
 - 当前仍未上传 TestFlight。
+
+V1.8 阶段 2 实现检查项：
+
+- 内置模型路径：`DestinyScope/Resources/Models/qwen2.5-0.5b-instruct-q4_k_m.gguf`。
+- 内置 framework 路径：`DestinyScope/Frameworks/llama.xcframework`。
+- Git LFS 规则已写入 `.gitattributes`。
+- Debug build：通过。
+- Release build：通过。
+- 模拟器默认启用本地润色。
+- 设备评分达标时默认启用本地润色。
+- iPhone 12 mini / `iPhone13,1` 默认模板。
+- 低电量、过热、模型缺失、framework 缺失、超时、安全检查失败时回退模板。
+- 首页第一屏应聚焦出生日期、出生时辰和查询按钮。
+- 结果页模板结果始终保留，本地润色版不写入历史。
+- TestFlight 前仍需重新执行 readiness，并人工确认 license / notice 与包体风险。

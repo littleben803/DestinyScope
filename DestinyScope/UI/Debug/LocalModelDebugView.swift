@@ -8,7 +8,6 @@
 #if DEBUG
 import SwiftUI
 import UIKit
-import UniformTypeIdentifiers
 
 struct LocalModelDebugView: View {
     @State private var modelStatuses: [LocalModelFileStatus] = []
@@ -32,43 +31,28 @@ struct LocalModelDebugView: View {
     @State private var benchmarkResults: [LocalModelBenchmarkResult] = []
     @State private var benchmarkErrorMessage: String?
     @State private var benchmarkSummary = "尚未运行"
-    @State private var isModelImporterPresented = false
-    @State private var importStatusMessage = "尚未导入"
-    @State private var importedModelPath = "未记录"
-    @State private var importedModelSize = "未知"
+    @State private var managedLoadingState: LocalModelLoadingState = .idle
+    @State private var isManagedLoadRunning = false
 
     private let config = LocalModelDebugConfig.current
-
-    private var isSimulator: Bool {
-        DeviceModelIdentifier.isRunningOnSimulator
-    }
 
     var body: some View {
         AppBackground {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-                    AppSectionHeader(title: "V1.2 本地模型 PoC")
+                    AppSectionHeader(title: "本地模型状态与测试")
 
                     AppCard {
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                            infoRow(title: "运行环境", value: isSimulator ? "模拟器：直接读取 Mac 本地模型路径" : "真机：需要手动导入模型到 App Documents")
-                            infoRow(title: "当前默认输出", value: "TemplateTextRefiner")
-                            infoRow(title: "推荐模型", value: "Qwen2.5-0.5B-Instruct GGUF 4-bit")
+                            infoRow(title: "当前默认输出", value: "AutoLocalTextRefiner，失败回退模板")
+                            infoRow(title: "内置模型", value: "Qwen2.5-0.5B-Instruct GGUF 4-bit")
                             infoRow(title: "llama.xcframework", value: config.llamaFrameworkExists() ? "已配置" : "未找到")
-                            infoRow(title: "framework 路径", value: config.llamaFrameworkPath)
-                            if isSimulator {
-                                infoRow(title: "Mac 主路径", value: config.primaryModelPath)
-                                infoRow(title: "Mac 备用路径", value: config.fallbackModelPath)
-                            } else {
-                                infoRow(title: "App Documents 目标路径", value: config.appDocumentsModelFileURL().path)
-                            }
-                            infoRow(title: "文件位置", value: config.modelDirectoryDescription)
                         }
                     }
 
                     AppCard {
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                            Text("当前实验入口只在 Debug 下可见，不影响默认 App 输出。模型文件不会提交仓库，也不会复制进 App Bundle。")
+                            Text("当前页面只在 Debug 下可见，用于观察本地模型状态、生成和安全回退。V1.8 生产候选会优先读取 App Bundle 内置模型。")
                                 .font(AppTheme.Typography.body)
                                 .foregroundColor(AppTheme.Colors.primaryText)
 
@@ -78,16 +62,7 @@ struct LocalModelDebugView: View {
                         }
                     }
 
-                    if !isSimulator {
-                        AppPrimaryButton(title: "检查模型文件") {
-                            checkModelFiles()
-                        }
-                        .disabled(isRunning)
-
-                        importCard
-                    } else {
-                        simulatorModelCard
-                    }
+                    managedLoadingCard
 
                     AppPrimaryButton(title: isRunning ? "加载中..." : "加载并生成测试文本") {
                         runGenerationTest()
@@ -103,59 +78,13 @@ struct LocalModelDebugView: View {
                 .padding(AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle("本地模型 PoC")
-        .fileImporter(
-            isPresented: $isModelImporterPresented,
-            allowedContentTypes: [UTType(filenameExtension: "gguf") ?? .data],
-            allowsMultipleSelection: false
-        ) { result in
-            handleModelImport(result)
-        }
+        .navigationTitle("本地模型测试")
         .onAppear {
             checkModelFiles()
+            refreshManagedLoadingState()
         }
-    }
-
-    private var importCard: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                Text("导入 GGUF 模型")
-                    .font(AppTheme.Typography.sectionTitle)
-                    .foregroundColor(AppTheme.Colors.primaryText)
-
-                Text("仅用于 Debug 真机测试。选择 Files App 中的 .gguf 文件后，会复制到 App Documents/LocalModels/DestinyScope/，不会上传，也不会加入 App Bundle。")
-                    .font(AppTheme.Typography.secondary)
-                    .foregroundColor(AppTheme.Colors.secondaryText)
-
-                AppPrimaryButton(title: "导入 GGUF 模型") {
-                    isModelImporterPresented = true
-                }
-                .disabled(isRunning)
-
-                infoRow(title: "导入状态", value: importStatusMessage)
-                infoRow(title: "导入路径", value: importedModelPath)
-                infoRow(title: "导入文件大小", value: importedModelSize)
-                infoRow(title: "Documents 模型是否存在", value: config.modelExistsInAppDocuments() ? "存在" : "未找到")
-            }
-        }
-    }
-
-    private var simulatorModelCard: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                Text("模拟器模型路径")
-                    .font(AppTheme.Typography.sectionTitle)
-                    .foregroundColor(AppTheme.Colors.primaryText)
-
-                Text("当前为模拟器，PoC 会直接读取 Mac 本地指定路径的 GGUF 文件，不需要检查按钮，也不需要导入模型。")
-                    .font(AppTheme.Typography.secondary)
-                    .foregroundColor(AppTheme.Colors.secondaryText)
-
-                let status = config.currentModelFileStatuses().first
-                infoRow(title: "当前路径", value: status?.resolvedURL?.path ?? config.primaryModelPath)
-                infoRow(title: "文件状态", value: status?.isUsable == true ? "可用" : "未找到或不可用")
-                infoRow(title: "文件大小", value: status?.fileSizeText ?? "未知")
-            }
+        .task {
+            await monitorManagedLoadingState()
         }
     }
 
@@ -305,6 +234,59 @@ struct LocalModelDebugView: View {
         }
     }
 
+    private var managedLoadingCard: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+                Text("启动后台加载状态")
+                    .font(AppTheme.Typography.sectionTitle)
+                    .foregroundColor(AppTheme.Colors.primaryText)
+
+                Text("用于观察 V1.8 启动后低优先级模型预热；生产润色只有在状态为 loaded 时才会调用本地模型。")
+                    .font(AppTheme.Typography.secondary)
+                    .foregroundColor(AppTheme.Colors.secondaryText)
+
+                infoRow(title: "状态", value: managedLoadingStateTitle)
+                infoRow(title: "说明", value: managedLoadingState.fallbackReason)
+
+                if case .loaded(_, let loadTime) = managedLoadingState {
+                    infoRow(title: "预热耗时", value: formatDuration(loadTime))
+                }
+
+                HStack(spacing: AppTheme.Spacing.md) {
+                    AppPrimaryButton(title: "刷新状态") {
+                        refreshManagedLoadingState()
+                    }
+                    .disabled(isManagedLoadRunning)
+
+                    AppPrimaryButton(title: isManagedLoadRunning ? "加载中..." : "立即后台加载") {
+                        runManagedLoadNow()
+                    }
+                    .disabled(isManagedLoadRunning)
+                }
+
+                AppPrimaryButton(title: "卸载并重置状态") {
+                    resetManagedLoadState()
+                }
+                .disabled(isManagedLoadRunning)
+            }
+        }
+    }
+
+    private var managedLoadingStateTitle: String {
+        switch managedLoadingState {
+        case .idle:
+            return "idle"
+        case .scheduled:
+            return "scheduled"
+        case .loading:
+            return "loading"
+        case .loaded:
+            return "loaded"
+        case .failed:
+            return "failed"
+        }
+    }
+
     private func infoRow(title: String, value: String) -> some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
             Text(title)
@@ -331,13 +313,13 @@ struct LocalModelDebugView: View {
                 } else {
                     ForEach(modelStatuses) { status in
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                            Text(status.displayPath)
+                            Text(status.source.displayName)
                                 .font(AppTheme.Typography.body)
                                 .foregroundColor(AppTheme.Colors.primaryText)
 
-                            Text(status.exists ? "存在，大小 \(status.sizeDescription)" : "未找到")
+                            Text(status.isUsable ? "可用，大小 \(status.sizeDescription)" : "不可用")
                                 .font(AppTheme.Typography.secondary)
-                                .foregroundColor(status.exists ? AppTheme.Colors.darkGold : AppTheme.Colors.secondaryText)
+                                .foregroundColor(status.isUsable ? AppTheme.Colors.darkGold : AppTheme.Colors.secondaryText)
                         }
                     }
                 }
@@ -373,30 +355,44 @@ struct LocalModelDebugView: View {
         fileCheckTime = CFAbsoluteTimeGetCurrent() - start
     }
 
-    private func handleModelImport(_ result: Result<[URL], Error>) {
-        switch result {
-        case .success(let urls):
-            guard let sourceURL = urls.first else {
-                importStatusMessage = "未选择文件"
-                return
+    private func refreshManagedLoadingState() {
+        Task {
+            let state = await LocalModelLoadingManager.shared.currentState()
+            await MainActor.run {
+                managedLoadingState = state
             }
+        }
+    }
 
-            do {
-                let destinationURL = try LocalModelFileImporter().importModel(from: sourceURL)
-                importedModelPath = destinationURL.path
-                importedModelSize = fileSizeDescription(at: destinationURL)
-                importStatusMessage = "导入成功，已覆盖旧文件（如存在）。"
-                checkModelFiles()
-            } catch {
-                importedModelPath = "未导入"
-                importedModelSize = "未知"
-                importStatusMessage = (error as? LocalizedError)?.errorDescription ?? "导入失败。"
-                checkModelFiles()
+    private func monitorManagedLoadingState() async {
+        while !Task.isCancelled {
+            let state = await LocalModelLoadingManager.shared.currentState()
+            await MainActor.run {
+                managedLoadingState = state
             }
-        case .failure(let error):
-            importedModelPath = "未导入"
-            importedModelSize = "未知"
-            importStatusMessage = (error as? LocalizedError)?.errorDescription ?? "导入取消或失败。"
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+        }
+    }
+
+    private func runManagedLoadNow() {
+        isManagedLoadRunning = true
+        Task {
+            await LocalModelLoadingManager.shared.loadIfNeeded()
+            let state = await LocalModelLoadingManager.shared.currentState()
+            await MainActor.run {
+                managedLoadingState = state
+                isManagedLoadRunning = false
+            }
+        }
+    }
+
+    private func resetManagedLoadState() {
+        Task {
+            await LocalModelLoadingManager.shared.unload()
+            let state = await LocalModelLoadingManager.shared.currentState()
+            await MainActor.run {
+                managedLoadingState = state
+            }
         }
     }
 
@@ -468,7 +464,7 @@ struct LocalModelDebugView: View {
             purpose: selectedTestCase.purpose,
             tone: selectedTestCase.tone,
             context: [
-                "场景": "DestinyScope V1.2 Debug-only TextRefining PoC",
+                "场景": "DestinyScope Debug-only TextRefining 测试",
                 "边界": "只能润色既有模板文本，不进入默认结果页"
             ],
             safetyRules: TextRefiningSafetyRules.defaultRules
@@ -666,15 +662,6 @@ struct LocalModelDebugView: View {
 
         let attributes = try? FileManager.default.attributesOfItem(atPath: path)
         return ((path as NSString).lastPathComponent, attributes?[.size] as? UInt64)
-    }
-
-    private func fileSizeDescription(at url: URL) -> String {
-        let attributes = try? FileManager.default.attributesOfItem(atPath: url.path)
-        guard let size = attributes?[.size] as? UInt64 else {
-            return "未知"
-        }
-
-        return ByteCountFormatter.string(fromByteCount: Int64(size), countStyle: .file)
     }
 
     private func benchmarkSummaryText() -> String {

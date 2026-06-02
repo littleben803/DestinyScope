@@ -136,6 +136,19 @@ V1.8：生产环境本地 AI 润色与首页主路径强化。
 - 已新增 `docs/V1_8_Roadmap.md`。
 - 本阶段只修改 docs，没有修改 Swift、工程配置、资源、CSV、JSON、依赖或模型文件。
 - 当前下一阶段建议：V1.8 阶段 2，模型内置、llama framework 生产化、设备评分默认启用。
+- 阶段 2：生产候选本地 AI 能力一次性接入和首页第一屏重构已完成。
+- 已新增 `.gitattributes`，GGUF 和 `llama.xcframework` 指定走 Git LFS。
+- 已将 `qwen2.5-0.5b-instruct-q4_k_m.gguf` 放入 `DestinyScope/Resources/Models/`。
+- 已将 `llama.xcframework` 放入 `DestinyScope/Frameworks/`。
+- 已移除旧的手工 `Embed llama.xcframework` 脚本阶段，改由 Xcode 标准 `ProcessXCFramework` 处理。
+- 已新增设备评分服务和生产候选可用性判断：模拟器默认启用，高分设备默认启用，iPhone 12 mini / `iPhone13,1` 默认模板。
+- `makeDefaultRefiner()` 已按 V1.8 用户方向变更调整为 `AutoLocalTextRefiner()`；本地模型不可用或失败时回退 `TemplateTextRefiner`。
+- 结果页新增生产候选本地润色版展示，模板结果始终保留，本地润色不写入历史、不生成新的命理结论。
+- 首页第一屏已前置生辰查询输入卡片，压缩 Hero 和隐私说明，辅助入口后置。
+- App 内隐私政策、开源许可说明和 GitHub Pages 隐私页已补充生产候选本地模型说明。
+- Debug build：通过。
+- Release build：通过。
+- 当前下一阶段建议：V1.8 阶段 4 生产候选自测与上线风险决策，或先对阶段 2 合并的首页 / 结果页做人工回归。
 
 当前 V1.7 进度：
 

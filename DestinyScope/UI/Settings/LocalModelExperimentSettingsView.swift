@@ -6,21 +6,14 @@
 //
 
 import SwiftUI
-import UniformTypeIdentifiers
 
 struct LocalModelExperimentSettingsView: View {
     @StateObject private var settings = LocalModelExperimentSettings()
-    @State private var isModelImporterPresented = false
-    @State private var importStatusMessage = "尚未导入"
 
     private let config = LocalModelExperimentConfig.current
 
     private var availability: LocalModelExperimentAvailability {
         LocalModelExperimentAvailability.current(settings: settings)
-    }
-
-    private var isSimulator: Bool {
-        DeviceModelIdentifier.isRunningOnSimulator
     }
 
     var body: some View {
@@ -45,7 +38,6 @@ struct LocalModelExperimentSettingsView: View {
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
                             statusRow
                             deviceTierSection
-                            modelFileSection
 
                             Text("说明")
                                 .font(AppTheme.Typography.sectionTitle)
@@ -75,13 +67,6 @@ struct LocalModelExperimentSettingsView: View {
             }
         }
         .navigationTitle(config.featureName)
-        .fileImporter(
-            isPresented: $isModelImporterPresented,
-            allowedContentTypes: [UTType(filenameExtension: "gguf") ?? .data],
-            allowsMultipleSelection: false
-        ) { result in
-            handleModelImport(result)
-        }
         .onAppear(perform: enforceAvailability)
     }
 
@@ -139,51 +124,6 @@ struct LocalModelExperimentSettingsView: View {
                     .foregroundColor(AppTheme.Colors.secondaryText)
             }
         }
-    }
-
-    private var modelFileSection: some View {
-        let status = availability.modelFileStatus
-
-        return VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-            Text("模型文件")
-                .font(AppTheme.Typography.sectionTitle)
-                .foregroundColor(AppTheme.Colors.primaryText)
-
-            infoRow(title: "期望文件", value: status.expectedFileName)
-            infoRow(title: "当前路径", value: status.resolvedURL?.path ?? "未找到")
-            infoRow(title: "来源", value: status.source.displayName)
-            infoRow(title: "是否存在", value: status.exists ? "存在" : "未找到")
-            infoRow(title: "文件大小", value: status.fileSizeText)
-            infoRow(title: "是否可用", value: status.isUsable ? "可用" : "不可用")
-
-            if let reason = status.reason {
-                Text(reason)
-                    .font(AppTheme.Typography.secondary)
-                    .foregroundColor(AppTheme.Colors.secondaryText)
-            }
-
-            Text(modelFileHelpText)
-                .font(AppTheme.Typography.secondary)
-                .foregroundColor(AppTheme.Colors.secondaryText)
-
-            if !isSimulator {
-                AppPrimaryButton(title: "导入 GGUF 模型") {
-                    isModelImporterPresented = true
-                }
-
-                Text(importStatusMessage)
-                    .font(AppTheme.Typography.secondary)
-                    .foregroundColor(AppTheme.Colors.secondaryText)
-            }
-        }
-    }
-
-    private var modelFileHelpText: String {
-        if isSimulator {
-            return "当前为模拟器：直接读取 Mac 本地 ~/LocalModels/DestinyScope 下的 GGUF 文件。本页面只展示解析结果，不需要导入。"
-        }
-
-        return "当前为真机：请从 Files App 手动导入 GGUF 模型到 App Documents/LocalModels/DestinyScope。本页面只检测文件状态，不会加载模型。"
     }
 
     private var unavailableCard: some View {
@@ -277,25 +217,6 @@ struct LocalModelExperimentSettingsView: View {
     private func enforceAvailability() {
         if settings.isExperimentEnabled && !availability.isAvailable {
             settings.disableExperiment()
-        }
-    }
-
-    private func handleModelImport(_ result: Result<[URL], Error>) {
-        switch result {
-        case .success(let urls):
-            guard let sourceURL = urls.first else {
-                importStatusMessage = "未选择模型文件。"
-                return
-            }
-
-            do {
-                let destinationURL = try LocalModelFileImporter().importModel(from: sourceURL)
-                importStatusMessage = "导入成功：\(destinationURL.path)"
-            } catch {
-                importStatusMessage = (error as? LocalizedError)?.errorDescription ?? "导入失败。"
-            }
-        case .failure(let error):
-            importStatusMessage = (error as? LocalizedError)?.errorDescription ?? "导入取消或失败。"
         }
     }
 }

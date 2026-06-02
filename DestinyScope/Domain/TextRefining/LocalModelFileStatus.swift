@@ -8,12 +8,15 @@
 import Foundation
 
 enum LocalModelFileSource: String {
+    case appBundle
     case appDocuments
     case developerLocalModels
     case notFound
 
     var displayName: String {
         switch self {
+        case .appBundle:
+            return "App Bundle"
         case .appDocuments:
             return "App Documents"
         case .developerLocalModels:

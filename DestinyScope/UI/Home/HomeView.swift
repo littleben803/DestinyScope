@@ -34,7 +34,18 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
                     HomeHeroCard()
 
-                    HomePrivacyNoticeCard()
+                    HomeInputCard(
+                        birthDate: $birthDate,
+                        selectedHour: $selectedHour,
+                        hours: hours,
+                        errorMessage: errorMessage,
+                        onSaveCurrent: {
+                            isShowingSaveProfileSheet = true
+                        },
+                        onCalculate: calculateLifeWeight
+                    )
+                    .transition(.opacity.combined(with: .scale))
+                    .animation(.easeInOut, value: errorMessage)
 
                     if let draftBannerMessage {
                         HomeInputDraftBanner(message: draftBannerMessage) {
@@ -53,19 +64,6 @@ struct HomeView: View {
                             .foregroundColor(AppTheme.Colors.secondaryText)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
-
-                    HomeInputCard(
-                        birthDate: $birthDate,
-                        selectedHour: $selectedHour,
-                        hours: hours,
-                        errorMessage: errorMessage,
-                        onSaveCurrent: {
-                            isShowingSaveProfileSheet = true
-                        },
-                        onCalculate: calculateLifeWeight
-                    )
-                    .transition(.opacity.combined(with: .scale))
-                    .animation(.easeInOut, value: errorMessage)
 
                     HomeRecentHistoryCard(record: recentHistoryRecord)
 

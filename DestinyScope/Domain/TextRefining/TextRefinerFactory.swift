@@ -9,7 +9,7 @@ import Foundation
 
 enum TextRefinerFactory {
     static func makeDefaultRefiner() -> TextRefining {
-        TemplateTextRefiner()
+        AutoLocalTextRefiner()
     }
 
     static func makeTemplateRefiner() -> TextRefining {
@@ -20,7 +20,6 @@ enum TextRefinerFactory {
         LocalLLMTextRefiner()
     }
 
-    #if DEBUG
     static func makeDebugLocalLlamaRefiner() -> TextRefining {
         LocalLlamaTextRefiner()
     }
@@ -28,5 +27,4 @@ enum TextRefinerFactory {
     static func makeLocalExperimentRefiner() -> TextRefining {
         LocalLlamaTextRefiner()
     }
-    #endif
 }

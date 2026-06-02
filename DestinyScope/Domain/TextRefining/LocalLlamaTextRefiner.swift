@@ -11,16 +11,22 @@ struct LocalLlamaTextRefiner: TextRefining {
     private let config: LocalModelDebugConfig
     private let promptBuilder: TextRefiningPromptBuilder
     private let safetyChecker: TextRefiningSafetyChecker
+    private let modelResolver: BundledLocalModelResolver
+    private let engineName: String
     private let testPrompt = "请用一句温和的话说明：命理结果只适合作为自我探索参考。"
 
     init(
         config: LocalModelDebugConfig = .current,
         promptBuilder: TextRefiningPromptBuilder = TextRefiningPromptBuilder(),
-        safetyChecker: TextRefiningSafetyChecker = TextRefiningSafetyChecker()
+        safetyChecker: TextRefiningSafetyChecker = TextRefiningSafetyChecker(),
+        modelResolver: BundledLocalModelResolver = BundledLocalModelResolver(),
+        engineName: String = "llama.cpp-qwen2.5-0.5b-q4-debug"
     ) {
         self.config = config
         self.promptBuilder = promptBuilder
         self.safetyChecker = safetyChecker
+        self.modelResolver = modelResolver
+        self.engineName = engineName
     }
 
     func refine(_ input: TextRefiningInput) async throws -> TextRefiningOutput {
@@ -28,9 +34,8 @@ struct LocalLlamaTextRefiner: TextRefining {
             throw TextRefiningError.emptyInput
         }
 
-        #if DEBUG
         let prompt = try promptBuilder.buildPrompt(from: input)
-        let result = try runDebugGeneration(prompt: prompt, maxTokens: 96)
+        let result = try await runManagedGeneration(prompt: prompt, maxTokens: 96)
         let refinedText = cleanRefinedText(result.output, fallback: input.sourceText)
         let safetyResult = safetyChecker.check(refinedText, sourceText: input.sourceText)
 
@@ -44,15 +49,11 @@ struct LocalLlamaTextRefiner: TextRefining {
         return TextRefiningOutput(
             text: refinedText,
             wasRefined: true,
-            engine: "llama.cpp-qwen2.5-0.5b-q4-debug",
+            engine: engineName,
             safetyNotice: TextRefiningSafetyRules.safetyNotice
         )
-        #else
-        throw TextRefiningError.localModelNotAvailable
-        #endif
     }
 
-    #if DEBUG
     struct DebugRefiningResult {
         let output: TextRefiningOutput
         let loadTime: TimeInterval
@@ -69,7 +70,7 @@ struct LocalLlamaTextRefiner: TextRefining {
         }
 
         let prompt = try promptBuilder.buildPrompt(from: input)
-        let result = try runDebugGeneration(prompt: prompt, maxTokens: 96)
+        let result = try await runManagedGeneration(prompt: prompt, maxTokens: 96)
         let refinedText = cleanRefinedText(result.output, fallback: input.sourceText)
         let safetyResult = safetyChecker.check(refinedText, sourceText: input.sourceText)
 
@@ -78,7 +79,7 @@ struct LocalLlamaTextRefiner: TextRefining {
             output = TextRefiningOutput(
                 text: refinedText,
                 wasRefined: true,
-                engine: "llama.cpp-qwen2.5-0.5b-q4-debug",
+                engine: engineName,
                 safetyNotice: TextRefiningSafetyRules.safetyNotice
             )
         } else {
@@ -96,8 +97,18 @@ struct LocalLlamaTextRefiner: TextRefining {
     }
 
     func runDebugGeneration(prompt: String, maxTokens: Int) throws -> LlamaCppGenerationResult {
-        guard let modelPath = config.existingModelPath() else {
-            throw LlamaCppSessionError.modelFileMissing(config.modelPathCandidates.map(config.expandedPath))
+        try runGeneration(prompt: prompt, maxTokens: maxTokens)
+    }
+
+    private func runManagedGeneration(prompt: String, maxTokens: Int) async throws -> LlamaCppGenerationResult {
+        try await LocalModelLoadingManager.shared.generate(prompt: prompt, maxTokens: maxTokens)
+    }
+
+    func runGeneration(prompt: String, maxTokens: Int) throws -> LlamaCppGenerationResult {
+        let modelStatus = modelResolver.resolveModelFileStatus()
+        guard let modelPath = modelStatus.resolvedURL?.path, modelStatus.isUsable else {
+            let candidates = modelResolver.candidateStatuses().compactMap { $0.resolvedURL?.path }
+            throw LlamaCppSessionError.modelFileMissing(candidates.isEmpty ? config.modelPathCandidates.map(config.expandedPath) : candidates)
         }
 
         let session = LlamaCppSession()
@@ -157,9 +168,8 @@ struct LocalLlamaTextRefiner: TextRefining {
         TextRefiningOutput(
             text: sourceText,
             wasRefined: false,
-            engine: "llama.cpp-qwen2.5-0.5b-q4-debug-fallback",
+            engine: "\(engineName)-fallback",
             safetyNotice: "模型输出未通过安全检查，已回退到本地模板文本。原因：\(reason)"
         )
     }
-    #endif
 }

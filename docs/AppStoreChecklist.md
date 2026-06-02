@@ -621,3 +621,17 @@ V1.8 上架风险新增项：
 - 当前仍未上传 App Store。
 - 当前仍未创建 App Store Connect 记录。
 - 当前仍未修改签名、Bundle ID、Version / Build。
+
+V1.8 阶段 2 生产候选本地 AI 接入状态：
+
+- 已将 `qwen2.5-0.5b-instruct-q4_k_m.gguf` 放入 `DestinyScope/Resources/Models/` 作为内置模型候选。
+- 已将 `llama.xcframework` 放入 `DestinyScope/Frameworks/`，并由 Xcode 标准 `ProcessXCFramework` 处理。
+- 已新增 `.gitattributes`，指定 GGUF 和 `llama.xcframework` 走 Git LFS。
+- 已更新 `.gitignore`，仅放行生产候选模型路径和 framework 路径，其他临时模型文件仍忽略。
+- 设备评分达标时默认启用本地润色；模拟器默认启用；iPhone 12 mini / `iPhone13,1` 等低分设备默认使用模板。
+- `makeDefaultRefiner()` 已在 V1.8 范围内调整为 `AutoLocalTextRefiner()`，失败、超时、低电量、过热、安全检查失败或设备不达标时回退模板。
+- 首页第一屏已强化为生辰查询主路径。
+- 结果页新增生产候选本地润色版展示，模板结果始终保留，本地润色不写入历史记录。
+- App 内隐私政策、开源许可说明和 GitHub Pages 隐私页已补充生产候选本地模型说明。
+- Debug / Release build 均通过。
+- 当前仍未上传 App Store；正式上架前必须复核 license / notice、Archive 体积、隐私页面、Review Notes 和 App Store 元数据。

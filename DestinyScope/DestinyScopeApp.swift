@@ -16,6 +16,16 @@ struct DestinyScopeApp: App {
         WindowGroup {
             MainContentView()
                 .environmentObject(dataManager)
+                .task {
+                    await scheduleStartupTasks()
+                }
+        }
+    }
+
+    private func scheduleStartupTasks() async {
+        await LocalModelLoadingManager.shared.markScheduledIfNeeded()
+        await StartupTaskScheduler.shared.schedule(id: "local-model-preload", priority: .low) {
+            await LocalModelLoadingManager.shared.loadIfNeeded()
         }
     }
 }
