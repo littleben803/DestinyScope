@@ -12,24 +12,28 @@ struct FortuneQuestionView: View {
     let interpretation: FortuneInterpretation
     let insight: LifeWeightInsight
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     @State private var selectedQuestionID: String?
     @State private var answer: FortuneAnswer?
 
     private let answerer = TemplateFortuneQuestionAnswerer()
 
-    private let questions: [FortuneQuestion] = [
-        FortuneQuestion(id: "career", title: "我适合什么职业？", intent: .career),
-        FortuneQuestion(id: "wealth", title: "我的财运特点是什么？", intent: .wealth),
-        FortuneQuestion(id: "personality", title: "我的性格倾向是什么？", intent: .personality),
-        FortuneQuestion(id: "relationship", title: "关系中需要注意什么？", intent: .relationship),
-        FortuneQuestion(id: "daily_advice", title: "今天给我一句建议", intent: .dailyAdvice)
-    ]
+    private var questions: [FortuneQuestion] {
+        [
+            FortuneQuestion(id: "career", title: localizationStore.string("result.question.career"), intent: .career),
+            FortuneQuestion(id: "wealth", title: localizationStore.string("result.question.wealth"), intent: .wealth),
+            FortuneQuestion(id: "personality", title: localizationStore.string("result.question.personality"), intent: .personality),
+            FortuneQuestion(id: "relationship", title: localizationStore.string("result.question.relationship"), intent: .relationship),
+            FortuneQuestion(id: "daily_advice", title: localizationStore.string("result.question.dailyAdvice"), intent: .dailyAdvice)
+        ]
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            AppSectionHeader(title: "命理问答")
+            AppSectionHeader(title: localizationStore.string("result.question.title"))
 
-            Text("选择一个预设问题，基于本次结果生成本地模板回答。")
+            Text(localizationStore.string("result.question.description"))
                 .font(AppTheme.Typography.secondary)
                 .foregroundColor(AppTheme.Colors.secondaryText)
 

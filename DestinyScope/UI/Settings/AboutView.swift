@@ -8,61 +8,65 @@
 import SwiftUI
 
 struct AboutView: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppBackground {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
                     AppCard {
-                        Text("DestinyScope")
+                        Text(localizationStore.string(.appName))
                             .font(AppTheme.Typography.pageTitle)
                             .foregroundColor(AppTheme.Colors.primaryText)
 
-                        Text("东方命理、传统文化学习与自我探索工具。")
+                        Text(localizationStore.string(.aboutTagline))
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
 
-                        Text("当前能力基于本地传统命理数据、本地模板和设备端文本润色生成结果，出生信息仅在设备端处理。")
+                        Text(localizationStore.string(.aboutBody))
                             .font(AppTheme.Typography.secondary)
                             .foregroundColor(AppTheme.Colors.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                     }
 
                     AppCard {
-                        AppSectionHeader(title: "当前能力")
+                        AppSectionHeader(title: localizationStore.string(.aboutCapabilitiesTitle))
 
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                            bullet("出生日期和时辰仅用于设备端本地计算。")
-                            bullet("称骨结果、命格洞察、命理问答和知识库均可离线使用。")
-                            bullet("历史记录仅保存在本设备，可在历史页删除。")
-                            bullet("本地模型润色仅用于对已有模板文本做表达润色，不生成新的命理结论。")
+                            bullet(localizationStore.string(.aboutCapabilityBirth))
+                            bullet(localizationStore.string(.aboutCapabilityOffline))
+                            bullet(localizationStore.string(.aboutCapabilityHistory))
+                            bullet(localizationStore.string(.aboutCapabilityLocalModel))
                         }
                     }
 
                     AppCard {
-                        AppSectionHeader(title: "使用边界")
+                        AppSectionHeader(title: localizationStore.string(.aboutBoundaryTitle))
 
-                        Text("内容仅供娱乐、自我探索和传统文化学习参考，不构成现实决策建议。")
+                        Text(localizationStore.string(.aboutBoundaryBody))
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
                             .lineSpacing(4)
                             .fixedSize(horizontal: false, vertical: true)
                     }
 
-                    SettingsSectionCard(title: "使用帮助") {
+                    SettingsSectionCard(title: localizationStore.string(.aboutHelpTitle)) {
                         legalLink(
-                            title: "使用说明",
-                            subtitle: "查看首次使用说明、隐私和结果边界",
-                            accessibilityHint: "打开 DestinyScope 使用说明页面。"
+                            title: localizationStore.string(.settingsOnboardingTitle),
+                            subtitle: localizationStore.string(.settingsOnboardingSubtitle),
+                            systemImage: "book.closed",
+                            accessibilityHint: localizationStore.string(.settingsOnboardingAccessibilityHint)
                         ) {
                             OnboardingView(isReviewMode: true)
                         }
                     }
 
-                    SettingsSectionCard(title: "法律与隐私") {
+                    SettingsSectionCard(title: localizationStore.string(.aboutLegalPrivacyTitle)) {
                         legalLink(
-                            title: "隐私政策",
-                            subtitle: "出生信息仅在设备端处理",
-                            accessibilityHint: "打开隐私政策页面。"
+                            title: localizationStore.string(.settingsPrivacyPolicyTitle),
+                            subtitle: localizationStore.string(.aboutPrivacySubtitle),
+                            systemImage: "lock.shield",
+                            accessibilityHint: localizationStore.string(.settingsPrivacyPolicyAccessibilityHint)
                         ) {
                             PrivacyPolicyView()
                         }
@@ -71,9 +75,10 @@ struct AboutView: View {
                             .background(AppTheme.Colors.divider)
 
                         legalLink(
-                            title: "免责声明",
-                            subtitle: "仅供娱乐、自我探索和传统文化学习参考",
-                            accessibilityHint: "打开免责声明页面。"
+                            title: localizationStore.string(.settingsDisclaimerTitle),
+                            subtitle: localizationStore.string(.aboutDisclaimerSubtitle),
+                            systemImage: "exclamationmark.triangle",
+                            accessibilityHint: localizationStore.string(.settingsDisclaimerAccessibilityHint)
                         ) {
                             DisclaimerView()
                         }
@@ -82,9 +87,10 @@ struct AboutView: View {
                             .background(AppTheme.Colors.divider)
 
                         legalLink(
-                            title: "开源许可",
-                            subtitle: "查看本地模型和开源组件许可信息",
-                            accessibilityHint: "打开开源许可页面。"
+                            title: localizationStore.string(.settingsOpenSourceTitle),
+                            subtitle: localizationStore.string(.aboutOpenSourceSubtitle),
+                            systemImage: "doc.text",
+                            accessibilityHint: localizationStore.string(.settingsOpenSourceAccessibilityHint)
                         ) {
                             OpenSourceLicensesView()
                         }
@@ -93,7 +99,7 @@ struct AboutView: View {
                 .padding(AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle("关于")
+        .navigationTitle(localizationStore.string(.aboutNavigationTitle))
     }
 
     private func bullet(_ text: String) -> some View {
@@ -112,13 +118,20 @@ struct AboutView: View {
     private func legalLink<Destination: View>(
         title: String,
         subtitle: String,
+        systemImage: String,
         accessibilityHint: String,
         @ViewBuilder destination: () -> Destination
     ) -> some View {
         NavigationLink {
             destination()
         } label: {
-            HStack {
+            HStack(alignment: .top, spacing: AppTheme.Spacing.md) {
+                Image(systemName: systemImage)
+                    .font(AppTheme.Typography.body)
+                    .foregroundColor(AppTheme.Colors.darkGold)
+                    .frame(width: 22)
+                    .accessibilityHidden(true)
+
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
                     Text(title)
                         .font(AppTheme.Typography.body)
@@ -135,6 +148,8 @@ struct AboutView: View {
                     .font(AppTheme.Typography.caption)
                     .foregroundColor(AppTheme.Colors.secondaryText)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)

@@ -12,6 +12,8 @@ struct DestinyResultView: View {
     let interpretation: FortuneInterpretation
     let insight: LifeWeightInsight
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppBackground {
             ScrollView {
@@ -47,7 +49,7 @@ struct DestinyResultView: View {
                         insight: insight
                     )
 
-                    Text("结果仅供娱乐、自我探索和传统文化学习参考。")
+                    Text(localizationStore.string("result.safety.short"))
                         .font(AppTheme.Typography.footnote)
                         .foregroundColor(AppTheme.Colors.secondaryText)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -55,12 +57,12 @@ struct DestinyResultView: View {
                 .padding(AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle("命理结果")
+        .navigationTitle(localizationStore.string("result.navigation.title"))
     }
 
     private var insightSection: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            AppSectionHeader(title: "命格洞察")
+            AppSectionHeader(title: localizationStore.string("result.insight.title"))
 
             InsightTagsView(tags: insight.tags)
 
@@ -73,11 +75,11 @@ struct DestinyResultView: View {
                     .foregroundColor(AppTheme.Colors.primaryText)
             }
 
-            bulletSection(title: "优势倾向", items: insight.strengths)
-            bulletSection(title: "需要关注", items: insight.cautions)
+            bulletSection(title: localizationStore.string("result.insight.strengths"), items: insight.strengths)
+            bulletSection(title: localizationStore.string("result.insight.cautions"), items: insight.cautions)
 
             VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text("行动建议")
+                Text(localizationStore.string("result.insight.actionSuggestion"))
                     .font(AppTheme.Typography.sectionTitle)
                     .foregroundColor(AppTheme.Colors.primaryText)
                 Text(insight.actionSuggestion)
@@ -113,7 +115,7 @@ struct DestinyResultView: View {
 
     private var poemCard: some View {
         AppCard {
-            AppSectionHeader(title: "称骨诗文")
+            AppSectionHeader(title: localizationStore.string("result.poem.title"))
 
             Text(result.poem)
                 .font(AppTheme.Typography.body)

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomePrivacyNoticeCard: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
             HStack(alignment: .top, spacing: AppTheme.Spacing.md) {
@@ -17,11 +19,11 @@ struct HomePrivacyNoticeCard: View {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                    Text("本地计算")
+                    Text(localizationStore.string(.homePrivacyTitle))
                         .font(AppTheme.Typography.sectionTitle)
                         .foregroundColor(AppTheme.Colors.primaryText)
 
-                    Text("出生日期和时辰仅用于本机计算，不需要账号，也不会上传到服务端。")
+                    Text(localizationStore.string(.homePrivacyBody))
                         .font(AppTheme.Typography.footnote)
                         .foregroundColor(AppTheme.Colors.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)

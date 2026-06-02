@@ -12,6 +12,7 @@ struct HistoryDetailView: View {
     let onRequestHomeTab: () -> Void
 
     @EnvironmentObject private var homeInputDraftStore: HomeInputDraftStore
+    @EnvironmentObject private var localizationStore: LocalizationStore
 
     @State private var isFavorite = false
     @State private var isPinned = false
@@ -54,7 +55,7 @@ struct HistoryDetailView: View {
                 .padding(AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle("历史详情")
+        .navigationTitle(localizationStore.string("history.detail.navigationTitle"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear(perform: loadUserState)
     }
@@ -69,16 +70,25 @@ struct HistoryDetailView: View {
             if isPinned || isFavorite {
                 HStack(spacing: AppTheme.Spacing.sm) {
                     if isPinned {
-                        HistoryRecordStateBadgeView(title: "置顶", systemImageName: "pin.fill")
+                        HistoryRecordStateBadgeView(
+                            title: localizationStore.string("history.badge.pinned"),
+                            systemImageName: "pin.fill"
+                        )
                     }
 
                     if isFavorite {
-                        HistoryRecordStateBadgeView(title: "收藏", systemImageName: "star.fill")
+                        HistoryRecordStateBadgeView(
+                            title: localizationStore.string("history.badge.favorite"),
+                            systemImageName: "star.fill"
+                        )
                     }
                 }
             }
 
-            Text("查询时间：\(record.createdAtDisplayText)")
+            Text(localizationStore.string(
+                "history.detail.queryTime",
+                replacements: ["time": record.createdAtDisplayText]
+            ))
                 .font(AppTheme.Typography.secondary)
                 .foregroundColor(AppTheme.Colors.secondaryText)
 
@@ -94,7 +104,10 @@ struct HistoryDetailView: View {
                     .font(AppTheme.Typography.body)
                     .foregroundColor(AppTheme.Colors.secondaryText)
 
-                Text("总重量：\(record.totalWeightText)")
+                Text(localizationStore.string(
+                    "history.row.totalWeight",
+                    replacements: ["weight": record.totalWeightText]
+                ))
                     .font(AppTheme.Typography.body.weight(.semibold))
                     .foregroundColor(AppTheme.Colors.darkGold)
             }
@@ -103,7 +116,7 @@ struct HistoryDetailView: View {
 
     private var poemCard: some View {
         AppCard {
-            AppSectionHeader(title: "称骨诗文")
+            AppSectionHeader(title: localizationStore.string("result.poem.title"))
             Text(record.poem)
                 .font(AppTheme.Typography.body)
                 .foregroundColor(AppTheme.Colors.primaryText)
@@ -114,14 +127,14 @@ struct HistoryDetailView: View {
 
     private var tagsCard: some View {
         AppCard {
-            AppSectionHeader(title: "标签")
+            AppSectionHeader(title: localizationStore.string("knowledge.detail.tagsTitle"))
             HistoryTagGrid(tags: record.tags)
         }
     }
 
     private var lightweightRecordNotice: some View {
         AppCard {
-            Text("这是一次历史查询的轻量记录，完整报告请重新查询生成。")
+            Text(localizationStore.string("history.detail.lightweightNotice"))
                 .font(AppTheme.Typography.footnote)
                 .foregroundColor(AppTheme.Colors.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
@@ -137,7 +150,7 @@ struct HistoryDetailView: View {
         } catch {
             isFavorite = false
             isPinned = false
-            stateMessage = "历史记录收藏和置顶状态加载失败，请稍后重试。"
+            stateMessage = localizationStore.string("history.error.stateLoadFailed")
         }
     }
 
@@ -145,9 +158,11 @@ struct HistoryDetailView: View {
         do {
             try userStateStore.toggleFavorite(id: record.id)
             loadUserState()
-            stateMessage = isFavorite ? "已收藏这条本机历史记录。" : "已取消收藏。"
+            stateMessage = isFavorite
+                ? localizationStore.string("history.detail.favoriteAdded")
+                : localizationStore.string("history.detail.favoriteRemoved")
         } catch {
-            stateMessage = "收藏状态更新失败，请稍后重试。"
+            stateMessage = localizationStore.string("history.error.favoriteUpdateFailed")
         }
     }
 
@@ -155,9 +170,11 @@ struct HistoryDetailView: View {
         do {
             try userStateStore.togglePinned(id: record.id)
             loadUserState()
-            stateMessage = isPinned ? "已置顶这条本机历史记录。" : "已取消置顶。"
+            stateMessage = isPinned
+                ? localizationStore.string("history.detail.pinned")
+                : localizationStore.string("history.detail.unpinned")
         } catch {
-            stateMessage = "置顶状态更新失败，请稍后重试。"
+            stateMessage = localizationStore.string("history.error.pinUpdateFailed")
         }
     }
 
@@ -165,9 +182,12 @@ struct HistoryDetailView: View {
         homeInputDraftStore.setDraft(
             birthDate: record.solarDate,
             hour: record.hour,
-            source: "历史记录：\(record.title)"
+            source: localizationStore.string(
+                "history.detail.draftSource",
+                replacements: ["title": record.title]
+            )
         )
-        stateMessage = "已填入首页草稿，返回首页后可点击查询。"
+        stateMessage = localizationStore.string("history.detail.reuseApplied")
         onRequestHomeTab()
     }
 }

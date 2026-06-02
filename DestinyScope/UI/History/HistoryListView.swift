@@ -10,6 +10,8 @@ import SwiftUI
 struct HistoryListView: View {
     let onRequestHomeTab: () -> Void
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     @State private var records: [HistoryRecord] = []
     @State private var userState = HistoryRecordUserState.empty
     @State private var errorMessage: String?
@@ -51,12 +53,12 @@ struct HistoryListView: View {
             Group {
                 if let errorMessage {
                     AppCard {
-                        AppSectionHeader(title: "加载失败")
+                        AppSectionHeader(title: localizationStore.string("common.loadFailed"))
                         Text(errorMessage)
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
 
-                        Button("重新加载") {
+                        Button(localizationStore.string("common.reload")) {
                             loadRecords()
                         }
                         .font(AppTheme.Typography.body.weight(.semibold))
@@ -125,15 +127,15 @@ struct HistoryListView: View {
                                             )
                                     }
                                     .buttonStyle(.plain)
-                                    .accessibilityLabel("删除历史记录")
-                                    .accessibilityHint("删除这条本机历史记录，删除后无法恢复。")
+                                    .accessibilityLabel(localizationStore.string("history.delete.accessibilityLabel"))
+                                    .accessibilityHint(localizationStore.string("history.delete.accessibilityHint"))
                                 }
                             }
 
                             Button(role: .destructive) {
                                 isShowingDeleteAllConfirmation = true
                             } label: {
-                                Text("清空全部")
+                                Text(localizationStore.string("common.clearAll"))
                                     .font(AppTheme.Typography.body)
                                     .foregroundColor(AppTheme.Colors.cinnabar)
                                     .frame(maxWidth: .infinity)
@@ -146,33 +148,33 @@ struct HistoryListView: View {
                 }
             }
         }
-        .navigationTitle("历史记录")
+        .navigationTitle(localizationStore.string("history.navigation.title"))
         .onAppear {
             loadRecords()
             loadUserState()
         }
-        .alert("删除这条历史记录？", isPresented: $isShowingDeleteConfirmation) {
-            Button("删除", role: .destructive) {
+        .alert(localizationStore.string("history.delete.confirmTitle"), isPresented: $isShowingDeleteConfirmation) {
+            Button(localizationStore.string("common.delete"), role: .destructive) {
                 if let recordPendingDeletion {
                     delete(recordPendingDeletion)
                 }
                 recordPendingDeletion = nil
             }
 
-            Button("取消", role: .cancel) {
+            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) {
                 recordPendingDeletion = nil
             }
         } message: {
-            Text("此操作只会删除本机记录，无法恢复。")
+            Text(localizationStore.string("history.delete.confirmMessage"))
         }
-        .alert("清空全部历史记录？", isPresented: $isShowingDeleteAllConfirmation) {
-            Button("清空", role: .destructive) {
+        .alert(localizationStore.string("history.clearAll.confirmTitle"), isPresented: $isShowingDeleteAllConfirmation) {
+            Button(localizationStore.string("common.clear"), role: .destructive) {
                 deleteAll()
             }
 
-            Button("取消", role: .cancel) {}
+            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) {}
         } message: {
-            Text("此操作只会清空本机记录，无法恢复。")
+            Text(localizationStore.string("history.clearAll.confirmMessage"))
         }
     }
 
@@ -182,7 +184,7 @@ struct HistoryListView: View {
             errorMessage = nil
         } catch {
             records = []
-            errorMessage = "历史记录加载失败，请稍后重试。"
+            errorMessage = localizationStore.string("history.error.loadFailed")
         }
     }
 
@@ -192,7 +194,7 @@ struct HistoryListView: View {
             stateMessage = nil
         } catch {
             userState = .empty
-            stateMessage = "历史记录收藏和置顶状态加载失败，请稍后重试。"
+            stateMessage = localizationStore.string("history.error.stateLoadFailed")
         }
     }
 
@@ -204,13 +206,13 @@ struct HistoryListView: View {
                 try userStateStore.remove(id: record.id)
                 cleanupMessage = nil
             } catch {
-                cleanupMessage = "历史记录已删除，但收藏 / 置顶状态清理失败，请稍后重试。"
+                cleanupMessage = localizationStore.string("history.error.deleteCleanupFailed")
             }
             loadUserState()
             loadRecords()
             stateMessage = cleanupMessage
         } catch {
-            errorMessage = "历史记录删除失败，请稍后重试。"
+            errorMessage = localizationStore.string("history.error.deleteFailed")
         }
     }
 
@@ -222,13 +224,13 @@ struct HistoryListView: View {
                 try userStateStore.clearAll()
                 cleanupMessage = nil
             } catch {
-                cleanupMessage = "历史记录已清空，但收藏 / 置顶状态清理失败，请稍后重试。"
+                cleanupMessage = localizationStore.string("history.error.clearCleanupFailed")
             }
             loadUserState()
             loadRecords()
             stateMessage = cleanupMessage
         } catch {
-            errorMessage = "历史记录清空失败，请稍后重试。"
+            errorMessage = localizationStore.string("history.error.clearFailed")
         }
     }
 }
@@ -237,5 +239,6 @@ struct HistoryListView: View {
     NavigationStack {
         HistoryListView()
             .environmentObject(HomeInputDraftStore())
+            .environmentObject(LocalizationStore())
     }
 }

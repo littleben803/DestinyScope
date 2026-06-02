@@ -14,31 +14,40 @@ struct HistoryRecordActionBar: View {
     let onTogglePinned: () -> Void
     let onReuseInput: () -> Void
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
-            AppSectionHeader(title: "记录操作")
+            AppSectionHeader(title: localizationStore.string("history.actions.title"))
 
-            Text("这些操作只影响本机历史记录状态。填入首页不会自动查询，也不会生成新的历史记录。")
+            Text(localizationStore.string("history.actions.notice"))
                 .font(AppTheme.Typography.footnote)
                 .foregroundColor(AppTheme.Colors.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
 
             VStack(spacing: AppTheme.Spacing.sm) {
                 actionButton(
-                    title: isFavorite ? "取消收藏" : "收藏记录",
+                    title: isFavorite
+                        ? localizationStore.string("history.actions.unfavorite")
+                        : localizationStore.string("history.actions.favorite"),
                     systemImageName: isFavorite ? "star.slash" : "star",
+                    accessibilityHint: localizationStore.string("history.actions.favorite.accessibilityHint"),
                     action: onToggleFavorite
                 )
 
                 actionButton(
-                    title: isPinned ? "取消置顶" : "置顶记录",
+                    title: isPinned
+                        ? localizationStore.string("history.actions.unpin")
+                        : localizationStore.string("history.actions.pin"),
                     systemImageName: isPinned ? "pin.slash" : "pin",
+                    accessibilityHint: localizationStore.string("history.actions.pin.accessibilityHint"),
                     action: onTogglePinned
                 )
 
                 actionButton(
-                    title: "填入首页重新查询",
+                    title: localizationStore.string("history.actions.reuse"),
                     systemImageName: "arrowshape.turn.up.left",
+                    accessibilityHint: localizationStore.string("history.actions.reuse.accessibilityHint"),
                     action: onReuseInput
                 )
             }
@@ -48,6 +57,7 @@ struct HistoryRecordActionBar: View {
     private func actionButton(
         title: String,
         systemImageName: String,
+        accessibilityHint: String,
         action: @escaping () -> Void
     ) -> some View {
         Button(action: action) {
@@ -66,17 +76,6 @@ struct HistoryRecordActionBar: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(title)
-        .accessibilityHint(accessibilityHint(for: title))
-    }
-
-    private func accessibilityHint(for title: String) -> String {
-        switch title {
-        case "填入首页重新查询":
-            return "将这条历史记录的出生日期和时辰填入首页，不会自动查询。"
-        case "收藏记录", "取消收藏":
-            return "切换这条历史记录的本机收藏状态。"
-        default:
-            return "切换这条历史记录的本机置顶状态。"
-        }
+        .accessibilityHint(accessibilityHint)
     }
 }

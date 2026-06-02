@@ -10,6 +10,8 @@ import SwiftUI
 struct KnowledgeDetailView: View {
     let article: KnowledgeArticle
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     @State private var isFavorite = false
     @State private var stateMessage: String?
 
@@ -36,7 +38,7 @@ struct KnowledgeDetailView: View {
     private var headerCard: some View {
         AppCard {
             HStack(alignment: .center, spacing: AppTheme.Spacing.sm) {
-                Text(article.category)
+                Text(localizationStore.string(KnowledgeArticleLocalization.categoryKind(for: article).titleID))
                     .font(AppTheme.Typography.caption.weight(.semibold))
                     .foregroundColor(AppTheme.Colors.darkGold)
                     .lineLimit(1)
@@ -72,7 +74,7 @@ struct KnowledgeDetailView: View {
 
     private var bodyCard: some View {
         AppCard {
-            AppSectionHeader(title: "正文")
+            AppSectionHeader(title: localizationStore.string("knowledge.detail.bodyTitle"))
 
             ForEach(Array(bodyParagraphs.enumerated()), id: \.offset) { _, paragraph in
                 Text(paragraph)
@@ -88,7 +90,7 @@ struct KnowledgeDetailView: View {
         AppCard {
             if !article.tags.isEmpty {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                    Text("标签")
+                    Text(localizationStore.string("knowledge.detail.tagsTitle"))
                         .font(AppTheme.Typography.footnote.weight(.semibold))
                         .foregroundColor(AppTheme.Colors.secondaryText)
                     KnowledgeTagFlowView(tags: article.tags)
@@ -99,17 +101,17 @@ struct KnowledgeDetailView: View {
                 .background(AppTheme.Colors.divider)
 
             VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text("来源")
+                Text(localizationStore.string("knowledge.detail.sourceTitle"))
                     .font(AppTheme.Typography.footnote.weight(.semibold))
                     .foregroundColor(AppTheme.Colors.secondaryText)
-                Text(article.source ?? "未注明")
+                Text(article.source ?? localizationStore.string("knowledge.detail.sourceUnknown"))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
                     .textSelection(.enabled)
                     .fixedSize(horizontal: false, vertical: true)
             }
 
-            Text("版本：\(article.version)")
+            Text(localizationStore.string("knowledge.detail.version", replacements: ["version": article.version]))
                 .font(AppTheme.Typography.footnote)
                 .foregroundColor(AppTheme.Colors.secondaryText)
         }
@@ -166,7 +168,7 @@ struct KnowledgeDetailView: View {
         do {
             try stateStore.addRecentRead(articleId: article.id)
         } catch {
-            stateMessage = "最近阅读记录保存失败，不影响文章阅读。"
+            stateMessage = localizationStore.string("knowledge.detail.recentSaveFailed")
         }
     }
 
@@ -174,9 +176,11 @@ struct KnowledgeDetailView: View {
         do {
             try stateStore.toggleFavorite(articleId: article.id)
             isFavorite = stateStore.isFavorite(articleId: article.id)
-            stateMessage = isFavorite ? "已加入本机收藏。" : "已取消收藏。"
+            stateMessage = isFavorite
+                ? localizationStore.string("knowledge.detail.favoriteAdded")
+                : localizationStore.string("knowledge.detail.favoriteRemoved")
         } catch {
-            stateMessage = "收藏状态更新失败，请稍后重试。"
+            stateMessage = localizationStore.string("knowledge.error.favoriteUpdateFailed")
         }
     }
 }

@@ -1,0 +1,239 @@
+{
+  "strings": {
+    "localData.management.title": {
+      "zh-Hans": "本地数据管理",
+      "zh-Hant": "本地資料管理",
+      "en": "Local Data Management"
+    },
+    "localData.management.navigationTitle": {
+      "zh-Hans": "本地数据管理",
+      "zh-Hant": "本地資料管理",
+      "en": "Local Data"
+    },
+    "localData.management.body": {
+      "zh-Hans": "以下数据仅保存在当前设备，不上传、不同步。删除后无法恢复。",
+      "zh-Hant": "以下資料僅保存在目前裝置，不上傳、不同步。刪除後無法恢復。",
+      "en": "The data below is stored only on this device. It is not uploaded or synced. Deletion cannot be undone."
+    },
+    "localData.management.footnote": {
+      "zh-Hans": "清理操作不会删除内置知识库、称骨数据、模型文件或 App 资源。",
+      "zh-Hant": "清理操作不會刪除內置知識庫、稱骨資料、模型檔案或 App 資源。",
+      "en": "Cleanup actions do not delete bundled knowledge, weight data, model files, or app resources."
+    },
+    "localData.summary.title": {
+      "zh-Hans": "本地数据摘要",
+      "zh-Hant": "本地資料摘要",
+      "en": "Local Data Summary"
+    },
+    "localData.summary.history": {
+      "zh-Hans": "历史记录",
+      "zh-Hant": "歷史記錄",
+      "en": "History"
+    },
+    "localData.summary.savedProfiles": {
+      "zh-Hans": "常用出生资料",
+      "zh-Hant": "常用出生資料",
+      "en": "Saved Birth Profiles"
+    },
+    "localData.summary.knowledgeFavorites": {
+      "zh-Hans": "知识库收藏",
+      "zh-Hant": "知識庫收藏",
+      "en": "Knowledge Favorites"
+    },
+    "localData.summary.knowledgeRecent": {
+      "zh-Hans": "知识库最近阅读",
+      "zh-Hant": "知識庫最近閱讀",
+      "en": "Knowledge Recent Reads"
+    },
+    "localData.summary.historyFavorites": {
+      "zh-Hans": "历史收藏",
+      "zh-Hant": "歷史收藏",
+      "en": "History Favorites"
+    },
+    "localData.summary.historyPinned": {
+      "zh-Hans": "历史置顶",
+      "zh-Hant": "歷史置頂",
+      "en": "History Pins"
+    },
+    "localData.summary.onboarding": {
+      "zh-Hans": "首次使用说明",
+      "zh-Hant": "首次使用說明",
+      "en": "Onboarding"
+    },
+    "localData.summary.completed": {
+      "zh-Hans": "已完成",
+      "zh-Hant": "已完成",
+      "en": "Completed"
+    },
+    "localData.summary.notCompleted": {
+      "zh-Hans": "未完成",
+      "zh-Hant": "未完成",
+      "en": "Not Completed"
+    },
+    "localData.count.records": {
+      "zh-Hans": "{count} 条",
+      "zh-Hant": "{count} 條",
+      "en": "{count}"
+    },
+    "localData.count.articles": {
+      "zh-Hans": "{count} 篇",
+      "zh-Hant": "{count} 篇",
+      "en": "{count}"
+    },
+    "localData.actions.title": {
+      "zh-Hans": "清理操作",
+      "zh-Hant": "清理操作",
+      "en": "Cleanup Actions"
+    },
+    "localData.error.operationFailed": {
+      "zh-Hans": "操作失败，请稍后重试。",
+      "zh-Hant": "操作失敗，請稍後重試。",
+      "en": "Operation failed. Please try again later."
+    },
+    "localData.action.confirmClean": {
+      "zh-Hans": "确认清理",
+      "zh-Hant": "確認清理",
+      "en": "Confirm Cleanup"
+    },
+    "localData.action.clearHistory.title": {
+      "zh-Hans": "清空历史记录",
+      "zh-Hant": "清空歷史記錄",
+      "en": "Clear History"
+    },
+    "localData.action.clearHistory.subtitle": {
+      "zh-Hans": "删除本机历史记录，并同步清理对应收藏和置顶状态。",
+      "zh-Hant": "刪除本機歷史記錄，並同步清理對應收藏與置頂狀態。",
+      "en": "Delete local history records and clean matching favorite and pin state."
+    },
+    "localData.action.clearHistory.confirmation": {
+      "zh-Hans": "此操作只会删除本机历史记录，并同步清理对应收藏和置顶状态。删除后无法恢复，不影响内置知识库和称骨数据。",
+      "zh-Hant": "此操作只會刪除本機歷史記錄，並同步清理對應收藏與置頂狀態。刪除後無法恢復，不影響內置知識庫與稱骨資料。",
+      "en": "This only deletes local history records and matching favorite/pin state. It cannot be undone and does not affect bundled knowledge or weight data."
+    },
+    "localData.action.clearHistory.success": {
+      "zh-Hans": "已清空本机历史记录。",
+      "zh-Hant": "已清空本機歷史記錄。",
+      "en": "Local history was cleared."
+    },
+    "localData.action.clearHistoryState.title": {
+      "zh-Hans": "清空历史收藏 / 置顶状态",
+      "zh-Hant": "清空歷史收藏 / 置頂狀態",
+      "en": "Clear History Favorites / Pins"
+    },
+    "localData.action.clearHistoryState.subtitle": {
+      "zh-Hans": "只清理历史记录的收藏和置顶标记，不删除历史记录。",
+      "zh-Hant": "只清理歷史記錄的收藏與置頂標記，不刪除歷史記錄。",
+      "en": "Clear only history favorite and pin marks without deleting history records."
+    },
+    "localData.action.clearHistoryState.confirmation": {
+      "zh-Hans": "此操作只会删除本机历史收藏和置顶状态，不删除历史记录。删除后无法恢复。",
+      "zh-Hant": "此操作只會刪除本機歷史收藏與置頂狀態，不刪除歷史記錄。刪除後無法恢復。",
+      "en": "This only deletes local history favorite and pin state. It does not delete history records and cannot be undone."
+    },
+    "localData.action.clearHistoryState.success": {
+      "zh-Hans": "已清空本机历史收藏和置顶状态。",
+      "zh-Hant": "已清空本機歷史收藏與置頂狀態。",
+      "en": "Local history favorites and pins were cleared."
+    },
+    "localData.action.clearSavedProfiles.title": {
+      "zh-Hans": "清空常用出生资料",
+      "zh-Hant": "清空常用出生資料",
+      "en": "Clear Saved Birth Profiles"
+    },
+    "localData.action.clearSavedProfiles.subtitle": {
+      "zh-Hans": "删除保存在本机的常用出生日期和时辰。",
+      "zh-Hant": "刪除保存在本機的常用出生日期與時辰。",
+      "en": "Delete saved birth dates and hours stored on this device."
+    },
+    "localData.action.clearSavedProfiles.confirmation": {
+      "zh-Hans": "此操作只会删除本机常用出生资料，不影响历史记录。删除后无法恢复。",
+      "zh-Hant": "此操作只會刪除本機常用出生資料，不影響歷史記錄。刪除後無法恢復。",
+      "en": "This only deletes local saved birth profiles. It does not affect history and cannot be undone."
+    },
+    "localData.action.clearSavedProfiles.success": {
+      "zh-Hans": "已清空本机常用出生资料。",
+      "zh-Hant": "已清空本機常用出生資料。",
+      "en": "Local saved birth profiles were cleared."
+    },
+    "localData.action.clearKnowledgeFavorites.title": {
+      "zh-Hans": "清空知识库收藏",
+      "zh-Hant": "清空知識庫收藏",
+      "en": "Clear Knowledge Favorites"
+    },
+    "localData.action.clearKnowledgeFavorites.subtitle": {
+      "zh-Hans": "只清理文章收藏状态，不删除内置知识库文章。",
+      "zh-Hant": "只清理文章收藏狀態，不刪除內置知識庫文章。",
+      "en": "Clear only article favorite state without deleting bundled knowledge articles."
+    },
+    "localData.action.clearKnowledgeFavorites.confirmation": {
+      "zh-Hans": "此操作只会删除本机知识库收藏状态，不删除内置文章。删除后无法恢复。",
+      "zh-Hant": "此操作只會刪除本機知識庫收藏狀態，不刪除內置文章。刪除後無法恢復。",
+      "en": "This only deletes local knowledge favorite state. It does not delete bundled articles and cannot be undone."
+    },
+    "localData.action.clearKnowledgeFavorites.success": {
+      "zh-Hans": "已清空本机知识库收藏。",
+      "zh-Hant": "已清空本機知識庫收藏。",
+      "en": "Local knowledge favorites were cleared."
+    },
+    "localData.action.clearKnowledgeRecent.title": {
+      "zh-Hans": "清空知识库最近阅读",
+      "zh-Hant": "清空知識庫最近閱讀",
+      "en": "Clear Knowledge Recent Reads"
+    },
+    "localData.action.clearKnowledgeRecent.subtitle": {
+      "zh-Hans": "只清理最近阅读记录，不删除内置知识库文章。",
+      "zh-Hant": "只清理最近閱讀記錄，不刪除內置知識庫文章。",
+      "en": "Clear only recent-read records without deleting bundled knowledge articles."
+    },
+    "localData.action.clearKnowledgeRecent.confirmation": {
+      "zh-Hans": "此操作只会删除本机知识库最近阅读记录，不删除内置文章。删除后无法恢复。",
+      "zh-Hant": "此操作只會刪除本機知識庫最近閱讀記錄，不刪除內置文章。刪除後無法恢復。",
+      "en": "This only deletes local knowledge recent-read records. It does not delete bundled articles and cannot be undone."
+    },
+    "localData.action.clearKnowledgeRecent.success": {
+      "zh-Hans": "已清空本机知识库最近阅读。",
+      "zh-Hant": "已清空本機知識庫最近閱讀。",
+      "en": "Local knowledge recent reads were cleared."
+    },
+    "localData.action.resetOnboarding.title": {
+      "zh-Hans": "重置首次使用说明",
+      "zh-Hant": "重置首次使用說明",
+      "en": "Reset Onboarding"
+    },
+    "localData.action.resetOnboarding.subtitle": {
+      "zh-Hans": "下次启动时重新展示首次使用说明，不删除其他数据。",
+      "zh-Hant": "下次啟動時重新展示首次使用說明，不刪除其他資料。",
+      "en": "Show onboarding again on next launch without deleting other data."
+    },
+    "localData.action.resetOnboarding.confirmation": {
+      "zh-Hans": "此操作只会重置本机首次使用说明状态，不删除历史、常用资料或知识库状态。",
+      "zh-Hant": "此操作只會重置本機首次使用說明狀態，不刪除歷史、常用資料或知識庫狀態。",
+      "en": "This only resets local onboarding state. It does not delete history, saved profiles, or knowledge state."
+    },
+    "localData.action.resetOnboarding.success": {
+      "zh-Hans": "已重置首次使用说明状态。",
+      "zh-Hant": "已重置首次使用說明狀態。",
+      "en": "Onboarding state was reset."
+    },
+    "localData.action.clearAll.title": {
+      "zh-Hans": "清空全部本地用户数据",
+      "zh-Hant": "清空全部本地使用者資料",
+      "en": "Clear All Local User Data"
+    },
+    "localData.action.clearAll.subtitle": {
+      "zh-Hans": "清空历史、常用资料、知识库状态和首次使用说明状态，不删除内置资源或模型文件。",
+      "zh-Hant": "清空歷史、常用資料、知識庫狀態與首次使用說明狀態，不刪除內置資源或模型檔案。",
+      "en": "Clear history, saved profiles, knowledge state, and onboarding state without deleting bundled resources or model files."
+    },
+    "localData.action.clearAll.confirmation": {
+      "zh-Hans": "此操作会清空本机历史记录、历史收藏和置顶、常用出生资料、知识库收藏、最近阅读和首次使用说明状态。不会删除内置知识库、称骨数据、模型文件或 App 资源。删除后无法恢复。",
+      "zh-Hant": "此操作會清空本機歷史記錄、歷史收藏與置頂、常用出生資料、知識庫收藏、最近閱讀與首次使用說明狀態。不會刪除內置知識庫、稱骨資料、模型檔案或 App 資源。刪除後無法恢復。",
+      "en": "This clears local history, history favorites and pins, saved birth profiles, knowledge favorites, recent reads, and onboarding state. It does not delete bundled knowledge, weight data, model files, or app resources. It cannot be undone."
+    },
+    "localData.action.clearAll.success": {
+      "zh-Hans": "已清空本机用户数据。",
+      "zh-Hant": "已清空本機使用者資料。",
+      "en": "Local user data was cleared."
+    }
+  }
+}

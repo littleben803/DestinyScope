@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct HistoryEmptyStateView: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
-            AppSectionHeader(title: "暂无历史记录")
+            AppSectionHeader(title: localizationStore.string("history.empty.title"))
 
-            Text("完成一次查询后，结果会以轻量记录保存在本机，方便以后回看。")
+            Text(localizationStore.string("history.empty.message"))
                 .font(AppTheme.Typography.body)
                 .foregroundColor(AppTheme.Colors.primaryText)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text("历史记录不会上传或同步。")
+            Text(localizationStore.string("history.empty.privacy"))
                 .font(AppTheme.Typography.secondary)
                 .foregroundColor(AppTheme.Colors.secondaryText)
         }

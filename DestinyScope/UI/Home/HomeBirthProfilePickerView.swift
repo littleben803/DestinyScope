@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeBirthProfilePickerView: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     let profiles: [SavedBirthProfile]
     let onSelect: (SavedBirthProfile) -> Void
 
@@ -15,22 +17,22 @@ struct HomeBirthProfilePickerView: View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
                 HStack(alignment: .firstTextBaseline) {
-                    AppSectionHeader(title: "常用资料")
+                    AppSectionHeader(title: localizationStore.string(.homeBirthProfilesTitle))
 
                     Spacer()
 
-                    Text("本机保存")
+                    Text(localizationStore.string(.homeBirthProfilesBadge))
                         .font(AppTheme.Typography.caption)
                         .foregroundColor(AppTheme.Colors.darkGold)
                 }
 
-                Text("选择后只填入出生日期和时辰，不会自动查询。")
+                Text(localizationStore.string(.homeBirthProfilesDescription))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
 
                 if profiles.isEmpty {
-                    Text("暂无常用资料。可在查询卡片中保存当前输入，方便下次快速填写。")
+                    Text(localizationStore.string(.homeBirthProfilesEmpty))
                         .font(AppTheme.Typography.body)
                         .foregroundColor(AppTheme.Colors.primaryText)
                         .fixedSize(horizontal: false, vertical: true)
@@ -44,8 +46,13 @@ struct HomeBirthProfilePickerView: View {
                                     profileChip(profile)
                                 }
                                 .buttonStyle(.plain)
-                                .accessibilityLabel("选择常用资料 \(profile.displayName)")
-                                .accessibilityHint("将出生日期和时辰填入首页输入，不会自动查询。")
+                                .accessibilityLabel(
+                                    localizationStore.string(
+                                        .homeBirthProfilesSelectAccessibilityLabel,
+                                        replacements: ["name": profile.displayName]
+                                    )
+                                )
+                                .accessibilityHint(localizationStore.string(.homeBirthProfilesSelectAccessibilityHint))
                             }
                         }
                         .padding(.vertical, AppTheme.Spacing.xs)
@@ -57,10 +64,17 @@ struct HomeBirthProfilePickerView: View {
 
     private func profileChip(_ profile: SavedBirthProfile) -> some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-            Text(profile.displayName)
-                .font(AppTheme.Typography.body.weight(.semibold))
-                .foregroundColor(AppTheme.Colors.primaryText)
-                .lineLimit(2)
+            HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.xs) {
+                Image(systemName: "bookmark.fill")
+                    .font(AppTheme.Typography.footnote.weight(.semibold))
+                    .foregroundColor(AppTheme.Colors.darkGold)
+                    .accessibilityHidden(true)
+
+                Text(profile.displayName)
+                    .font(AppTheme.Typography.body.weight(.semibold))
+                    .foregroundColor(AppTheme.Colors.primaryText)
+                    .lineLimit(2)
+            }
 
             Text(profile.birthSummaryText)
                 .font(AppTheme.Typography.footnote)

@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct HomeKnowledgeEntryCard: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
-            AppSectionHeader(title: "知识学习")
+            AppSectionHeader(title: localizationStore.string(.homeKnowledgeTitle))
 
-            Text("想了解称骨、时辰、生肖、五行等基础内容，可以在知识库阅读入门文章。")
+            Text(localizationStore.string(.homeKnowledgeBody))
                 .font(AppTheme.Typography.footnote)
                 .foregroundColor(AppTheme.Colors.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)

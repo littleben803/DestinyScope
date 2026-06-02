@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SaveBirthProfileSheet: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     let birthDate: Date
     let hour: Int
     let onSave: (String) -> Void
@@ -21,18 +23,18 @@ struct SaveBirthProfileSheet: View {
                 ScrollView {
                     VStack(spacing: AppTheme.Spacing.md) {
                         AppCard {
-                            AppSectionHeader(title: "保存常用出生资料")
+                            AppSectionHeader(title: localizationStore.string(.homeSaveSheetTitle))
 
-                            Text("为当前出生日期和时辰设置一个本地显示名，方便下次快速填写。")
+                            Text(localizationStore.string(.homeSaveSheetBody))
                                 .font(AppTheme.Typography.body)
                                 .foregroundColor(AppTheme.Colors.primaryText)
                                 .fixedSize(horizontal: false, vertical: true)
 
-                            Text("资料仅保存在本机，不会上传或同步。")
+                            Text(localizationStore.string(.homeSaveSheetPrivacy))
                                 .font(AppTheme.Typography.footnote)
                                 .foregroundColor(AppTheme.Colors.secondaryText)
 
-                            TextField("例如：本人、家人、朋友", text: $displayName)
+                            TextField(localizationStore.string(.homeSaveSheetPlaceholder), text: $displayName)
                                 .textInputAutocapitalization(.never)
                                 .disableAutocorrection(true)
                                 .padding(AppTheme.Spacing.md)
@@ -44,40 +46,62 @@ struct SaveBirthProfileSheet: View {
                                 )
 
                             VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                                Text("出生日期：\(Self.dateFormatter.string(from: birthDate))")
-                                Text(String(format: "出生时辰：%02d 时", hour))
+                                Text(
+                                    localizationStore.string(
+                                        .homeSaveSheetBirthDate,
+                                        replacements: ["date": birthDateText]
+                                    )
+                                )
+                                Text(
+                                    localizationStore.string(
+                                        .homeSaveSheetBirthHour,
+                                        replacements: ["hour": hourText]
+                                    )
+                                )
                             }
                             .font(AppTheme.Typography.secondary)
                             .foregroundColor(AppTheme.Colors.secondaryText)
                         }
 
-                        AppPrimaryButton(title: "保存") {
+                        AppPrimaryButton(title: localizationStore.string(.homeSaveSheetSave)) {
                             onSave(displayName)
                             dismiss()
                         }
-                        .accessibilityLabel("保存常用出生资料")
-                        .accessibilityHint("将当前出生日期和时辰保存到本机。")
+                        .accessibilityLabel(localizationStore.string(.homeSaveSheetSaveAccessibilityLabel))
+                        .accessibilityHint(localizationStore.string(.homeSaveSheetSaveAccessibilityHint))
                     }
                     .padding(AppTheme.Spacing.lg)
                 }
             }
-            .navigationTitle("保存资料")
+            .navigationTitle(localizationStore.string(.homeSaveSheetNavigationTitle))
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("取消") {
+                    Button(localizationStore.string(.homeSaveSheetCancel)) {
                         dismiss()
                     }
-                    .accessibilityLabel("取消保存")
-                    .accessibilityHint("关闭保存常用出生资料页面。")
+                    .accessibilityLabel(localizationStore.string(.homeSaveSheetCancelAccessibilityLabel))
+                    .accessibilityHint(localizationStore.string(.homeSaveSheetCancelAccessibilityHint))
                 }
             }
         }
     }
 
-    private static let dateFormatter: DateFormatter = {
+    private var birthDateText: String {
+        dateFormatter.string(from: birthDate)
+    }
+
+    private var hourText: String {
+        localizationStore.string(
+            .homeHourValue,
+            replacements: ["hour": String(format: "%02d", hour)]
+        )
+    }
+
+    private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "zh_CN")
-        formatter.dateFormat = "yyyy年M月d日"
+        formatter.locale = localizationStore.locale
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
         return formatter
-    }()
+    }
 }

@@ -11,6 +11,8 @@ struct LocalRefiningPreviewCard: View {
     let interpretation: FortuneInterpretation
     let insight: LifeWeightInsight
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     @StateObject private var settings = LocalModelExperimentSettings()
     @State private var state: LocalRefiningPreviewState = .idle
     @State private var output: TextRefiningOutput?
@@ -40,16 +42,16 @@ struct LocalRefiningPreviewCard: View {
         if shouldShowCard {
             AppCard {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                    AppSectionHeader(title: "本地润色预览")
+                    AppSectionHeader(title: localizationStore.string("refiningPreview.title"))
 
-                    Text("使用设备端本地模型对已有模板文本做表达润色，不生成新的命理结论。")
+                    Text(localizationStore.string("refiningPreview.description"))
                         .font(AppTheme.Typography.secondary)
                         .foregroundColor(AppTheme.Colors.secondaryText)
 
                     originalSummarySection
 
                     if state == .generating {
-                        ProgressView("正在生成润色版...")
+                        ProgressView(localizationStore.string("refiningPreview.generating"))
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
                     }
@@ -81,7 +83,7 @@ struct LocalRefiningPreviewCard: View {
 
     private var originalSummarySection: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-            Text("原始文本摘要")
+            Text(localizationStore.string("refiningPreview.originalSummary"))
                 .font(AppTheme.Typography.sectionTitle)
                 .foregroundColor(AppTheme.Colors.primaryText)
 
@@ -94,7 +96,9 @@ struct LocalRefiningPreviewCard: View {
 
     private func outputSection(_ output: TextRefiningOutput) -> some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-            Text(state == .success ? "润色结果" : "回退文本")
+            Text(state == .success
+                 ? localizationStore.string("refiningPreview.refinedResult")
+                 : localizationStore.string("refiningPreview.fallbackText"))
                 .font(AppTheme.Typography.sectionTitle)
                 .foregroundColor(AppTheme.Colors.primaryText)
 
@@ -102,10 +106,18 @@ struct LocalRefiningPreviewCard: View {
                 .font(AppTheme.Typography.body)
                 .foregroundColor(AppTheme.Colors.primaryText)
 
-            infoRow(title: "状态", value: state.displayName)
+            infoRow(title: localizationStore.string("refiningPreview.status"), value: localizedStateName)
             infoRow(title: "engine", value: output.engine)
             infoRow(title: "wasRefined", value: output.wasRefined ? "true" : "false")
-            infoRow(title: "耗时", value: duration.map { String(format: "%.3f 秒", $0) } ?? "未记录")
+            infoRow(
+                title: localizationStore.string("refiningPreview.duration"),
+                value: duration.map {
+                    localizationStore.string(
+                        "common.duration.seconds.threeDecimals",
+                        replacements: ["seconds": String(format: "%.3f", $0)]
+                    )
+                } ?? localizationStore.string("common.notRecorded")
+            )
 
             if let safetyNotice = output.safetyNotice {
                 Text(safetyNotice)
@@ -117,12 +129,14 @@ struct LocalRefiningPreviewCard: View {
 
     private var controls: some View {
         HStack(spacing: AppTheme.Spacing.md) {
-            AppPrimaryButton(title: state == .idle ? "生成润色版" : "重新生成") {
+            AppPrimaryButton(title: state == .idle
+                ? localizationStore.string("refiningPreview.generate")
+                : localizationStore.string("refiningPreview.regenerate")) {
                 generatePreview()
             }
             .disabled(isGenerationInFlight)
 
-            Button("使用原始文本") {
+            Button(localizationStore.string("refiningPreview.useOriginal")) {
                 isCollapsed = true
             }
             .font(AppTheme.Typography.body)
@@ -141,6 +155,25 @@ struct LocalRefiningPreviewCard: View {
             Text(value)
                 .font(AppTheme.Typography.secondary)
                 .foregroundColor(AppTheme.Colors.primaryText)
+        }
+    }
+
+    private var localizedStateName: String {
+        switch state {
+        case .idle:
+            return localizationStore.string("refiningPreview.state.idle")
+        case .generating:
+            return localizationStore.string("refiningPreview.state.generating")
+        case .success:
+            return localizationStore.string("refiningPreview.state.success")
+        case .blocked:
+            return localizationStore.string("refiningPreview.state.blocked")
+        case .timeout:
+            return localizationStore.string("refiningPreview.state.timeout")
+        case .fallback:
+            return localizationStore.string("refiningPreview.state.fallback")
+        case .failed:
+            return localizationStore.string("refiningPreview.state.failed")
         }
     }
 

@@ -10,6 +10,8 @@ import SwiftUI
 struct ResultSummaryCard: View {
     let result: LifeWeightResult
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
@@ -18,15 +20,15 @@ struct ResultSummaryCard: View {
                     .foregroundColor(AppTheme.Colors.primaryText)
 
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                    infoRow(title: "农历生日", value: result.lunarBirthDate.displayText)
-                    infoRow(title: "出生时辰", value: result.hourText)
-                    infoRow(title: "总重量", value: result.totalWeightText, emphasized: true)
+                    infoRow(title: localizationStore.string("result.summary.lunarBirthday"), value: result.lunarBirthDate.displayText)
+                    infoRow(title: localizationStore.string("result.summary.birthHour"), value: result.hourText)
+                    infoRow(title: localizationStore.string("result.summary.totalWeight"), value: result.totalWeightText, emphasized: true)
                 }
 
                 Divider()
                     .background(AppTheme.Colors.divider)
 
-                Text("结果仅供娱乐、自我探索和传统文化学习参考。")
+                Text(localizationStore.string("result.safety.short"))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
             }

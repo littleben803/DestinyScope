@@ -8,71 +8,25 @@
 import SwiftUI
 
 struct PrivacyPolicyView: View {
-    private let sections: [(title: String, body: String)] = [
-        (
-            "账号与登录",
-            "DestinyScope 当前版本不创建账号，也不需要登录。使用首页查询、结果页、知识库和历史记录功能时，不需要提供姓名、手机号、邮箱或其他账号信息。"
-        ),
-        (
-            "出生信息处理",
-            "你输入的出生日期和出生时辰仅用于设备端本地传统命理计算。当前版本不上传出生信息，也不会上传命理结果。"
-        ),
-        (
-            "常用出生资料",
-            "如果你保存常用出生资料，当前版本只会将显示名、出生日期和出生时辰保存在当前设备，用于快速填充首页输入。常用出生资料不上传、不同步、不需要账号，你可以在设置中删除单条资料或清空全部资料。"
-        ),
-        (
-            "本地历史记录",
-            "历史记录仅保存在本地设备，用于在 App 内查看过去生成的轻量结果。当前版本不上传历史记录，也不进行云同步。你可以在历史记录页面删除单条记录或清空全部记录。"
-        ),
-        (
-            "历史收藏、置顶与快速复查",
-            "如果你收藏或置顶历史记录，当前版本只会在当前设备保存历史记录 id，用于本地排序和回看。快速复查只会把历史记录中的出生日期和出生时辰填回首页输入，不会自动重新查询，也不会上传数据。"
-        ),
-        (
-            "知识库收藏与最近阅读",
-            "如果你收藏知识库文章或浏览文章详情，当前版本只会在当前设备保存文章标识和阅读时间，用于展示收藏和最近阅读。当前版本不保存知识库文章全文，不保存搜索关键词，不上传、不同步、不需要账号。你可以在知识库页面取消收藏、清空收藏或清空最近阅读。"
-        ),
-        (
-            "本地数据管理",
-            "你可以在设置中的本地数据管理页面清理历史记录、常用出生资料、知识库收藏、最近阅读和首次使用说明状态等本机数据。删除仅影响当前设备，不影响 App 内置知识库、称骨数据或本地计算规则。当前版本无账号、无同步、无服务端。"
-        ),
-        (
-            "本地模型润色",
-            "当前版本可内置本地模型用于设备端文本润色。设备评分达标时，App 可在设备端使用本地模型对已有模板文本做表达润色；设备不达标、低电量、过热、模型不可用、超时或安全检查失败时，会自动回退到本地模板文本。"
-        ),
-        (
-            "本地模型数据边界",
-            "本地模型仅用于表达润色，不生成新的命理结论，不替代称骨计算、诗文匹配、命格洞察或模板问答。当前版本不上传模型输入，不上传模型输出，不上传出生信息，不上传命理结果，也不上传历史记录。润色结果默认不保存到历史记录。"
-        ),
-        (
-            "网络与服务端",
-            "当前版本不接服务端，不接在线 AI，也不提供模型下载功能。本地模型文件如随 App 分发，会作为 App Bundle 内置资源在设备端读取。如果未来支持联网能力或模型下载，隐私政策会补充网络请求、模型文件大小、存储位置、删除方式和校验机制等说明。"
-        ),
-        (
-            "系统分享",
-            "当前版本如调用 iOS 系统分享面板，仅在你主动点击分享时把当前结果摘要交给系统分享能力处理。DestinyScope 不会自动分享内容，不会从其他 App 接收分享数据，也不会通过分享功能上传出生信息、命理结果或历史记录。"
-        ),
-        (
-            "系统权限",
-            "当前版本不使用定位、相机、相册、通讯录、麦克风等敏感系统权限，也不会主动请求这些权限。"
-        ),
-        (
-            "广告、分析与追踪",
-            "当前版本不接入广告追踪，不接入分析 SDK，不包含付费订阅，也不使用第三方在线模型服务处理用户输入。"
-        ),
-        (
-            "本地资源",
-            "本地知识库和命理数据来自 App Bundle 内置资源，包括本地 CSV、JSON 等文件。应用在设备端读取这些资源完成展示和计算。"
-        ),
-        (
-            "未来版本",
-            "如果未来版本加入联网、账号、订阅、数据同步、分析 SDK、模型下载或其他需要处理用户数据的能力，隐私说明会在对应版本中更新，并重新说明数据类型、处理目的、保存位置、删除方式和退出方式。"
-        ),
-        (
-            "联系方式",
-            "如对本隐私政策有任何问题，请联系：littleben803@gmail.com"
-        )
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
+    private let sections: [(titleID: L10nID, bodyID: L10nID)] = [
+        ("legal.privacy.section.account.title", "legal.privacy.section.account.body"),
+        ("legal.privacy.section.birth.title", "legal.privacy.section.birth.body"),
+        ("legal.privacy.section.profiles.title", "legal.privacy.section.profiles.body"),
+        ("legal.privacy.section.history.title", "legal.privacy.section.history.body"),
+        ("legal.privacy.section.historyState.title", "legal.privacy.section.historyState.body"),
+        ("legal.privacy.section.knowledgeState.title", "legal.privacy.section.knowledgeState.body"),
+        ("legal.privacy.section.localData.title", "legal.privacy.section.localData.body"),
+        ("legal.privacy.section.localModel.title", "legal.privacy.section.localModel.body"),
+        ("legal.privacy.section.localModelBoundary.title", "legal.privacy.section.localModelBoundary.body"),
+        ("legal.privacy.section.network.title", "legal.privacy.section.network.body"),
+        ("legal.privacy.section.share.title", "legal.privacy.section.share.body"),
+        ("legal.privacy.section.permissions.title", "legal.privacy.section.permissions.body"),
+        ("legal.privacy.section.tracking.title", "legal.privacy.section.tracking.body"),
+        ("legal.privacy.section.resources.title", "legal.privacy.section.resources.body"),
+        ("legal.privacy.section.future.title", "legal.privacy.section.future.body"),
+        ("legal.privacy.section.contact.title", "legal.privacy.section.contact.body")
     ]
 
     var body: some View {
@@ -80,26 +34,23 @@ struct PrivacyPolicyView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
                     LegalSummaryCard(
-                        title: "隐私政策",
-                        bodyText: "适用于 DestinyScope 当前版本。应用以 Native、本地处理和无服务端为基础；本地模型润色仅在设备端处理已有模板文本。",
-                        highlights: [
-                            "当前版本不创建账号、不需要登录。",
-                            "出生信息、命理结果和历史记录不上传。",
-                            "常用出生资料仅保存在当前设备，可随时删除。",
-                            "历史收藏和置顶状态只保存本机记录 id。",
-                            "知识库收藏和最近阅读仅保存在当前设备。",
-                            "本地数据管理只清理当前设备上的用户数据。",
-                            "本地模型润色只在设备端处理已有模板文本，不上传模型输入或输出。"
-                        ]
+                        title: localizationStore.string("legal.privacy.summary.title"),
+                        bodyText: localizationStore.string("legal.privacy.summary.body"),
+                        highlights: (0...6).map {
+                            localizationStore.string(L10nID("legal.privacy.highlight.\($0)"))
+                        }
                     )
 
-                    ForEach(sections, id: \.title) { section in
-                        LegalSectionCard(title: section.title, bodyText: section.body)
+                    ForEach(sections, id: \.titleID) { section in
+                        LegalSectionCard(
+                            title: localizationStore.string(section.titleID),
+                            bodyText: localizationStore.string(section.bodyID)
+                        )
                     }
                 }
                 .padding(AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle("隐私政策")
+        .navigationTitle(localizationStore.string(.legalPrivacyNavigationTitle))
     }
 }

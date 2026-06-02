@@ -11,10 +11,12 @@ struct KnowledgeArticleRowView: View {
     let article: KnowledgeArticle
     var isFavorite = false
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
             HStack(alignment: .center, spacing: AppTheme.Spacing.sm) {
-                Text(article.category)
+                Text(localizationStore.string(categoryKind.titleID))
                     .font(AppTheme.Typography.caption.weight(.semibold))
                     .foregroundColor(AppTheme.Colors.darkGold)
                     .lineLimit(1)
@@ -28,18 +30,25 @@ struct KnowledgeArticleRowView: View {
                 if isFavorite {
                     HStack(spacing: AppTheme.Spacing.xs) {
                         Image(systemName: "star.fill")
-                        Text("已收藏")
+                        Text(localizationStore.string("knowledge.favorite.selected"))
                     }
                     .font(AppTheme.Typography.caption.weight(.semibold))
                     .foregroundColor(AppTheme.Colors.cinnabar)
-                    .accessibilityLabel("已收藏")
+                    .accessibilityLabel(localizationStore.string("knowledge.favorite.selected"))
                 }
             }
 
-            Text(article.title)
-                .font(AppTheme.Typography.sectionTitle)
-                .foregroundColor(AppTheme.Colors.primaryText)
-                .fixedSize(horizontal: false, vertical: true)
+            HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.sm) {
+                Image(systemName: categoryKind.iconName)
+                    .font(AppTheme.Typography.sectionTitle)
+                    .foregroundColor(AppTheme.Colors.darkGold)
+                    .accessibilityHidden(true)
+
+                Text(article.title)
+                    .font(AppTheme.Typography.sectionTitle)
+                    .foregroundColor(AppTheme.Colors.primaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
 
             Text(article.summary)
                 .font(AppTheme.Typography.secondary)
@@ -51,5 +60,9 @@ struct KnowledgeArticleRowView: View {
                 KnowledgeTagFlowView(tags: article.tags, limit: 3)
             }
         }
+    }
+
+    private var categoryKind: KnowledgeArticleCategoryKind {
+        KnowledgeArticleLocalization.categoryKind(for: article)
     }
 }

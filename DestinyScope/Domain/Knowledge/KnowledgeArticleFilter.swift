@@ -8,8 +8,8 @@
 import Foundation
 
 struct KnowledgeArticleFilter {
-    static let allCategory = "全部"
-    static let favoriteCategory = "收藏"
+    static let allCategory = "__all"
+    static let favoriteCategory = "__favorite"
 
     func categories(from articles: [KnowledgeArticle], includeFavorites: Bool = false) -> [String] {
         var seen = Set<String>()

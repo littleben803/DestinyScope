@@ -10,6 +10,8 @@ import SwiftUI
 struct KnowledgeRecentArticleRowView: View {
     let article: KnowledgeArticle
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
             Image(systemName: "clock")
@@ -18,12 +20,19 @@ struct KnowledgeRecentArticleRowView: View {
                 .padding(.top, 2)
 
             VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text(article.title)
-                    .font(AppTheme.Typography.secondary.weight(.semibold))
-                    .foregroundColor(AppTheme.Colors.primaryText)
-                    .fixedSize(horizontal: false, vertical: true)
+                HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.xs) {
+                    Image(systemName: "book.closed")
+                        .font(AppTheme.Typography.caption.weight(.semibold))
+                        .foregroundColor(AppTheme.Colors.darkGold)
+                        .accessibilityHidden(true)
 
-                Text(article.category)
+                    Text(article.title)
+                        .font(AppTheme.Typography.secondary.weight(.semibold))
+                        .foregroundColor(AppTheme.Colors.primaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Text(localizationStore.string(KnowledgeArticleLocalization.categoryKind(for: article).titleID))
                     .font(AppTheme.Typography.caption)
                     .foregroundColor(AppTheme.Colors.secondaryText)
             }
@@ -35,7 +44,12 @@ struct KnowledgeRecentArticleRowView: View {
                 .foregroundColor(AppTheme.Colors.secondaryText)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("最近阅读 \(article.title)")
-        .accessibilityHint("打开这篇知识库文章。")
+        .accessibilityLabel(
+            localizationStore.string(
+                "knowledge.recent.row.accessibilityLabel",
+                replacements: ["title": article.title]
+            )
+        )
+        .accessibilityHint(localizationStore.string("knowledge.recent.row.accessibilityHint"))
     }
 }

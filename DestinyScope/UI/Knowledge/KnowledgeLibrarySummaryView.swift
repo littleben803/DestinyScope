@@ -14,19 +14,29 @@ struct KnowledgeLibrarySummaryView: View {
     let onClearRecentReads: () -> Void
     let onClearFavorites: () -> Void
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                AppSectionHeader(title: "我的知识库")
+                AppSectionHeader(title: localizationStore.string("knowledge.summary.myLibrary"))
 
-                Text("收藏和最近阅读仅保存在当前设备，不上传、不同步。")
+                Text(localizationStore.string("knowledge.summary.localNotice"))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
 
                 HStack(spacing: AppTheme.Spacing.sm) {
-                    countBadge(title: "收藏", count: favoriteCount, systemImageName: "star.fill")
-                    countBadge(title: "最近阅读", count: recentReadCount, systemImageName: "clock")
+                    countBadge(
+                        title: localizationStore.string("knowledge.summary.favoriteCount"),
+                        count: favoriteCount,
+                        systemImageName: "star.fill"
+                    )
+                    countBadge(
+                        title: localizationStore.string("knowledge.summary.recentCount"),
+                        count: recentReadCount,
+                        systemImageName: "clock"
+                    )
                 }
 
                 if !recentArticles.isEmpty {
@@ -34,7 +44,7 @@ struct KnowledgeLibrarySummaryView: View {
                         .background(AppTheme.Colors.divider)
 
                     VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                        Text("最近阅读")
+                        Text(localizationStore.string("knowledge.recent.title"))
                             .font(AppTheme.Typography.sectionTitle)
                             .foregroundColor(AppTheme.Colors.primaryText)
 
@@ -53,19 +63,19 @@ struct KnowledgeLibrarySummaryView: View {
 
                     HStack(spacing: AppTheme.Spacing.sm) {
                         if recentReadCount > 0 {
-                            Button("清空最近阅读", action: onClearRecentReads)
+                            Button(localizationStore.string("knowledge.clearRecent.button"), action: onClearRecentReads)
                                 .font(AppTheme.Typography.footnote.weight(.semibold))
                                 .foregroundColor(AppTheme.Colors.cinnabar)
-                                .accessibilityLabel("清空最近阅读")
-                                .accessibilityHint("清空本机保存的知识库最近阅读记录。")
+                                .accessibilityLabel(localizationStore.string("knowledge.clearRecent.button"))
+                                .accessibilityHint(localizationStore.string("knowledge.clearRecent.accessibilityHint"))
                         }
 
                         if favoriteCount > 0 {
-                            Button("清空收藏", action: onClearFavorites)
+                            Button(localizationStore.string("knowledge.clearFavorites.button"), action: onClearFavorites)
                                 .font(AppTheme.Typography.footnote.weight(.semibold))
                                 .foregroundColor(AppTheme.Colors.cinnabar)
-                                .accessibilityLabel("清空收藏")
-                                .accessibilityHint("清空本机保存的知识库收藏。")
+                                .accessibilityLabel(localizationStore.string("knowledge.clearFavorites.button"))
+                                .accessibilityHint(localizationStore.string("knowledge.clearFavorites.accessibilityHint"))
                         }
                     }
                     .buttonStyle(.plain)

@@ -1,0 +1,289 @@
+{
+  "strings": {
+    "settings.language.title": {
+      "zh-Hans": "显示语言",
+      "zh-Hant": "顯示語言",
+      "en": "Display Language"
+    },
+    "settings.language.current.system": {
+      "zh-Hans": "跟随系统：{language}",
+      "zh-Hant": "跟隨系統：{language}",
+      "en": "Following system: {language}"
+    },
+    "settings.language.current.manual": {
+      "zh-Hans": "当前：{language}",
+      "zh-Hant": "目前：{language}",
+      "en": "Current: {language}"
+    },
+    "settings.language.accessibilityHint": {
+      "zh-Hans": "打开显示语言设置页面。",
+      "zh-Hant": "開啟顯示語言設定頁面。",
+      "en": "Open display language settings."
+    },
+    "languageSettings.section.title": {
+      "zh-Hans": "选择显示语言",
+      "zh-Hant": "選擇顯示語言",
+      "en": "Choose Display Language"
+    },
+    "languageSettings.section.subtitle": {
+      "zh-Hans": "默认跟随设备语言；你也可以在这里固定 App 的显示语言。",
+      "zh-Hant": "預設跟隨裝置語言；你也可以在這裡固定 App 的顯示語言。",
+      "en": "By default, the app follows the device language. You can also choose a fixed app language here."
+    },
+    "languageSettings.option.system.subtitle": {
+      "zh-Hans": "每次启动时根据设备语言自动选择。",
+      "zh-Hant": "每次啟動時依照裝置語言自動選擇。",
+      "en": "Choose automatically from the device language at launch."
+    },
+    "languageSettings.option.manual.subtitle": {
+      "zh-Hans": "固定使用 {language} 显示。",
+      "zh-Hant": "固定使用 {language} 顯示。",
+      "en": "Always display in {language}."
+    },
+    "languageSettings.option.selected.accessibilityValue": {
+      "zh-Hans": "已选择",
+      "zh-Hant": "已選擇",
+      "en": "Selected"
+    },
+    "settings.navigation.title": {
+      "zh-Hans": "设置",
+      "zh-Hant": "設定",
+      "en": "Settings"
+    },
+    "settings.application.section.title": {
+      "zh-Hans": "应用信息",
+      "zh-Hant": "應用資訊",
+      "en": "App Information"
+    },
+    "settings.application.section.subtitle": {
+      "zh-Hans": "了解 DestinyScope 的定位、当前能力和本地处理原则。",
+      "zh-Hant": "了解 DestinyScope 的定位、目前能力與本地處理原則。",
+      "en": "Learn about DestinyScope, current features, and local-first processing."
+    },
+    "settings.about.title": {
+      "zh-Hans": "关于 DestinyScope",
+      "zh-Hant": "關於 DestinyScope",
+      "en": "About DestinyScope"
+    },
+    "settings.about.subtitle": {
+      "zh-Hans": "传统文化、自我探索和本地优先",
+      "zh-Hant": "傳統文化、自我探索與本地優先",
+      "en": "Traditional culture, self-reflection, and local-first design"
+    },
+    "settings.about.accessibilityHint": {
+      "zh-Hans": "打开关于 DestinyScope 页面。",
+      "zh-Hant": "開啟關於 DestinyScope 頁面。",
+      "en": "Open the About DestinyScope page."
+    },
+    "settings.onboarding.title": {
+      "zh-Hans": "使用说明",
+      "zh-Hant": "使用說明",
+      "en": "Guide"
+    },
+    "settings.onboarding.subtitle": {
+      "zh-Hans": "查看首次使用说明、隐私和结果边界",
+      "zh-Hant": "查看首次使用說明、隱私與結果邊界",
+      "en": "Review the guide, privacy notes, and result boundaries"
+    },
+    "settings.onboarding.accessibilityHint": {
+      "zh-Hans": "打开 DestinyScope 使用说明页面。",
+      "zh-Hant": "開啟 DestinyScope 使用說明頁面。",
+      "en": "Open the DestinyScope guide."
+    },
+    "settings.privacy.section.title": {
+      "zh-Hans": "隐私与安全",
+      "zh-Hant": "隱私與安全",
+      "en": "Privacy and Safety"
+    },
+    "settings.privacy.section.subtitle": {
+      "zh-Hans": "查看数据处理边界、使用免责声明和开源许可说明。",
+      "zh-Hant": "查看資料處理邊界、使用免責聲明與開源授權說明。",
+      "en": "Review data boundaries, disclaimers, and open-source notices."
+    },
+    "settings.privacyPolicy.title": {
+      "zh-Hans": "隐私政策",
+      "zh-Hant": "隱私政策",
+      "en": "Privacy Policy"
+    },
+    "settings.privacyPolicy.subtitle": {
+      "zh-Hans": "无账号、无服务端、出生信息不上传",
+      "zh-Hant": "無帳號、無服務端、出生資訊不上傳",
+      "en": "No account, no server, no birth data upload"
+    },
+    "settings.privacyPolicy.accessibilityHint": {
+      "zh-Hans": "打开隐私政策页面。",
+      "zh-Hant": "開啟隱私政策頁面。",
+      "en": "Open the privacy policy."
+    },
+    "settings.disclaimer.title": {
+      "zh-Hans": "免责声明",
+      "zh-Hant": "免責聲明",
+      "en": "Disclaimer"
+    },
+    "settings.disclaimer.subtitle": {
+      "zh-Hans": "娱乐、自我探索和传统文化学习参考",
+      "zh-Hant": "娛樂、自我探索與傳統文化學習參考",
+      "en": "For entertainment, self-reflection, and cultural learning"
+    },
+    "settings.disclaimer.accessibilityHint": {
+      "zh-Hans": "打开免责声明页面。",
+      "zh-Hant": "開啟免責聲明頁面。",
+      "en": "Open the disclaimer."
+    },
+    "settings.openSource.title": {
+      "zh-Hans": "开源许可",
+      "zh-Hant": "開源授權",
+      "en": "Open-Source Licenses"
+    },
+    "settings.openSource.subtitle": {
+      "zh-Hans": "查看本地模型和开源组件许可信息",
+      "zh-Hant": "查看本地模型與開源元件授權資訊",
+      "en": "Review local model and open-source component licenses"
+    },
+    "settings.openSource.accessibilityHint": {
+      "zh-Hans": "打开开源许可页面。",
+      "zh-Hant": "開啟開源授權頁面。",
+      "en": "Open open-source licenses."
+    },
+    "settings.localData.section.title": {
+      "zh-Hans": "本地数据",
+      "zh-Hant": "本地資料",
+      "en": "Local Data"
+    },
+    "settings.localData.section.subtitle": {
+      "zh-Hans": "管理仅保存在当前设备上的资料。",
+      "zh-Hant": "管理僅保存在目前裝置上的資料。",
+      "en": "Manage data stored only on this device."
+    },
+    "settings.localDataManagement.title": {
+      "zh-Hans": "本地数据管理",
+      "zh-Hant": "本地資料管理",
+      "en": "Local Data Management"
+    },
+    "settings.localDataManagement.subtitle": {
+      "zh-Hans": "查看和清理保存在本机的历史、常用资料和知识库状态",
+      "zh-Hant": "查看與清理保存在本機的歷史、常用資料與知識庫狀態",
+      "en": "Review and clear local history, saved profiles, and knowledge state"
+    },
+    "settings.localDataManagement.accessibilityHint": {
+      "zh-Hans": "打开本地数据管理页面。",
+      "zh-Hant": "開啟本地資料管理頁面。",
+      "en": "Open local data management."
+    },
+    "settings.savedProfiles.title": {
+      "zh-Hans": "常用出生资料",
+      "zh-Hant": "常用出生資料",
+      "en": "Saved Birth Profiles"
+    },
+    "settings.savedProfiles.subtitle": {
+      "zh-Hans": "管理保存在本机的出生日期和时辰",
+      "zh-Hant": "管理保存在本機的出生日期與時辰",
+      "en": "Manage birth dates and hours stored on this device"
+    },
+    "settings.savedProfiles.accessibilityHint": {
+      "zh-Hans": "打开常用出生资料管理页面。",
+      "zh-Hant": "開啟常用出生資料管理頁面。",
+      "en": "Open saved birth profiles."
+    },
+    "settings.debug.section.title": {
+      "zh-Hans": "实验功能",
+      "zh-Hant": "實驗功能",
+      "en": "Experimental Features"
+    },
+    "settings.debug.section.subtitle": {
+      "zh-Hans": "仅用于 Debug 观察内置模型加载、润色和回退状态。",
+      "zh-Hant": "僅用於 Debug 觀察內置模型載入、潤色與回退狀態。",
+      "en": "Debug-only tools for observing bundled model loading, refinement, and fallback."
+    },
+    "settings.localModelDebug.title": {
+      "zh-Hans": "本地模型状态与测试",
+      "zh-Hant": "本地模型狀態與測試",
+      "en": "Local Model Status and Tests"
+    },
+    "settings.localModelDebug.subtitle": {
+      "zh-Hans": "查看内置模型后台加载、润色输出和模板回退",
+      "zh-Hant": "查看內置模型背景載入、潤色輸出與模板回退",
+      "en": "Review bundled model loading, refined output, and template fallback"
+    },
+    "settings.localModelDebug.accessibilityHint": {
+      "zh-Hans": "打开本地模型状态与测试页面。",
+      "zh-Hant": "開啟本地模型狀態與測試頁面。",
+      "en": "Open local model status and tests."
+    },
+    "about.navigation.title": {
+      "zh-Hans": "关于",
+      "zh-Hant": "關於",
+      "en": "About"
+    },
+    "about.tagline": {
+      "zh-Hans": "东方命理、传统文化学习与自我探索工具。",
+      "zh-Hant": "東方命理、傳統文化學習與自我探索工具。",
+      "en": "An Eastern numerology, traditional culture, and self-reflection tool."
+    },
+    "about.body": {
+      "zh-Hans": "当前能力基于本地传统命理数据、本地模板和设备端文本润色生成结果，出生信息仅在设备端处理。",
+      "zh-Hant": "目前能力基於本地傳統命理資料、本地模板與裝置端文字潤色產生結果，出生資訊僅在裝置端處理。",
+      "en": "Current features use local traditional numerology data, local templates, and on-device text refinement. Birth information is processed only on device."
+    },
+    "about.capabilities.title": {
+      "zh-Hans": "当前能力",
+      "zh-Hant": "目前能力",
+      "en": "Current Capabilities"
+    },
+    "about.capability.birth": {
+      "zh-Hans": "生日信息仅用于设备端本地计算。",
+      "zh-Hant": "生日資訊僅用於裝置端本地計算。",
+      "en": "Birth information is used only for on-device calculation."
+    },
+    "about.capability.offline": {
+      "zh-Hans": "称骨结果、命格洞察、命理问答和知识库均可离线使用。",
+      "zh-Hant": "稱骨結果、命格洞察、命理問答與知識庫皆可離線使用。",
+      "en": "Weight-based results, insights, template Q&A, and the knowledge library all work offline."
+    },
+    "about.capability.history": {
+      "zh-Hans": "历史记录仅保存在本设备，可在历史页删除。",
+      "zh-Hant": "歷史記錄僅保存在本裝置，可在歷史頁刪除。",
+      "en": "History is stored only on this device and can be deleted from the History page."
+    },
+    "about.capability.localModel": {
+      "zh-Hans": "本地模型润色仅用于对已有模板文本做表达润色，不生成新的命理结论。",
+      "zh-Hant": "本地模型潤色僅用於對既有模板文字做表達潤色，不產生新的命理結論。",
+      "en": "Local model refinement only polishes existing template text and does not generate new numerology conclusions."
+    },
+    "about.boundary.title": {
+      "zh-Hans": "使用边界",
+      "zh-Hant": "使用邊界",
+      "en": "Usage Boundaries"
+    },
+    "about.boundary.body": {
+      "zh-Hans": "内容仅供娱乐、自我探索和传统文化学习参考，不构成现实决策建议。",
+      "zh-Hant": "內容僅供娛樂、自我探索與傳統文化學習參考，不構成現實決策建議。",
+      "en": "Content is for entertainment, self-reflection, and traditional culture learning only. It is not real-world decision advice."
+    },
+    "about.help.title": {
+      "zh-Hans": "使用帮助",
+      "zh-Hant": "使用說明",
+      "en": "Help"
+    },
+    "about.legalPrivacy.title": {
+      "zh-Hans": "法律与隐私",
+      "zh-Hant": "法律與隱私",
+      "en": "Legal and Privacy"
+    },
+    "about.privacy.subtitle": {
+      "zh-Hans": "出生信息仅在设备端处理",
+      "zh-Hant": "出生資訊僅在裝置端處理",
+      "en": "Birth information is processed only on device"
+    },
+    "about.disclaimer.subtitle": {
+      "zh-Hans": "仅供娱乐、自我探索和传统文化学习参考",
+      "zh-Hant": "僅供娛樂、自我探索與傳統文化學習參考",
+      "en": "For entertainment, self-reflection, and traditional culture learning only"
+    },
+    "about.openSource.subtitle": {
+      "zh-Hans": "查看本地模型和开源组件许可信息",
+      "zh-Hant": "查看本地模型與開源元件授權資訊",
+      "en": "Review local model and open-source component license information"
+    }
+  }
+}

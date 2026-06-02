@@ -1,0 +1,89 @@
+{
+  "strings": {
+    "profile.row.birth": {
+      "zh-Hans": "出生：{birth}",
+      "zh-Hant": "出生：{birth}",
+      "en": "Birth: {birth}"
+    },
+    "profile.row.updated": {
+      "zh-Hans": "更新：{date}",
+      "zh-Hant": "更新：{date}",
+      "en": "Updated: {date}"
+    },
+    "profile.row.accessibilityLabel": {
+      "zh-Hans": "{name}，出生 {birth}，更新 {date}",
+      "zh-Hant": "{name}，出生 {birth}，更新 {date}",
+      "en": "{name}, birth {birth}, updated {date}"
+    },
+    "profile.delete.accessibilityLabel": {
+      "zh-Hans": "删除常用出生资料",
+      "zh-Hant": "刪除常用出生資料",
+      "en": "Delete saved birth profile"
+    },
+    "profile.delete.accessibilityHint": {
+      "zh-Hans": "删除这条本机常用出生资料，删除后无法恢复。",
+      "zh-Hant": "刪除這條本機常用出生資料，刪除後無法恢復。",
+      "en": "Delete this local saved birth profile. It cannot be restored."
+    },
+    "profile.clearAll.accessibilityLabel": {
+      "zh-Hans": "清空全部常用出生资料",
+      "zh-Hant": "清空全部常用出生資料",
+      "en": "Clear all saved birth profiles"
+    },
+    "profile.clearAll.accessibilityHint": {
+      "zh-Hans": "删除本机保存的全部常用出生资料。",
+      "zh-Hant": "刪除本機保存的全部常用出生資料。",
+      "en": "Delete all saved birth profiles stored on this device."
+    },
+    "profile.delete.confirmTitle": {
+      "zh-Hans": "删除这条常用出生资料？",
+      "zh-Hant": "刪除這條常用出生資料？",
+      "en": "Delete this saved birth profile?"
+    },
+    "profile.delete.confirmMessage": {
+      "zh-Hans": "此操作只会删除本机保存的资料，无法恢复。",
+      "zh-Hant": "此操作只會刪除本機保存的資料，無法恢復。",
+      "en": "This only deletes the profile stored on this device and cannot be undone."
+    },
+    "profile.clearAll.confirmTitle": {
+      "zh-Hans": "清空全部常用出生资料？",
+      "zh-Hant": "清空全部常用出生資料？",
+      "en": "Clear all saved birth profiles?"
+    },
+    "profile.clearAll.confirmMessage": {
+      "zh-Hans": "此操作只会清空本机保存的常用出生资料，无法恢复。",
+      "zh-Hant": "此操作只會清空本機保存的常用出生資料，無法恢復。",
+      "en": "This only clears saved birth profiles stored on this device and cannot be undone."
+    },
+    "profile.localNotice.title": {
+      "zh-Hans": "本地保存",
+      "zh-Hant": "本地保存",
+      "en": "Stored Locally"
+    },
+    "profile.localNotice.body": {
+      "zh-Hans": "常用资料仅保存在当前设备，不上传、不同步，也不需要账号。你可以随时删除。",
+      "zh-Hant": "常用資料僅保存在目前裝置，不上傳、不同步，也不需要帳號。你可以隨時刪除。",
+      "en": "Saved profiles are stored only on this device. They are not uploaded, synced, or tied to an account. You can delete them anytime."
+    },
+    "profile.empty.title": {
+      "zh-Hans": "暂无常用出生资料",
+      "zh-Hant": "暫無常用出生資料",
+      "en": "No Saved Birth Profiles"
+    },
+    "profile.empty.message": {
+      "zh-Hans": "你可以在首页保存常用出生日期和时辰，方便下次快速填写。",
+      "zh-Hant": "你可以在首頁保存常用出生日期與時辰，方便下次快速填寫。",
+      "en": "Save birth date and hour from Home for faster entry next time."
+    },
+    "profile.error.deleteFailed": {
+      "zh-Hans": "常用出生资料删除失败，请稍后重试。",
+      "zh-Hant": "常用出生資料刪除失敗，請稍後重試。",
+      "en": "Saved birth profile failed to delete. Please try again later."
+    },
+    "profile.error.clearFailed": {
+      "zh-Hans": "常用出生资料清空失败，请稍后重试。",
+      "zh-Hant": "常用出生資料清空失敗，請稍後重試。",
+      "en": "Saved birth profiles failed to clear. Please try again later."
+    }
+  }
+}

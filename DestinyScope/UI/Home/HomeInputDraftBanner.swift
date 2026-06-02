@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeInputDraftBanner: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     let message: String
     let onClear: () -> Void
 
@@ -20,7 +22,7 @@ struct HomeInputDraftBanner: View {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                    Text("已填入待查询资料")
+                    Text(localizationStore.string(.homeDraftTitle))
                         .font(AppTheme.Typography.sectionTitle)
                         .foregroundColor(AppTheme.Colors.primaryText)
 
@@ -29,11 +31,11 @@ struct HomeInputDraftBanner: View {
                         .foregroundColor(AppTheme.Colors.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
 
-                    Button("清除提示", action: onClear)
+                    Button(localizationStore.string(.homeDraftClear), action: onClear)
                         .font(AppTheme.Typography.footnote.weight(.semibold))
                         .foregroundColor(AppTheme.Colors.cinnabar)
-                        .accessibilityLabel("清除历史填入提示")
-                        .accessibilityHint("只清除当前提示，不会清除已经填入的出生日期和时辰。")
+                        .accessibilityLabel(localizationStore.string(.homeDraftClearAccessibilityLabel))
+                        .accessibilityHint(localizationStore.string(.homeDraftClearAccessibilityHint))
                 }
             }
         }

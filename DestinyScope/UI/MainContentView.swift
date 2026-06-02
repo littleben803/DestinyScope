@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainContentView: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     private enum MainTab: Hashable {
         case home
         case knowledge
@@ -32,7 +34,7 @@ struct MainContentView: View {
                 HomeView()
             }
             .tabItem {
-                Label("首页", systemImage: "house")
+                Label(localizationStore.string(.tabHome), systemImage: "house")
             }
             .tag(MainTab.home)
 
@@ -40,7 +42,7 @@ struct MainContentView: View {
                 KnowledgeListView()
             }
             .tabItem {
-                Label("知识库", systemImage: "book")
+                Label(localizationStore.string(.tabKnowledge), systemImage: "book")
             }
             .tag(MainTab.knowledge)
 
@@ -50,7 +52,7 @@ struct MainContentView: View {
                 }
             }
             .tabItem {
-                Label("历史", systemImage: "clock")
+                Label(localizationStore.string(.tabHistory), systemImage: "clock")
             }
             .tag(MainTab.history)
 
@@ -58,7 +60,7 @@ struct MainContentView: View {
                 SettingsView()
             }
             .tabItem {
-                Label("关于", systemImage: "info.circle")
+                Label(localizationStore.string(.tabSettings), systemImage: "info.circle")
             }
             .tag(MainTab.settings)
         }
@@ -76,4 +78,5 @@ struct MainContentView: View {
 #Preview {
     MainContentView()
         .environmentObject(DataManager.shared)
+        .environmentObject(LocalizationStore())
 }

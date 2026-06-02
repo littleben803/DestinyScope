@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct HomeHeroCard: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-            Text("DestinyScope")
-                .font(AppTheme.Typography.pageTitle)
-                .foregroundColor(AppTheme.Colors.primaryText)
-
-            Text("东方命理 · 自我探索")
+            Text(localizationStore.string(.homeHeroSubtitle))
                 .font(AppTheme.Typography.sectionTitle)
                 .foregroundColor(AppTheme.Colors.darkGold)
         }

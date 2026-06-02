@@ -11,6 +11,8 @@ struct ProductionLocalRefiningCard: View {
     let interpretation: FortuneInterpretation
     let insight: LifeWeightInsight
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     @State private var output: TextRefiningOutput?
     @State private var isGenerating = false
     @State private var hasAttempted = false
@@ -28,15 +30,15 @@ struct ProductionLocalRefiningCard: View {
         if availability.shouldShowEntry {
             AppCard {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                    AppSectionHeader(title: "本地润色版")
+                    AppSectionHeader(title: localizationStore.string("result.localRefining.title"))
 
-                    Text("设备端生成，只做表达润色，不改变命理结论。模板结果始终保留。")
+                    Text(localizationStore.string("result.localRefining.description"))
                         .font(AppTheme.Typography.secondary)
                         .foregroundColor(AppTheme.Colors.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
 
                     if isGenerating {
-                        ProgressView("正在生成本地润色版...")
+                        ProgressView(localizationStore.string("result.localRefining.generating"))
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
                     }
@@ -48,10 +50,21 @@ struct ProductionLocalRefiningCard: View {
                             .lineSpacing(4)
                             .fixedSize(horizontal: false, vertical: true)
 
-                        infoRow(title: "状态", value: output.wasRefined ? "本地润色完成" : "已回退模板")
+                        infoRow(
+                            title: localizationStore.string("result.localRefining.status"),
+                            value: output.wasRefined
+                                ? localizationStore.string("result.localRefining.status.refined")
+                                : localizationStore.string("result.localRefining.status.fallback")
+                        )
                         infoRow(title: "engine", value: output.engine)
                         if let elapsedTime {
-                            infoRow(title: "耗时", value: String(format: "%.2f 秒", elapsedTime))
+                            infoRow(
+                                title: localizationStore.string("result.localRefining.duration"),
+                                value: localizationStore.string(
+                                    "common.duration.seconds.twoDecimals",
+                                    replacements: ["seconds": String(format: "%.2f", elapsedTime)]
+                                )
+                            )
                         }
 
                         if let safetyNotice = output.safetyNotice {
@@ -114,7 +127,7 @@ struct ProductionLocalRefiningCard: View {
             }
         } catch {
             await MainActor.run {
-                fallbackReason = "本地润色暂不可用，已保留原始模板文本。"
+                fallbackReason = localizationStore.string("result.localRefining.fallbackReason")
                 elapsedTime = Date().timeIntervalSince(start)
                 isGenerating = false
             }

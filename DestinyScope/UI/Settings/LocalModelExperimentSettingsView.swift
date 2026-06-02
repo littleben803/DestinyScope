@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct LocalModelExperimentSettingsView: View {
-    @StateObject private var settings = LocalModelExperimentSettings()
+    @EnvironmentObject private var localizationStore: LocalizationStore
 
-    private let config = LocalModelExperimentConfig.current
+    @StateObject private var settings = LocalModelExperimentSettings()
 
     private var availability: LocalModelExperimentAvailability {
         LocalModelExperimentAvailability.current(settings: settings)
@@ -20,15 +20,15 @@ struct LocalModelExperimentSettingsView: View {
         AppBackground {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-                    AppSectionHeader(title: config.featureName)
+                    AppSectionHeader(title: localizationStore.string("localModel.experiment.title"))
 
                     AppCard {
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                            Text(config.descriptionText)
+                            Text(localizationStore.string("localModel.experiment.description"))
                                 .font(AppTheme.Typography.body)
                                 .foregroundColor(AppTheme.Colors.primaryText)
 
-                            Text(config.safetyNoticeText)
+                            Text(localizationStore.string("localModel.experiment.safetyNotice"))
                                 .font(AppTheme.Typography.secondary)
                                 .foregroundColor(AppTheme.Colors.secondaryText)
                         }
@@ -39,17 +39,17 @@ struct LocalModelExperimentSettingsView: View {
                             statusRow
                             deviceTierSection
 
-                            Text("说明")
+                            Text(localizationStore.string("localModel.experiment.notesTitle"))
                                 .font(AppTheme.Typography.sectionTitle)
                                 .foregroundColor(AppTheme.Colors.primaryText)
 
-                            bullet("使用设备端本地模型对已有模板文本做表达润色。")
-                            bullet("不生成新的命理结论。")
-                            bullet("不替代称骨计算和模板规则。")
-                            bullet("不上传出生信息、命理结果、模型输入输出或历史记录。")
-                            bullet("可能较慢、耗电或失败。")
-                            bullet("失败会回退本地模板文本。")
-                            bullet("当前仅用于 Debug/TestFlight 内测。")
+                            bullet(localizationStore.string("localModel.experiment.note.0"))
+                            bullet(localizationStore.string("localModel.experiment.note.1"))
+                            bullet(localizationStore.string("localModel.experiment.note.2"))
+                            bullet(localizationStore.string("localModel.experiment.note.3"))
+                            bullet(localizationStore.string("localModel.experiment.note.4"))
+                            bullet(localizationStore.string("localModel.experiment.note.5"))
+                            bullet(localizationStore.string("localModel.experiment.note.6"))
                         }
                     }
 
@@ -66,13 +66,13 @@ struct LocalModelExperimentSettingsView: View {
                 .padding(AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle(config.featureName)
+        .navigationTitle(localizationStore.string("localModel.experiment.title"))
         .onAppear(perform: enforceAvailability)
     }
 
     private var statusRow: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-            Text("当前状态")
+            Text(localizationStore.string("localModel.experiment.currentStatus"))
                 .font(AppTheme.Typography.sectionTitle)
                 .foregroundColor(AppTheme.Colors.primaryText)
 
@@ -84,9 +84,11 @@ struct LocalModelExperimentSettingsView: View {
 
     private var statusText: String {
         if !availability.isAvailable, let reason = availability.reason {
-            return "不可用：\(reason)"
+            return localizationStore.string("localModel.experiment.unavailableWithReason", replacements: ["reason": reason])
         }
-        return settings.isExperimentEnabled ? "已开启" : "已关闭"
+        return settings.isExperimentEnabled
+            ? localizationStore.string("localModel.experiment.enabled")
+            : localizationStore.string("localModel.experiment.disabled")
     }
 
     private var statusColor: Color {
@@ -98,20 +100,24 @@ struct LocalModelExperimentSettingsView: View {
 
     private var deviceTierSection: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-            Text("设备分级")
+            Text(localizationStore.string("localModel.experiment.deviceTier"))
                 .font(AppTheme.Typography.sectionTitle)
                 .foregroundColor(AppTheme.Colors.primaryText)
 
-            infoRow(title: "设备标识", value: availability.deviceIdentifier)
-            infoRow(title: "当前分级", value: availability.deviceTier.displayName)
-            infoRow(title: "分级说明", value: availability.deviceTier.description)
+            infoRow(title: localizationStore.string("localModel.experiment.deviceIdentifier"), value: availability.deviceIdentifier)
+            infoRow(title: localizationStore.string("localModel.experiment.currentTier"), value: availability.deviceTier.displayName)
+            infoRow(title: localizationStore.string("localModel.experiment.tierDescription"), value: availability.deviceTier.description)
             infoRow(
-                title: "是否允许实验",
-                value: availability.isDeviceAllowed ? "允许" : "不允许"
+                title: localizationStore.string("localModel.experiment.isAllowed"),
+                value: availability.isDeviceAllowed
+                    ? localizationStore.string("common.allowed")
+                    : localizationStore.string("common.notAllowed")
             )
             infoRow(
-                title: "推荐超时",
-                value: availability.timeoutSeconds.map { "\(Int($0)) 秒" } ?? "不启用"
+                title: localizationStore.string("localModel.experiment.recommendedTimeout"),
+                value: availability.timeoutSeconds.map {
+                    localizationStore.string("common.duration.seconds.integer", replacements: ["seconds": "\(Int($0))"])
+                } ?? localizationStore.string("common.notEnabled")
             )
 
             Text(availability.deviceTier.userFacingNotice)
@@ -129,11 +135,11 @@ struct LocalModelExperimentSettingsView: View {
     private var unavailableCard: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                Text("不可用")
+                Text(localizationStore.string("localModel.experiment.unavailable"))
                     .font(AppTheme.Typography.sectionTitle)
                     .foregroundColor(AppTheme.Colors.primaryText)
 
-                Text(availability.reason ?? "当前构建不开放本地模型润色实验。")
+                Text(availability.reason ?? localizationStore.string("localModel.experiment.buildUnavailable"))
                     .font(AppTheme.Typography.body)
                     .foregroundColor(AppTheme.Colors.secondaryText)
             }
@@ -143,15 +149,15 @@ struct LocalModelExperimentSettingsView: View {
     private var consentCard: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                Text("开启前确认")
+                Text(localizationStore.string("localModel.experiment.consentTitle"))
                     .font(AppTheme.Typography.sectionTitle)
                     .foregroundColor(AppTheme.Colors.primaryText)
 
-                Text("我理解这是实验功能，结果仅供娱乐、自我探索和传统文化学习参考。")
+                Text(localizationStore.string("localModel.experiment.consentBody"))
                     .font(AppTheme.Typography.body)
                     .foregroundColor(AppTheme.Colors.primaryText)
 
-                AppPrimaryButton(title: "我理解这是实验功能") {
+                AppPrimaryButton(title: localizationStore.string("localModel.experiment.acceptConsent")) {
                     settings.acceptNotice()
                 }
             }
@@ -175,14 +181,14 @@ struct LocalModelExperimentSettingsView: View {
                         }
                     }
                 )) {
-                    Text("启用本地模型润色实验")
+                    Text(localizationStore.string("localModel.experiment.toggleTitle"))
                         .font(AppTheme.Typography.body)
                         .foregroundColor(AppTheme.Colors.primaryText)
                 }
                 .tint(AppTheme.Colors.cinnabar)
                 .disabled(!availability.isAvailable)
 
-                AppPrimaryButton(title: "重置实验确认") {
+                AppPrimaryButton(title: localizationStore.string("localModel.experiment.resetConsent")) {
                     settings.reset()
                 }
             }

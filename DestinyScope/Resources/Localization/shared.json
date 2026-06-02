@@ -1,0 +1,119 @@
+{
+  "strings": {
+    "app.language.system": {
+      "zh-Hans": "跟随系统",
+      "zh-Hant": "跟隨系統",
+      "en": "Follow System"
+    },
+    "app.language.zhHans": {
+      "zh-Hans": "简体中文",
+      "zh-Hant": "簡體中文",
+      "en": "Simplified Chinese"
+    },
+    "app.language.zhHant": {
+      "zh-Hans": "繁体中文",
+      "zh-Hant": "繁體中文",
+      "en": "Traditional Chinese"
+    },
+    "app.language.en": {
+      "zh-Hans": "英文",
+      "zh-Hant": "英文",
+      "en": "English"
+    },
+    "app.name": {
+      "zh-Hans": "DestinyScope",
+      "zh-Hant": "DestinyScope",
+      "en": "DestinyScope"
+    },
+    "tab.home": {
+      "zh-Hans": "首页",
+      "zh-Hant": "首頁",
+      "en": "Home"
+    },
+    "tab.knowledge": {
+      "zh-Hans": "知识库",
+      "zh-Hant": "知識庫",
+      "en": "Knowledge"
+    },
+    "tab.history": {
+      "zh-Hans": "历史",
+      "zh-Hant": "歷史",
+      "en": "History"
+    },
+    "tab.settings": {
+      "zh-Hans": "关于",
+      "zh-Hant": "關於",
+      "en": "About"
+    },
+    "common.loadFailed": {
+      "zh-Hans": "加载失败",
+      "zh-Hant": "載入失敗",
+      "en": "Load Failed"
+    },
+    "common.reload": {
+      "zh-Hans": "重新加载",
+      "zh-Hant": "重新載入",
+      "en": "Reload"
+    },
+    "common.delete": {
+      "zh-Hans": "删除",
+      "zh-Hant": "刪除",
+      "en": "Delete"
+    },
+    "common.clear": {
+      "zh-Hans": "清空",
+      "zh-Hant": "清空",
+      "en": "Clear"
+    },
+    "common.clearAll": {
+      "zh-Hans": "清空全部",
+      "zh-Hant": "清空全部",
+      "en": "Clear All"
+    },
+    "common.reset": {
+      "zh-Hans": "重置",
+      "zh-Hant": "重置",
+      "en": "Reset"
+    },
+    "common.confirmAction": {
+      "zh-Hans": "确认操作",
+      "zh-Hant": "確認操作",
+      "en": "Confirm Action"
+    },
+    "common.allowed": {
+      "zh-Hans": "允许",
+      "zh-Hant": "允許",
+      "en": "Allowed"
+    },
+    "common.notAllowed": {
+      "zh-Hans": "不允许",
+      "zh-Hant": "不允許",
+      "en": "Not Allowed"
+    },
+    "common.notEnabled": {
+      "zh-Hans": "不启用",
+      "zh-Hant": "不啟用",
+      "en": "Not Enabled"
+    },
+    "common.notRecorded": {
+      "zh-Hans": "未记录",
+      "zh-Hant": "未記錄",
+      "en": "Not Recorded"
+    },
+    "common.duration.seconds.integer": {
+      "zh-Hans": "{seconds} 秒",
+      "zh-Hant": "{seconds} 秒",
+      "en": "{seconds}s"
+    },
+    "common.duration.seconds.twoDecimals": {
+      "zh-Hans": "{seconds} 秒",
+      "zh-Hant": "{seconds} 秒",
+      "en": "{seconds}s"
+    },
+    "common.duration.seconds.threeDecimals": {
+      "zh-Hans": "{seconds} 秒",
+      "zh-Hant": "{seconds} 秒",
+      "en": "{seconds}s"
+    }
+  }
+}

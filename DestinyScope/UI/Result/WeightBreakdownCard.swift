@@ -10,6 +10,8 @@ import SwiftUI
 struct WeightBreakdownCard: View {
     let breakdown: LifeWeightBreakdown
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     private var items: [WeightItem] {
         [
             breakdown.year,
@@ -26,7 +28,7 @@ struct WeightBreakdownCard: View {
 
     var body: some View {
         AppCard {
-            AppSectionHeader(title: "权重明细")
+            AppSectionHeader(title: localizationStore.string("result.weightBreakdown.title"))
 
             LazyVGrid(columns: columns, alignment: .leading, spacing: AppTheme.Spacing.md) {
                 ForEach(items, id: \.label) { item in

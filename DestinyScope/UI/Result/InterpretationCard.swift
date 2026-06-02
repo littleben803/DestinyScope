@@ -10,22 +10,23 @@ import SwiftUI
 struct InterpretationCard: View {
     let interpretation: FortuneInterpretation
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
     @State private var expandedSections: Set<String> = ["summary", "personality"]
 
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                AppSectionHeader(title: "命理师解读")
+                AppSectionHeader(title: localizationStore.string("result.interpretation.title"))
 
-                Text("以下为本地模板生成的五类参考解读，原始命理结果保持不变。")
+                Text(localizationStore.string("result.interpretation.description"))
                     .font(AppTheme.Typography.secondary)
                     .foregroundColor(AppTheme.Colors.secondaryText)
 
-                interpretationSection(id: "summary", title: "总评", body: interpretation.summary)
-                interpretationSection(id: "personality", title: "性格", body: interpretation.personality)
-                interpretationSection(id: "career", title: "事业", body: interpretation.career)
-                interpretationSection(id: "wealth", title: "财运", body: interpretation.wealth)
-                interpretationSection(id: "relationship", title: "关系", body: interpretation.relationship)
+                interpretationSection(id: "summary", title: localizationStore.string("result.interpretation.summary"), body: interpretation.summary)
+                interpretationSection(id: "personality", title: localizationStore.string("result.interpretation.personality"), body: interpretation.personality)
+                interpretationSection(id: "career", title: localizationStore.string("result.interpretation.career"), body: interpretation.career)
+                interpretationSection(id: "wealth", title: localizationStore.string("result.interpretation.wealth"), body: interpretation.wealth)
+                interpretationSection(id: "relationship", title: localizationStore.string("result.interpretation.relationship"), body: interpretation.relationship)
 
                 Text(interpretation.safetyNotice)
                     .font(AppTheme.Typography.footnote)

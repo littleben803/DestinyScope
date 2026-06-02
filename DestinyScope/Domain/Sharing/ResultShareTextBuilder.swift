@@ -11,25 +11,26 @@ struct ResultShareTextBuilder {
     func build(
         result: LifeWeightResult,
         interpretation: FortuneInterpretation,
-        insight: LifeWeightInsight
+        insight: LifeWeightInsight,
+        localizationStore: LocalizationStore
     ) -> String {
         [
-            "DestinyScope",
+            localizationStore.string(.appName),
             "",
-            "称骨结果摘要",
-            "命格：\(result.title)",
-            "总重量：\(result.totalWeightText)",
+            localizationStore.string("result.share.text.title"),
+            localizationStore.string("result.share.text.destinyTitle", replacements: ["title": result.title]),
+            localizationStore.string("result.share.text.totalWeight", replacements: ["weight": result.totalWeightText]),
             "",
-            "命格诗文：",
+            localizationStore.string("result.share.text.poemTitle"),
             result.poem,
             "",
-            "简要解读：",
+            localizationStore.string("result.share.text.interpretationTitle"),
             interpretation.summary,
             "",
-            "行动建议：",
+            localizationStore.string("result.share.text.actionTitle"),
             insight.actionSuggestion,
             "",
-            "以上内容仅供娱乐、自我探索和传统文化学习参考。"
+            localizationStore.string("result.share.text.safety")
         ].joined(separator: "\n")
     }
 }

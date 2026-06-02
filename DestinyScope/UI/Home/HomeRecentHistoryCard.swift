@@ -8,18 +8,27 @@
 import SwiftUI
 
 struct HomeRecentHistoryCard: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     let record: HistoryRecord?
 
     var body: some View {
         AppCard {
-            AppSectionHeader(title: "最近记录")
+            AppSectionHeader(title: localizationStore.string(.homeRecentTitle))
 
             if let record {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                    Text(record.title)
-                        .font(AppTheme.Typography.body.weight(.semibold))
-                        .foregroundColor(AppTheme.Colors.primaryText)
-                        .fixedSize(horizontal: false, vertical: true)
+                    HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.sm) {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .font(AppTheme.Typography.body.weight(.semibold))
+                            .foregroundColor(AppTheme.Colors.darkGold)
+                            .accessibilityHidden(true)
+
+                        Text(record.title)
+                            .font(AppTheme.Typography.body.weight(.semibold))
+                            .foregroundColor(AppTheme.Colors.primaryText)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
 
                     Text(record.createdAtDisplayText)
                         .font(AppTheme.Typography.footnote)
@@ -29,17 +38,22 @@ struct HomeRecentHistoryCard: View {
                         .font(AppTheme.Typography.footnote)
                         .foregroundColor(AppTheme.Colors.secondaryText)
 
-                    Text("总重量：\(record.totalWeightText)")
+                    Text(
+                        localizationStore.string(
+                            .homeRecentWeight,
+                            replacements: ["weight": record.totalWeightText]
+                        )
+                    )
                         .font(AppTheme.Typography.footnote)
                         .foregroundColor(AppTheme.Colors.darkGold)
 
-                    Text("可在历史页查看、收藏、置顶或填回首页复查。")
+                    Text(localizationStore.string(.homeRecentDescription))
                         .font(AppTheme.Typography.footnote)
                         .foregroundColor(AppTheme.Colors.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             } else {
-                Text("完成一次查询后，会在本机保存轻量历史记录，方便之后回看。")
+                Text(localizationStore.string(.homeRecentEmpty))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)

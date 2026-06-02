@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppBackground {
             ScrollView {
                 VStack(spacing: AppTheme.Spacing.md) {
                     SettingsSectionCard(
-                        title: "应用信息",
-                        subtitle: "了解 DestinyScope 的定位、当前能力和本地处理原则。"
+                        title: localizationStore.string(.settingsApplicationSectionTitle),
+                        subtitle: localizationStore.string(.settingsApplicationSectionSubtitle)
                     ) {
                         settingsLink(
-                            title: "关于 DestinyScope",
-                            subtitle: "传统文化、自我探索和本地优先",
-                            accessibilityHint: "打开关于 DestinyScope 页面。"
+                            title: localizationStore.string(.settingsAboutTitle),
+                            subtitle: localizationStore.string(.settingsAboutSubtitle),
+                            systemImage: "info.circle",
+                            accessibilityHint: localizationStore.string(.settingsAboutAccessibilityHint)
                         ) {
                             AboutView()
                         }
@@ -28,22 +31,36 @@ struct SettingsView: View {
                             .background(AppTheme.Colors.divider)
 
                         settingsLink(
-                            title: "使用说明",
-                            subtitle: "查看首次使用说明、隐私和结果边界",
-                            accessibilityHint: "打开 DestinyScope 使用说明页面。"
+                            title: localizationStore.string(.settingsOnboardingTitle),
+                            subtitle: localizationStore.string(.settingsOnboardingSubtitle),
+                            systemImage: "book.closed",
+                            accessibilityHint: localizationStore.string(.settingsOnboardingAccessibilityHint)
                         ) {
                             OnboardingView(isReviewMode: true)
+                        }
+
+                        Divider()
+                            .background(AppTheme.Colors.divider)
+
+                        settingsLink(
+                            title: localizationStore.string(.settingsLanguageTitle),
+                            subtitle: languageSubtitle,
+                            systemImage: "globe",
+                            accessibilityHint: localizationStore.string(.settingsLanguageAccessibilityHint)
+                        ) {
+                            LanguageSettingsView()
                         }
                     }
 
                     SettingsSectionCard(
-                        title: "隐私与安全",
-                        subtitle: "查看数据处理边界、使用免责声明和开源许可说明。"
+                        title: localizationStore.string(.settingsPrivacySectionTitle),
+                        subtitle: localizationStore.string(.settingsPrivacySectionSubtitle)
                     ) {
                         settingsLink(
-                            title: "隐私政策",
-                            subtitle: "无账号、无服务端、出生信息不上传",
-                            accessibilityHint: "打开隐私政策页面。"
+                            title: localizationStore.string(.settingsPrivacyPolicyTitle),
+                            subtitle: localizationStore.string(.settingsPrivacyPolicySubtitle),
+                            systemImage: "lock.shield",
+                            accessibilityHint: localizationStore.string(.settingsPrivacyPolicyAccessibilityHint)
                         ) {
                             PrivacyPolicyView()
                         }
@@ -52,9 +69,10 @@ struct SettingsView: View {
                             .background(AppTheme.Colors.divider)
 
                         settingsLink(
-                            title: "免责声明",
-                            subtitle: "娱乐、自我探索和传统文化学习参考",
-                            accessibilityHint: "打开免责声明页面。"
+                            title: localizationStore.string(.settingsDisclaimerTitle),
+                            subtitle: localizationStore.string(.settingsDisclaimerSubtitle),
+                            systemImage: "exclamationmark.triangle",
+                            accessibilityHint: localizationStore.string(.settingsDisclaimerAccessibilityHint)
                         ) {
                             DisclaimerView()
                         }
@@ -63,22 +81,24 @@ struct SettingsView: View {
                             .background(AppTheme.Colors.divider)
 
                         settingsLink(
-                            title: "开源许可",
-                            subtitle: "查看本地模型和开源组件许可信息",
-                            accessibilityHint: "打开开源许可页面。"
+                            title: localizationStore.string(.settingsOpenSourceTitle),
+                            subtitle: localizationStore.string(.settingsOpenSourceSubtitle),
+                            systemImage: "doc.text",
+                            accessibilityHint: localizationStore.string(.settingsOpenSourceAccessibilityHint)
                         ) {
                             OpenSourceLicensesView()
                         }
                     }
 
                     SettingsSectionCard(
-                        title: "本地数据",
-                        subtitle: "管理仅保存在当前设备上的资料。"
+                        title: localizationStore.string(.settingsLocalDataSectionTitle),
+                        subtitle: localizationStore.string(.settingsLocalDataSectionSubtitle)
                     ) {
                         settingsLink(
-                            title: "本地数据管理",
-                            subtitle: "查看和清理保存在本机的历史、常用资料和知识库状态",
-                            accessibilityHint: "打开本地数据管理页面。"
+                            title: localizationStore.string(.settingsLocalDataManagementTitle),
+                            subtitle: localizationStore.string(.settingsLocalDataManagementSubtitle),
+                            systemImage: "folder",
+                            accessibilityHint: localizationStore.string(.settingsLocalDataManagementAccessibilityHint)
                         ) {
                             LocalDataManagementView()
                         }
@@ -87,9 +107,10 @@ struct SettingsView: View {
                             .background(AppTheme.Colors.divider)
 
                         settingsLink(
-                            title: "常用出生资料",
-                            subtitle: "管理保存在本机的出生日期和时辰",
-                            accessibilityHint: "打开常用出生资料管理页面。"
+                            title: localizationStore.string(.settingsSavedProfilesTitle),
+                            subtitle: localizationStore.string(.settingsSavedProfilesSubtitle),
+                            systemImage: "person.crop.circle",
+                            accessibilityHint: localizationStore.string(.settingsSavedProfilesAccessibilityHint)
                         ) {
                             SavedBirthProfileListView()
                         }
@@ -97,13 +118,14 @@ struct SettingsView: View {
 
                     #if DEBUG
                     SettingsSectionCard(
-                        title: "实验功能",
-                        subtitle: "仅用于 Debug 观察内置模型加载、润色和回退状态。"
+                        title: localizationStore.string(.settingsDebugSectionTitle),
+                        subtitle: localizationStore.string(.settingsDebugSectionSubtitle)
                     ) {
                         settingsLink(
-                            title: "本地模型状态与测试",
-                            subtitle: "查看内置模型后台加载、润色输出和模板回退",
-                            accessibilityHint: "打开本地模型状态与测试页面。"
+                            title: localizationStore.string(.settingsLocalModelDebugTitle),
+                            subtitle: localizationStore.string(.settingsLocalModelDebugSubtitle),
+                            systemImage: "cpu",
+                            accessibilityHint: localizationStore.string(.settingsLocalModelDebugAccessibilityHint)
                         ) {
                             LocalModelDebugView()
                         }
@@ -113,19 +135,26 @@ struct SettingsView: View {
                 .padding(AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle("设置")
+        .navigationTitle(localizationStore.string(.settingsNavigationTitle))
     }
 
     private func settingsLink<Destination: View>(
         title: String,
         subtitle: String,
+        systemImage: String,
         accessibilityHint: String,
         @ViewBuilder destination: () -> Destination
     ) -> some View {
         NavigationLink {
             destination()
         } label: {
-            HStack {
+            HStack(alignment: .top, spacing: AppTheme.Spacing.md) {
+                Image(systemName: systemImage)
+                    .font(AppTheme.Typography.sectionTitle)
+                    .foregroundColor(AppTheme.Colors.darkGold)
+                    .frame(width: 24)
+                    .accessibilityHidden(true)
+
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
                     Text(title)
                         .font(AppTheme.Typography.sectionTitle)
@@ -142,10 +171,29 @@ struct SettingsView: View {
                     .font(AppTheme.Typography.caption)
                     .foregroundColor(AppTheme.Colors.secondaryText)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(title)
         .accessibilityHint(accessibilityHint)
+    }
+
+    private var languageSubtitle: String {
+        let languageName = localizationStore.string(localizationStore.currentLanguage.displayNameID)
+
+        switch localizationStore.languagePreference {
+        case .system:
+            return localizationStore.string(
+                .settingsLanguageCurrentSystem,
+                replacements: ["language": languageName]
+            )
+        case .simplifiedChinese, .traditionalChinese, .english:
+            return localizationStore.string(
+                .settingsLanguageCurrentManual,
+                replacements: ["language": languageName]
+            )
+        }
     }
 }

@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct HistoryLocalNoticeView: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
-            AppSectionHeader(title: "本地保存")
+            AppSectionHeader(title: localizationStore.string("history.localNotice.title"))
 
-            Text("当前版本的历史记录、收藏和置顶状态仅保存在本设备。不会上传、不会同步，也不会用于在线服务。删除后无法恢复。")
+            Text(localizationStore.string("history.localNotice.body"))
                 .font(AppTheme.Typography.secondary)
                 .foregroundColor(AppTheme.Colors.secondaryText)
                 .lineSpacing(3)

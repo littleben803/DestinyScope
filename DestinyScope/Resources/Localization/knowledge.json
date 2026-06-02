@@ -1,0 +1,279 @@
+{
+  "strings": {
+    "knowledge.category.all": {
+      "zh-Hans": "全部",
+      "zh-Hant": "全部",
+      "en": "All"
+    },
+    "knowledge.category.favorite": {
+      "zh-Hans": "收藏",
+      "zh-Hant": "收藏",
+      "en": "Favorites"
+    },
+    "knowledge.category.lifeWeight": {
+      "zh-Hans": "称骨算命",
+      "zh-Hant": "稱骨算命",
+      "en": "Bone Weight"
+    },
+    "knowledge.category.lunarHour": {
+      "zh-Hans": "农历时辰",
+      "zh-Hant": "農曆時辰",
+      "en": "Lunar Hours"
+    },
+    "knowledge.category.stemsBranches": {
+      "zh-Hans": "天干地支",
+      "zh-Hant": "天干地支",
+      "en": "Stems and Branches"
+    },
+    "knowledge.category.zodiac": {
+      "zh-Hans": "生肖",
+      "zh-Hant": "生肖",
+      "en": "Zodiac"
+    },
+    "knowledge.category.fiveElements": {
+      "zh-Hans": "五行",
+      "zh-Hant": "五行",
+      "en": "Five Elements"
+    },
+    "knowledge.category.bagua": {
+      "zh-Hans": "八卦周易",
+      "zh-Hant": "八卦周易",
+      "en": "Bagua and Zhouyi"
+    },
+    "knowledge.category.meihua": {
+      "zh-Hans": "梅花易数",
+      "zh-Hant": "梅花易數",
+      "en": "Meihua Yishu"
+    },
+    "knowledge.category.boundary": {
+      "zh-Hans": "使用边界",
+      "zh-Hant": "使用邊界",
+      "en": "Usage Boundaries"
+    },
+    "knowledge.category.unknown": {
+      "zh-Hans": "知识文章",
+      "zh-Hant": "知識文章",
+      "en": "Article"
+    },
+    "knowledge.empty.noContent": {
+      "zh-Hans": "暂无知识库内容",
+      "zh-Hant": "暫無知識庫內容",
+      "en": "No knowledge content yet"
+    },
+    "knowledge.search.prompt": {
+      "zh-Hans": "搜索标题、摘要、标签",
+      "zh-Hant": "搜尋標題、摘要、標籤",
+      "en": "Search title, summary, or tags"
+    },
+    "knowledge.clearRecent.confirmTitle": {
+      "zh-Hans": "清空最近阅读？",
+      "zh-Hant": "清空最近閱讀？",
+      "en": "Clear recent reads?"
+    },
+    "knowledge.clearRecent.button": {
+      "zh-Hans": "清空最近阅读",
+      "zh-Hant": "清空最近閱讀",
+      "en": "Clear Recent"
+    },
+    "knowledge.clearRecent.message": {
+      "zh-Hans": "此操作只会清空本机保存的知识库最近阅读记录，无法恢复。",
+      "zh-Hant": "此操作只會清空本機保存的知識庫最近閱讀記錄，無法恢復。",
+      "en": "This only clears knowledge recent-read records stored on this device. It cannot be undone."
+    },
+    "knowledge.clearRecent.accessibilityHint": {
+      "zh-Hans": "清空本机保存的知识库最近阅读记录。",
+      "zh-Hant": "清空本機保存的知識庫最近閱讀記錄。",
+      "en": "Clear knowledge recent-read records stored on this device."
+    },
+    "knowledge.clearFavorites.confirmTitle": {
+      "zh-Hans": "清空收藏？",
+      "zh-Hant": "清空收藏？",
+      "en": "Clear favorites?"
+    },
+    "knowledge.clearFavorites.button": {
+      "zh-Hans": "清空收藏",
+      "zh-Hant": "清空收藏",
+      "en": "Clear Favorites"
+    },
+    "knowledge.clearFavorites.message": {
+      "zh-Hans": "此操作只会清空本机保存的知识库收藏，无法恢复。",
+      "zh-Hant": "此操作只會清空本機保存的知識庫收藏，無法恢復。",
+      "en": "This only clears knowledge favorites stored on this device. It cannot be undone."
+    },
+    "knowledge.clearFavorites.accessibilityHint": {
+      "zh-Hans": "清空本机保存的知识库收藏。",
+      "zh-Hant": "清空本機保存的知識庫收藏。",
+      "en": "Clear knowledge favorites stored on this device."
+    },
+    "knowledge.summary.myLibrary": {
+      "zh-Hans": "我的知识库",
+      "zh-Hant": "我的知識庫",
+      "en": "My Library"
+    },
+    "knowledge.summary.localNotice": {
+      "zh-Hans": "收藏和最近阅读仅保存在当前设备，不上传、不同步。",
+      "zh-Hant": "收藏與最近閱讀僅保存在目前裝置，不上傳、不同步。",
+      "en": "Favorites and recent reads are stored only on this device. They are not uploaded or synced."
+    },
+    "knowledge.summary.favoriteCount": {
+      "zh-Hans": "收藏",
+      "zh-Hant": "收藏",
+      "en": "Favorites"
+    },
+    "knowledge.summary.recentCount": {
+      "zh-Hans": "最近阅读",
+      "zh-Hant": "最近閱讀",
+      "en": "Recent"
+    },
+    "knowledge.recent.title": {
+      "zh-Hans": "最近阅读",
+      "zh-Hant": "最近閱讀",
+      "en": "Recent Reads"
+    },
+    "knowledge.recent.row.accessibilityLabel": {
+      "zh-Hans": "最近阅读 {title}",
+      "zh-Hant": "最近閱讀 {title}",
+      "en": "Recent read {title}"
+    },
+    "knowledge.recent.row.accessibilityHint": {
+      "zh-Hans": "打开这篇知识库文章。",
+      "zh-Hant": "開啟這篇知識庫文章。",
+      "en": "Open this knowledge article."
+    },
+    "knowledge.summary.allArticles": {
+      "zh-Hans": "全部文章",
+      "zh-Hant": "全部文章",
+      "en": "All Articles"
+    },
+    "knowledge.summary.favoriteArticles": {
+      "zh-Hans": "收藏文章",
+      "zh-Hant": "收藏文章",
+      "en": "Favorite Articles"
+    },
+    "knowledge.summary.categoryCount": {
+      "zh-Hans": "当前分类共 {count} 篇",
+      "zh-Hant": "目前分類共 {count} 篇",
+      "en": "{count} articles in this category"
+    },
+    "knowledge.summary.searchCount": {
+      "zh-Hans": "在当前分类中找到 {count} 篇",
+      "zh-Hant": "在目前分類中找到 {count} 篇",
+      "en": "{count} articles found in this category"
+    },
+    "knowledge.empty.favoritesTitle": {
+      "zh-Hans": "还没有收藏文章",
+      "zh-Hant": "還沒有收藏文章",
+      "en": "No Favorite Articles Yet"
+    },
+    "knowledge.empty.searchTitle": {
+      "zh-Hans": "没有找到相关知识",
+      "zh-Hant": "沒有找到相關知識",
+      "en": "No Matching Knowledge"
+    },
+    "knowledge.empty.favoritesMessage": {
+      "zh-Hans": "可以在文章详情页点收藏，收藏记录仅保存在本机。",
+      "zh-Hant": "可以在文章詳情頁點收藏，收藏記錄僅保存在本機。",
+      "en": "Favorite articles from the detail page. Favorites are stored only on this device."
+    },
+    "knowledge.empty.searchMessage": {
+      "zh-Hans": "可以换个关键词试试，或切换到“全部”分类浏览。",
+      "zh-Hant": "可以換個關鍵字試試，或切換到「全部」分類瀏覽。",
+      "en": "Try another keyword, or switch to the All category."
+    },
+    "knowledge.favorite.selected": {
+      "zh-Hans": "已收藏",
+      "zh-Hant": "已收藏",
+      "en": "Favorited"
+    },
+    "knowledge.favorite.add": {
+      "zh-Hans": "收藏",
+      "zh-Hant": "收藏",
+      "en": "Favorite"
+    },
+    "knowledge.favorite.add.accessibilityLabel": {
+      "zh-Hans": "收藏文章",
+      "zh-Hant": "收藏文章",
+      "en": "Favorite article"
+    },
+    "knowledge.favorite.add.accessibilityHint": {
+      "zh-Hans": "将这篇知识文章加入本机收藏。",
+      "zh-Hant": "將這篇知識文章加入本機收藏。",
+      "en": "Add this knowledge article to local favorites."
+    },
+    "knowledge.favorite.remove.accessibilityLabel": {
+      "zh-Hans": "取消收藏文章",
+      "zh-Hant": "取消收藏文章",
+      "en": "Remove favorite article"
+    },
+    "knowledge.favorite.remove.accessibilityHint": {
+      "zh-Hans": "从本机收藏中移除这篇知识文章。",
+      "zh-Hant": "從本機收藏中移除這篇知識文章。",
+      "en": "Remove this knowledge article from local favorites."
+    },
+    "knowledge.detail.bodyTitle": {
+      "zh-Hans": "正文",
+      "zh-Hant": "正文",
+      "en": "Body"
+    },
+    "knowledge.detail.tagsTitle": {
+      "zh-Hans": "标签",
+      "zh-Hant": "標籤",
+      "en": "Tags"
+    },
+    "knowledge.detail.sourceTitle": {
+      "zh-Hans": "来源",
+      "zh-Hant": "來源",
+      "en": "Source"
+    },
+    "knowledge.detail.sourceUnknown": {
+      "zh-Hans": "未注明",
+      "zh-Hant": "未註明",
+      "en": "Not specified"
+    },
+    "knowledge.detail.version": {
+      "zh-Hans": "版本：{version}",
+      "zh-Hant": "版本：{version}",
+      "en": "Version: {version}"
+    },
+    "knowledge.detail.recentSaveFailed": {
+      "zh-Hans": "最近阅读记录保存失败，不影响文章阅读。",
+      "zh-Hant": "最近閱讀記錄保存失敗，不影響文章閱讀。",
+      "en": "Recent-read record failed to save. This does not affect reading."
+    },
+    "knowledge.detail.favoriteAdded": {
+      "zh-Hans": "已加入本机收藏。",
+      "zh-Hant": "已加入本機收藏。",
+      "en": "Added to local favorites."
+    },
+    "knowledge.detail.favoriteRemoved": {
+      "zh-Hans": "已取消收藏。",
+      "zh-Hant": "已取消收藏。",
+      "en": "Removed from favorites."
+    },
+    "knowledge.error.loadFailed": {
+      "zh-Hans": "知识库加载失败，请稍后重试。",
+      "zh-Hant": "知識庫載入失敗，請稍後重試。",
+      "en": "Knowledge library failed to load. Please try again later."
+    },
+    "knowledge.error.stateLoadFailed": {
+      "zh-Hans": "知识库本地收藏和最近阅读状态加载失败，请稍后重试。",
+      "zh-Hant": "知識庫本地收藏與最近閱讀狀態載入失敗，請稍後重試。",
+      "en": "Knowledge favorites and recent-read state failed to load. Please try again later."
+    },
+    "knowledge.error.clearRecentFailed": {
+      "zh-Hans": "最近阅读清空失败，请稍后重试。",
+      "zh-Hant": "最近閱讀清空失敗，請稍後重試。",
+      "en": "Recent reads failed to clear. Please try again later."
+    },
+    "knowledge.error.clearFavoritesFailed": {
+      "zh-Hans": "收藏清空失败，请稍后重试。",
+      "zh-Hant": "收藏清空失敗，請稍後重試。",
+      "en": "Favorites failed to clear. Please try again later."
+    },
+    "knowledge.error.favoriteUpdateFailed": {
+      "zh-Hans": "收藏状态更新失败，请稍后重试。",
+      "zh-Hant": "收藏狀態更新失敗，請稍後重試。",
+      "en": "Favorite state failed to update. Please try again later."
+    }
+  }
+}

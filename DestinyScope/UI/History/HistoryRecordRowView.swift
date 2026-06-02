@@ -12,25 +12,40 @@ struct HistoryRecordRowView: View {
     var isFavorite = false
     var isPinned = false
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
                 if isPinned || isFavorite {
                     HStack(spacing: AppTheme.Spacing.sm) {
                         if isPinned {
-                            HistoryRecordStateBadgeView(title: "置顶", systemImageName: "pin.fill")
+                            HistoryRecordStateBadgeView(
+                                title: localizationStore.string("history.badge.pinned"),
+                                systemImageName: "pin.fill"
+                            )
                         }
 
                         if isFavorite {
-                            HistoryRecordStateBadgeView(title: "收藏", systemImageName: "star.fill")
+                            HistoryRecordStateBadgeView(
+                                title: localizationStore.string("history.badge.favorite"),
+                                systemImageName: "star.fill"
+                            )
                         }
                     }
                 }
 
-                Text(record.title)
-                    .font(AppTheme.Typography.sectionTitle)
-                    .foregroundColor(AppTheme.Colors.primaryText)
-                    .fixedSize(horizontal: false, vertical: true)
+                HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.sm) {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .font(AppTheme.Typography.sectionTitle)
+                        .foregroundColor(AppTheme.Colors.darkGold)
+                        .accessibilityHidden(true)
+
+                    Text(record.title)
+                        .font(AppTheme.Typography.sectionTitle)
+                        .foregroundColor(AppTheme.Colors.primaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
 
                 Text(record.createdAtDisplayText)
                     .font(AppTheme.Typography.caption)
@@ -45,7 +60,10 @@ struct HistoryRecordRowView: View {
                         .font(AppTheme.Typography.secondary)
                         .foregroundColor(AppTheme.Colors.secondaryText)
 
-                    Text("总重量：\(record.totalWeightText)")
+                    Text(localizationStore.string(
+                        "history.row.totalWeight",
+                        replacements: ["weight": record.totalWeightText]
+                    ))
                         .font(AppTheme.Typography.secondary.weight(.semibold))
                         .foregroundColor(AppTheme.Colors.darkGold)
                 }

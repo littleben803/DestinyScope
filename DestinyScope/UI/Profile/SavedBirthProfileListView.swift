@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SavedBirthProfileListView: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     @State private var profiles: [SavedBirthProfile] = []
     @State private var errorMessage: String?
     @State private var profilePendingDeletion: SavedBirthProfile?
@@ -21,12 +23,12 @@ struct SavedBirthProfileListView: View {
             Group {
                 if let errorMessage {
                     AppCard {
-                        AppSectionHeader(title: "加载失败")
+                        AppSectionHeader(title: localizationStore.string("common.loadFailed"))
                         Text(errorMessage)
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
 
-                        Button("重新加载") {
+                        Button(localizationStore.string("common.reload")) {
                             loadProfiles()
                         }
                         .font(AppTheme.Typography.body.weight(.semibold))
@@ -61,23 +63,23 @@ struct SavedBirthProfileListView: View {
                                                 )
                                         }
                                         .buttonStyle(.plain)
-                                        .accessibilityLabel("删除常用出生资料")
-                                        .accessibilityHint("删除这条本机常用出生资料，删除后无法恢复。")
+                                        .accessibilityLabel(localizationStore.string("profile.delete.accessibilityLabel"))
+                                        .accessibilityHint(localizationStore.string("profile.delete.accessibilityHint"))
                                     }
                                 }
 
                                 Button(role: .destructive) {
                                     isShowingDeleteAllConfirmation = true
                                 } label: {
-                                    Text("清空全部")
+                                    Text(localizationStore.string("common.clearAll"))
                                         .font(AppTheme.Typography.body)
                                         .foregroundColor(AppTheme.Colors.cinnabar)
                                         .frame(maxWidth: .infinity)
                                         .padding(.vertical, AppTheme.Spacing.md)
                                 }
                                 .buttonStyle(.plain)
-                                .accessibilityLabel("清空全部常用出生资料")
-                                .accessibilityHint("删除本机保存的全部常用出生资料。")
+                                .accessibilityLabel(localizationStore.string("profile.clearAll.accessibilityLabel"))
+                                .accessibilityHint(localizationStore.string("profile.clearAll.accessibilityHint"))
                             }
                         }
                         .padding(AppTheme.Spacing.lg)
@@ -85,37 +87,37 @@ struct SavedBirthProfileListView: View {
                 }
             }
         }
-        .navigationTitle("常用出生资料")
+        .navigationTitle(localizationStore.string(.settingsSavedProfilesTitle))
         .onAppear(perform: loadProfiles)
-        .alert("删除这条常用出生资料？", isPresented: $isShowingDeleteConfirmation) {
-            Button("删除", role: .destructive) {
+        .alert(localizationStore.string("profile.delete.confirmTitle"), isPresented: $isShowingDeleteConfirmation) {
+            Button(localizationStore.string("common.delete"), role: .destructive) {
                 if let profilePendingDeletion {
                     delete(profilePendingDeletion)
                 }
                 profilePendingDeletion = nil
             }
 
-            Button("取消", role: .cancel) {
+            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) {
                 profilePendingDeletion = nil
             }
         } message: {
-            Text("此操作只会删除本机保存的资料，无法恢复。")
+            Text(localizationStore.string("profile.delete.confirmMessage"))
         }
-        .alert("清空全部常用出生资料？", isPresented: $isShowingDeleteAllConfirmation) {
-            Button("清空", role: .destructive) {
+        .alert(localizationStore.string("profile.clearAll.confirmTitle"), isPresented: $isShowingDeleteAllConfirmation) {
+            Button(localizationStore.string("common.clear"), role: .destructive) {
                 deleteAll()
             }
 
-            Button("取消", role: .cancel) {}
+            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) {}
         } message: {
-            Text("此操作只会清空本机保存的常用出生资料，无法恢复。")
+            Text(localizationStore.string("profile.clearAll.confirmMessage"))
         }
     }
 
     private var localNotice: some View {
         AppCard {
-            AppSectionHeader(title: "本地保存")
-            Text("常用资料仅保存在当前设备，不上传、不同步，也不需要账号。你可以随时删除。")
+            AppSectionHeader(title: localizationStore.string("profile.localNotice.title"))
+            Text(localizationStore.string("profile.localNotice.body"))
                 .font(AppTheme.Typography.body)
                 .foregroundColor(AppTheme.Colors.primaryText)
                 .fixedSize(horizontal: false, vertical: true)
@@ -124,8 +126,8 @@ struct SavedBirthProfileListView: View {
 
     private var emptyState: some View {
         AppCard {
-            AppSectionHeader(title: "暂无常用出生资料")
-            Text("你可以在首页保存常用出生日期和时辰，方便下次快速填写。")
+            AppSectionHeader(title: localizationStore.string("profile.empty.title"))
+            Text(localizationStore.string("profile.empty.message"))
                 .font(AppTheme.Typography.body)
                 .foregroundColor(AppTheme.Colors.primaryText)
                 .fixedSize(horizontal: false, vertical: true)
@@ -138,7 +140,7 @@ struct SavedBirthProfileListView: View {
             errorMessage = nil
         } catch {
             profiles = []
-            errorMessage = "常用出生资料加载失败，请稍后重试。"
+            errorMessage = localizationStore.string(.homeProfileLoadFailed)
         }
     }
 
@@ -147,7 +149,7 @@ struct SavedBirthProfileListView: View {
             try store.delete(id: profile.id)
             loadProfiles()
         } catch {
-            errorMessage = "常用出生资料删除失败，请稍后重试。"
+            errorMessage = localizationStore.string("profile.error.deleteFailed")
         }
     }
 
@@ -156,7 +158,7 @@ struct SavedBirthProfileListView: View {
             try store.deleteAll()
             loadProfiles()
         } catch {
-            errorMessage = "常用出生资料清空失败，请稍后重试。"
+            errorMessage = localizationStore.string("profile.error.clearFailed")
         }
     }
 }
@@ -164,5 +166,6 @@ struct SavedBirthProfileListView: View {
 #Preview {
     NavigationStack {
         SavedBirthProfileListView()
+            .environmentObject(LocalizationStore())
     }
 }

@@ -10,6 +10,8 @@ import SwiftUI
 struct OnboardingPageCard: View {
     let page: OnboardingPage
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
@@ -18,12 +20,12 @@ struct OnboardingPageCard: View {
                     .foregroundColor(AppTheme.Colors.darkGold)
                     .accessibilityHidden(true)
 
-                Text(page.title)
+                Text(titleText)
                     .font(AppTheme.Typography.pageTitle)
                     .foregroundColor(AppTheme.Colors.primaryText)
                     .fixedSize(horizontal: false, vertical: true)
 
-                Text(page.body)
+                Text(bodyText)
                     .font(AppTheme.Typography.body)
                     .foregroundColor(AppTheme.Colors.primaryText)
                     .lineSpacing(6)
@@ -31,7 +33,14 @@ struct OnboardingPageCard: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(page.title)。\(page.body)")
+        .accessibilityLabel("\(titleText). \(bodyText)")
+    }
+
+    private var titleText: String {
+        localizationStore.string(page.titleID)
+    }
+
+    private var bodyText: String {
+        localizationStore.string(page.bodyID)
     }
 }
-

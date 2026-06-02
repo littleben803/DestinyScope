@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LocalDataManagementView: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     @State private var summary: LocalDataSummary
     @State private var pendingAction: LocalDataAction?
     @State private var message: String?
@@ -24,14 +26,14 @@ struct LocalDataManagementView: View {
             ScrollView {
                 VStack(spacing: AppTheme.Spacing.md) {
                     AppCard {
-                        AppSectionHeader(title: "本地数据管理")
+                        AppSectionHeader(title: localizationStore.string("localData.management.title"))
 
-                        Text("以下数据仅保存在当前设备，不上传、不同步。删除后无法恢复。")
+                        Text(localizationStore.string("localData.management.body"))
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
                             .fixedSize(horizontal: false, vertical: true)
 
-                        Text("清理操作不会删除内置知识库、称骨数据、模型文件或 App 资源。")
+                        Text(localizationStore.string("localData.management.footnote"))
                             .font(AppTheme.Typography.footnote)
                             .foregroundColor(AppTheme.Colors.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
@@ -49,12 +51,12 @@ struct LocalDataManagementView: View {
                     }
 
                     AppCard {
-                        AppSectionHeader(title: "清理操作")
+                        AppSectionHeader(title: localizationStore.string("localData.actions.title"))
 
                         ForEach(LocalDataAction.allCases) { action in
                             LocalDataActionRow(
-                                title: action.title,
-                                subtitle: action.subtitle,
+                                title: localizationStore.string(action.titleID),
+                                subtitle: localizationStore.string(action.subtitleID),
                                 systemImage: action.systemImage,
                                 isDestructive: action.isDestructive
                             ) {
@@ -71,10 +73,11 @@ struct LocalDataManagementView: View {
                 .padding(AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle("本地数据管理")
+        .navigationTitle(localizationStore.string("localData.management.navigationTitle"))
         .onAppear(perform: refreshSummary)
         .confirmationDialog(
-            pendingAction?.confirmationTitle ?? "确认操作",
+            pendingAction.map { localizationStore.string($0.confirmationTitleID) }
+                ?? localizationStore.string("common.confirmAction"),
             isPresented: Binding(
                 get: { pendingAction != nil },
                 set: { isPresented in
@@ -86,15 +89,15 @@ struct LocalDataManagementView: View {
             titleVisibility: .visible,
             presenting: pendingAction
         ) { action in
-            Button(action.confirmButtonTitle, role: .destructive) {
+            Button(localizationStore.string(action.confirmButtonTitleID), role: .destructive) {
                 perform(action)
             }
 
-            Button("取消", role: .cancel) {
+            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) {
                 pendingAction = nil
             }
         } message: { action in
-            Text(action.confirmationMessage)
+            Text(localizationStore.string(action.confirmationMessageID))
         }
     }
 
@@ -121,11 +124,11 @@ struct LocalDataManagementView: View {
                 try service.clearAllUserLocalData()
             }
 
-            message = action.successMessage
+            message = localizationStore.string(action.successMessageID)
             pendingAction = nil
             refreshSummary()
         } catch {
-            message = "操作失败，请稍后重试。"
+            message = localizationStore.string("localData.error.operationFailed")
             pendingAction = nil
             refreshSummary()
         }
@@ -143,41 +146,41 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
-    var title: String {
+    var titleID: L10nID {
         switch self {
         case .clearHistory:
-            return "清空历史记录"
+            return "localData.action.clearHistory.title"
         case .clearHistoryUserState:
-            return "清空历史收藏 / 置顶状态"
+            return "localData.action.clearHistoryState.title"
         case .clearSavedBirthProfiles:
-            return "清空常用出生资料"
+            return "localData.action.clearSavedProfiles.title"
         case .clearKnowledgeFavorites:
-            return "清空知识库收藏"
+            return "localData.action.clearKnowledgeFavorites.title"
         case .clearKnowledgeRecentReads:
-            return "清空知识库最近阅读"
+            return "localData.action.clearKnowledgeRecent.title"
         case .resetOnboarding:
-            return "重置首次使用说明"
+            return "localData.action.resetOnboarding.title"
         case .clearAllUserLocalData:
-            return "清空全部本地用户数据"
+            return "localData.action.clearAll.title"
         }
     }
 
-    var subtitle: String {
+    var subtitleID: L10nID {
         switch self {
         case .clearHistory:
-            return "删除本机历史记录，并同步清理对应收藏和置顶状态。"
+            return "localData.action.clearHistory.subtitle"
         case .clearHistoryUserState:
-            return "只清理历史记录的收藏和置顶标记，不删除历史记录。"
+            return "localData.action.clearHistoryState.subtitle"
         case .clearSavedBirthProfiles:
-            return "删除保存在本机的常用出生日期和时辰。"
+            return "localData.action.clearSavedProfiles.subtitle"
         case .clearKnowledgeFavorites:
-            return "只清理文章收藏状态，不删除内置知识库文章。"
+            return "localData.action.clearKnowledgeFavorites.subtitle"
         case .clearKnowledgeRecentReads:
-            return "只清理最近阅读记录，不删除内置知识库文章。"
+            return "localData.action.clearKnowledgeRecent.subtitle"
         case .resetOnboarding:
-            return "下次启动时重新展示首次使用说明，不删除其他数据。"
+            return "localData.action.resetOnboarding.subtitle"
         case .clearAllUserLocalData:
-            return "清空历史、常用资料、知识库状态和首次使用说明状态，不删除内置资源或模型文件。"
+            return "localData.action.clearAll.subtitle"
         }
     }
 
@@ -204,54 +207,54 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
         true
     }
 
-    var confirmationTitle: String {
-        title
+    var confirmationTitleID: L10nID {
+        titleID
     }
 
-    var confirmationMessage: String {
+    var confirmationMessageID: L10nID {
         switch self {
         case .clearHistory:
-            return "此操作只会删除本机历史记录，并同步清理对应收藏和置顶状态。删除后无法恢复，不影响内置知识库和称骨数据。"
+            return "localData.action.clearHistory.confirmation"
         case .clearHistoryUserState:
-            return "此操作只会删除本机历史收藏和置顶状态，不删除历史记录。删除后无法恢复。"
+            return "localData.action.clearHistoryState.confirmation"
         case .clearSavedBirthProfiles:
-            return "此操作只会删除本机常用出生资料，不影响历史记录。删除后无法恢复。"
+            return "localData.action.clearSavedProfiles.confirmation"
         case .clearKnowledgeFavorites:
-            return "此操作只会删除本机知识库收藏状态，不删除内置文章。删除后无法恢复。"
+            return "localData.action.clearKnowledgeFavorites.confirmation"
         case .clearKnowledgeRecentReads:
-            return "此操作只会删除本机知识库最近阅读记录，不删除内置文章。删除后无法恢复。"
+            return "localData.action.clearKnowledgeRecent.confirmation"
         case .resetOnboarding:
-            return "此操作只会重置本机首次使用说明状态，不删除历史、常用资料或知识库状态。"
+            return "localData.action.resetOnboarding.confirmation"
         case .clearAllUserLocalData:
-            return "此操作会清空本机历史记录、历史收藏和置顶、常用出生资料、知识库收藏、最近阅读和首次使用说明状态。不会删除内置知识库、称骨数据、模型文件或 App 资源。删除后无法恢复。"
+            return "localData.action.clearAll.confirmation"
         }
     }
 
-    var confirmButtonTitle: String {
+    var confirmButtonTitleID: L10nID {
         switch self {
         case .resetOnboarding:
-            return "重置"
+            return "common.reset"
         default:
-            return "确认清理"
+            return "localData.action.confirmClean"
         }
     }
 
-    var successMessage: String {
+    var successMessageID: L10nID {
         switch self {
         case .clearHistory:
-            return "已清空本机历史记录。"
+            return "localData.action.clearHistory.success"
         case .clearHistoryUserState:
-            return "已清空本机历史收藏和置顶状态。"
+            return "localData.action.clearHistoryState.success"
         case .clearSavedBirthProfiles:
-            return "已清空本机常用出生资料。"
+            return "localData.action.clearSavedProfiles.success"
         case .clearKnowledgeFavorites:
-            return "已清空本机知识库收藏。"
+            return "localData.action.clearKnowledgeFavorites.success"
         case .clearKnowledgeRecentReads:
-            return "已清空本机知识库最近阅读。"
+            return "localData.action.clearKnowledgeRecent.success"
         case .resetOnboarding:
-            return "已重置首次使用说明状态。"
+            return "localData.action.resetOnboarding.success"
         case .clearAllUserLocalData:
-            return "已清空本机用户数据。"
+            return "localData.action.clearAll.success"
         }
     }
 }

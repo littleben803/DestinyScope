@@ -10,6 +10,7 @@ import SwiftUI
 struct KnowledgeCategoryFilterView: View {
     let categories: [String]
     let articleCount: (String) -> Int
+    let displayTitle: (String) -> String
     @Binding var selectedCategory: String
 
     var body: some View {
@@ -19,7 +20,7 @@ struct KnowledgeCategoryFilterView: View {
                     Button {
                         selectedCategory = category
                     } label: {
-                        Text("\(category) \(articleCount(category))")
+                        Text("\(displayTitle(category)) \(articleCount(category))")
                             .font(AppTheme.Typography.footnote.weight(.semibold))
                             .foregroundColor(foregroundColor(for: category))
                             .lineLimit(1)

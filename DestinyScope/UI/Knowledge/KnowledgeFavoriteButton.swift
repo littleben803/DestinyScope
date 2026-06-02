@@ -11,11 +11,15 @@ struct KnowledgeFavoriteButton: View {
     let isFavorite: Bool
     let action: () -> Void
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         Button(action: action) {
             HStack(spacing: AppTheme.Spacing.xs) {
                 Image(systemName: isFavorite ? "star.fill" : "star")
-                Text(isFavorite ? "已收藏" : "收藏")
+                Text(isFavorite
+                     ? localizationStore.string("knowledge.favorite.selected")
+                     : localizationStore.string("knowledge.favorite.add"))
             }
             .font(AppTheme.Typography.footnote.weight(.semibold))
             .foregroundColor(isFavorite ? AppTheme.Colors.paper : AppTheme.Colors.cinnabar)
@@ -29,7 +33,15 @@ struct KnowledgeFavoriteButton: View {
             )
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(isFavorite ? "取消收藏文章" : "收藏文章")
-        .accessibilityHint(isFavorite ? "从本机收藏中移除这篇知识文章。" : "将这篇知识文章加入本机收藏。")
+        .accessibilityLabel(
+            isFavorite
+                ? localizationStore.string("knowledge.favorite.remove.accessibilityLabel")
+                : localizationStore.string("knowledge.favorite.add.accessibilityLabel")
+        )
+        .accessibilityHint(
+            isFavorite
+                ? localizationStore.string("knowledge.favorite.remove.accessibilityHint")
+                : localizationStore.string("knowledge.favorite.add.accessibilityHint")
+        )
     }
 }

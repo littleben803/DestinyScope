@@ -12,21 +12,28 @@ struct ResultTextShareCard: View {
     let interpretation: FortuneInterpretation
     let insight: LifeWeightInsight
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     @State private var hasCopied = false
 
     private let builder = ResultShareTextBuilder()
     private let clipboardWriter = ClipboardWriter()
 
     private var shareText: String {
-        builder.build(result: result, interpretation: interpretation, insight: insight)
+        builder.build(
+            result: result,
+            interpretation: interpretation,
+            insight: insight,
+            localizationStore: localizationStore
+        )
     }
 
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                AppSectionHeader(title: "复制与分享")
+                AppSectionHeader(title: localizationStore.string("result.share.title"))
 
-                Text("复制一段不含完整出生信息的结果摘要，方便自己保存或分享。分享给其他 App 是你的主动操作，DestinyScope 不会自动上传分享内容。")
+                Text(localizationStore.string("result.share.description"))
                     .font(AppTheme.Typography.body)
                     .foregroundColor(AppTheme.Colors.primaryText)
                     .fixedSize(horizontal: false, vertical: true)
@@ -38,7 +45,7 @@ struct ResultTextShareCard: View {
                     } label: {
                         HStack {
                             Image(systemName: "doc.on.doc")
-                            Text("复制摘要")
+                            Text(localizationStore.string("result.share.copy"))
                         }
                         .font(AppTheme.Typography.body.weight(.semibold))
                         .foregroundColor(.white)
@@ -48,13 +55,13 @@ struct ResultTextShareCard: View {
                         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.button, style: .continuous))
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("复制结果摘要")
-                    .accessibilityHint("将不含完整出生信息的结果摘要复制到剪贴板。")
+                    .accessibilityLabel(localizationStore.string("result.share.copy.accessibilityLabel"))
+                    .accessibilityHint(localizationStore.string("result.share.copy.accessibilityHint"))
 
                     ShareLink(item: shareText) {
                         HStack {
                             Image(systemName: "square.and.arrow.up")
-                            Text("分享摘要")
+                            Text(localizationStore.string("result.share.share"))
                         }
                         .font(AppTheme.Typography.body.weight(.semibold))
                         .foregroundColor(AppTheme.Colors.cinnabar)
@@ -64,18 +71,18 @@ struct ResultTextShareCard: View {
                         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.button, style: .continuous))
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("分享结果摘要")
-                    .accessibilityHint("打开系统分享面板，分享不含完整出生信息的纯文本摘要。")
+                    .accessibilityLabel(localizationStore.string("result.share.share.accessibilityLabel"))
+                    .accessibilityHint(localizationStore.string("result.share.share.accessibilityHint"))
                 }
 
                 if hasCopied {
-                    Text("已复制到剪贴板。")
+                    Text(localizationStore.string("result.share.copied"))
                         .font(AppTheme.Typography.footnote)
                         .foregroundColor(AppTheme.Colors.darkGold)
                         .transition(.opacity)
                 }
 
-                Text("默认摘要不包含完整出生日期、农历生日、具体出生时辰、历史记录或本地模型润色结果。")
+                Text(localizationStore.string("result.share.privacyNotice"))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)

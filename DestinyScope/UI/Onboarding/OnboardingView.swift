@@ -12,6 +12,7 @@ struct OnboardingView: View {
     let onFinish: (() -> Void)?
 
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var localizationStore: LocalizationStore
     @State private var selectedPage = 0
 
     private let pages = OnboardingPage.v1_6Pages
@@ -45,18 +46,18 @@ struct OnboardingView: View {
                     .padding(.bottom, AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle("使用说明")
+        .navigationTitle(localizationStore.string(.onboardingNavigationTitle))
         .navigationBarTitleDisplayMode(.inline)
         .interactiveDismissDisabled(!isReviewMode)
     }
 
     private var header: some View {
         VStack(spacing: AppTheme.Spacing.sm) {
-            Text("使用说明")
+            Text(localizationStore.string(.onboardingHeaderTitle))
                 .font(AppTheme.Typography.pageTitle)
                 .foregroundColor(AppTheme.Colors.primaryText)
 
-            Text("了解本地计算、隐私和结果边界")
+            Text(localizationStore.string(.onboardingHeaderSubtitle))
                 .font(AppTheme.Typography.secondary)
                 .foregroundColor(AppTheme.Colors.secondaryText)
         }
@@ -76,17 +77,17 @@ struct OnboardingView: View {
                     }
                 }
             } label: {
-                Text(isLastPage ? finishTitle : "下一步")
+                Text(isLastPage ? finishTitle : localizationStore.string(.onboardingNext))
                     .font(AppTheme.Typography.sectionTitle)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, AppTheme.Spacing.md)
                     .background(AppTheme.Colors.cinnabar)
-                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.button, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.button, style: .continuous))
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(isLastPage ? finishTitle : "下一步")
-            .accessibilityHint(isLastPage ? finishHint : "查看下一页使用说明。")
+            .accessibilityLabel(isLastPage ? finishTitle : localizationStore.string(.onboardingNext))
+            .accessibilityHint(isLastPage ? finishHint : localizationStore.string(.onboardingNextHint))
 
             if selectedPage > 0 {
                 Button {
@@ -94,15 +95,15 @@ struct OnboardingView: View {
                         selectedPage -= 1
                     }
                 } label: {
-                    Text("上一步")
+                    Text(localizationStore.string(.onboardingPrevious))
                         .font(AppTheme.Typography.body)
                         .foregroundColor(AppTheme.Colors.cinnabar)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, AppTheme.Spacing.sm)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("上一步")
-                .accessibilityHint("返回上一页使用说明。")
+                .accessibilityLabel(localizationStore.string(.onboardingPrevious))
+                .accessibilityHint(localizationStore.string(.onboardingPreviousHint))
             }
         }
     }
@@ -112,11 +113,15 @@ struct OnboardingView: View {
     }
 
     private var finishTitle: String {
-        isReviewMode ? "完成" : "开始使用"
+        isReviewMode
+            ? localizationStore.string(.onboardingDone)
+            : localizationStore.string(.onboardingStart)
     }
 
     private var finishHint: String {
-        isReviewMode ? "关闭使用说明。" : "完成使用说明并进入应用。"
+        isReviewMode
+            ? localizationStore.string(.onboardingDoneHint)
+            : localizationStore.string(.onboardingStartHint)
     }
 
     private func finish() {
@@ -130,4 +135,5 @@ struct OnboardingView: View {
 
 #Preview {
     OnboardingView(isReviewMode: true)
+        .environmentObject(LocalizationStore())
 }

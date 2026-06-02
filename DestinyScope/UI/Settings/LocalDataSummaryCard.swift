@@ -10,20 +10,49 @@ import SwiftUI
 struct LocalDataSummaryCard: View {
     let summary: LocalDataSummary
 
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     var body: some View {
         AppCard {
-            AppSectionHeader(title: "本地数据摘要")
+            AppSectionHeader(title: localizationStore.string("localData.summary.title"))
 
             VStack(spacing: AppTheme.Spacing.sm) {
-                summaryRow(title: "历史记录", value: "\(summary.historyRecordCount) 条")
-                summaryRow(title: "常用出生资料", value: "\(summary.savedBirthProfileCount) 条")
-                summaryRow(title: "知识库收藏", value: "\(summary.favoriteKnowledgeCount) 篇")
-                summaryRow(title: "知识库最近阅读", value: "\(summary.recentKnowledgeCount) 条")
-                summaryRow(title: "历史收藏", value: "\(summary.favoriteHistoryCount) 条")
-                summaryRow(title: "历史置顶", value: "\(summary.pinnedHistoryCount) 条")
-                summaryRow(title: "首次使用说明", value: summary.hasCompletedOnboarding ? "已完成" : "未完成")
+                summaryRow(
+                    title: localizationStore.string("localData.summary.history"),
+                    value: countText("localData.count.records", summary.historyRecordCount)
+                )
+                summaryRow(
+                    title: localizationStore.string("localData.summary.savedProfiles"),
+                    value: countText("localData.count.records", summary.savedBirthProfileCount)
+                )
+                summaryRow(
+                    title: localizationStore.string("localData.summary.knowledgeFavorites"),
+                    value: countText("localData.count.articles", summary.favoriteKnowledgeCount)
+                )
+                summaryRow(
+                    title: localizationStore.string("localData.summary.knowledgeRecent"),
+                    value: countText("localData.count.records", summary.recentKnowledgeCount)
+                )
+                summaryRow(
+                    title: localizationStore.string("localData.summary.historyFavorites"),
+                    value: countText("localData.count.records", summary.favoriteHistoryCount)
+                )
+                summaryRow(
+                    title: localizationStore.string("localData.summary.historyPinned"),
+                    value: countText("localData.count.records", summary.pinnedHistoryCount)
+                )
+                summaryRow(
+                    title: localizationStore.string("localData.summary.onboarding"),
+                    value: summary.hasCompletedOnboarding
+                        ? localizationStore.string("localData.summary.completed")
+                        : localizationStore.string("localData.summary.notCompleted")
+                )
             }
         }
+    }
+
+    private func countText(_ id: L10nID, _ count: Int) -> String {
+        localizationStore.string(id, replacements: ["count": "\(count)"])
     }
 
     private func summaryRow(title: String, value: String) -> some View {

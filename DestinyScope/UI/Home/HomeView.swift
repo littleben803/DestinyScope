@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var dataManager: DataManager
     @EnvironmentObject private var homeInputDraftStore: HomeInputDraftStore
+    @EnvironmentObject private var localizationStore: LocalizationStore
 
     @State private var birthDate = Date()
     @State private var selectedHour = 0
@@ -66,13 +67,11 @@ struct HomeView: View {
                     }
 
                     HomeRecentHistoryCard(record: recentHistoryRecord)
-
-                    HomeKnowledgeEntryCard()
                 }
                 .padding(AppTheme.Spacing.lg)
             }
         }
-        .navigationTitle("DestinyScope")
+        .navigationTitle(localizationStore.string(.appName))
         .navigationDestination(isPresented: $shouldShowResult) {
             if let calculation, let interpretation, let insight {
                 DestinyResultView(result: calculation, interpretation: interpretation, insight: insight)
@@ -117,7 +116,8 @@ struct HomeView: View {
             interpretation = nil
             insight = nil
             shouldShowResult = false
-            errorMessage = (error as? LocalizedError)?.errorDescription ?? "暂时无法计算，请稍后重试。"
+            errorMessage = (error as? LocalizedError)?.errorDescription
+                ?? localizationStore.string(.homeErrorCalculateFallback)
         }
     }
 
@@ -149,7 +149,7 @@ struct HomeView: View {
             savedProfiles = try savedProfileStore.load()
         } catch {
             savedProfiles = []
-            profileMessage = "常用出生资料加载失败，请稍后重试。"
+            profileMessage = localizationStore.string(.homeProfileLoadFailed)
         }
     }
 
@@ -164,7 +164,10 @@ struct HomeView: View {
     private func applySavedProfile(_ profile: SavedBirthProfile) {
         birthDate = profile.birthDate
         selectedHour = profile.hour
-        profileMessage = "已填入“\(profile.displayName)”，请确认后点击查询。"
+        profileMessage = localizationStore.string(
+            .homeProfileApplied,
+            replacements: ["name": profile.displayName]
+        )
         draftBannerMessage = nil
         errorMessage = nil
     }
@@ -177,14 +180,19 @@ struct HomeView: View {
         birthDate = draft.birthDate
         selectedHour = draft.hour
         shouldShowResult = false
-        draftBannerMessage = "已从\(draft.source)填入出生日期和时辰，请确认后点击查询。"
+        draftBannerMessage = localizationStore.string(
+            .homeProfileDraftApplied,
+            replacements: ["source": draft.source]
+        )
         profileMessage = nil
         errorMessage = nil
     }
 
     private func saveCurrentBirthProfile(displayName: String) {
         let trimmedName = displayName.trimmingCharacters(in: .whitespacesAndNewlines)
-        let finalName = trimmedName.isEmpty ? "常用资料" : String(trimmedName.prefix(20))
+        let finalName = trimmedName.isEmpty
+            ? localizationStore.string(.homeProfileDefaultName)
+            : String(trimmedName.prefix(20))
         let now = Date()
         let profile = SavedBirthProfile(
             id: UUID(),
@@ -198,9 +206,12 @@ struct HomeView: View {
         do {
             try savedProfileStore.add(profile)
             loadSavedProfiles()
-            profileMessage = "已保存“\(finalName)”，资料仅保存在本机。"
+            profileMessage = localizationStore.string(
+                .homeProfileSaved,
+                replacements: ["name": finalName]
+            )
         } catch {
-            profileMessage = "常用出生资料保存失败，请稍后重试。"
+            profileMessage = localizationStore.string(.homeProfileSaveFailed)
         }
     }
 }
@@ -210,5 +221,6 @@ struct HomeView: View {
         HomeView()
             .environmentObject(DataManager.shared)
             .environmentObject(HomeInputDraftStore())
+            .environmentObject(LocalizationStore())
     }
 }

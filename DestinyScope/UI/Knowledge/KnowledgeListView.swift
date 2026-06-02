@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct KnowledgeListView: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
     @State private var articles: [KnowledgeArticle] = []
     @State private var errorMessage: String?
     @State private var selectedCategory = KnowledgeArticleFilter.allCategory
@@ -63,7 +65,7 @@ struct KnowledgeListView: View {
             Group {
                 if let errorMessage {
                     AppCard {
-                        AppSectionHeader(title: "加载失败")
+                        AppSectionHeader(title: localizationStore.string("common.loadFailed"))
                         Text(errorMessage)
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
@@ -71,7 +73,7 @@ struct KnowledgeListView: View {
                     .padding(AppTheme.Spacing.lg)
                 } else if articles.isEmpty {
                     AppCard {
-                        Text("暂无知识库内容")
+                        Text(localizationStore.string("knowledge.empty.noContent"))
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.secondaryText)
                     }
@@ -81,23 +83,35 @@ struct KnowledgeListView: View {
                 }
             }
         }
-        .navigationTitle("知识库")
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "搜索标题、摘要、标签")
+        .navigationTitle(localizationStore.string(.tabKnowledge))
+        .searchable(
+            text: $searchText,
+            placement: .navigationBarDrawer(displayMode: .automatic),
+            prompt: Text(localizationStore.string("knowledge.search.prompt"))
+        )
         .onAppear {
             loadArticles()
             loadLibraryState()
         }
-        .confirmationDialog("清空最近阅读？", isPresented: $isShowingClearRecentConfirmation, titleVisibility: .visible) {
-            Button("清空最近阅读", role: .destructive, action: clearRecentReads)
-            Button("取消", role: .cancel) { }
+        .confirmationDialog(
+            localizationStore.string("knowledge.clearRecent.confirmTitle"),
+            isPresented: $isShowingClearRecentConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button(localizationStore.string("knowledge.clearRecent.button"), role: .destructive, action: clearRecentReads)
+            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) { }
         } message: {
-            Text("此操作只会清空本机保存的知识库最近阅读记录，无法恢复。")
+            Text(localizationStore.string("knowledge.clearRecent.message"))
         }
-        .confirmationDialog("清空收藏？", isPresented: $isShowingClearFavoritesConfirmation, titleVisibility: .visible) {
-            Button("清空收藏", role: .destructive, action: clearFavorites)
-            Button("取消", role: .cancel) { }
+        .confirmationDialog(
+            localizationStore.string("knowledge.clearFavorites.confirmTitle"),
+            isPresented: $isShowingClearFavoritesConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button(localizationStore.string("knowledge.clearFavorites.button"), role: .destructive, action: clearFavorites)
+            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) { }
         } message: {
-            Text("此操作只会清空本机保存的知识库收藏，无法恢复。")
+            Text(localizationStore.string("knowledge.clearFavorites.message"))
         }
     }
 
@@ -112,6 +126,7 @@ struct KnowledgeListView: View {
                         favoriteArticleIDs: libraryState.favoriteArticleIDs
                     )
                 },
+                displayTitle: localizedCategoryTitle,
                 selectedCategory: $selectedCategory
             )
 
@@ -167,8 +182,14 @@ struct KnowledgeListView: View {
                     .foregroundColor(AppTheme.Colors.primaryText)
 
                 Text(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-                     ? "当前分类共 \(selectedCategoryCount) 篇"
-                     : "在当前分类中找到 \(filteredArticles.count) 篇")
+                     ? localizationStore.string(
+                        "knowledge.summary.categoryCount",
+                        replacements: ["count": "\(selectedCategoryCount)"]
+                     )
+                     : localizationStore.string(
+                        "knowledge.summary.searchCount",
+                        replacements: ["count": "\(filteredArticles.count)"]
+                     ))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
             }
@@ -190,28 +211,41 @@ struct KnowledgeListView: View {
 
     private var summaryTitle: String {
         if selectedCategory == KnowledgeArticleFilter.allCategory {
-            return "全部文章"
+            return localizationStore.string("knowledge.summary.allArticles")
         }
         if selectedCategory == KnowledgeArticleFilter.favoriteCategory {
-            return "收藏文章"
+            return localizationStore.string("knowledge.summary.favoriteArticles")
         }
-        return selectedCategory
+        return localizedCategoryTitle(selectedCategory)
     }
 
     private var emptyStateTitle: String {
         if selectedCategory == KnowledgeArticleFilter.favoriteCategory,
            searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return "还没有收藏文章"
+            return localizationStore.string("knowledge.empty.favoritesTitle")
         }
-        return "没有找到相关知识"
+        return localizationStore.string("knowledge.empty.searchTitle")
     }
 
     private var emptyStateMessage: String {
         if selectedCategory == KnowledgeArticleFilter.favoriteCategory,
            searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return "可以在文章详情页点收藏，收藏记录仅保存在本机。"
+            return localizationStore.string("knowledge.empty.favoritesMessage")
         }
-        return "可以换个关键词试试，或切换到“全部”分类浏览。"
+        return localizationStore.string("knowledge.empty.searchMessage")
+    }
+
+    private func localizedCategoryTitle(_ category: String) -> String {
+        if category == KnowledgeArticleFilter.allCategory {
+            return localizationStore.string("knowledge.category.all")
+        }
+        if category == KnowledgeArticleFilter.favoriteCategory {
+            return localizationStore.string("knowledge.category.favorite")
+        }
+        if let article = articles.first(where: { $0.category == category }) {
+            return localizationStore.string(KnowledgeArticleLocalization.categoryKind(for: article).titleID)
+        }
+        return category
     }
 
     private func loadArticles() {
@@ -223,7 +257,8 @@ struct KnowledgeListView: View {
             errorMessage = nil
         } catch {
             articles = []
-            errorMessage = (error as? LocalizedError)?.errorDescription ?? "知识库加载失败，请稍后重试。"
+            errorMessage = (error as? LocalizedError)?.errorDescription
+                ?? localizationStore.string("knowledge.error.loadFailed")
         }
     }
 
@@ -233,7 +268,7 @@ struct KnowledgeListView: View {
             libraryStateMessage = nil
         } catch {
             libraryState = .empty
-            libraryStateMessage = "知识库本地收藏和最近阅读状态加载失败，请稍后重试。"
+            libraryStateMessage = localizationStore.string("knowledge.error.stateLoadFailed")
         }
     }
 
@@ -242,7 +277,7 @@ struct KnowledgeListView: View {
             try libraryStateStore.clearRecentReads()
             loadLibraryState()
         } catch {
-            libraryStateMessage = "最近阅读清空失败，请稍后重试。"
+            libraryStateMessage = localizationStore.string("knowledge.error.clearRecentFailed")
         }
     }
 
@@ -254,7 +289,7 @@ struct KnowledgeListView: View {
                 selectedCategory = KnowledgeArticleFilter.allCategory
             }
         } catch {
-            libraryStateMessage = "收藏清空失败，请稍后重试。"
+            libraryStateMessage = localizationStore.string("knowledge.error.clearFavoritesFailed")
         }
     }
 }

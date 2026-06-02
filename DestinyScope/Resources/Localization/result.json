@@ -1,0 +1,254 @@
+{
+  "strings": {
+    "result.navigation.title": {
+      "zh-Hans": "命理结果",
+      "zh-Hant": "命理結果",
+      "en": "Result"
+    },
+    "result.safety.short": {
+      "zh-Hans": "结果仅供娱乐、自我探索和传统文化学习参考。",
+      "zh-Hant": "結果僅供娛樂、自我探索與傳統文化學習參考。",
+      "en": "Results are for entertainment, self-reflection, and traditional culture learning only."
+    },
+    "result.poem.title": {
+      "zh-Hans": "称骨诗文",
+      "zh-Hant": "稱骨詩文",
+      "en": "Bone Weight Poem"
+    },
+    "result.summary.lunarBirthday": {
+      "zh-Hans": "农历生日",
+      "zh-Hant": "農曆生日",
+      "en": "Lunar Birth Date"
+    },
+    "result.summary.birthHour": {
+      "zh-Hans": "出生时辰",
+      "zh-Hant": "出生時辰",
+      "en": "Birth Hour"
+    },
+    "result.summary.totalWeight": {
+      "zh-Hans": "总重量",
+      "zh-Hant": "總重量",
+      "en": "Total Weight"
+    },
+    "result.weightBreakdown.title": {
+      "zh-Hans": "权重明细",
+      "zh-Hant": "權重明細",
+      "en": "Weight Breakdown"
+    },
+    "result.insight.title": {
+      "zh-Hans": "命格洞察",
+      "zh-Hant": "命格洞察",
+      "en": "Insights"
+    },
+    "result.insight.strengths": {
+      "zh-Hans": "优势倾向",
+      "zh-Hant": "優勢傾向",
+      "en": "Strengths"
+    },
+    "result.insight.cautions": {
+      "zh-Hans": "需要关注",
+      "zh-Hant": "需要關注",
+      "en": "Watch Points"
+    },
+    "result.insight.actionSuggestion": {
+      "zh-Hans": "行动建议",
+      "zh-Hant": "行動建議",
+      "en": "Action Suggestion"
+    },
+    "result.interpretation.title": {
+      "zh-Hans": "命理师解读",
+      "zh-Hant": "命理師解讀",
+      "en": "Interpretation"
+    },
+    "result.interpretation.description": {
+      "zh-Hans": "以下为本地模板生成的五类参考解读，原始命理结果保持不变。",
+      "zh-Hant": "以下為本地模板產生的五類參考解讀，原始命理結果保持不變。",
+      "en": "The following five reference interpretations are generated from local templates. The original result remains unchanged."
+    },
+    "result.interpretation.summary": {
+      "zh-Hans": "总评",
+      "zh-Hant": "總評",
+      "en": "Summary"
+    },
+    "result.interpretation.personality": {
+      "zh-Hans": "性格",
+      "zh-Hant": "性格",
+      "en": "Personality"
+    },
+    "result.interpretation.career": {
+      "zh-Hans": "事业",
+      "zh-Hant": "事業",
+      "en": "Career"
+    },
+    "result.interpretation.wealth": {
+      "zh-Hans": "财运",
+      "zh-Hant": "財運",
+      "en": "Wealth"
+    },
+    "result.interpretation.relationship": {
+      "zh-Hans": "关系",
+      "zh-Hant": "關係",
+      "en": "Relationships"
+    },
+    "result.question.title": {
+      "zh-Hans": "命理问答",
+      "zh-Hant": "命理問答",
+      "en": "Q&A"
+    },
+    "result.question.description": {
+      "zh-Hans": "选择一个预设问题，基于本次结果生成本地模板回答。",
+      "zh-Hant": "選擇一個預設問題，基於本次結果產生本地模板回答。",
+      "en": "Choose a preset question to generate a local template answer from this result."
+    },
+    "result.question.career": {
+      "zh-Hans": "我适合什么职业？",
+      "zh-Hant": "我適合什麼職業？",
+      "en": "What kind of career suits me?"
+    },
+    "result.question.wealth": {
+      "zh-Hans": "我的财运特点是什么？",
+      "zh-Hant": "我的財運特點是什麼？",
+      "en": "What are my wealth tendencies?"
+    },
+    "result.question.personality": {
+      "zh-Hans": "我的性格倾向是什么？",
+      "zh-Hant": "我的性格傾向是什麼？",
+      "en": "What are my personality tendencies?"
+    },
+    "result.question.relationship": {
+      "zh-Hans": "关系中需要注意什么？",
+      "zh-Hant": "關係中需要注意什麼？",
+      "en": "What should I watch in relationships?"
+    },
+    "result.question.dailyAdvice": {
+      "zh-Hans": "今天给我一句建议",
+      "zh-Hant": "今天給我一句建議",
+      "en": "Give me one suggestion for today"
+    },
+    "result.share.title": {
+      "zh-Hans": "复制与分享",
+      "zh-Hant": "複製與分享",
+      "en": "Copy and Share"
+    },
+    "result.share.description": {
+      "zh-Hans": "复制一段不含完整出生信息的结果摘要，方便自己保存或分享。分享给其他 App 是你的主动操作，DestinyScope 不会自动上传分享内容。",
+      "zh-Hant": "複製一段不含完整出生資訊的結果摘要，方便自己保存或分享。分享給其他 App 是你的主動操作，DestinyScope 不會自動上傳分享內容。",
+      "en": "Copy a result summary without full birth information for saving or sharing. Sharing to another app is your action; DestinyScope does not upload shared content automatically."
+    },
+    "result.share.copy": {
+      "zh-Hans": "复制摘要",
+      "zh-Hant": "複製摘要",
+      "en": "Copy Summary"
+    },
+    "result.share.copy.accessibilityLabel": {
+      "zh-Hans": "复制结果摘要",
+      "zh-Hant": "複製結果摘要",
+      "en": "Copy result summary"
+    },
+    "result.share.copy.accessibilityHint": {
+      "zh-Hans": "将不含完整出生信息的结果摘要复制到剪贴板。",
+      "zh-Hant": "將不含完整出生資訊的結果摘要複製到剪貼簿。",
+      "en": "Copy a result summary without full birth information to the clipboard."
+    },
+    "result.share.share": {
+      "zh-Hans": "分享摘要",
+      "zh-Hant": "分享摘要",
+      "en": "Share Summary"
+    },
+    "result.share.share.accessibilityLabel": {
+      "zh-Hans": "分享结果摘要",
+      "zh-Hant": "分享結果摘要",
+      "en": "Share result summary"
+    },
+    "result.share.share.accessibilityHint": {
+      "zh-Hans": "打开系统分享面板，分享不含完整出生信息的纯文本摘要。",
+      "zh-Hant": "開啟系統分享面板，分享不含完整出生資訊的純文字摘要。",
+      "en": "Open the system share sheet to share a plain-text summary without full birth information."
+    },
+    "result.share.copied": {
+      "zh-Hans": "已复制到剪贴板。",
+      "zh-Hant": "已複製到剪貼簿。",
+      "en": "Copied to clipboard."
+    },
+    "result.share.privacyNotice": {
+      "zh-Hans": "默认摘要不包含完整出生日期、农历生日、具体出生时辰、历史记录或本地模型润色结果。",
+      "zh-Hant": "預設摘要不包含完整出生日期、農曆生日、具體出生時辰、歷史記錄或本地模型潤色結果。",
+      "en": "By default, the summary excludes full birth date, lunar birth date, exact birth hour, history records, and local model refined output."
+    },
+    "result.share.text.title": {
+      "zh-Hans": "称骨结果摘要",
+      "zh-Hant": "稱骨結果摘要",
+      "en": "Bone Weight Result Summary"
+    },
+    "result.share.text.destinyTitle": {
+      "zh-Hans": "命格：{title}",
+      "zh-Hant": "命格：{title}",
+      "en": "Title: {title}"
+    },
+    "result.share.text.totalWeight": {
+      "zh-Hans": "总重量：{weight}",
+      "zh-Hant": "總重量：{weight}",
+      "en": "Total weight: {weight}"
+    },
+    "result.share.text.poemTitle": {
+      "zh-Hans": "命格诗文：",
+      "zh-Hant": "命格詩文：",
+      "en": "Poem:"
+    },
+    "result.share.text.interpretationTitle": {
+      "zh-Hans": "简要解读：",
+      "zh-Hant": "簡要解讀：",
+      "en": "Brief interpretation:"
+    },
+    "result.share.text.actionTitle": {
+      "zh-Hans": "行动建议：",
+      "zh-Hant": "行動建議：",
+      "en": "Action suggestion:"
+    },
+    "result.share.text.safety": {
+      "zh-Hans": "以上内容仅供娱乐、自我探索和传统文化学习参考。",
+      "zh-Hant": "以上內容僅供娛樂、自我探索與傳統文化學習參考。",
+      "en": "This content is for entertainment, self-reflection, and traditional culture learning only."
+    },
+    "result.localRefining.title": {
+      "zh-Hans": "本地润色版",
+      "zh-Hant": "本地潤色版",
+      "en": "Local Refined Version"
+    },
+    "result.localRefining.description": {
+      "zh-Hans": "设备端生成，只做表达润色，不改变命理结论。模板结果始终保留。",
+      "zh-Hant": "裝置端產生，只做表達潤色，不改變命理結論。模板結果始終保留。",
+      "en": "Generated on device for wording refinement only. It does not change conclusions, and the template result is always kept."
+    },
+    "result.localRefining.generating": {
+      "zh-Hans": "正在生成本地润色版...",
+      "zh-Hant": "正在產生本地潤色版...",
+      "en": "Generating local refined version..."
+    },
+    "result.localRefining.status": {
+      "zh-Hans": "状态",
+      "zh-Hant": "狀態",
+      "en": "Status"
+    },
+    "result.localRefining.status.refined": {
+      "zh-Hans": "本地润色完成",
+      "zh-Hant": "本地潤色完成",
+      "en": "Local refinement complete"
+    },
+    "result.localRefining.status.fallback": {
+      "zh-Hans": "已回退模板",
+      "zh-Hant": "已回退模板",
+      "en": "Fell back to template"
+    },
+    "result.localRefining.duration": {
+      "zh-Hans": "耗时",
+      "zh-Hant": "耗時",
+      "en": "Duration"
+    },
+    "result.localRefining.fallbackReason": {
+      "zh-Hans": "本地润色暂不可用，已保留原始模板文本。",
+      "zh-Hant": "本地潤色暫不可用，已保留原始模板文字。",
+      "en": "Local refinement is unavailable. The original template text was kept."
+    }
+  }
+}
