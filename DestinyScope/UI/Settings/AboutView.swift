@@ -21,7 +21,7 @@ struct AboutView: View {
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
 
-                        Text("当前正式能力基于本地传统命理数据和本地模板生成结果，出生信息仅在设备端处理。")
+                        Text("当前能力基于本地传统命理数据、本地模板和设备端文本润色生成结果，出生信息仅在设备端处理。")
                             .font(AppTheme.Typography.secondary)
                             .foregroundColor(AppTheme.Colors.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
@@ -34,7 +34,7 @@ struct AboutView: View {
                             bullet("出生日期和时辰仅用于设备端本地计算。")
                             bullet("称骨结果、命格洞察、命理问答和知识库均可离线使用。")
                             bullet("历史记录仅保存在本设备，可在历史页删除。")
-                            bullet("本地模型润色实验仅用于对已有模板文本做表达润色，不生成新的命理结论。")
+                            bullet("本地模型润色仅用于对已有模板文本做表达润色，不生成新的命理结论。")
                         }
                     }
 
@@ -83,7 +83,7 @@ struct AboutView: View {
 
                         legalLink(
                             title: "开源许可",
-                            subtitle: "本地模型实验相关许可与 notice 草案",
+                            subtitle: "查看本地模型和开源组件许可信息",
                             accessibilityHint: "打开开源许可页面。"
                         ) {
                             OpenSourceLicensesView()

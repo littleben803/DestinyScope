@@ -635,3 +635,65 @@ V1.8 阶段 2 生产候选本地 AI 接入状态：
 - App 内隐私政策、开源许可说明和 GitHub Pages 隐私页已补充生产候选本地模型说明。
 - Debug / Release build 均通过。
 - 当前仍未上传 App Store；正式上架前必须复核 license / notice、Archive 体积、隐私页面、Review Notes 和 App Store 元数据。
+
+V1.8 阶段 3 生产候选自测与上线风险收口：
+
+- 已新增 `docs/V1_8_ProductionCandidateTestReport.md`。
+- 已新增 `docs/V1_8_ReleaseRiskDecision.md`。
+- 决策结论：Production Candidate: Conditional Go。
+- Debug build：通过。
+- Release build：通过。
+- `git lfs ls-files` 已列出指定 GGUF 和 `llama.xcframework` 内容。
+- GGUF 文件大小：`491400032 bytes`，约 `469 MiB`。
+- GGUF sha256：`74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db`。
+- Release Simulator `.app` 产物约 `502M`。
+- Release `.app` 中包含 `qwen2.5-0.5b-instruct-q4_k_m.gguf`，位置被 Xcode 扁平化到 bundle 根目录；当前 resolver 会优先查 bundle 根目录。
+- Release `.app` 中包含 `Frameworks/llama.framework/llama`。
+- `otool -L` 确认主 binary 依赖 `@rpath/llama.framework/llama`。
+- 未发现旧 Debug-only `Embed llama.xcframework` run script phase 残留。
+- `makeDefaultRefiner()` 当前返回 `AutoLocalTextRefiner()`。
+- App 启动后延迟后台 preload 本地模型；若用户过快进入结果页，可能先回退模板，这是体验风险但不阻断主流程。
+- Swift 源码未发现新增网络、在线 AI、StoreKit、CloudKit、追踪或敏感权限。
+- 高风险词命中集中于安全规则、测试样例、禁止事项和历史报告，不属于用户可见营销文案。
+- 当前仍不是 App Store Go。
+- App Store 前必须完成真机生产包复测、Archive / IPA / 分发体积记录、Review Notes 和元数据复核。License / notice 已由用户人工确认完成。
+
+V1.8 阶段 5 上线前材料修复状态：
+
+- 已新增 `DestinyScope/Resources/PrivacyInfo.xcprivacy`。
+- `PrivacyInfo.xcprivacy` 声明 `NSPrivacyAccessedAPICategoryUserDefaults` / `CA92.1`。
+- `PrivacyInfo.xcprivacy` 声明 `NSPrivacyAccessedAPICategoryFileTimestamp` / `C617.1`。
+- `PrivacyInfo.xcprivacy` 声明不收集数据、不追踪、无 tracking domains。
+- 已更新 `docs/AppStoreMetadata.md` 和 `docs/V1_8_AppStoreConnectDraft.md`。
+- 已更新 `docs/AppReviewNotes.md` 和 `docs/V1_8_AppReviewNotesFinalDraft.md`，不再保留“does not run a real local LLM”的旧表述。
+- 已新增 `docs/V1_8_PrivacyNutritionLabelDraft.md`，建议 App Store Connect 选择 Data Not Collected。
+- 已更新 App 内 Privacy Policy / Disclaimer / Open Source Licenses 文案。
+- 已更新 GitHub Pages 隐私 Markdown / HTML。
+- 已更新截图计划，明确本地润色截图只能展示真实页面，不伪造模型能力。
+- 已新增 `docs/V1_8_LicenseNoticeFinalChecklist.md`。
+- App Store 前仍需人工确认 GitHub Pages URL 可公开访问、Archive 包体、素材授权、截图尺寸和 App Store Connect 最终填写。License / notice blocker：none。
+
+V1.8 阶段 7 License / Notice 人工复核与分发硬化状态：
+
+- 已创建 `docs/legal_evidence/` 证据目录。
+- 已保存 Qwen base model README / LICENSE / HF API metadata。
+- 已保存 Qwen GGUF README / LICENSE / HF API metadata。
+- 已保存 llama.cpp README / LICENSE。
+- 已新增 `docs/legal_evidence/LOCAL_MODEL_DISTRIBUTION_RECORD.md`。
+- 已新增 `docs/V1_8_LicenseNoticeHumanReview.md`。
+- 已新增 `docs/V1_8_DistributionHardeningReport.md`。
+- 未下载任何模型大文件到 `docs/legal_evidence`。
+- License / notice 当前结论：Qwen / GGUF / llama.cpp license human review completed；OpenSource license page completed；License blocker：none。
+- 当前签名仍为 Apple Development；Distribution signing 未完成。
+- IPA export 未完成。
+- App Store Connect upload 未开始。
+- App Store Connect 前仍需完成 Distribution signing、IPA export、最终元数据和截图检查。
+
+V1.8 阶段 8 用户可见文案清理状态：
+
+- 已新增 `docs/V1_8_UserFacingCopyCleanupReport.md`。
+- App 内 About / Settings / Open Source Licenses / Privacy Policy 的上线前内部状态文案已清理。
+- Open Source Licenses 页面不再展示复核状态或分发状态，改为展示 License、来源、用途、Copyright / Notice 和说明。
+- GitHub Pages 隐私页、App Store metadata、Review Notes 和 Screenshot Plan 已同步正式 V1.8 口径。
+- Release 用户可见页面不应出现草案、待确认、Risk、Blocker、生产候选等内部状态词。
+- App Store 前仍需完成 Distribution signing、IPA export、最终隐私 URL、截图和 App Store Connect 字段复核。

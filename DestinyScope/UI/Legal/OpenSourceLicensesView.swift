@@ -14,24 +14,56 @@ struct OpenSourceLicensesView: View {
             name: "llama.cpp",
             sourceURLs: ["https://github.com/ggml-org/llama.cpp"],
             license: "MIT License",
-            description: "用于本地模型推理支持。V1.8 起作为生产候选依赖接入时，需要保留 license / notice，并在发布前完成最终人工复核。"
+            sha256: nil,
+            usageDescription: "用于在设备端运行本地 GGUF 模型。",
+            copyrightText: "Copyright notices and license terms are provided by the llama.cpp project.",
+            noticeText: "DestinyScope 使用 llama.cpp 支持设备端本地文本润色，不接入服务端或模型下载。"
         ),
         OpenSourceLicenseItem(
             id: "ggml-gguf",
             name: "ggml / GGUF",
             sourceURLs: ["llama.cpp 项目相关组件"],
             license: "以 llama.cpp 仓库 LICENSE 为准",
-            description: "用于本地 GGUF 模型推理支持。若额外引入独立组件或二进制产物，需要逐项补充许可说明。"
+            sha256: nil,
+            usageDescription: "用于本地模型推理和 GGUF 模型格式支持。",
+            copyrightText: "Related copyright notices follow the llama.cpp and ggml project materials.",
+            noticeText: "GGUF 格式用于在设备端读取和运行 App 内置本地模型文件。"
         ),
         OpenSourceLicenseItem(
-            id: "qwen25-05b",
-            name: "Qwen2.5-0.5B-Instruct / GGUF",
+            id: "qwen25-05b-base",
+            name: "Qwen2.5-0.5B-Instruct",
             sourceURLs: [
-                "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+                "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct"
+            ],
+            license: "Apache License 2.0",
+            sha256: nil,
+            usageDescription: "用于设备端本地文本润色能力。模型仅用于对已有模板文本做表达润色，不生成新的命理结论。",
+            copyrightText: "Copyright notices and license terms are provided by the Qwen model repository.",
+            noticeText: "DestinyScope 不以该模型生成新的命理结论，不改变称骨计算结果。"
+        ),
+        OpenSourceLicenseItem(
+            id: "qwen25-05b-gguf-repo",
+            name: "Qwen2.5-0.5B-Instruct-GGUF",
+            sourceURLs: [
                 "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF"
             ],
-            license: "Apache 2.0，最终以模型仓库为准",
-            description: "V1.8 作为内置本地模型生产候选。进入 TestFlight 或 App Store 分发前仍需人工确认具体文件来源、LICENSE / NOTICE、商业使用、再分发和 App 内分发条件。"
+            license: "Apache License 2.0",
+            sha256: nil,
+            usageDescription: "作为 App 内置 GGUF 格式本地模型文件的来源说明。",
+            copyrightText: "Copyright notices and license terms are provided by the Qwen GGUF model repository.",
+            noticeText: "该 GGUF 模型文件用于设备端文本润色。"
+        ),
+        OpenSourceLicenseItem(
+            id: "qwen25-05b-q4-k-m",
+            name: "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+            sourceURLs: [
+                "DestinyScope/Resources/Models/qwen2.5-0.5b-instruct-q4_k_m.gguf"
+            ],
+            license: "Apache License 2.0",
+            sha256: "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+            usageDescription: "App 内置的 GGUF 格式本地模型文件，用于设备端文本润色。",
+            copyrightText: "Copyright notices and license terms follow the Qwen2.5-0.5B-Instruct and Qwen GGUF model repositories.",
+            noticeText: "模型仅在设备端读取；失败或不可用时，App 会回退到本地模板文本。"
         )
     ]
 
@@ -41,11 +73,11 @@ struct OpenSourceLicensesView: View {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
                     LegalSummaryCard(
                         title: "开源许可",
-                        bodyText: "本页面用于记录 DestinyScope 本地模型相关的开源许可草案，不构成法律意见。",
+                        bodyText: "DestinyScope 使用以下开源项目和模型组件。相关许可信息在本页面列出。",
                         highlights: [
                             "本地模型只用于设备端文本表达润色。",
-                            "如果 App 正式包含模型或框架，会继续补充对应 license / notice。",
-                            "进入分发前仍需人工复核具体来源、许可、署名和再分发条件。"
+                            "本地润色不生成新的命理结论。",
+                            "模型输入和输出不上传。"
                         ]
                     )
 
@@ -56,14 +88,19 @@ struct OpenSourceLicensesView: View {
                             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
                                 LegalInfoRow(title: "License", value: item.license)
                                 LegalInfoRow(title: "来源", value: item.sourceDisplayText, allowsSelection: true)
-                                LegalInfoRow(title: "说明", value: item.description)
+                                LegalInfoRow(title: "用途", value: item.usageDescription)
+                                if let sha256 = item.sha256 {
+                                    LegalInfoRow(title: "SHA-256", value: sha256, allowsSelection: true)
+                                }
+                                LegalInfoRow(title: "Copyright / Notice", value: item.copyrightText)
+                                LegalInfoRow(title: "说明", value: item.noticeText)
                             }
                         }
                     }
 
                     LegalSectionCard(
-                        title: "后续要求",
-                        bodyText: "如果 App 正式包含模型或框架，需要继续补充相应 license / notice，并在发布前人工复核来源、许可、署名、再分发和 App 内分发条件。"
+                        title: "补充说明",
+                        bodyText: "本页面列出当前版本使用的开源组件和模型组件。后续如果更换模型、框架、量化文件或新增二进制组件，许可信息会随版本更新。"
                     )
                 }
                 .padding(AppTheme.Spacing.lg)

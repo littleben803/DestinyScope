@@ -12,7 +12,10 @@ struct OpenSourceLicenseItem: Identifiable, Equatable {
     let name: String
     let sourceURLs: [String]
     let license: String
-    let description: String
+    let sha256: String?
+    let usageDescription: String
+    let copyrightText: String
+    let noticeText: String
 }
 
 extension OpenSourceLicenseItem {

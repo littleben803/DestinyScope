@@ -156,7 +156,20 @@
 
 - `feat: surface local refined result and focus home query`
 
-## V1.8 阶段 4：生产候选自测与上线风险决策
+## V1.8 阶段 3B：生产候选自测与上线风险决策
+
+状态：
+
+- 已完成生产候选自测与上线风险收口。
+- 已新增 `docs/V1_8_ProductionCandidateTestReport.md`。
+- 已新增 `docs/V1_8_ReleaseRiskDecision.md`。
+- 本阶段只修改 docs。
+- 未修改 Swift 代码、Xcode 工程配置、资源文件、模型文件、CSV、JSON、签名配置、Bundle ID、Version 或 Build。
+- Debug build：通过。
+- Release build：通过。
+- 决策结论：Production Candidate: Conditional Go。
+- 当前仍不得上传 App Store。
+- 当前仍不建议上传 TestFlight，除非用户下一步明确要求并重新执行 TestFlight readiness。
 
 目标：
 
@@ -180,15 +193,122 @@
 
 验收标准：
 
-- Debug / Release build 通过。
-- App size 风险记录。
-- license / notice 状态记录。
-- iPhone 17 Pro Max 和 iPhone 12 mini 行为符合设备评分预期。
-- 模拟器默认启用符合预期。
-- 低电量 / 过热 / 超时 / 安全失败回退符合预期。
-- 首页第一屏验收通过。
-- 下一步 Go / No-Go 清晰。
+- Debug / Release build 通过：已通过。
+- App size 风险记录：已记录 Release Simulator `.app` 约 `502M`，仍需真实 Archive / IPA / App Store 分发体积。
+- license / notice 状态记录：已记录仍需人工最终复核。
+- iPhone 17 Pro Max 和 iPhone 12 mini 行为符合设备评分预期：代码策略符合预期，但真机生产包待复测。
+- 模拟器默认启用符合预期：设备评分策略符合预期，Release 产物包含模型和 framework；模拟器 UI 运行待复测。
+- 低电量 / 过热 / 超时 / 安全失败回退符合预期：代码路径符合预期，真机状态待复测。
+- 首页第一屏验收通过：代码结构符合目标，仍需小屏 / 高端真机人工复测。
+- 下一步 Go / No-Go 清晰：Conditional Go，进入真机生产包复测。
 
 建议 commit message：
 
 - `docs: add v1.8 production candidate decision`
+
+## V1.8 阶段 4：真机生产包复测与上线前材料修复
+
+目标：
+
+- 在真机生产构建中复测内置模型、framework、设备评分和 fallback。
+- 记录高端设备与低端设备的实际行为。
+- 复核 license / notice、App size、隐私 URL、Review Notes、截图和 App Store 元数据。
+- 决定是否进入 TestFlight readiness 或继续修复。
+
+允许修改范围：
+
+- 真机复测记录。
+- release readiness 报告。
+- checklist。
+- 隐私、开源许可、Review Notes、元数据文档。
+- 明确阻断 bug 的最小修复。
+
+不允许做的事：
+
+- 不上传 TestFlight，除非用户明确要求。
+- 不上传 App Store。
+- 不创建 App Store Connect 记录。
+- 不修改签名、Bundle ID、Version / Build，除非用户明确要求。
+- 不接服务端、在线 AI、模型下载、RAG、开放聊天、流式 UI 或付费订阅。
+
+验收标准：
+
+- iPhone 17 Pro Max 生产内置模型加载、润色和 fallback 记录完整。
+- iPhone 12 mini 生产内置模型默认禁用 / 回退记录完整。
+- 低电量、过热、模型缺失、framework 不可用、超时和安全失败路径有记录。
+- Archive / IPA / 安装体积有记录。
+- license / notice 人工确认状态清晰。
+- 是否进入 TestFlight readiness 的决策清晰。
+
+建议 commit message：
+
+- `docs: add v1.8 device production qa records`
+
+## V1.8 阶段 5：上线前材料修复
+
+状态：
+
+- 已完成上线前材料修复。
+- 已新增 `DestinyScope/Resources/PrivacyInfo.xcprivacy`。
+- 已新增 `docs/V1_8_AppStoreConnectDraft.md`。
+- 已新增 `docs/V1_8_PrivacyNutritionLabelDraft.md`。
+- 已新增 `docs/V1_8_AppReviewNotesFinalDraft.md`。
+- 已新增 `docs/V1_8_ScreenshotAndCopyPlan.md`。
+- 已新增 `docs/V1_8_LicenseNoticeFinalChecklist.md`。
+- 已新增 `docs/V1_8_PreLaunchMaterialsReport.md`。
+- 已更新 App 内隐私政策、免责声明、开源许可页面。
+- 已更新 GitHub Pages 隐私 Markdown / HTML。
+- 已更新 App Store metadata、Review Notes、Screenshot Plan、App Store / TestFlight checklist。
+
+目标：
+
+- 修复 V1.8 App Store Connect 文案、Review Notes、Privacy Nutrition Label、PrivacyInfo、Legal 文案、开源许可、隐私页、截图计划和上线清单。
+- 保持业务逻辑、签名、Bundle ID、Version / Build、模型接入和默认路径不变。
+
+验收标准：
+
+- `PrivacyInfo.xcprivacy` 声明 UserDefaults 和 FileTimestamp required reason API。
+- App Store 文案不含确定性预测、改命、化解、避灾或专业建议承诺。
+- Review Notes 正确描述本地模型生产候选能力和 fallback。
+- 隐私页与 App 内隐私政策同步。
+- 开源许可页面记录 llama.cpp、GGUF、Qwen base、GGUF 仓库和精确 GGUF 文件。
+- Debug / Release build 通过。
+- 静态扫描无新增网络、支付、追踪、敏感权限风险。
+
+建议 commit message：
+
+- `docs: prepare v1.8 prelaunch materials`
+
+## V1.8 阶段 6：Archive / App Store Connect 准备前最终检查
+
+目标：
+
+- 生成并验证 Archive。
+- 确认 `PrivacyInfo.xcprivacy` 进入最终 Archive / IPA。
+- 记录 Archive / IPA / App Store 分发体积。
+- 真机复测高端设备默认本地润色和低端设备 fallback。
+- 完成 license / notice 人工最终留档。
+- 决定是否进入 TestFlight readiness 或 App Store Connect 手工填写。
+
+## V1.8 阶段 8：上线前用户可见文案清理
+
+状态：
+
+- 已完成 App 内用户可见文案清理。
+- 已新增 `docs/V1_8_UserFacingCopyCleanupReport.md`。
+- 已更新 About / Settings / Open Source Licenses / Privacy Policy 相关文案。
+- 已将 Open Source Licenses 展示从内部状态字段改为正式 license 信息字段。
+- 已同步 GitHub Pages 隐私 Markdown / HTML、App Store metadata、Review Notes、Screenshot Plan 和 App Store Connect 填写草稿。
+
+边界：
+
+- 未修改业务逻辑、本地模型运行逻辑、设备评分、结果页、历史记录或首页主结构。
+- 未修改 Xcode 工程配置、签名、Bundle ID、Version、Build、模型文件或 framework。
+- 未接入网络、服务端、在线 AI、模型下载、付费订阅、追踪或敏感权限。
+
+验收标准：
+
+- Release 用户可见 Swift 页面不展示内部状态词。
+- Debug-only 页面仍仅保留在 `#if DEBUG` 内。
+- `git diff --check` 通过。
+- Debug / Release build 通过。

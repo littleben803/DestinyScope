@@ -64,7 +64,7 @@ struct SettingsView: View {
 
                         settingsLink(
                             title: "开源许可",
-                            subtitle: "本地模型实验相关 license / notice 草案",
+                            subtitle: "查看本地模型和开源组件许可信息",
                             accessibilityHint: "打开开源许可页面。"
                         ) {
                             OpenSourceLicensesView()

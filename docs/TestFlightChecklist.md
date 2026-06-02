@@ -768,3 +768,50 @@ V1.8 阶段 2 实现检查项：
 - 首页第一屏应聚焦出生日期、出生时辰和查询按钮。
 - 结果页模板结果始终保留，本地润色版不写入历史。
 - TestFlight 前仍需重新执行 readiness，并人工确认 license / notice 与包体风险。
+
+V1.8 阶段 3 生产候选自测状态：
+
+- 已新增 `docs/V1_8_ProductionCandidateTestReport.md`。
+- 已新增 `docs/V1_8_ReleaseRiskDecision.md`。
+- 决策结论：Production Candidate: Conditional Go。
+- Debug build：通过。
+- Release build：通过。
+- GGUF 已由 Git LFS 跟踪。
+- GGUF 文件大小：`491400032 bytes`。
+- GGUF sha256：`74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db`。
+- Release Simulator `.app` 约 `502M`，包体风险高。
+- Release `.app` 包含 GGUF 和 `Frameworks/llama.framework/llama`。
+- `makeDefaultRefiner()` 当前返回 `AutoLocalTextRefiner()`。
+- 未发现 Swift 源码新增网络、在线 AI、StoreKit、CloudKit、追踪或敏感权限。
+- 当前不应直接上传 TestFlight。
+- 如果下一步要 TestFlight，必须使用内置模型构建重新测试，并覆盖高端设备、低端设备和模拟器。
+- TestFlight 前必须人工确认 license / notice、App size、设备评分、fallback、安全检查、隐私说明和测试人员说明。
+- iPhone 17 Pro Max 生产内置模型待复测。
+- iPhone 12 mini 生产内置模型待复测。
+
+V1.8 阶段 5 TestFlight 前材料状态：
+
+- 已新增 `PrivacyInfo.xcprivacy`，但仍需在 Archive / IPA 中确认实际包含。
+- 已更新 TestFlight / App Review 说明，明确本地模型仅润色已有模板文本，失败回退模板。
+- 已更新隐私政策、免责声明和开源许可。
+- 已新增 Privacy Nutrition Label 草案，当前建议 Data Not Collected。
+- 已新增 license / notice 最终检查清单。
+- TestFlight 前仍需真机生产包复测、Archive 体积记录、隐私 URL 公网确认。License / notice 人工复核已完成。
+
+V1.8 阶段 7 TestFlight 分发硬化状态：
+
+- TestFlight license / notice requirement: completed by human review。
+- 已保存 license evidence，当前结果为 `Pass`。
+- 当前 archive 使用 Apple Development 签名；TestFlight 需要有效分发签名或可上传的 archive。
+- IPA export 未完成，TestFlight 上传未开始。
+- 已记录 Archive 约 `549M`、`.app` 约 `493M`、GGUF 约 `469M`、`llama.framework` 约 `4.5M`。
+- 如果要 TestFlight，仍需完成 signing / archive export / TestFlight metadata，并记录 IPA 导出体积和上传校验结果。
+
+V1.8 阶段 8 用户可见文案清理状态：
+
+- 已新增 `docs/V1_8_UserFacingCopyCleanupReport.md`。
+- Release 用户可见 Settings / About / Legal 页面已改为正式上线口径。
+- Open Source Licenses 页面不再展示内部复核或分发状态。
+- Privacy Policy、GitHub Pages 隐私页、App Store metadata、Review Notes 和截图计划已同步 V1.8 正式口径。
+- Debug-only 本地模型状态页仍保留在 `#if DEBUG` 下，不进入 Release 用户可见路径。
+- TestFlight 前仍需完成 signing / archive export / TestFlight metadata，并记录 IPA 导出体积和上传校验结果。
