@@ -125,6 +125,121 @@
       "zh-Hant": "今天給我一句建議",
       "en": "Give me one suggestion for today"
     },
+    "result.reading.title": {
+      "zh-Hans": "命格详解",
+      "zh-Hant": "命格詳解",
+      "en": "Detailed Reading"
+    },
+    "result.reading.subtitle": {
+      "zh-Hans": "基于称骨结果的传统文化解读",
+      "zh-Hant": "基於稱骨結果的傳統文化解讀",
+      "en": "Traditional cultural interpretation based on the bone-weight result"
+    },
+    "result.reading.section.characterCareer": {
+      "zh-Hans": "性情与事业",
+      "zh-Hant": "性情與事業",
+      "en": "Character and Career"
+    },
+    "result.reading.section.wealthRelationship": {
+      "zh-Hans": "财帛与关系",
+      "zh-Hant": "財帛與關係",
+      "en": "Wealth and Relationships"
+    },
+    "result.reading.section.familyBlessing": {
+      "zh-Hans": "家庭与福泽",
+      "zh-Hant": "家庭與福澤",
+      "en": "Family and Blessing"
+    },
+    "result.reading.section.advice": {
+      "zh-Hans": "行动建议",
+      "zh-Hant": "行動建議",
+      "en": "Action Advice"
+    },
+    "result.reading.field.personality": {
+      "zh-Hans": "性情底色",
+      "zh-Hant": "性情底色",
+      "en": "Character"
+    },
+    "result.reading.field.career": {
+      "zh-Hans": "事业方向",
+      "zh-Hant": "事業方向",
+      "en": "Career Direction"
+    },
+    "result.reading.field.wealth": {
+      "zh-Hans": "财帛观照",
+      "zh-Hant": "財帛觀照",
+      "en": "Wealth View"
+    },
+    "result.reading.field.relationship": {
+      "zh-Hans": "情感相处",
+      "zh-Hant": "情感相處",
+      "en": "Relationships"
+    },
+    "result.reading.field.childrenFamily": {
+      "zh-Hans": "家庭晚辈",
+      "zh-Hant": "家庭晚輩",
+      "en": "Family and Younger Generations"
+    },
+    "result.reading.field.healthBlessing": {
+      "zh-Hans": "身心福泽",
+      "zh-Hant": "身心福澤",
+      "en": "Wellbeing and Blessing"
+    },
+    "result.reading.field.advice": {
+      "zh-Hans": "现在该怎么做",
+      "zh-Hant": "現在該怎麼做",
+      "en": "What to Do Now"
+    },
+    "result.reading.detail.title": {
+      "zh-Hans": "完整解读",
+      "zh-Hant": "完整解讀",
+      "en": "Full Reading"
+    },
+    "result.reading.question.title": {
+      "zh-Hans": "问问命格",
+      "zh-Hant": "問問命格",
+      "en": "Ask the Reading"
+    },
+    "result.reading.question.overall": {
+      "zh-Hans": "整体怎么看？",
+      "zh-Hant": "整體怎麼看？",
+      "en": "Overall view?"
+    },
+    "result.reading.question.personality": {
+      "zh-Hans": "性格重点？",
+      "zh-Hant": "性格重點？",
+      "en": "Personality focus?"
+    },
+    "result.reading.question.career": {
+      "zh-Hans": "事业适合什么？",
+      "zh-Hant": "事業適合什麼？",
+      "en": "Career fit?"
+    },
+    "result.reading.question.wealth": {
+      "zh-Hans": "财运要注意什么？",
+      "zh-Hant": "財運要注意什麼？",
+      "en": "Wealth cautions?"
+    },
+    "result.reading.question.relationship": {
+      "zh-Hans": "感情关系怎么看？",
+      "zh-Hant": "感情關係怎麼看？",
+      "en": "Relationship view?"
+    },
+    "result.reading.question.childrenFamily": {
+      "zh-Hans": "家庭晚辈怎么看？",
+      "zh-Hant": "家庭晚輩怎麼看？",
+      "en": "Family view?"
+    },
+    "result.reading.question.healthBlessing": {
+      "zh-Hans": "身心福泽怎么看？",
+      "zh-Hant": "身心福澤怎麼看？",
+      "en": "Wellbeing view?"
+    },
+    "result.reading.question.advice": {
+      "zh-Hans": "现在该怎么做？",
+      "zh-Hant": "現在該怎麼做？",
+      "en": "What now?"
+    },
     "result.share.title": {
       "zh-Hans": "复制与分享",
       "zh-Hant": "複製與分享",

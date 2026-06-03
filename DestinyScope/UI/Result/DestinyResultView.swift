@@ -11,6 +11,7 @@ struct DestinyResultView: View {
     let result: LifeWeightResult
     let interpretation: FortuneInterpretation
     let insight: LifeWeightInsight
+    let detailedReading: LifeWeightReading?
 
     @EnvironmentObject private var localizationStore: LocalizationStore
 
@@ -22,29 +23,15 @@ struct DestinyResultView: View {
 
                     poemCard
 
-                    WeightBreakdownCard(breakdown: result.breakdown)
-
-                    AppCard {
-                        insightSection
-                    }
-
-                    InterpretationCard(interpretation: interpretation)
-
-                    AppCard {
-                        FortuneQuestionView(
-                            result: result,
-                            interpretation: interpretation,
-                            insight: insight
-                        )
-                    }
-
-                    ResultTextShareCard(
+                    LifeWeightReadingCard(
                         result: result,
+                        reading: detailedReading,
                         interpretation: interpretation,
                         insight: insight
                     )
 
-                    ProductionLocalRefiningCard(
+                    ResultTextShareCard(
+                        result: result,
                         interpretation: interpretation,
                         insight: insight
                     )
@@ -58,59 +45,6 @@ struct DestinyResultView: View {
             }
         }
         .navigationTitle(localizationStore.string("result.navigation.title"))
-    }
-
-    private var insightSection: some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-            AppSectionHeader(title: localizationStore.string("result.insight.title"))
-
-            InsightTagsView(tags: insight.tags)
-
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text(insight.focusTitle)
-                    .font(AppTheme.Typography.sectionTitle)
-                    .foregroundColor(AppTheme.Colors.primaryText)
-                Text(insight.focusDescription)
-                    .font(AppTheme.Typography.body)
-                    .foregroundColor(AppTheme.Colors.primaryText)
-            }
-
-            bulletSection(title: localizationStore.string("result.insight.strengths"), items: insight.strengths)
-            bulletSection(title: localizationStore.string("result.insight.cautions"), items: insight.cautions)
-
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text(localizationStore.string("result.insight.actionSuggestion"))
-                    .font(AppTheme.Typography.sectionTitle)
-                    .foregroundColor(AppTheme.Colors.primaryText)
-                Text(insight.actionSuggestion)
-                    .font(AppTheme.Typography.body)
-                    .foregroundColor(AppTheme.Colors.primaryText)
-            }
-
-            Text(insight.safetyNotice)
-                .font(AppTheme.Typography.footnote)
-                .foregroundColor(AppTheme.Colors.secondaryText)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private func bulletSection(title: String, items: [String]) -> some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-            Text(title)
-                .font(AppTheme.Typography.sectionTitle)
-                .foregroundColor(AppTheme.Colors.primaryText)
-
-            ForEach(items, id: \.self) { item in
-                HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
-                    Text("•")
-                        .font(AppTheme.Typography.body)
-                        .foregroundColor(AppTheme.Colors.darkGold)
-                    Text(item)
-                        .font(AppTheme.Typography.body)
-                        .foregroundColor(AppTheme.Colors.primaryText)
-                }
-            }
-        }
     }
 
     private var poemCard: some View {

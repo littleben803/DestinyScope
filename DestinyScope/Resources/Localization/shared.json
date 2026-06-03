@@ -114,6 +114,16 @@
       "zh-Hans": "{seconds} 秒",
       "zh-Hant": "{seconds} 秒",
       "en": "{seconds}s"
+    },
+    "gender.male": {
+      "zh-Hans": "男",
+      "zh-Hant": "男",
+      "en": "Male"
+    },
+    "gender.female": {
+      "zh-Hans": "女",
+      "zh-Hant": "女",
+      "en": "Female"
     }
   }
 }

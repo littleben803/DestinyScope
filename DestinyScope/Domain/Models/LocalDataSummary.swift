@@ -12,7 +12,5 @@ struct LocalDataSummary: Equatable {
     let savedBirthProfileCount: Int
     let favoriteKnowledgeCount: Int
     let recentKnowledgeCount: Int
-    let favoriteHistoryCount: Int
-    let pinnedHistoryCount: Int
     let hasCompletedOnboarding: Bool
 }

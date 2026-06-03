@@ -9,7 +9,7 @@ import Foundation
 
 enum TextRefinerFactory {
     static func makeDefaultRefiner() -> TextRefining {
-        AutoLocalTextRefiner()
+        TemplateTextRefiner()
     }
 
     static func makeTemplateRefiner() -> TextRefining {

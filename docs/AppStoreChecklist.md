@@ -697,3 +697,12 @@ V1.8 阶段 8 用户可见文案清理状态：
 - GitHub Pages 隐私页、App Store metadata、Review Notes 和 Screenshot Plan 已同步正式 V1.8 口径。
 - Release 用户可见页面不应出现草案、待确认、Risk、Blocker、生产候选等内部状态词。
 - App Store 前仍需完成 Distribution signing、IPA export、最终隐私 URL、截图和 App Store Connect 字段复核。
+
+结果页命格详解卡片状态：
+
+- 结果页后半部分已合并为 `命格详解` 卡片，副标题为 `基于称骨结果的传统文化解读`。
+- `命格详解` 使用本地 `DestinyScope/Resources/Readings/life_weight_readings.json` 数据，不请求网络、不上传用户数据、不依赖服务端。
+- `male` / `female` 按首页选择读取对应 variant；缺失时 fallback 到 `general`；仍缺失时 fallback 到现有本地模板文本。
+- `keywords` 在卡片顶部以标签样式展示。
+- `original_poem`、`original_note`、`rewrite_notes` 仅作为内部参考字段，不在前端展示。
+- 当前阶段结果页不展示本地润色卡片，也不自动调用本地模型；默认文本润色工厂返回模板 refiner。

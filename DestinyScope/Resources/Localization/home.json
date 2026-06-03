@@ -16,9 +16,9 @@
       "en": "Birth Date"
     },
     "home.input.birthHour": {
-      "zh-Hans": "出生时辰",
-      "zh-Hant": "出生時辰",
-      "en": "Birth Hour"
+      "zh-Hans": "出生时间",
+      "zh-Hant": "出生時間",
+      "en": "Birth Time"
     },
     "home.input.hourValue": {
       "zh-Hans": "{hour} 时",
@@ -41,9 +41,9 @@
       "en": "Calculate weight-based result"
     },
     "home.input.calculate.accessibilityHint": {
-      "zh-Hans": "根据当前出生日期和时辰在本机生成结果。",
-      "zh-Hant": "根據目前出生日期與時辰在本機產生結果。",
-      "en": "Generate a result on this device from the current birth date and hour."
+      "zh-Hans": "根据当前输入在本机生成结果。",
+      "zh-Hant": "根據目前輸入在本機產生結果。",
+      "en": "Generate a result on this device from the current input."
     },
     "home.input.saveProfile": {
       "zh-Hans": "保存为常用资料",
@@ -56,9 +56,9 @@
       "en": "Save current birth profile"
     },
     "home.input.saveProfile.accessibilityHint": {
-      "zh-Hans": "输入本地显示名后，将当前出生日期和时辰保存到本机。",
-      "zh-Hant": "輸入本地顯示名稱後，將目前出生日期與時辰保存到本機。",
-      "en": "Enter a local display name to save the current birth date and hour on this device."
+      "zh-Hans": "输入本地显示名后，将当前输入资料保存到本机。",
+      "zh-Hant": "輸入本地顯示名稱後，將目前輸入資料保存到本機。",
+      "en": "Enter a local display name to save the current input on this device."
     },
     "home.input.prompt.title": {
       "zh-Hans": "提示",
@@ -76,9 +76,9 @@
       "en": "Stored Locally"
     },
     "home.birthProfiles.description": {
-      "zh-Hans": "选择后只填入出生日期和时辰，不会自动查询。",
-      "zh-Hant": "選擇後只填入出生日期與時辰，不會自動查詢。",
-      "en": "Selecting one only fills the birth date and hour. It will not calculate automatically."
+      "zh-Hans": "选择后只填入已保存的出生资料，不会自动查询。",
+      "zh-Hant": "選擇後只填入已保存的出生資料，不會自動查詢。",
+      "en": "Selecting one only fills the saved birth profile. It will not calculate automatically."
     },
     "home.birthProfiles.empty": {
       "zh-Hans": "暂无常用资料。可在查询卡片中保存当前输入，方便下次快速填写。",
@@ -105,10 +105,15 @@
       "zh-Hant": "總重量：{weight}",
       "en": "Total weight: {weight}"
     },
+    "home.recent.birthEightCharacters": {
+      "zh-Hans": "生辰八字：{value}",
+      "zh-Hant": "生辰八字：{value}",
+      "en": "Eight characters: {value}"
+    },
     "home.recent.description": {
-      "zh-Hans": "可在历史页查看、收藏、置顶或填回首页复查。",
-      "zh-Hant": "可在歷史頁查看、收藏、置頂或填回首頁複查。",
-      "en": "You can view, favorite, pin, or refill this from the History page."
+      "zh-Hans": "可在历史页查看历史查询记录",
+      "zh-Hant": "可在歷史頁查看歷史查詢記錄",
+      "en": "View past query records on the History page."
     },
     "home.recent.empty": {
       "zh-Hans": "完成一次查询后，会在本机保存轻量历史记录，方便之后回看。",
@@ -134,26 +139,6 @@
       "zh-Hans": "想了解称骨、时辰、生肖、五行等基础内容，可以在知识库阅读入门文章。",
       "zh-Hant": "想了解稱骨、時辰、生肖、五行等基礎內容，可以在知識庫閱讀入門文章。",
       "en": "To learn about weight-based readings, birth hours, zodiac signs, and the five elements, read introductory articles in the knowledge library."
-    },
-    "home.draft.title": {
-      "zh-Hans": "已填入待查询资料",
-      "zh-Hant": "已填入待查詢資料",
-      "en": "Query Details Filled"
-    },
-    "home.draft.clear": {
-      "zh-Hans": "清除提示",
-      "zh-Hant": "清除提示",
-      "en": "Clear Notice"
-    },
-    "home.draft.clear.accessibilityLabel": {
-      "zh-Hans": "清除历史填入提示",
-      "zh-Hant": "清除歷史填入提示",
-      "en": "Clear history refill notice"
-    },
-    "home.draft.clear.accessibilityHint": {
-      "zh-Hans": "只清除当前提示，不会清除已经填入的出生日期和时辰。",
-      "zh-Hant": "只清除目前提示，不會清除已經填入的出生日期與時辰。",
-      "en": "Only clears this notice. The filled birth date and hour remain unchanged."
     },
     "home.saveSheet.title": {
       "zh-Hans": "保存常用出生资料",
@@ -235,11 +220,6 @@
       "zh-Hant": "已填入「{name}」，請確認後點擊查詢。",
       "en": "Filled in \"{name}\". Please confirm, then calculate."
     },
-    "home.profile.draftApplied": {
-      "zh-Hans": "已从{source}填入出生日期和时辰，请确认后点击查询。",
-      "zh-Hant": "已從{source}填入出生日期與時辰，請確認後點擊查詢。",
-      "en": "Filled birth date and hour from {source}. Please confirm, then calculate."
-    },
     "home.profile.defaultName": {
       "zh-Hans": "常用资料",
       "zh-Hant": "常用資料",
@@ -254,6 +234,11 @@
       "zh-Hans": "常用出生资料保存失败，请稍后重试。",
       "zh-Hant": "常用出生資料保存失敗，請稍後重試。",
       "en": "Saved birth profile failed to save. Please try again later."
+    },
+    "home.input.gender": {
+      "zh-Hans": "性别",
+      "zh-Hant": "性別",
+      "en": "Gender"
     }
   }
 }

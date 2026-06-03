@@ -15,7 +15,6 @@ struct PrivacyPolicyView: View {
         ("legal.privacy.section.birth.title", "legal.privacy.section.birth.body"),
         ("legal.privacy.section.profiles.title", "legal.privacy.section.profiles.body"),
         ("legal.privacy.section.history.title", "legal.privacy.section.history.body"),
-        ("legal.privacy.section.historyState.title", "legal.privacy.section.historyState.body"),
         ("legal.privacy.section.knowledgeState.title", "legal.privacy.section.knowledgeState.body"),
         ("legal.privacy.section.localData.title", "legal.privacy.section.localData.body"),
         ("legal.privacy.section.localModel.title", "legal.privacy.section.localModel.body"),
@@ -36,7 +35,7 @@ struct PrivacyPolicyView: View {
                     LegalSummaryCard(
                         title: localizationStore.string("legal.privacy.summary.title"),
                         bodyText: localizationStore.string("legal.privacy.summary.body"),
-                        highlights: (0...6).map {
+                        highlights: (0...5).map {
                             localizationStore.string(L10nID("legal.privacy.highlight.\($0)"))
                         }
                     )

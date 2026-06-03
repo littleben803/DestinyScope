@@ -31,21 +31,16 @@
       "en": "Saved birth profiles are stored only on this device and can be deleted at any time."
     },
     "legal.privacy.highlight.3": {
-      "zh-Hans": "历史收藏和置顶状态只保存本机记录 id。",
-      "zh-Hant": "歷史收藏與置頂狀態只保存本機記錄 id。",
-      "en": "History favorites and pins store only local record IDs."
-    },
-    "legal.privacy.highlight.4": {
       "zh-Hans": "知识库收藏和最近阅读仅保存在当前设备。",
       "zh-Hant": "知識庫收藏與最近閱讀僅保存在目前裝置。",
       "en": "Knowledge favorites and recent reads are stored only on this device."
     },
-    "legal.privacy.highlight.5": {
+    "legal.privacy.highlight.4": {
       "zh-Hans": "本地数据管理只清理当前设备上的用户数据。",
       "zh-Hant": "本地資料管理只清理目前裝置上的使用者資料。",
       "en": "Local data management clears only user data on this device."
     },
-    "legal.privacy.highlight.6": {
+    "legal.privacy.highlight.5": {
       "zh-Hans": "本地模型润色只在设备端处理已有模板文本，不上传模型输入或输出。",
       "zh-Hant": "本地模型潤色只在裝置端處理既有模板文字，不上傳模型輸入或輸出。",
       "en": "Local model refinement processes existing template text on device and does not upload model input or output."
@@ -89,16 +84,6 @@
       "zh-Hans": "历史记录仅保存在本地设备，用于在 App 内查看过去生成的轻量结果。当前版本不上传历史记录，也不进行云同步。你可以在历史记录页面删除单条记录或清空全部记录。",
       "zh-Hant": "歷史記錄僅保存在本地裝置，用於在 App 內查看過去產生的輕量結果。目前版本不上傳歷史記錄，也不進行雲端同步。你可以在歷史記錄頁面刪除單筆記錄或清空全部記錄。",
       "en": "History is stored only on this device so you can review lightweight past results in the app. The current version does not upload history or sync it to the cloud. You can delete one record or clear all records from the History page."
-    },
-    "legal.privacy.section.historyState.title": {
-      "zh-Hans": "历史收藏、置顶与快速复查",
-      "zh-Hant": "歷史收藏、置頂與快速複查",
-      "en": "History Favorites, Pins, and Quick Review"
-    },
-    "legal.privacy.section.historyState.body": {
-      "zh-Hans": "如果你收藏或置顶历史记录，当前版本只会在当前设备保存历史记录 id，用于本地排序和回看。快速复查只会把历史记录中的出生日期和出生时辰填回首页输入，不会自动重新查询，也不会上传数据。",
-      "zh-Hant": "如果你收藏或置頂歷史記錄，目前版本只會在目前裝置保存歷史記錄 id，用於本地排序與回看。快速複查只會把歷史記錄中的出生日期與出生時辰填回首頁輸入，不會自動重新查詢，也不會上傳資料。",
-      "en": "If you favorite or pin history records, the current version stores only history record IDs on this device for local sorting and review. Quick review only fills the birth date and hour back into Home. It does not calculate again automatically or upload data."
     },
     "legal.privacy.section.knowledgeState.title": {
       "zh-Hans": "知识库收藏与最近阅读",

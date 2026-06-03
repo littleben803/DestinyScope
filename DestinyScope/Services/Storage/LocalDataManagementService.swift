@@ -9,20 +9,17 @@ import Foundation
 
 struct LocalDataManagementService {
     private let historyRecordStore: HistoryRecordStore
-    private let historyRecordUserStateStore: HistoryRecordUserStateStore
     private let savedBirthProfileStore: SavedBirthProfileStore
     private let knowledgeLibraryStateStore: KnowledgeLibraryStateStore
     private let onboardingStateStore: OnboardingStateStore
 
     init(
         historyRecordStore: HistoryRecordStore = HistoryRecordStore(),
-        historyRecordUserStateStore: HistoryRecordUserStateStore = HistoryRecordUserStateStore(),
         savedBirthProfileStore: SavedBirthProfileStore = SavedBirthProfileStore(),
         knowledgeLibraryStateStore: KnowledgeLibraryStateStore = KnowledgeLibraryStateStore(),
         onboardingStateStore: OnboardingStateStore = OnboardingStateStore()
     ) {
         self.historyRecordStore = historyRecordStore
-        self.historyRecordUserStateStore = historyRecordUserStateStore
         self.savedBirthProfileStore = savedBirthProfileStore
         self.knowledgeLibraryStateStore = knowledgeLibraryStateStore
         self.onboardingStateStore = onboardingStateStore
@@ -30,7 +27,6 @@ struct LocalDataManagementService {
 
     func loadSummary() -> LocalDataSummary {
         let historyRecords = (try? historyRecordStore.load()) ?? []
-        let historyUserState = (try? historyRecordUserStateStore.load()) ?? .empty
         let savedProfiles = (try? savedBirthProfileStore.load()) ?? []
         let knowledgeState = (try? knowledgeLibraryStateStore.load()) ?? .empty
 
@@ -39,19 +35,13 @@ struct LocalDataManagementService {
             savedBirthProfileCount: savedProfiles.count,
             favoriteKnowledgeCount: knowledgeState.favoriteArticleIDs.count,
             recentKnowledgeCount: knowledgeState.recentReads.count,
-            favoriteHistoryCount: historyUserState.favoriteRecordIDs.count,
-            pinnedHistoryCount: historyUserState.pinnedRecordIDs.count,
             hasCompletedOnboarding: onboardingStateStore.hasCompletedOnboarding
         )
     }
 
     func clearHistory() throws {
         try historyRecordStore.deleteAll()
-        try historyRecordUserStateStore.clearAll()
-    }
-
-    func clearHistoryUserState() throws {
-        try historyRecordUserStateStore.clearAll()
+        try deleteLegacyHistoryMetadataIfNeeded()
     }
 
     func clearSavedBirthProfiles() throws {
@@ -76,5 +66,20 @@ struct LocalDataManagementService {
         try clearKnowledgeFavorites()
         try clearKnowledgeRecentReads()
         try resetOnboarding()
+    }
+
+    private func deleteLegacyHistoryMetadataIfNeeded() throws {
+        let fileManager = FileManager.default
+        let directory = try fileManager.url(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+        ).appendingPathComponent("DestinyScope", isDirectory: true)
+        let url = directory.appendingPathComponent("history_record_user_state.json")
+
+        if fileManager.fileExists(atPath: url.path) {
+            try fileManager.removeItem(at: url)
+        }
     }
 }

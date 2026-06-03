@@ -40,6 +40,15 @@ struct HomeRecentHistoryCard: View {
 
                     Text(
                         localizationStore.string(
+                            .homeRecentBirthEightCharacters,
+                            replacements: ["value": record.birthEightCharacters.displayText]
+                        )
+                    )
+                        .font(AppTheme.Typography.footnote)
+                        .foregroundColor(AppTheme.Colors.secondaryText)
+
+                    Text(
+                        localizationStore.string(
                             .homeRecentWeight,
                             replacements: ["weight": record.totalWeightText]
                         )

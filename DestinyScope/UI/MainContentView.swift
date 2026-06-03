@@ -19,7 +19,6 @@ struct MainContentView: View {
 
     private let onboardingStore: OnboardingStateStore
 
-    @StateObject private var homeInputDraftStore = HomeInputDraftStore()
     @State private var isOnboardingPresented: Bool
     @State private var selectedTab: MainTab = .home
 
@@ -47,9 +46,7 @@ struct MainContentView: View {
             .tag(MainTab.knowledge)
 
             NavigationStack {
-                HistoryListView {
-                    selectedTab = .home
-                }
+                HistoryListView()
             }
             .tabItem {
                 Label(localizationStore.string(.tabHistory), systemImage: "clock")
@@ -65,7 +62,6 @@ struct MainContentView: View {
             .tag(MainTab.settings)
         }
         .tint(AppTheme.Colors.cinnabar)
-        .environmentObject(homeInputDraftStore)
         .fullScreenCover(isPresented: $isOnboardingPresented) {
             OnboardingView {
                 onboardingStore.markCompleted()

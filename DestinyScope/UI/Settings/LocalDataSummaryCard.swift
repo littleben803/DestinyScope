@@ -34,14 +34,6 @@ struct LocalDataSummaryCard: View {
                     value: countText("localData.count.records", summary.recentKnowledgeCount)
                 )
                 summaryRow(
-                    title: localizationStore.string("localData.summary.historyFavorites"),
-                    value: countText("localData.count.records", summary.favoriteHistoryCount)
-                )
-                summaryRow(
-                    title: localizationStore.string("localData.summary.historyPinned"),
-                    value: countText("localData.count.records", summary.pinnedHistoryCount)
-                )
-                summaryRow(
                     title: localizationStore.string("localData.summary.onboarding"),
                     value: summary.hasCompletedOnboarding
                         ? localizationStore.string("localData.summary.completed")

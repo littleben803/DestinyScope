@@ -9,17 +9,17 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var dataManager: DataManager
-    @EnvironmentObject private var homeInputDraftStore: HomeInputDraftStore
     @EnvironmentObject private var localizationStore: LocalizationStore
 
     @State private var birthDate = Date()
-    @State private var selectedHour = 0
+    @State private var selectedHour = Calendar.current.component(.hour, from: Date())
+    @State private var selectedGender = BirthGender.defaultValue
     @State private var calculation: LifeWeightResult?
     @State private var interpretation: FortuneInterpretation?
     @State private var insight: LifeWeightInsight?
+    @State private var detailedReading: LifeWeightReading?
     @State private var errorMessage: String?
     @State private var profileMessage: String?
-    @State private var draftBannerMessage: String?
     @State private var savedProfiles: [SavedBirthProfile] = []
     @State private var recentHistoryRecord: HistoryRecord?
     @State private var isShowingSaveProfileSheet = false
@@ -28,6 +28,7 @@ struct HomeView: View {
     private let hours = Array(0...23)
     private let savedProfileStore = SavedBirthProfileStore()
     private let historyRecordStore = HistoryRecordStore()
+    private let lifeWeightReadingRepository = LifeWeightReadingRepository()
 
     var body: some View {
         AppBackground {
@@ -38,6 +39,7 @@ struct HomeView: View {
                     HomeInputCard(
                         birthDate: $birthDate,
                         selectedHour: $selectedHour,
+                        selectedGender: $selectedGender,
                         hours: hours,
                         errorMessage: errorMessage,
                         onSaveCurrent: {
@@ -47,12 +49,6 @@ struct HomeView: View {
                     )
                     .transition(.opacity.combined(with: .scale))
                     .animation(.easeInOut, value: errorMessage)
-
-                    if let draftBannerMessage {
-                        HomeInputDraftBanner(message: draftBannerMessage) {
-                            self.draftBannerMessage = nil
-                        }
-                    }
 
                     HomeBirthProfilePickerView(
                         profiles: savedProfiles,
@@ -74,17 +70,17 @@ struct HomeView: View {
         .navigationTitle(localizationStore.string(.appName))
         .navigationDestination(isPresented: $shouldShowResult) {
             if let calculation, let interpretation, let insight {
-                DestinyResultView(result: calculation, interpretation: interpretation, insight: insight)
+                DestinyResultView(
+                    result: calculation,
+                    interpretation: interpretation,
+                    insight: insight,
+                    detailedReading: detailedReading
+                )
             }
         }
         .onAppear {
             loadSavedProfiles()
             loadRecentHistory()
-            applyPendingDraftIfNeeded()
-        }
-        .onReceive(homeInputDraftStore.$pendingDraft) { draft in
-            guard draft != nil else { return }
-            applyPendingDraftIfNeeded()
         }
         .sheet(isPresented: $isShowingSaveProfileSheet) {
             SaveBirthProfileSheet(birthDate: birthDate, hour: selectedHour) { displayName in
@@ -97,16 +93,22 @@ struct HomeView: View {
         let engine = LifeWeightEngine(dataManager: dataManager)
 
         do {
-            let calculation = try engine.calculate(birthDate: birthDate, selectedHour: selectedHour)
+            let calculation = try engine
+                .calculate(birthDate: birthDate, selectedHour: selectedHour)
+                .withGender(selectedGender)
             let interpretation = TemplateFortuneInterpreter().interpret(result: calculation)
             let insight = LifeWeightInsightGenerator().generate(result: calculation)
+            let detailedReading = try? lifeWeightReadingRepository.reading(
+                forWeightKey: calculation.readingWeightKey,
+                gender: selectedGender
+            )
             let savedRecord = saveHistoryRecord(result: calculation, insight: insight)
 
             self.calculation = calculation
             self.interpretation = interpretation
             self.insight = insight
+            self.detailedReading = detailedReading
             errorMessage = nil
-            draftBannerMessage = nil
             if let savedRecord {
                 recentHistoryRecord = savedRecord
             }
@@ -115,6 +117,7 @@ struct HomeView: View {
             calculation = nil
             interpretation = nil
             insight = nil
+            detailedReading = nil
             shouldShowResult = false
             errorMessage = (error as? LocalizedError)?.errorDescription
                 ?? localizationStore.string(.homeErrorCalculateFallback)
@@ -128,7 +131,12 @@ struct HomeView: View {
             createdAt: Date(),
             solarDate: result.birthProfile.solarDate,
             hour: result.birthProfile.hour,
+            gender: result.birthProfile.gender,
             lunarBirthday: result.lunarBirthDate.displayText,
+            birthEightCharacters: BirthEightCharactersCalculator().calculate(
+                solarDate: result.birthProfile.solarDate,
+                hour: result.birthProfile.hour
+            ),
             totalWeightText: result.totalWeightText,
             title: result.title,
             poem: result.poem,
@@ -164,27 +172,11 @@ struct HomeView: View {
     private func applySavedProfile(_ profile: SavedBirthProfile) {
         birthDate = profile.birthDate
         selectedHour = profile.hour
+        selectedGender = profile.gender
         profileMessage = localizationStore.string(
             .homeProfileApplied,
             replacements: ["name": profile.displayName]
         )
-        draftBannerMessage = nil
-        errorMessage = nil
-    }
-
-    private func applyPendingDraftIfNeeded() {
-        guard let draft = homeInputDraftStore.consumeDraft() else {
-            return
-        }
-
-        birthDate = draft.birthDate
-        selectedHour = draft.hour
-        shouldShowResult = false
-        draftBannerMessage = localizationStore.string(
-            .homeProfileDraftApplied,
-            replacements: ["source": draft.source]
-        )
-        profileMessage = nil
         errorMessage = nil
     }
 
@@ -199,6 +191,7 @@ struct HomeView: View {
             displayName: finalName,
             birthDate: birthDate,
             hour: selectedHour,
+            gender: selectedGender,
             createdAt: now,
             updatedAt: now
         )
@@ -220,7 +213,6 @@ struct HomeView: View {
     NavigationStack {
         HomeView()
             .environmentObject(DataManager.shared)
-            .environmentObject(HomeInputDraftStore())
             .environmentObject(LocalizationStore())
     }
 }

@@ -26,24 +26,19 @@
       "en": "Stored Locally"
     },
     "history.localNotice.body": {
-      "zh-Hans": "当前版本的历史记录、收藏和置顶状态仅保存在本设备。不会上传、不会同步，也不会用于在线服务。删除后无法恢复。",
-      "zh-Hant": "目前版本的歷史記錄、收藏與置頂狀態僅保存在本裝置。不會上傳、不會同步，也不會用於線上服務。刪除後無法恢復。",
-      "en": "History, favorites, and pins are stored only on this device. They are not uploaded, synced, or used by online services. Deletion cannot be undone."
-    },
-    "history.badge.pinned": {
-      "zh-Hans": "置顶",
-      "zh-Hant": "置頂",
-      "en": "Pinned"
-    },
-    "history.badge.favorite": {
-      "zh-Hans": "收藏",
-      "zh-Hant": "收藏",
-      "en": "Favorite"
+      "zh-Hans": "当前版本的历史记录仅保存在本设备。不会上传、不会同步，也不会用于在线服务。删除后无法恢复。",
+      "zh-Hant": "目前版本的歷史記錄僅保存在本裝置。不會上傳、不會同步，也不會用於線上服務。刪除後無法恢復。",
+      "en": "History is stored only on this device. It is not uploaded, synced, or used by online services. Deletion cannot be undone."
     },
     "history.row.totalWeight": {
       "zh-Hans": "总重量：{weight}",
       "zh-Hant": "總重量：{weight}",
       "en": "Total weight: {weight}"
+    },
+    "history.row.birthEightCharacters": {
+      "zh-Hans": "生辰八字：{value}",
+      "zh-Hant": "生辰八字：{value}",
+      "en": "Eight characters: {value}"
     },
     "history.delete.accessibilityLabel": {
       "zh-Hans": "删除历史记录",
@@ -75,60 +70,20 @@
       "zh-Hant": "此操作只會清空本機記錄，無法恢復。",
       "en": "This only clears local records and cannot be undone."
     },
-    "history.actions.title": {
-      "zh-Hans": "记录操作",
-      "zh-Hant": "記錄操作",
-      "en": "Record Actions"
-    },
-    "history.actions.notice": {
-      "zh-Hans": "这些操作只影响本机历史记录状态。填入首页不会自动查询，也不会生成新的历史记录。",
-      "zh-Hant": "這些操作只影響本機歷史記錄狀態。填入首頁不會自動查詢，也不會產生新的歷史記錄。",
-      "en": "These actions affect only local history state. Refilling Home will not calculate automatically or create a new history record."
-    },
-    "history.actions.favorite": {
-      "zh-Hans": "收藏记录",
-      "zh-Hant": "收藏記錄",
-      "en": "Favorite Record"
-    },
-    "history.actions.unfavorite": {
-      "zh-Hans": "取消收藏",
-      "zh-Hant": "取消收藏",
-      "en": "Unfavorite"
-    },
-    "history.actions.pin": {
-      "zh-Hans": "置顶记录",
-      "zh-Hant": "置頂記錄",
-      "en": "Pin Record"
-    },
-    "history.actions.unpin": {
-      "zh-Hans": "取消置顶",
-      "zh-Hant": "取消置頂",
-      "en": "Unpin"
-    },
-    "history.actions.reuse": {
-      "zh-Hans": "填入首页重新查询",
-      "zh-Hant": "填入首頁重新查詢",
-      "en": "Refill Home"
-    },
-    "history.actions.favorite.accessibilityHint": {
-      "zh-Hans": "切换这条历史记录的本机收藏状态。",
-      "zh-Hant": "切換這條歷史記錄的本機收藏狀態。",
-      "en": "Toggle the local favorite state for this history record."
-    },
-    "history.actions.pin.accessibilityHint": {
-      "zh-Hans": "切换这条历史记录的本机置顶状态。",
-      "zh-Hant": "切換這條歷史記錄的本機置頂狀態。",
-      "en": "Toggle the local pinned state for this history record."
-    },
-    "history.actions.reuse.accessibilityHint": {
-      "zh-Hans": "将这条历史记录的出生日期和时辰填入首页，不会自动查询。",
-      "zh-Hant": "將這條歷史記錄的出生日期與時辰填入首頁，不會自動查詢。",
-      "en": "Fill Home with this record's birth date and hour without calculating automatically."
-    },
     "history.detail.navigationTitle": {
       "zh-Hans": "历史详情",
       "zh-Hant": "歷史詳情",
       "en": "History Detail"
+    },
+    "history.detail.share.accessibilityLabel": {
+      "zh-Hans": "分享历史详情",
+      "zh-Hant": "分享歷史詳情",
+      "en": "Share history detail"
+    },
+    "history.detail.share.accessibilityHint": {
+      "zh-Hans": "打开系统分享面板，分享这条历史查询摘要。",
+      "zh-Hant": "開啟系統分享面板，分享這條歷史查詢摘要。",
+      "en": "Open the system share sheet to share this history query summary."
     },
     "history.detail.queryTime": {
       "zh-Hans": "查询时间：{time}",
@@ -140,75 +95,25 @@
       "zh-Hant": "這是一次歷史查詢的輕量記錄，完整報告請重新查詢產生。",
       "en": "This is a lightweight history record. Recalculate to generate the full report."
     },
-    "history.detail.favoriteAdded": {
-      "zh-Hans": "已收藏这条本机历史记录。",
-      "zh-Hant": "已收藏這條本機歷史記錄。",
-      "en": "This local history record was favorited."
-    },
-    "history.detail.favoriteRemoved": {
-      "zh-Hans": "已取消收藏。",
-      "zh-Hant": "已取消收藏。",
-      "en": "Favorite removed."
-    },
-    "history.detail.pinned": {
-      "zh-Hans": "已置顶这条本机历史记录。",
-      "zh-Hant": "已置頂這條本機歷史記錄。",
-      "en": "This local history record was pinned."
-    },
-    "history.detail.unpinned": {
-      "zh-Hans": "已取消置顶。",
-      "zh-Hant": "已取消置頂。",
-      "en": "Pin removed."
-    },
-    "history.detail.draftSource": {
-      "zh-Hans": "历史记录：{title}",
-      "zh-Hant": "歷史記錄：{title}",
-      "en": "History record: {title}"
-    },
-    "history.detail.reuseApplied": {
-      "zh-Hans": "已填入首页草稿，返回首页后可点击查询。",
-      "zh-Hant": "已填入首頁草稿，返回首頁後可點擊查詢。",
-      "en": "Filled a Home draft. Return to Home and tap Calculate."
+    "history.detail.unknownValue": {
+      "zh-Hans": "未知",
+      "zh-Hant": "未知",
+      "en": "Unknown"
     },
     "history.error.loadFailed": {
       "zh-Hans": "历史记录加载失败，请稍后重试。",
       "zh-Hant": "歷史記錄載入失敗，請稍後重試。",
       "en": "History failed to load. Please try again later."
     },
-    "history.error.stateLoadFailed": {
-      "zh-Hans": "历史记录收藏和置顶状态加载失败，请稍后重试。",
-      "zh-Hant": "歷史記錄收藏與置頂狀態載入失敗，請稍後重試。",
-      "en": "History favorite and pin state failed to load. Please try again later."
-    },
-    "history.error.deleteCleanupFailed": {
-      "zh-Hans": "历史记录已删除，但收藏 / 置顶状态清理失败，请稍后重试。",
-      "zh-Hant": "歷史記錄已刪除，但收藏 / 置頂狀態清理失敗，請稍後重試。",
-      "en": "History was deleted, but favorite/pin cleanup failed. Please try again later."
-    },
     "history.error.deleteFailed": {
       "zh-Hans": "历史记录删除失败，请稍后重试。",
       "zh-Hant": "歷史記錄刪除失敗，請稍後重試。",
       "en": "History deletion failed. Please try again later."
     },
-    "history.error.clearCleanupFailed": {
-      "zh-Hans": "历史记录已清空，但收藏 / 置顶状态清理失败，请稍后重试。",
-      "zh-Hant": "歷史記錄已清空，但收藏 / 置頂狀態清理失敗，請稍後重試。",
-      "en": "History was cleared, but favorite/pin cleanup failed. Please try again later."
-    },
     "history.error.clearFailed": {
       "zh-Hans": "历史记录清空失败，请稍后重试。",
       "zh-Hant": "歷史記錄清空失敗，請稍後重試。",
       "en": "History failed to clear. Please try again later."
-    },
-    "history.error.favoriteUpdateFailed": {
-      "zh-Hans": "收藏状态更新失败，请稍后重试。",
-      "zh-Hant": "收藏狀態更新失敗，請稍後重試。",
-      "en": "Favorite state failed to update. Please try again later."
-    },
-    "history.error.pinUpdateFailed": {
-      "zh-Hans": "置顶状态更新失败，请稍后重试。",
-      "zh-Hant": "置頂狀態更新失敗，請稍後重試。",
-      "en": "Pin state failed to update. Please try again later."
     }
   }
 }

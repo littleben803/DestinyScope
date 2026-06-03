@@ -12,6 +12,7 @@ struct HomeInputCard: View {
 
     @Binding var birthDate: Date
     @Binding var selectedHour: Int
+    @Binding var selectedGender: BirthGender
 
     let hours: [Int]
     let errorMessage: String?
@@ -51,6 +52,23 @@ struct HomeInputCard: View {
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel(localizationStore.string(.homeBirthHourTitle))
                 .accessibilityValue(Text(hourText(for: selectedHour)))
+
+                Divider()
+                    .background(AppTheme.Colors.divider)
+
+                HStack(spacing: AppTheme.Spacing.md) {
+                    Label(localizationStore.string(.homeGenderTitle), systemImage: "person.2")
+                        .font(AppTheme.Typography.body)
+                        .foregroundColor(AppTheme.Colors.primaryText)
+
+                    Spacer()
+
+                    BirthGenderSegmentedControl(selection: $selectedGender)
+                        .environmentObject(localizationStore)
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(localizationStore.string(.homeGenderTitle))
+                .accessibilityValue(Text(genderText(for: selectedGender)))
 
                 HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
                     Image(systemName: "lock.shield")
@@ -109,5 +127,75 @@ struct HomeInputCard: View {
             .homeHourValue,
             replacements: ["hour": String(format: "%02d", hour)]
         )
+    }
+
+    private func genderText(for gender: BirthGender) -> String {
+        switch gender {
+        case .male:
+            return localizationStore.string(.genderMale)
+        case .female:
+            return localizationStore.string(.genderFemale)
+        }
+    }
+}
+
+private struct BirthGenderSegmentedControl: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
+    @Binding var selection: BirthGender
+
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(BirthGender.allCases) { gender in
+                Button {
+                    selection = gender
+                } label: {
+                    HStack(spacing: AppTheme.Spacing.xs) {
+                        Image(systemName: systemImageName(for: gender))
+                            .font(AppTheme.Typography.footnote.weight(.semibold))
+                            .accessibilityHidden(true)
+
+                        Text(title(for: gender))
+                            .font(AppTheme.Typography.footnote.weight(.semibold))
+                    }
+                    .foregroundColor(selection == gender ? .white : AppTheme.Colors.primaryText)
+                    .frame(minWidth: 64)
+                    .padding(.vertical, AppTheme.Spacing.xs)
+                    .padding(.horizontal, AppTheme.Spacing.sm)
+                    .background(
+                        RoundedRectangle(cornerRadius: AppTheme.Radius.button, style: .continuous)
+                            .fill(selection == gender ? AppTheme.Colors.cinnabar : Color.clear)
+                    )
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(title(for: gender))
+                .accessibilityAddTraits(selection == gender ? .isSelected : [])
+            }
+        }
+        .padding(3)
+        .background(AppTheme.Colors.paper)
+        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.button, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppTheme.Radius.button, style: .continuous)
+                .stroke(AppTheme.Colors.divider.opacity(0.65), lineWidth: 1)
+        )
+    }
+
+    private func title(for gender: BirthGender) -> String {
+        switch gender {
+        case .male:
+            return localizationStore.string(.genderMale)
+        case .female:
+            return localizationStore.string(.genderFemale)
+        }
+    }
+
+    private func systemImageName(for gender: BirthGender) -> String {
+        switch gender {
+        case .male:
+            return "figure.stand"
+        case .female:
+            return "figure.stand.dress"
+        }
     }
 }

@@ -9,108 +9,50 @@ import SwiftUI
 
 struct HistoryDetailView: View {
     let record: HistoryRecord
-    let onRequestHomeTab: () -> Void
 
-    @EnvironmentObject private var homeInputDraftStore: HomeInputDraftStore
     @EnvironmentObject private var localizationStore: LocalizationStore
 
-    @State private var isFavorite = false
-    @State private var isPinned = false
-    @State private var stateMessage: String?
+    @State private var detailedReading: LifeWeightReading?
 
-    private let userStateStore = HistoryRecordUserStateStore()
+    private let lifeWeightReadingRepository = LifeWeightReadingRepository()
+    private let shareTextBuilder = ResultShareTextBuilder()
 
-    init(record: HistoryRecord, onRequestHomeTab: @escaping () -> Void = {}) {
+    init(record: HistoryRecord) {
         self.record = record
-        self.onRequestHomeTab = onRequestHomeTab
     }
 
     var body: some View {
         AppBackground {
             ScrollView {
                 VStack(spacing: AppTheme.Spacing.md) {
-                    summaryCard
-                    HistoryRecordActionBar(
-                        isFavorite: isFavorite,
-                        isPinned: isPinned,
-                        onToggleFavorite: toggleFavorite,
-                        onTogglePinned: togglePinned,
-                        onReuseInput: fillHomeInputDraft
-                    )
-                    if let stateMessage {
-                        AppCard {
-                            Text(stateMessage)
-                                .font(AppTheme.Typography.footnote)
-                                .foregroundColor(AppTheme.Colors.secondaryText)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                    }
                     poemCard
-                    if !record.tags.isEmpty {
-                        tagsCard
-                    }
-                    HistoryLocalNoticeView()
-                    lightweightRecordNotice
+                    LifeWeightReadingCard(
+                        result: lightweightResult,
+                        reading: detailedReading,
+                        interpretation: fallbackInterpretation,
+                        insight: fallbackInsight
+                    )
                 }
                 .padding(AppTheme.Spacing.lg)
             }
         }
         .navigationTitle(localizationStore.string("history.detail.navigationTitle"))
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear(perform: loadUserState)
-    }
-
-    private var summaryCard: some View {
-        AppCard {
-            Text(record.title)
-                .font(AppTheme.Typography.pageTitle)
-                .foregroundColor(AppTheme.Colors.primaryText)
-                .fixedSize(horizontal: false, vertical: true)
-
-            if isPinned || isFavorite {
-                HStack(spacing: AppTheme.Spacing.sm) {
-                    if isPinned {
-                        HistoryRecordStateBadgeView(
-                            title: localizationStore.string("history.badge.pinned"),
-                            systemImageName: "pin.fill"
-                        )
-                    }
-
-                    if isFavorite {
-                        HistoryRecordStateBadgeView(
-                            title: localizationStore.string("history.badge.favorite"),
-                            systemImageName: "star.fill"
-                        )
-                    }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ShareLink(item: historyShareText) {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(AppTheme.Colors.primaryText)
+                        .frame(width: 36, height: 36)
+                        .contentShape(Circle())
                 }
+                .accessibilityLabel(localizationStore.string("history.detail.share.accessibilityLabel"))
+                .accessibilityHint(localizationStore.string("history.detail.share.accessibilityHint"))
             }
-
-            Text(localizationStore.string(
-                "history.detail.queryTime",
-                replacements: ["time": record.createdAtDisplayText]
-            ))
-                .font(AppTheme.Typography.secondary)
-                .foregroundColor(AppTheme.Colors.secondaryText)
-
-            Divider()
-                .background(AppTheme.Colors.divider)
-
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                Text(record.birthDisplayText)
-                    .font(AppTheme.Typography.body)
-                    .foregroundColor(AppTheme.Colors.primaryText)
-
-                Text(record.lunarBirthday)
-                    .font(AppTheme.Typography.body)
-                    .foregroundColor(AppTheme.Colors.secondaryText)
-
-                Text(localizationStore.string(
-                    "history.row.totalWeight",
-                    replacements: ["weight": record.totalWeightText]
-                ))
-                    .font(AppTheme.Typography.body.weight(.semibold))
-                    .foregroundColor(AppTheme.Colors.darkGold)
-            }
+        }
+        .onAppear {
+            loadDetailedReading()
         }
     }
 
@@ -125,69 +67,127 @@ struct HistoryDetailView: View {
         }
     }
 
-    private var tagsCard: some View {
-        AppCard {
-            AppSectionHeader(title: localizationStore.string("knowledge.detail.tagsTitle"))
-            HistoryTagGrid(tags: record.tags)
-        }
-    }
-
-    private var lightweightRecordNotice: some View {
-        AppCard {
-            Text(localizationStore.string("history.detail.lightweightNotice"))
-                .font(AppTheme.Typography.footnote)
-                .foregroundColor(AppTheme.Colors.secondaryText)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-    }
-
-    private func loadUserState() {
-        do {
-            let userState = try userStateStore.load()
-            isFavorite = userState.favoriteRecordIDs.contains(record.id)
-            isPinned = userState.pinnedRecordIDs.contains(record.id)
-            stateMessage = nil
-        } catch {
-            isFavorite = false
-            isPinned = false
-            stateMessage = localizationStore.string("history.error.stateLoadFailed")
-        }
-    }
-
-    private func toggleFavorite() {
-        do {
-            try userStateStore.toggleFavorite(id: record.id)
-            loadUserState()
-            stateMessage = isFavorite
-                ? localizationStore.string("history.detail.favoriteAdded")
-                : localizationStore.string("history.detail.favoriteRemoved")
-        } catch {
-            stateMessage = localizationStore.string("history.error.favoriteUpdateFailed")
-        }
-    }
-
-    private func togglePinned() {
-        do {
-            try userStateStore.togglePinned(id: record.id)
-            loadUserState()
-            stateMessage = isPinned
-                ? localizationStore.string("history.detail.pinned")
-                : localizationStore.string("history.detail.unpinned")
-        } catch {
-            stateMessage = localizationStore.string("history.error.pinUpdateFailed")
-        }
-    }
-
-    private func fillHomeInputDraft() {
-        homeInputDraftStore.setDraft(
-            birthDate: record.solarDate,
-            hour: record.hour,
-            source: localizationStore.string(
-                "history.detail.draftSource",
-                replacements: ["title": record.title]
-            )
+    private var lightweightResult: LifeWeightResult {
+        LifeWeightResult(
+            birthProfile: BirthProfile(
+                solarDate: record.solarDate,
+                hour: record.hour,
+                gender: record.gender
+            ),
+            lunarBirthDate: LunarBirthDate(
+                yearIndex: 0,
+                yearText: "",
+                month: 0,
+                monthText: "",
+                day: 0,
+                dayText: "",
+                isLeapMonth: false,
+                displayText: record.lunarBirthday
+            ),
+            hourText: record.hourDisplayText,
+            breakdown: emptyBreakdown,
+            totalWeight: record.totalWeightValue,
+            totalWeightText: record.totalWeightText,
+            title: record.title,
+            poem: record.poem
         )
-        stateMessage = localizationStore.string("history.detail.reuseApplied")
-        onRequestHomeTab()
+    }
+
+    private var emptyBreakdown: LifeWeightBreakdown {
+        LifeWeightBreakdown(
+            year: emptyWeightItem(label: "年"),
+            month: emptyWeightItem(label: "月"),
+            day: emptyWeightItem(label: "日"),
+            hour: emptyWeightItem(label: "时")
+        )
+    }
+
+    private var fallbackInterpretation: FortuneInterpretation {
+        TemplateFortuneInterpreter().interpret(result: lightweightResult)
+    }
+
+    private var fallbackInsight: LifeWeightInsight {
+        let generatedInsight = LifeWeightInsightGenerator().generate(result: lightweightResult)
+        guard !record.tags.isEmpty else {
+            return generatedInsight
+        }
+
+        return LifeWeightInsight(
+            tags: record.tags,
+            focusTitle: generatedInsight.focusTitle,
+            focusDescription: generatedInsight.focusDescription,
+            strengths: generatedInsight.strengths,
+            cautions: generatedInsight.cautions,
+            actionSuggestion: generatedInsight.actionSuggestion,
+            safetyNotice: generatedInsight.safetyNotice
+        )
+    }
+
+    private var historyShareText: String {
+        shareTextBuilder.build(
+            result: lightweightResult,
+            interpretation: fallbackInterpretation,
+            insight: fallbackInsight,
+            localizationStore: localizationStore
+        )
+    }
+
+    private func emptyWeightItem(label: String) -> WeightItem {
+        WeightItem(
+            label: label,
+            valueText: localizationStore.string("history.detail.unknownValue"),
+            weightText: localizationStore.string("history.detail.unknownValue"),
+            weight: 0
+        )
+    }
+
+    private func loadDetailedReading() {
+        detailedReading = try? lifeWeightReadingRepository.reading(
+            forWeightKey: record.readingWeightKey,
+            gender: record.gender
+        )
+    }
+}
+
+private extension HistoryRecord {
+    var readingWeightKey: String {
+        totalWeightText
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "两", with: "兩")
+            .replacingOccurrences(of: "钱", with: "")
+            .replacingOccurrences(of: "錢", with: "")
+    }
+
+    var totalWeightValue: Double {
+        let key = readingWeightKey
+        guard let liangMarkerRange = key.range(of: "兩") else {
+            return 0
+        }
+
+        let liangText = String(key[..<liangMarkerRange.lowerBound])
+        let qianText = String(key[liangMarkerRange.upperBound...])
+        let liang = Self.chineseNumeralValue(liangText) ?? 0
+        let qian = Self.chineseNumeralValue(qianText) ?? 0
+        return Double(liang) + Double(qian) / 10
+    }
+
+    private static func chineseNumeralValue(_ text: String) -> Int? {
+        guard !text.isEmpty else {
+            return 0
+        }
+
+        let numerals: [String: Int] = [
+            "零": 0,
+            "一": 1,
+            "二": 2,
+            "三": 3,
+            "四": 4,
+            "五": 5,
+            "六": 6,
+            "七": 7,
+            "八": 8,
+            "九": 9
+        ]
+        return numerals[text]
     }
 }

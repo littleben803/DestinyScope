@@ -9,32 +9,12 @@ import SwiftUI
 
 struct HistoryRecordRowView: View {
     let record: HistoryRecord
-    var isFavorite = false
-    var isPinned = false
 
     @EnvironmentObject private var localizationStore: LocalizationStore
 
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                if isPinned || isFavorite {
-                    HStack(spacing: AppTheme.Spacing.sm) {
-                        if isPinned {
-                            HistoryRecordStateBadgeView(
-                                title: localizationStore.string("history.badge.pinned"),
-                                systemImageName: "pin.fill"
-                            )
-                        }
-
-                        if isFavorite {
-                            HistoryRecordStateBadgeView(
-                                title: localizationStore.string("history.badge.favorite"),
-                                systemImageName: "star.fill"
-                            )
-                        }
-                    }
-                }
-
                 HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.sm) {
                     Image(systemName: "clock.arrow.circlepath")
                         .font(AppTheme.Typography.sectionTitle)
@@ -56,7 +36,10 @@ struct HistoryRecordRowView: View {
                         .font(AppTheme.Typography.secondary)
                         .foregroundColor(AppTheme.Colors.primaryText)
 
-                    Text(record.lunarBirthday)
+                    Text(localizationStore.string(
+                        "history.row.birthEightCharacters",
+                        replacements: ["value": record.birthEightCharacters.displayText]
+                    ))
                         .font(AppTheme.Typography.secondary)
                         .foregroundColor(AppTheme.Colors.secondaryText)
 
@@ -66,10 +49,6 @@ struct HistoryRecordRowView: View {
                     ))
                         .font(AppTheme.Typography.secondary.weight(.semibold))
                         .foregroundColor(AppTheme.Colors.darkGold)
-                }
-
-                if !record.tags.isEmpty {
-                    HistoryTagGrid(tags: Array(record.tags.prefix(3)))
                 }
             }
         }

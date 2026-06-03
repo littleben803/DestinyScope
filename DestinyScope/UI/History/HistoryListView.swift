@@ -8,12 +8,9 @@
 import SwiftUI
 
 struct HistoryListView: View {
-    let onRequestHomeTab: () -> Void
-
     @EnvironmentObject private var localizationStore: LocalizationStore
 
     @State private var records: [HistoryRecord] = []
-    @State private var userState = HistoryRecordUserState.empty
     @State private var errorMessage: String?
     @State private var stateMessage: String?
     @State private var recordPendingDeletion: HistoryRecord?
@@ -21,31 +18,10 @@ struct HistoryListView: View {
     @State private var isShowingDeleteAllConfirmation = false
 
     private let store = HistoryRecordStore()
-    private let userStateStore = HistoryRecordUserStateStore()
-
-    init(onRequestHomeTab: @escaping () -> Void = {}) {
-        self.onRequestHomeTab = onRequestHomeTab
-    }
+    private let localDataManagementService = LocalDataManagementService()
 
     private var sortedRecords: [HistoryRecord] {
-        let pinnedIDs = Set(userState.pinnedRecordIDs)
-        return records.sorted { lhs, rhs in
-            let lhsPinned = pinnedIDs.contains(lhs.id)
-            let rhsPinned = pinnedIDs.contains(rhs.id)
-
-            if lhsPinned != rhsPinned {
-                return lhsPinned
-            }
-            return lhs.createdAt > rhs.createdAt
-        }
-    }
-
-    private var favoriteIDs: Set<UUID> {
-        Set(userState.favoriteRecordIDs)
-    }
-
-    private var pinnedIDs: Set<UUID> {
-        Set(userState.pinnedRecordIDs)
+        records.sorted { $0.createdAt > $1.createdAt }
     }
 
     var body: some View {
@@ -98,16 +74,9 @@ struct HistoryListView: View {
                             ForEach(sortedRecords) { record in
                                 HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
                                     NavigationLink(
-                                        destination: HistoryDetailView(
-                                            record: record,
-                                            onRequestHomeTab: onRequestHomeTab
-                                        )
+                                        destination: HistoryDetailView(record: record)
                                     ) {
-                                        HistoryRecordRowView(
-                                            record: record,
-                                            isFavorite: favoriteIDs.contains(record.id),
-                                            isPinned: pinnedIDs.contains(record.id)
-                                        )
+                                        HistoryRecordRowView(record: record)
                                     }
                                     .buttonStyle(.plain)
 
@@ -151,7 +120,6 @@ struct HistoryListView: View {
         .navigationTitle(localizationStore.string("history.navigation.title"))
         .onAppear {
             loadRecords()
-            loadUserState()
         }
         .alert(localizationStore.string("history.delete.confirmTitle"), isPresented: $isShowingDeleteConfirmation) {
             Button(localizationStore.string("common.delete"), role: .destructive) {
@@ -188,29 +156,11 @@ struct HistoryListView: View {
         }
     }
 
-    private func loadUserState() {
-        do {
-            userState = try userStateStore.load()
-            stateMessage = nil
-        } catch {
-            userState = .empty
-            stateMessage = localizationStore.string("history.error.stateLoadFailed")
-        }
-    }
-
     private func delete(_ record: HistoryRecord) {
         do {
             try store.delete(id: record.id)
-            let cleanupMessage: String?
-            do {
-                try userStateStore.remove(id: record.id)
-                cleanupMessage = nil
-            } catch {
-                cleanupMessage = localizationStore.string("history.error.deleteCleanupFailed")
-            }
-            loadUserState()
             loadRecords()
-            stateMessage = cleanupMessage
+            stateMessage = nil
         } catch {
             errorMessage = localizationStore.string("history.error.deleteFailed")
         }
@@ -218,17 +168,9 @@ struct HistoryListView: View {
 
     private func deleteAll() {
         do {
-            try store.deleteAll()
-            let cleanupMessage: String?
-            do {
-                try userStateStore.clearAll()
-                cleanupMessage = nil
-            } catch {
-                cleanupMessage = localizationStore.string("history.error.clearCleanupFailed")
-            }
-            loadUserState()
+            try localDataManagementService.clearHistory()
             loadRecords()
-            stateMessage = cleanupMessage
+            stateMessage = nil
         } catch {
             errorMessage = localizationStore.string("history.error.clearFailed")
         }
@@ -238,7 +180,6 @@ struct HistoryListView: View {
 #Preview {
     NavigationStack {
         HistoryListView()
-            .environmentObject(HomeInputDraftStore())
             .environmentObject(LocalizationStore())
     }
 }
