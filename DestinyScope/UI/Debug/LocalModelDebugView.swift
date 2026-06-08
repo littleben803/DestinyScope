@@ -33,6 +33,8 @@ struct LocalModelDebugView: View {
     @State private var benchmarkSummary = "尚未运行"
     @State private var managedLoadingState: LocalModelLoadingState = .idle
     @State private var isManagedLoadRunning = false
+    @State private var ragProbeSummary = "尚未运行"
+    @State private var isRAGProbeRunning = false
 
     private let config = LocalModelDebugConfig.current
 
@@ -72,6 +74,8 @@ struct LocalModelDebugView: View {
                     statusCard
 
                     refiningCard
+
+                    ragRuntimeCard
 
                     benchmarkCard
                 }
@@ -287,6 +291,27 @@ struct LocalModelDebugView: View {
         }
     }
 
+    private var ragRuntimeCard: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+                Text("RAG 解释链路自检")
+                    .font(AppTheme.Typography.sectionTitle)
+                    .foregroundColor(AppTheme.Colors.primaryText)
+
+                Text("Debug-only：验证 rag_chunks 加载、五行检索、RAG context、Prompt JSON schema、安全拦截和 JSON 解析失败 fallback。")
+                    .font(AppTheme.Typography.secondary)
+                    .foregroundColor(AppTheme.Colors.secondaryText)
+
+                AppPrimaryButton(title: isRAGProbeRunning ? "自检中..." : "运行 RAG 链路自检") {
+                    runRAGRuntimeProbe()
+                }
+                .disabled(isRAGProbeRunning)
+
+                infoRow(title: "结果", value: ragProbeSummary)
+            }
+        }
+    }
+
     private func infoRow(title: String, value: String) -> some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
             Text(title)
@@ -392,6 +417,19 @@ struct LocalModelDebugView: View {
             let state = await LocalModelLoadingManager.shared.currentState()
             await MainActor.run {
                 managedLoadingState = state
+            }
+        }
+    }
+
+    private func runRAGRuntimeProbe() {
+        isRAGProbeRunning = true
+        ragProbeSummary = "运行中..."
+
+        Task {
+            let report = await DestinyRAGDebugProbe().run()
+            await MainActor.run {
+                ragProbeSummary = (report.didPass ? "Pass\n" : "Fail\n") + report.summary
+                isRAGProbeRunning = false
             }
         }
     }
