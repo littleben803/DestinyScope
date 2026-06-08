@@ -102,18 +102,6 @@ struct SettingsView: View {
                         ) {
                             LocalDataManagementView()
                         }
-
-                        Divider()
-                            .background(AppTheme.Colors.divider)
-
-                        settingsLink(
-                            title: localizationStore.string(.settingsSavedProfilesTitle),
-                            subtitle: localizationStore.string(.settingsSavedProfilesSubtitle),
-                            systemImage: "person.crop.circle",
-                            accessibilityHint: localizationStore.string(.settingsSavedProfilesAccessibilityHint)
-                        ) {
-                            SavedBirthProfileListView()
-                        }
                     }
 
                     #if DEBUG

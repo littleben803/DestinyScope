@@ -30,11 +30,6 @@
       "zh-Hant": "歷史記錄",
       "en": "History"
     },
-    "localData.summary.savedProfiles": {
-      "zh-Hans": "常用出生资料",
-      "zh-Hant": "常用出生資料",
-      "en": "Saved Birth Profiles"
-    },
     "localData.summary.knowledgeFavorites": {
       "zh-Hans": "知识库收藏",
       "zh-Hant": "知識庫收藏",
@@ -105,26 +100,6 @@
       "zh-Hant": "已清空本機歷史記錄。",
       "en": "Local history was cleared."
     },
-    "localData.action.clearSavedProfiles.title": {
-      "zh-Hans": "清空常用出生资料",
-      "zh-Hant": "清空常用出生資料",
-      "en": "Clear Saved Birth Profiles"
-    },
-    "localData.action.clearSavedProfiles.subtitle": {
-      "zh-Hans": "删除保存在本机的常用出生日期和时辰。",
-      "zh-Hant": "刪除保存在本機的常用出生日期與時辰。",
-      "en": "Delete saved birth dates and hours stored on this device."
-    },
-    "localData.action.clearSavedProfiles.confirmation": {
-      "zh-Hans": "此操作只会删除本机常用出生资料，不影响历史记录。删除后无法恢复。",
-      "zh-Hant": "此操作只會刪除本機常用出生資料，不影響歷史記錄。刪除後無法恢復。",
-      "en": "This only deletes local saved birth profiles. It does not affect history and cannot be undone."
-    },
-    "localData.action.clearSavedProfiles.success": {
-      "zh-Hans": "已清空本机常用出生资料。",
-      "zh-Hant": "已清空本機常用出生資料。",
-      "en": "Local saved birth profiles were cleared."
-    },
     "localData.action.clearKnowledgeFavorites.title": {
       "zh-Hans": "清空知识库收藏",
       "zh-Hant": "清空知識庫收藏",
@@ -176,9 +151,9 @@
       "en": "Show onboarding again on next launch without deleting other data."
     },
     "localData.action.resetOnboarding.confirmation": {
-      "zh-Hans": "此操作只会重置本机首次使用说明状态，不删除历史、常用资料或知识库状态。",
-      "zh-Hant": "此操作只會重置本機首次使用說明狀態，不刪除歷史、常用資料或知識庫狀態。",
-      "en": "This only resets local onboarding state. It does not delete history, saved profiles, or knowledge state."
+      "zh-Hans": "此操作只会重置本机首次使用说明状态，不删除历史或知识库状态。",
+      "zh-Hant": "此操作只會重置本機首次使用說明狀態，不刪除歷史或知識庫狀態。",
+      "en": "This only resets local onboarding state. It does not delete history or knowledge state."
     },
     "localData.action.resetOnboarding.success": {
       "zh-Hans": "已重置首次使用说明状态。",
@@ -191,14 +166,14 @@
       "en": "Clear All Local User Data"
     },
     "localData.action.clearAll.subtitle": {
-      "zh-Hans": "清空历史、常用资料、知识库状态和首次使用说明状态，不删除内置资源或模型文件。",
-      "zh-Hant": "清空歷史、常用資料、知識庫狀態與首次使用說明狀態，不刪除內置資源或模型檔案。",
-      "en": "Clear history, saved profiles, knowledge state, and onboarding state without deleting bundled resources or model files."
+      "zh-Hans": "清空历史、知识库状态和首次使用说明状态，不删除内置资源或模型文件。",
+      "zh-Hant": "清空歷史、知識庫狀態與首次使用說明狀態，不刪除內置資源或模型檔案。",
+      "en": "Clear history, knowledge state, and onboarding state without deleting bundled resources or model files."
     },
     "localData.action.clearAll.confirmation": {
-      "zh-Hans": "此操作会清空本机历史记录、常用出生资料、知识库收藏、最近阅读和首次使用说明状态。不会删除内置知识库、称骨数据、模型文件或 App 资源。删除后无法恢复。",
-      "zh-Hant": "此操作會清空本機歷史記錄、常用出生資料、知識庫收藏、最近閱讀與首次使用說明狀態。不會刪除內置知識庫、稱骨資料、模型檔案或 App 資源。刪除後無法恢復。",
-      "en": "This clears local history, saved birth profiles, knowledge favorites, recent reads, and onboarding state. It does not delete bundled knowledge, weight data, model files, or app resources. It cannot be undone."
+      "zh-Hans": "此操作会清空本机历史记录、知识库收藏、最近阅读和首次使用说明状态。不会删除内置知识库、称骨数据、模型文件或 App 资源。删除后无法恢复。",
+      "zh-Hant": "此操作會清空本機歷史記錄、知識庫收藏、最近閱讀與首次使用說明狀態。不會刪除內置知識庫、稱骨資料、模型檔案或 App 資源。刪除後無法恢復。",
+      "en": "This clears local history, knowledge favorites, recent reads, and onboarding state. It does not delete bundled knowledge, weight data, model files, or app resources. It cannot be undone."
     },
     "localData.action.clearAll.success": {
       "zh-Hans": "已清空本机用户数据。",

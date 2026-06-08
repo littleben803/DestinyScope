@@ -161,29 +161,14 @@
       "en": "Local Data Management"
     },
     "settings.localDataManagement.subtitle": {
-      "zh-Hans": "查看和清理保存在本机的历史、常用资料和知识库状态",
-      "zh-Hant": "查看與清理保存在本機的歷史、常用資料與知識庫狀態",
-      "en": "Review and clear local history, saved profiles, and knowledge state"
+      "zh-Hans": "查看和清理保存在本机的历史和知识库状态",
+      "zh-Hant": "查看與清理保存在本機的歷史與知識庫狀態",
+      "en": "Review and clear local history and knowledge state"
     },
     "settings.localDataManagement.accessibilityHint": {
       "zh-Hans": "打开本地数据管理页面。",
       "zh-Hant": "開啟本地資料管理頁面。",
       "en": "Open local data management."
-    },
-    "settings.savedProfiles.title": {
-      "zh-Hans": "常用出生资料",
-      "zh-Hant": "常用出生資料",
-      "en": "Saved Birth Profiles"
-    },
-    "settings.savedProfiles.subtitle": {
-      "zh-Hans": "管理保存在本机的出生日期和时辰",
-      "zh-Hant": "管理保存在本機的出生日期與時辰",
-      "en": "Manage birth dates and hours stored on this device"
-    },
-    "settings.savedProfiles.accessibilityHint": {
-      "zh-Hans": "打开常用出生资料管理页面。",
-      "zh-Hant": "開啟常用出生資料管理頁面。",
-      "en": "Open saved birth profiles."
     },
     "settings.debug.section.title": {
       "zh-Hans": "实验功能",

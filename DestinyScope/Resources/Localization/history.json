@@ -11,24 +11,14 @@
       "en": "No History Yet"
     },
     "history.empty.message": {
-      "zh-Hans": "完成一次查询后，结果会以轻量记录保存在本机，方便以后回看。",
-      "zh-Hant": "完成一次查詢後，結果會以輕量記錄保存在本機，方便之後回看。",
-      "en": "After a query, a lightweight local record will be saved for later review."
+      "zh-Hans": "完成一次查询后，结果会保存在本机，方便以后回看。",
+      "zh-Hant": "完成一次查詢後，結果會保存在本機，方便之後回看。",
+      "en": "After a query, the result will be saved on this device for later review."
     },
     "history.empty.privacy": {
       "zh-Hans": "历史记录不会上传或同步。",
       "zh-Hant": "歷史記錄不會上傳或同步。",
       "en": "History is not uploaded or synced."
-    },
-    "history.localNotice.title": {
-      "zh-Hans": "本地保存",
-      "zh-Hant": "本地保存",
-      "en": "Stored Locally"
-    },
-    "history.localNotice.body": {
-      "zh-Hans": "当前版本的历史记录仅保存在本设备。不会上传、不会同步，也不会用于在线服务。删除后无法恢复。",
-      "zh-Hant": "目前版本的歷史記錄僅保存在本裝置。不會上傳、不會同步，也不會用於線上服務。刪除後無法恢復。",
-      "en": "History is stored only on this device. It is not uploaded, synced, or used by online services. Deletion cannot be undone."
     },
     "history.row.totalWeight": {
       "zh-Hans": "总重量：{weight}",
@@ -39,26 +29,6 @@
       "zh-Hans": "生辰八字：{value}",
       "zh-Hant": "生辰八字：{value}",
       "en": "Eight characters: {value}"
-    },
-    "history.delete.accessibilityLabel": {
-      "zh-Hans": "删除历史记录",
-      "zh-Hant": "刪除歷史記錄",
-      "en": "Delete history record"
-    },
-    "history.delete.accessibilityHint": {
-      "zh-Hans": "删除这条本机历史记录，删除后无法恢复。",
-      "zh-Hant": "刪除這條本機歷史記錄，刪除後無法恢復。",
-      "en": "Delete this local history record. It cannot be restored."
-    },
-    "history.delete.confirmTitle": {
-      "zh-Hans": "删除这条历史记录？",
-      "zh-Hant": "刪除這條歷史記錄？",
-      "en": "Delete this history record?"
-    },
-    "history.delete.confirmMessage": {
-      "zh-Hans": "此操作只会删除本机记录，无法恢复。",
-      "zh-Hant": "此操作只會刪除本機記錄，無法恢復。",
-      "en": "This only deletes the local record and cannot be undone."
     },
     "history.clearAll.confirmTitle": {
       "zh-Hans": "清空全部历史记录？",
@@ -75,25 +45,15 @@
       "zh-Hant": "歷史詳情",
       "en": "History Detail"
     },
-    "history.detail.share.accessibilityLabel": {
-      "zh-Hans": "分享历史详情",
-      "zh-Hant": "分享歷史詳情",
-      "en": "Share history detail"
-    },
-    "history.detail.share.accessibilityHint": {
-      "zh-Hans": "打开系统分享面板，分享这条历史查询摘要。",
-      "zh-Hant": "開啟系統分享面板，分享這條歷史查詢摘要。",
-      "en": "Open the system share sheet to share this history query summary."
-    },
     "history.detail.queryTime": {
       "zh-Hans": "查询时间：{time}",
       "zh-Hant": "查詢時間：{time}",
       "en": "Query time: {time}"
     },
     "history.detail.lightweightNotice": {
-      "zh-Hans": "这是一次历史查询的轻量记录，完整报告请重新查询生成。",
-      "zh-Hant": "這是一次歷史查詢的輕量記錄，完整報告請重新查詢產生。",
-      "en": "This is a lightweight history record. Recalculate to generate the full report."
+      "zh-Hans": "这是一次历史查询记录，完整报告请重新查询生成。",
+      "zh-Hant": "這是一次歷史查詢記錄，完整報告請重新查詢產生。",
+      "en": "This is a history record. Recalculate to generate the full report."
     },
     "history.detail.unknownValue": {
       "zh-Hans": "未知",

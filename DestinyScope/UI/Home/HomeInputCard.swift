@@ -16,7 +16,6 @@ struct HomeInputCard: View {
 
     let hours: [Int]
     let errorMessage: String?
-    let onSaveCurrent: () -> Void
     let onCalculate: () -> Void
 
     var body: some View {
@@ -86,22 +85,6 @@ struct HomeInputCard: View {
             AppPrimaryButton(title: localizationStore.string(.homeInputCalculate), action: onCalculate)
                 .accessibilityLabel(localizationStore.string(.homeInputCalculateAccessibilityLabel))
                 .accessibilityHint(localizationStore.string(.homeInputCalculateAccessibilityHint))
-
-            Button(action: onSaveCurrent) {
-                HStack {
-                    Image(systemName: "tray.and.arrow.down")
-                    Text(localizationStore.string(.homeInputSaveProfile))
-                }
-                .font(AppTheme.Typography.body.weight(.semibold))
-                .foregroundColor(AppTheme.Colors.cinnabar)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, AppTheme.Spacing.md)
-                .background(AppTheme.Colors.secondaryBackground.opacity(0.45))
-                .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.card, style: .continuous))
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(localizationStore.string(.homeInputSaveProfileAccessibilityLabel))
-            .accessibilityHint(localizationStore.string(.homeInputSaveProfileAccessibilityHint))
 
             if let errorMessage {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {

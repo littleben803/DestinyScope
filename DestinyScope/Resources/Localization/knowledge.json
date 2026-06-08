@@ -25,6 +25,21 @@
       "zh-Hant": "天干地支",
       "en": "Stems and Branches"
     },
+    "knowledge.category.yinYang": {
+      "zh-Hans": "阴阳",
+      "zh-Hant": "陰陽",
+      "en": "Yin and Yang"
+    },
+    "knowledge.category.heavenlyStems": {
+      "zh-Hans": "天干",
+      "zh-Hant": "天干",
+      "en": "Heavenly Stems"
+    },
+    "knowledge.category.earthlyBranches": {
+      "zh-Hans": "地支",
+      "zh-Hant": "地支",
+      "en": "Earthly Branches"
+    },
     "knowledge.category.zodiac": {
       "zh-Hans": "生肖",
       "zh-Hant": "生肖",
@@ -39,6 +54,11 @@
       "zh-Hans": "八卦周易",
       "zh-Hant": "八卦周易",
       "en": "Bagua and Zhouyi"
+    },
+    "knowledge.category.yiBasics": {
+      "zh-Hans": "易学基础",
+      "zh-Hant": "易學基礎",
+      "en": "Yi Studies Basics"
     },
     "knowledge.category.meihua": {
       "zh-Hans": "梅花易数",

@@ -45,55 +45,10 @@
       "zh-Hant": "根據目前輸入在本機產生結果。",
       "en": "Generate a result on this device from the current input."
     },
-    "home.input.saveProfile": {
-      "zh-Hans": "保存为常用资料",
-      "zh-Hant": "保存為常用資料",
-      "en": "Save as Profile"
-    },
-    "home.input.saveProfile.accessibilityLabel": {
-      "zh-Hans": "保存当前出生资料",
-      "zh-Hant": "保存目前出生資料",
-      "en": "Save current birth profile"
-    },
-    "home.input.saveProfile.accessibilityHint": {
-      "zh-Hans": "输入本地显示名后，将当前输入资料保存到本机。",
-      "zh-Hant": "輸入本地顯示名稱後，將目前輸入資料保存到本機。",
-      "en": "Enter a local display name to save the current input on this device."
-    },
     "home.input.prompt.title": {
       "zh-Hans": "提示",
       "zh-Hant": "提示",
       "en": "Notice"
-    },
-    "home.birthProfiles.title": {
-      "zh-Hans": "常用资料",
-      "zh-Hant": "常用資料",
-      "en": "Saved Profiles"
-    },
-    "home.birthProfiles.badge": {
-      "zh-Hans": "本机保存",
-      "zh-Hant": "本機保存",
-      "en": "Stored Locally"
-    },
-    "home.birthProfiles.description": {
-      "zh-Hans": "选择后只填入已保存的出生资料，不会自动查询。",
-      "zh-Hant": "選擇後只填入已保存的出生資料，不會自動查詢。",
-      "en": "Selecting one only fills the saved birth profile. It will not calculate automatically."
-    },
-    "home.birthProfiles.empty": {
-      "zh-Hans": "暂无常用资料。可在查询卡片中保存当前输入，方便下次快速填写。",
-      "zh-Hant": "暫無常用資料。可在查詢卡片中保存目前輸入，方便下次快速填寫。",
-      "en": "No saved profiles yet. Save the current input from the query card for faster entry next time."
-    },
-    "home.birthProfiles.select.accessibilityLabel": {
-      "zh-Hans": "选择常用资料 {name}",
-      "zh-Hant": "選擇常用資料 {name}",
-      "en": "Select saved profile {name}"
-    },
-    "home.birthProfiles.select.accessibilityHint": {
-      "zh-Hans": "将出生日期和时辰填入首页输入，不会自动查询。",
-      "zh-Hant": "將出生日期與時辰填入首頁輸入，不會自動查詢。",
-      "en": "Fill the home input with this birth date and hour without calculating automatically."
     },
     "home.recent.title": {
       "zh-Hans": "最近查询",
@@ -115,11 +70,6 @@
       "zh-Hant": "可在歷史頁查看歷史查詢記錄",
       "en": "View past query records on the History page."
     },
-    "home.recent.empty": {
-      "zh-Hans": "完成一次查询后，会在本机保存轻量历史记录，方便之后回看。",
-      "zh-Hant": "完成一次查詢後，會在本機保存輕量歷史記錄，方便之後回看。",
-      "en": "After a query, a lightweight local history record will be saved for later review."
-    },
     "home.privacy.title": {
       "zh-Hans": "本地计算",
       "zh-Hant": "本地計算",
@@ -140,100 +90,10 @@
       "zh-Hant": "想了解稱骨、時辰、生肖、五行等基礎內容，可以在知識庫閱讀入門文章。",
       "en": "To learn about weight-based readings, birth hours, zodiac signs, and the five elements, read introductory articles in the knowledge library."
     },
-    "home.saveSheet.title": {
-      "zh-Hans": "保存常用出生资料",
-      "zh-Hant": "保存常用出生資料",
-      "en": "Save Birth Profile"
-    },
-    "home.saveSheet.body": {
-      "zh-Hans": "为当前出生日期和时辰设置一个本地显示名，方便下次快速填写。",
-      "zh-Hant": "為目前出生日期與時辰設定一個本地顯示名稱，方便下次快速填寫。",
-      "en": "Set a local display name for the current birth date and hour so you can fill it quickly next time."
-    },
-    "home.saveSheet.privacy": {
-      "zh-Hans": "资料仅保存在本机，不会上传或同步。",
-      "zh-Hant": "資料僅保存在本機，不會上傳或同步。",
-      "en": "This profile is stored only on this device. It is not uploaded or synced."
-    },
-    "home.saveSheet.placeholder": {
-      "zh-Hans": "例如：本人、家人、朋友",
-      "zh-Hant": "例如：本人、家人、朋友",
-      "en": "For example: Me, Family, Friend"
-    },
-    "home.saveSheet.birthDate": {
-      "zh-Hans": "出生日期：{date}",
-      "zh-Hant": "出生日期：{date}",
-      "en": "Birth date: {date}"
-    },
-    "home.saveSheet.birthHour": {
-      "zh-Hans": "出生时辰：{hour}",
-      "zh-Hant": "出生時辰：{hour}",
-      "en": "Birth hour: {hour}"
-    },
-    "home.saveSheet.save": {
-      "zh-Hans": "保存",
-      "zh-Hant": "保存",
-      "en": "Save"
-    },
-    "home.saveSheet.save.accessibilityLabel": {
-      "zh-Hans": "保存常用出生资料",
-      "zh-Hant": "保存常用出生資料",
-      "en": "Save birth profile"
-    },
-    "home.saveSheet.save.accessibilityHint": {
-      "zh-Hans": "将当前出生日期和时辰保存到本机。",
-      "zh-Hant": "將目前出生日期與時辰保存到本機。",
-      "en": "Save the current birth date and hour on this device."
-    },
-    "home.saveSheet.navigation.title": {
-      "zh-Hans": "保存资料",
-      "zh-Hant": "保存資料",
-      "en": "Save Profile"
-    },
-    "home.saveSheet.cancel": {
-      "zh-Hans": "取消",
-      "zh-Hant": "取消",
-      "en": "Cancel"
-    },
-    "home.saveSheet.cancel.accessibilityLabel": {
-      "zh-Hans": "取消保存",
-      "zh-Hant": "取消保存",
-      "en": "Cancel saving"
-    },
-    "home.saveSheet.cancel.accessibilityHint": {
-      "zh-Hans": "关闭保存常用出生资料页面。",
-      "zh-Hant": "關閉保存常用出生資料頁面。",
-      "en": "Close the save birth profile screen."
-    },
     "home.error.calculateFallback": {
       "zh-Hans": "暂时无法计算，请稍后重试。",
       "zh-Hant": "暫時無法計算，請稍後重試。",
       "en": "Unable to calculate right now. Please try again later."
-    },
-    "home.profile.loadFailed": {
-      "zh-Hans": "常用出生资料加载失败，请稍后重试。",
-      "zh-Hant": "常用出生資料載入失敗，請稍後重試。",
-      "en": "Saved birth profiles failed to load. Please try again later."
-    },
-    "home.profile.applied": {
-      "zh-Hans": "已填入“{name}”，请确认后点击查询。",
-      "zh-Hant": "已填入「{name}」，請確認後點擊查詢。",
-      "en": "Filled in \"{name}\". Please confirm, then calculate."
-    },
-    "home.profile.defaultName": {
-      "zh-Hans": "常用资料",
-      "zh-Hant": "常用資料",
-      "en": "Saved Profile"
-    },
-    "home.profile.saved": {
-      "zh-Hans": "已保存“{name}”，资料仅保存在本机。",
-      "zh-Hant": "已保存「{name}」，資料僅保存在本機。",
-      "en": "Saved \"{name}\". The profile is stored only on this device."
-    },
-    "home.profile.saveFailed": {
-      "zh-Hans": "常用出生资料保存失败，请稍后重试。",
-      "zh-Hant": "常用出生資料保存失敗，請稍後重試。",
-      "en": "Saved birth profile failed to save. Please try again later."
     },
     "home.input.gender": {
       "zh-Hans": "性别",

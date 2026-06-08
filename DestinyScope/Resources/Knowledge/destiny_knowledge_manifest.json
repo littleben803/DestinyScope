@@ -1,0 +1,225 @@
+{
+  "generatedAt": "2026-06-04T16:01:55+00:00",
+  "version": "destiny-knowledge-2026-06-03",
+  "qualityThreshold": 70,
+  "riskPolicy": "Only riskLevel=safe and qualityScore>=70 records enter official outputs.",
+  "inputPolicy": {
+    "usedFiles": [
+      ".build/knowledge_import/wuxingbagua_cleaned.jsonl",
+      ".build/knowledge_import/wuxingbagua_knowledge_articles_candidate.json",
+      ".build/knowledge_import/wuxingbagua_rag_chunks_candidate.json",
+      ".build/knowledge_import/wuxingbagua_cleaning_summary.json",
+      ".build/knowledge_import/wuxingbagua_audit_summary.json"
+    ],
+    "excludedFiles": [
+      ".build/knowledge_import/wuxingbagua_raw.json",
+      "Complex_CoT",
+      ".build/knowledge_import/wuxingbagua_review_queue.jsonl",
+      ".build/knowledge_import/wuxingbagua_rejects.jsonl"
+    ]
+  },
+  "inputs": {
+    "sourceRows": 2240,
+    "cleanedRows": 1317,
+    "candidateArticles": 1317,
+    "candidateChunks": 1317,
+    "curatedSupplementArticles": 182,
+    "curatedSupplementChunks": 182,
+    "auditRiskRows": 808
+  },
+  "outputs": {
+    "articles": 306,
+    "chunks": 306,
+    "wuxingbaguaArticles": 124,
+    "curatedSupplementArticles": 182,
+    "reservedFutureNaming": 1,
+    "filteredOut": 1192,
+    "categoryCounts": {
+      "五行": 64,
+      "阴阳": 79,
+      "易学基础": 13,
+      "八卦": 28,
+      "天干": 62,
+      "地支": 60
+    },
+    "sceneCounts": {
+      "knowledge_library": 306,
+      "rag_retrieval": 306,
+      "wuxing_foundation": 65,
+      "yinyang_foundation": 84,
+      "traditional_culture": 258,
+      "usage_boundary": 306,
+      "yixue_foundation": 74,
+      "bagua_foundation": 68,
+      "ganzhi_foundation": 122
+    },
+    "curatedSupplementCategoryCounts": {
+      "五行": 60,
+      "天干": 62,
+      "地支": 60
+    },
+    "quality": {
+      "min": 88,
+      "max": 95,
+      "average": 93.0
+    }
+  },
+  "filters": {
+    "prefixRemovedRows": 1268,
+    "counters": {
+      "deleted:out_of_scope": 61,
+      "deleted:review_risk_terms": 2,
+      "deleted:review_risk_terms:决定着": 2,
+      "deleted:book_metadata": 8,
+      "deleted:book_or_source_specific": 94,
+      "deleted:advanced_yijing_exegesis": 983,
+      "deleted:governance_or_ethics_case": 464,
+      "deleted:personal_consultation": 32,
+      "deleted:behavior_or_ethics_advice": 29,
+      "deleted:military_or_conflict": 21,
+      "deleted:face_reading": 11,
+      "deleted:tarot_or_divination": 5,
+      "reserved_future_naming": 1,
+      "reserved_future_naming:取名": 1,
+      "reserved_future_naming:姓名": 1,
+      "deleted:marriage": 1
+    },
+    "deletedReasonTopN": [
+      {
+        "reason": "deleted:advanced_yijing_exegesis",
+        "count": 983
+      },
+      {
+        "reason": "deleted:governance_or_ethics_case",
+        "count": 464
+      },
+      {
+        "reason": "deleted:book_or_source_specific",
+        "count": 94
+      },
+      {
+        "reason": "deleted:out_of_scope",
+        "count": 61
+      },
+      {
+        "reason": "deleted:personal_consultation",
+        "count": 32
+      },
+      {
+        "reason": "deleted:behavior_or_ethics_advice",
+        "count": 29
+      },
+      {
+        "reason": "deleted:military_or_conflict",
+        "count": 21
+      },
+      {
+        "reason": "deleted:face_reading",
+        "count": 11
+      },
+      {
+        "reason": "deleted:book_metadata",
+        "count": 8
+      },
+      {
+        "reason": "deleted:tarot_or_divination",
+        "count": 5
+      },
+      {
+        "reason": "deleted:review_risk_terms",
+        "count": 2
+      },
+      {
+        "reason": "deleted:review_risk_terms:决定着",
+        "count": 2
+      }
+    ]
+  },
+  "validation": {
+    "forbiddenHits": [],
+    "chunkMetadataOK": true,
+    "chunkBoundaryOK": true,
+    "articleBoundaryFieldOK": true,
+    "chunkBoundaryFieldOK": true,
+    "articleBodyNoInlineBoundary": true,
+    "chunkTextNoInlineBoundary": true,
+    "articleBodyNoQuestionPrefix": true,
+    "chunkTextNoQuestionPrefix": true,
+    "articleRiskOK": true,
+    "passed": true
+  },
+  "sqlite": {
+    "tables": [
+      "metadata",
+      "articles",
+      "rag_chunks",
+      "articles_fts",
+      "rag_chunks_fts"
+    ],
+    "sampleQueryCounts": {
+      "五行": 122,
+      "阴阳": 137,
+      "天干": 62,
+      "地支": 60,
+      "八卦": 68,
+      "易学": 95
+    }
+  },
+  "files": {
+    "articles": "DestinyScope/Resources/Knowledge/destiny_knowledge_articles.json",
+    "chunks": "DestinyScope/Resources/Knowledge/destiny_rag_chunks.json",
+    "officialArticles": "DestinyScope/Resources/Knowledge/knowledge_articles.json",
+    "officialChunks": "DestinyScope/Resources/Knowledge/rag_chunks.json",
+    "reservedFutureNaming": "DestinyScope/Resources/Knowledge/reserved_future_naming.json",
+    "manifest": "DestinyScope/Resources/Knowledge/destiny_knowledge_manifest.json",
+    "sqlite": "DestinyScope/Resources/Knowledge/destiny_knowledge.sqlite",
+    "report": "docs/destiny_knowledge_build_report.md"
+  },
+  "publication": {
+    "publishedOfficialResources": true,
+    "officialArticles": "DestinyScope/Resources/Knowledge/knowledge_articles.json",
+    "officialChunks": "DestinyScope/Resources/Knowledge/rag_chunks.json"
+  },
+  "source": {
+    "dataset": "yico1211/wuxingbagua",
+    "revision": "887e383daae7e55c75b85326695a26244a1bbc55",
+    "license": null,
+    "curatedSupplementSources": [
+      {
+        "title": "《尚书·洪范》",
+        "url": "https://zh.wikisource.org/zh-hans/%E5%B0%9A%E6%9B%B8/%E6%B4%AA%E7%AF%84",
+        "note": "五行名称与润下、炎上、曲直、从革、稼穑等基础属性"
+      },
+      {
+        "title": "《礼记·月令》",
+        "url": "https://ctext.org/liji/yue-ling/ens",
+        "note": "四时、月令、日干、音、味等对应关系"
+      },
+      {
+        "title": "《淮南子·天文训》",
+        "url": "https://ctext.org/text.pl?node=3060&if=gb&remap=gb&show=parallel",
+        "note": "五方、五行、五星、五音、日干的系统对应"
+      },
+      {
+        "title": "汉典：天干",
+        "url": "https://zdic.net/hans/%E5%A4%A9%E5%B9%B2",
+        "note": "天干定义、十干列表、与地支配合纪时"
+      },
+      {
+        "title": "汉典：地支",
+        "url": "https://zdic.net/hans/%E5%9C%B0%E6%94%AF",
+        "note": "地支定义、十二支列表、与天干配合纪年纪月纪日纪时"
+      },
+      {
+        "title": "维基百科：天干",
+        "url": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B9%B2",
+        "note": "天干作为循环计序符号、干支命名和五行阴阳配属的现代整理"
+      },
+      {
+        "title": "维基百科：地支",
+        "url": "https://zh.wikipedia.org/wiki/%E5%9C%B0%E6%94%AF",
+        "note": "十二地支、十二辰、时辰、方位、阴阳五行配属的现代整理"
+      }
+    ]
+  }
+}

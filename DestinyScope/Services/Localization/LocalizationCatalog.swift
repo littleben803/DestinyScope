@@ -21,7 +21,6 @@ struct LocalizationCatalog {
         "settings",
         "legal",
         "onboarding",
-        "profile",
         "local_data",
         "local_model"
     ]

@@ -47,8 +47,8 @@ struct HistoryDetailView: View {
                         .frame(width: 36, height: 36)
                         .contentShape(Circle())
                 }
-                .accessibilityLabel(localizationStore.string("history.detail.share.accessibilityLabel"))
-                .accessibilityHint(localizationStore.string("history.detail.share.accessibilityHint"))
+                .accessibilityLabel(localizationStore.string("result.navigation.share.accessibilityLabel"))
+                .accessibilityHint(localizationStore.string("result.navigation.share.accessibilityHint"))
             }
         }
         .onAppear {
@@ -126,6 +126,7 @@ struct HistoryDetailView: View {
     private var historyShareText: String {
         shareTextBuilder.build(
             result: lightweightResult,
+            reading: detailedReading,
             interpretation: fallbackInterpretation,
             insight: fallbackInsight,
             localizationStore: localizationStore

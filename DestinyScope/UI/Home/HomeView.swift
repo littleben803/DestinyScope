@@ -19,14 +19,10 @@ struct HomeView: View {
     @State private var insight: LifeWeightInsight?
     @State private var detailedReading: LifeWeightReading?
     @State private var errorMessage: String?
-    @State private var profileMessage: String?
-    @State private var savedProfiles: [SavedBirthProfile] = []
     @State private var recentHistoryRecord: HistoryRecord?
-    @State private var isShowingSaveProfileSheet = false
     @State private var shouldShowResult = false
 
     private let hours = Array(0...23)
-    private let savedProfileStore = SavedBirthProfileStore()
     private let historyRecordStore = HistoryRecordStore()
     private let lifeWeightReadingRepository = LifeWeightReadingRepository()
 
@@ -42,27 +38,14 @@ struct HomeView: View {
                         selectedGender: $selectedGender,
                         hours: hours,
                         errorMessage: errorMessage,
-                        onSaveCurrent: {
-                            isShowingSaveProfileSheet = true
-                        },
                         onCalculate: calculateLifeWeight
                     )
                     .transition(.opacity.combined(with: .scale))
                     .animation(.easeInOut, value: errorMessage)
 
-                    HomeBirthProfilePickerView(
-                        profiles: savedProfiles,
-                        onSelect: applySavedProfile
-                    )
-
-                    if let profileMessage {
-                        Text(profileMessage)
-                            .font(AppTheme.Typography.footnote)
-                            .foregroundColor(AppTheme.Colors.secondaryText)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    if let recentHistoryRecord {
+                        HomeRecentHistoryCard(record: recentHistoryRecord)
                     }
-
-                    HomeRecentHistoryCard(record: recentHistoryRecord)
                 }
                 .padding(AppTheme.Spacing.lg)
             }
@@ -79,13 +62,7 @@ struct HomeView: View {
             }
         }
         .onAppear {
-            loadSavedProfiles()
             loadRecentHistory()
-        }
-        .sheet(isPresented: $isShowingSaveProfileSheet) {
-            SaveBirthProfileSheet(birthDate: birthDate, hour: selectedHour) { displayName in
-                saveCurrentBirthProfile(displayName: displayName)
-            }
         }
     }
 
@@ -152,59 +129,11 @@ struct HomeView: View {
         }
     }
 
-    private func loadSavedProfiles() {
-        do {
-            savedProfiles = try savedProfileStore.load()
-        } catch {
-            savedProfiles = []
-            profileMessage = localizationStore.string(.homeProfileLoadFailed)
-        }
-    }
-
     private func loadRecentHistory() {
         do {
             recentHistoryRecord = try historyRecordStore.load().first
         } catch {
             recentHistoryRecord = nil
-        }
-    }
-
-    private func applySavedProfile(_ profile: SavedBirthProfile) {
-        birthDate = profile.birthDate
-        selectedHour = profile.hour
-        selectedGender = profile.gender
-        profileMessage = localizationStore.string(
-            .homeProfileApplied,
-            replacements: ["name": profile.displayName]
-        )
-        errorMessage = nil
-    }
-
-    private func saveCurrentBirthProfile(displayName: String) {
-        let trimmedName = displayName.trimmingCharacters(in: .whitespacesAndNewlines)
-        let finalName = trimmedName.isEmpty
-            ? localizationStore.string(.homeProfileDefaultName)
-            : String(trimmedName.prefix(20))
-        let now = Date()
-        let profile = SavedBirthProfile(
-            id: UUID(),
-            displayName: finalName,
-            birthDate: birthDate,
-            hour: selectedHour,
-            gender: selectedGender,
-            createdAt: now,
-            updatedAt: now
-        )
-
-        do {
-            try savedProfileStore.add(profile)
-            loadSavedProfiles()
-            profileMessage = localizationStore.string(
-                .homeProfileSaved,
-                replacements: ["name": finalName]
-            )
-        } catch {
-            profileMessage = localizationStore.string(.homeProfileSaveFailed)
         }
     }
 }

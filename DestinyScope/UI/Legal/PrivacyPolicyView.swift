@@ -13,7 +13,6 @@ struct PrivacyPolicyView: View {
     private let sections: [(titleID: L10nID, bodyID: L10nID)] = [
         ("legal.privacy.section.account.title", "legal.privacy.section.account.body"),
         ("legal.privacy.section.birth.title", "legal.privacy.section.birth.body"),
-        ("legal.privacy.section.profiles.title", "legal.privacy.section.profiles.body"),
         ("legal.privacy.section.history.title", "legal.privacy.section.history.body"),
         ("legal.privacy.section.knowledgeState.title", "legal.privacy.section.knowledgeState.body"),
         ("legal.privacy.section.localData.title", "legal.privacy.section.localData.body"),
@@ -35,7 +34,7 @@ struct PrivacyPolicyView: View {
                     LegalSummaryCard(
                         title: localizationStore.string("legal.privacy.summary.title"),
                         bodyText: localizationStore.string("legal.privacy.summary.body"),
-                        highlights: (0...5).map {
+                        highlights: (0...4).map {
                             localizationStore.string(L10nID("legal.privacy.highlight.\($0)"))
                         }
                     )

@@ -70,6 +70,11 @@
       "zh-Hant": "清空全部",
       "en": "Clear All"
     },
+    "common.cancel": {
+      "zh-Hans": "取消",
+      "zh-Hant": "取消",
+      "en": "Cancel"
+    },
     "common.reset": {
       "zh-Hans": "重置",
       "zh-Hant": "重置",

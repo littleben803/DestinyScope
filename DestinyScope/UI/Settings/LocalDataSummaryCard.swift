@@ -22,10 +22,6 @@ struct LocalDataSummaryCard: View {
                     value: countText("localData.count.records", summary.historyRecordCount)
                 )
                 summaryRow(
-                    title: localizationStore.string("localData.summary.savedProfiles"),
-                    value: countText("localData.count.records", summary.savedBirthProfileCount)
-                )
-                summaryRow(
                     title: localizationStore.string("localData.summary.knowledgeFavorites"),
                     value: countText("localData.count.articles", summary.favoriteKnowledgeCount)
                 )

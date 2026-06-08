@@ -235,7 +235,7 @@ private extension View {
     }
 }
 
-private struct LifeWeightReadingDisplayContent {
+struct LifeWeightReadingDisplayContent {
     let title: String
     let keywords: [String]
     let detail: String

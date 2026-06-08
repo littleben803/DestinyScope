@@ -9,7 +9,6 @@ import Foundation
 
 struct LocalDataSummary: Equatable {
     let historyRecordCount: Int
-    let savedBirthProfileCount: Int
     let favoriteKnowledgeCount: Int
     let recentKnowledgeCount: Int
     let hasCompletedOnboarding: Bool

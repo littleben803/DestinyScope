@@ -99,7 +99,7 @@ struct KnowledgeListView: View {
             titleVisibility: .visible
         ) {
             Button(localizationStore.string("knowledge.clearRecent.button"), role: .destructive, action: clearRecentReads)
-            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) { }
+            Button(localizationStore.string(.commonCancel), role: .cancel) { }
         } message: {
             Text(localizationStore.string("knowledge.clearRecent.message"))
         }
@@ -109,7 +109,7 @@ struct KnowledgeListView: View {
             titleVisibility: .visible
         ) {
             Button(localizationStore.string("knowledge.clearFavorites.button"), role: .destructive, action: clearFavorites)
-            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) { }
+            Button(localizationStore.string(.commonCancel), role: .cancel) { }
         } message: {
             Text(localizationStore.string("knowledge.clearFavorites.message"))
         }

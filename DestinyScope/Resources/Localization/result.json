@@ -5,6 +5,16 @@
       "zh-Hant": "命理結果",
       "en": "Result"
     },
+    "result.navigation.share.accessibilityLabel": {
+      "zh-Hans": "分享命理结果",
+      "zh-Hant": "分享命理結果",
+      "en": "Share result"
+    },
+    "result.navigation.share.accessibilityHint": {
+      "zh-Hans": "打开系统分享面板，分享称骨诗文和命格详解。",
+      "zh-Hant": "開啟系統分享面板，分享稱骨詩文與命格詳解。",
+      "en": "Open the system share sheet to share the poem and detailed reading."
+    },
     "result.safety.short": {
       "zh-Hans": "结果仅供娱乐、自我探索和传统文化学习参考。",
       "zh-Hant": "結果僅供娛樂、自我探索與傳統文化學習參考。",
@@ -239,91 +249,6 @@
       "zh-Hans": "现在该怎么做？",
       "zh-Hant": "現在該怎麼做？",
       "en": "What now?"
-    },
-    "result.share.title": {
-      "zh-Hans": "复制与分享",
-      "zh-Hant": "複製與分享",
-      "en": "Copy and Share"
-    },
-    "result.share.description": {
-      "zh-Hans": "复制一段不含完整出生信息的结果摘要，方便自己保存或分享。分享给其他 App 是你的主动操作，DestinyScope 不会自动上传分享内容。",
-      "zh-Hant": "複製一段不含完整出生資訊的結果摘要，方便自己保存或分享。分享給其他 App 是你的主動操作，DestinyScope 不會自動上傳分享內容。",
-      "en": "Copy a result summary without full birth information for saving or sharing. Sharing to another app is your action; DestinyScope does not upload shared content automatically."
-    },
-    "result.share.copy": {
-      "zh-Hans": "复制摘要",
-      "zh-Hant": "複製摘要",
-      "en": "Copy Summary"
-    },
-    "result.share.copy.accessibilityLabel": {
-      "zh-Hans": "复制结果摘要",
-      "zh-Hant": "複製結果摘要",
-      "en": "Copy result summary"
-    },
-    "result.share.copy.accessibilityHint": {
-      "zh-Hans": "将不含完整出生信息的结果摘要复制到剪贴板。",
-      "zh-Hant": "將不含完整出生資訊的結果摘要複製到剪貼簿。",
-      "en": "Copy a result summary without full birth information to the clipboard."
-    },
-    "result.share.share": {
-      "zh-Hans": "分享摘要",
-      "zh-Hant": "分享摘要",
-      "en": "Share Summary"
-    },
-    "result.share.share.accessibilityLabel": {
-      "zh-Hans": "分享结果摘要",
-      "zh-Hant": "分享結果摘要",
-      "en": "Share result summary"
-    },
-    "result.share.share.accessibilityHint": {
-      "zh-Hans": "打开系统分享面板，分享不含完整出生信息的纯文本摘要。",
-      "zh-Hant": "開啟系統分享面板，分享不含完整出生資訊的純文字摘要。",
-      "en": "Open the system share sheet to share a plain-text summary without full birth information."
-    },
-    "result.share.copied": {
-      "zh-Hans": "已复制到剪贴板。",
-      "zh-Hant": "已複製到剪貼簿。",
-      "en": "Copied to clipboard."
-    },
-    "result.share.privacyNotice": {
-      "zh-Hans": "默认摘要不包含完整出生日期、农历生日、具体出生时辰、历史记录或本地模型润色结果。",
-      "zh-Hant": "預設摘要不包含完整出生日期、農曆生日、具體出生時辰、歷史記錄或本地模型潤色結果。",
-      "en": "By default, the summary excludes full birth date, lunar birth date, exact birth hour, history records, and local model refined output."
-    },
-    "result.share.text.title": {
-      "zh-Hans": "称骨结果摘要",
-      "zh-Hant": "稱骨結果摘要",
-      "en": "Bone Weight Result Summary"
-    },
-    "result.share.text.destinyTitle": {
-      "zh-Hans": "命格：{title}",
-      "zh-Hant": "命格：{title}",
-      "en": "Title: {title}"
-    },
-    "result.share.text.totalWeight": {
-      "zh-Hans": "总重量：{weight}",
-      "zh-Hant": "總重量：{weight}",
-      "en": "Total weight: {weight}"
-    },
-    "result.share.text.poemTitle": {
-      "zh-Hans": "命格诗文：",
-      "zh-Hant": "命格詩文：",
-      "en": "Poem:"
-    },
-    "result.share.text.interpretationTitle": {
-      "zh-Hans": "简要解读：",
-      "zh-Hant": "簡要解讀：",
-      "en": "Brief interpretation:"
-    },
-    "result.share.text.actionTitle": {
-      "zh-Hans": "行动建议：",
-      "zh-Hant": "行動建議：",
-      "en": "Action suggestion:"
-    },
-    "result.share.text.safety": {
-      "zh-Hans": "以上内容仅供娱乐、自我探索和传统文化学习参考。",
-      "zh-Hant": "以上內容僅供娛樂、自我探索與傳統文化學習參考。",
-      "en": "This content is for entertainment, self-reflection, and traditional culture learning only."
     },
     "result.localRefining.title": {
       "zh-Hans": "本地润色版",

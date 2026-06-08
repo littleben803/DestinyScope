@@ -26,21 +26,16 @@
       "en": "Birth information, results, and history are not uploaded."
     },
     "legal.privacy.highlight.2": {
-      "zh-Hans": "常用出生资料仅保存在当前设备，可随时删除。",
-      "zh-Hant": "常用出生資料僅保存在目前裝置，可隨時刪除。",
-      "en": "Saved birth profiles are stored only on this device and can be deleted at any time."
-    },
-    "legal.privacy.highlight.3": {
       "zh-Hans": "知识库收藏和最近阅读仅保存在当前设备。",
       "zh-Hant": "知識庫收藏與最近閱讀僅保存在目前裝置。",
       "en": "Knowledge favorites and recent reads are stored only on this device."
     },
-    "legal.privacy.highlight.4": {
+    "legal.privacy.highlight.3": {
       "zh-Hans": "本地数据管理只清理当前设备上的用户数据。",
       "zh-Hant": "本地資料管理只清理目前裝置上的使用者資料。",
       "en": "Local data management clears only user data on this device."
     },
-    "legal.privacy.highlight.5": {
+    "legal.privacy.highlight.4": {
       "zh-Hans": "本地模型润色只在设备端处理已有模板文本，不上传模型输入或输出。",
       "zh-Hant": "本地模型潤色只在裝置端處理既有模板文字，不上傳模型輸入或輸出。",
       "en": "Local model refinement processes existing template text on device and does not upload model input or output."
@@ -64,16 +59,6 @@
       "zh-Hans": "你输入的出生日期和出生时辰仅用于设备端本地传统命理计算。当前版本不上传出生信息，也不会上传命理结果。",
       "zh-Hant": "你輸入的出生日期與出生時辰僅用於裝置端本地傳統命理計算。目前版本不上傳出生資訊，也不會上傳命理結果。",
       "en": "The birth date and birth hour you enter are used only for local traditional numerology calculation on device. The current version does not upload birth information or results."
-    },
-    "legal.privacy.section.profiles.title": {
-      "zh-Hans": "常用出生资料",
-      "zh-Hant": "常用出生資料",
-      "en": "Saved Birth Profiles"
-    },
-    "legal.privacy.section.profiles.body": {
-      "zh-Hans": "如果你保存常用出生资料，当前版本只会将显示名、出生日期和出生时辰保存在当前设备，用于快速填充首页输入。常用出生资料不上传、不同步、不需要账号，你可以在设置中删除单条资料或清空全部资料。",
-      "zh-Hant": "如果你保存常用出生資料，目前版本只會將顯示名稱、出生日期與出生時辰保存在目前裝置，用於快速填充首頁輸入。常用出生資料不上傳、不同步、不需要帳號，你可以在設定中刪除單筆資料或清空全部資料。",
-      "en": "If you save birth profiles, the current version stores only the display name, birth date, and birth hour on this device for quick home input. Saved profiles are not uploaded, synced, or tied to an account. You can delete one or clear all from Settings."
     },
     "legal.privacy.section.history.title": {
       "zh-Hans": "本地历史记录",
@@ -101,9 +86,9 @@
       "en": "Local Data Management"
     },
     "legal.privacy.section.localData.body": {
-      "zh-Hans": "你可以在设置中的本地数据管理页面清理历史记录、常用出生资料、知识库收藏、最近阅读和首次使用说明状态等本机数据。删除仅影响当前设备，不影响 App 内置知识库、称骨数据或本地计算规则。当前版本无账号、无同步、无服务端。",
-      "zh-Hant": "你可以在設定中的本地資料管理頁面清理歷史記錄、常用出生資料、知識庫收藏、最近閱讀與首次使用說明狀態等本機資料。刪除僅影響目前裝置，不影響 App 內置知識庫、稱骨資料或本地計算規則。目前版本無帳號、無同步、無服務端。",
-      "en": "You can use Local Data Management in Settings to clear history, saved birth profiles, knowledge favorites, recent reads, onboarding state, and other local data. Deletion affects only this device and does not affect bundled knowledge, weight data, or local calculation rules. The current version has no account, sync, or server."
+      "zh-Hans": "你可以在设置中的本地数据管理页面清理历史记录、知识库收藏、最近阅读和首次使用说明状态等本机数据。删除仅影响当前设备，不影响 App 内置知识库、称骨数据或本地计算规则。当前版本无账号、无同步、无服务端。",
+      "zh-Hant": "你可以在設定中的本地資料管理頁面清理歷史記錄、知識庫收藏、最近閱讀與首次使用說明狀態等本機資料。刪除僅影響目前裝置，不影響 App 內置知識庫、稱骨資料或本地計算規則。目前版本無帳號、無同步、無服務端。",
+      "en": "You can use Local Data Management in Settings to clear history, knowledge favorites, recent reads, onboarding state, and other local data. Deletion affects only this device and does not affect bundled knowledge, weight data, or local calculation rules. The current version has no account, sync, or server."
     },
     "legal.privacy.section.localModel.title": {
       "zh-Hans": "本地模型润色",

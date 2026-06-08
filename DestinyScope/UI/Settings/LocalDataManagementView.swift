@@ -93,7 +93,7 @@ struct LocalDataManagementView: View {
                 perform(action)
             }
 
-            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) {
+            Button(localizationStore.string(.commonCancel), role: .cancel) {
                 pendingAction = nil
             }
         } message: { action in
@@ -110,8 +110,6 @@ struct LocalDataManagementView: View {
             switch action {
             case .clearHistory:
                 try service.clearHistory()
-            case .clearSavedBirthProfiles:
-                try service.clearSavedBirthProfiles()
             case .clearKnowledgeFavorites:
                 try service.clearKnowledgeFavorites()
             case .clearKnowledgeRecentReads:
@@ -135,7 +133,6 @@ struct LocalDataManagementView: View {
 
 private enum LocalDataAction: String, CaseIterable, Identifiable {
     case clearHistory
-    case clearSavedBirthProfiles
     case clearKnowledgeFavorites
     case clearKnowledgeRecentReads
     case resetOnboarding
@@ -147,8 +144,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
         switch self {
         case .clearHistory:
             return "localData.action.clearHistory.title"
-        case .clearSavedBirthProfiles:
-            return "localData.action.clearSavedProfiles.title"
         case .clearKnowledgeFavorites:
             return "localData.action.clearKnowledgeFavorites.title"
         case .clearKnowledgeRecentReads:
@@ -164,8 +159,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
         switch self {
         case .clearHistory:
             return "localData.action.clearHistory.subtitle"
-        case .clearSavedBirthProfiles:
-            return "localData.action.clearSavedProfiles.subtitle"
         case .clearKnowledgeFavorites:
             return "localData.action.clearKnowledgeFavorites.subtitle"
         case .clearKnowledgeRecentReads:
@@ -181,8 +174,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
         switch self {
         case .clearHistory:
             return "clock.badge.xmark"
-        case .clearSavedBirthProfiles:
-            return "person.crop.circle.badge.xmark"
         case .clearKnowledgeFavorites:
             return "star.slash"
         case .clearKnowledgeRecentReads:
@@ -206,8 +197,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
         switch self {
         case .clearHistory:
             return "localData.action.clearHistory.confirmation"
-        case .clearSavedBirthProfiles:
-            return "localData.action.clearSavedProfiles.confirmation"
         case .clearKnowledgeFavorites:
             return "localData.action.clearKnowledgeFavorites.confirmation"
         case .clearKnowledgeRecentReads:
@@ -232,8 +221,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
         switch self {
         case .clearHistory:
             return "localData.action.clearHistory.success"
-        case .clearSavedBirthProfiles:
-            return "localData.action.clearSavedProfiles.success"
         case .clearKnowledgeFavorites:
             return "localData.action.clearKnowledgeFavorites.success"
         case .clearKnowledgeRecentReads:

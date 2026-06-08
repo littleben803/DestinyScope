@@ -13,9 +13,8 @@ struct HistoryListView: View {
     @State private var records: [HistoryRecord] = []
     @State private var errorMessage: String?
     @State private var stateMessage: String?
-    @State private var recordPendingDeletion: HistoryRecord?
-    @State private var isShowingDeleteConfirmation = false
     @State private var isShowingDeleteAllConfirmation = false
+    @State private var selectedRecord: HistoryRecord?
 
     private let store = HistoryRecordStore()
     private let localDataManagementService = LocalDataManagementService()
@@ -45,7 +44,6 @@ struct HistoryListView: View {
                     ScrollView {
                         VStack(spacing: AppTheme.Spacing.md) {
                             HistoryEmptyStateView()
-                            HistoryLocalNoticeView()
                             if let stateMessage {
                                 AppCard {
                                     Text(stateMessage)
@@ -58,10 +56,8 @@ struct HistoryListView: View {
                         .padding(AppTheme.Spacing.lg)
                     }
                 } else {
-                    ScrollView {
-                        LazyVStack(spacing: AppTheme.Spacing.md) {
-                            HistoryLocalNoticeView()
-
+                    List {
+                        Group {
                             if let stateMessage {
                                 AppCard {
                                     Text(stateMessage)
@@ -69,35 +65,24 @@ struct HistoryListView: View {
                                         .foregroundColor(AppTheme.Colors.secondaryText)
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
+                                .historyListRowStyle()
                             }
 
                             ForEach(sortedRecords) { record in
-                                HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
-                                    NavigationLink(
-                                        destination: HistoryDetailView(record: record)
-                                    ) {
-                                        HistoryRecordRowView(record: record)
-                                    }
-                                    .buttonStyle(.plain)
-
+                                Button {
+                                    selectedRecord = record
+                                } label: {
+                                    HistoryRecordRowView(record: record)
+                                }
+                                .buttonStyle(.plain)
+                                .contentShape(Rectangle())
+                                .historyListRowStyle()
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                     Button(role: .destructive) {
-                                        recordPendingDeletion = record
-                                        isShowingDeleteConfirmation = true
+                                        delete(record)
                                     } label: {
-                                        Image(systemName: "trash")
-                                            .font(AppTheme.Typography.secondary)
-                                            .foregroundColor(AppTheme.Colors.cinnabar)
-                                            .padding(AppTheme.Spacing.sm)
-                                            .background(AppTheme.Colors.cardBackground)
-                                            .clipShape(Circle())
-                                            .overlay(
-                                                Circle()
-                                                    .stroke(AppTheme.Colors.divider.opacity(0.55), lineWidth: 1)
-                                            )
+                                        Label(localizationStore.string("common.delete"), systemImage: "trash")
                                     }
-                                    .buttonStyle(.plain)
-                                    .accessibilityLabel(localizationStore.string("history.delete.accessibilityLabel"))
-                                    .accessibilityHint(localizationStore.string("history.delete.accessibilityHint"))
                                 }
                             }
 
@@ -111,36 +96,31 @@ struct HistoryListView: View {
                                     .padding(.vertical, AppTheme.Spacing.md)
                             }
                             .buttonStyle(.plain)
+                            .historyListRowStyle()
                         }
-                        .padding(AppTheme.Spacing.lg)
                     }
+                    .listStyle(.plain)
+                    .listRowSpacing(AppTheme.Spacing.md)
+                    .scrollContentBackground(.hidden)
                 }
             }
         }
         .navigationTitle(localizationStore.string("history.navigation.title"))
+        .navigationDestination(isPresented: isDetailPresented) {
+            if let selectedRecord {
+                HistoryDetailView(record: selectedRecord)
+                    .environmentObject(localizationStore)
+            }
+        }
         .onAppear {
             loadRecords()
-        }
-        .alert(localizationStore.string("history.delete.confirmTitle"), isPresented: $isShowingDeleteConfirmation) {
-            Button(localizationStore.string("common.delete"), role: .destructive) {
-                if let recordPendingDeletion {
-                    delete(recordPendingDeletion)
-                }
-                recordPendingDeletion = nil
-            }
-
-            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) {
-                recordPendingDeletion = nil
-            }
-        } message: {
-            Text(localizationStore.string("history.delete.confirmMessage"))
         }
         .alert(localizationStore.string("history.clearAll.confirmTitle"), isPresented: $isShowingDeleteAllConfirmation) {
             Button(localizationStore.string("common.clear"), role: .destructive) {
                 deleteAll()
             }
 
-            Button(localizationStore.string(.homeSaveSheetCancel), role: .cancel) {}
+            Button(localizationStore.string(.commonCancel), role: .cancel) {}
         } message: {
             Text(localizationStore.string("history.clearAll.confirmMessage"))
         }
@@ -174,6 +154,31 @@ struct HistoryListView: View {
         } catch {
             errorMessage = localizationStore.string("history.error.clearFailed")
         }
+    }
+
+    private var isDetailPresented: Binding<Bool> {
+        Binding {
+            selectedRecord != nil
+        } set: { isPresented in
+            if !isPresented {
+                selectedRecord = nil
+            }
+        }
+    }
+}
+
+private extension View {
+    func historyListRowStyle() -> some View {
+        listRowInsets(
+            EdgeInsets(
+                top: 0,
+                leading: AppTheme.Spacing.lg,
+                bottom: 0,
+                trailing: AppTheme.Spacing.lg
+            )
+        )
+        .listRowBackground(Color.clear)
+        .listRowSeparator(.hidden)
     }
 }
 
