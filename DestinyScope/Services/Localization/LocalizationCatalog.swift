@@ -21,8 +21,7 @@ struct LocalizationCatalog {
         "settings",
         "legal",
         "onboarding",
-        "local_data",
-        "local_model"
+        "local_data"
     ]
 
     private let strings: [String: [String: String]]

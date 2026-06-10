@@ -16,8 +16,6 @@ struct PrivacyPolicyView: View {
         ("legal.privacy.section.history.title", "legal.privacy.section.history.body"),
         ("legal.privacy.section.knowledgeState.title", "legal.privacy.section.knowledgeState.body"),
         ("legal.privacy.section.localData.title", "legal.privacy.section.localData.body"),
-        ("legal.privacy.section.localModel.title", "legal.privacy.section.localModel.body"),
-        ("legal.privacy.section.localModelBoundary.title", "legal.privacy.section.localModelBoundary.body"),
         ("legal.privacy.section.network.title", "legal.privacy.section.network.body"),
         ("legal.privacy.section.share.title", "legal.privacy.section.share.body"),
         ("legal.privacy.section.permissions.title", "legal.privacy.section.permissions.body"),

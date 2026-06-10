@@ -1,2 +1,0 @@
-DestinyScope/Resources/Models/*.gguf filter=lfs diff=lfs merge=lfs -text
-DestinyScope/Frameworks/llama.xcframework/** filter=lfs diff=lfs merge=lfs -text

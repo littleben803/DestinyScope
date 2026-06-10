@@ -35,6 +35,11 @@
       "zh-Hant": "知識庫",
       "en": "Knowledge"
     },
+    "tab.qa": {
+      "zh-Hans": "问答",
+      "zh-Hant": "問答",
+      "en": "Q&A"
+    },
     "tab.history": {
       "zh-Hans": "历史",
       "zh-Hant": "歷史",

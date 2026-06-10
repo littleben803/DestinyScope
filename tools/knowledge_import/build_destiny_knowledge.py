@@ -31,8 +31,8 @@ INPUT_AUDIT_SUMMARY = BUILD_DIR / "wuxingbagua_audit_summary.json"
 OUTPUT_DIR = pathlib.Path("DestinyScope/Resources/Knowledge")
 OUTPUT_ARTICLES = OUTPUT_DIR / "destiny_knowledge_articles.json"
 OUTPUT_CHUNKS = OUTPUT_DIR / "destiny_rag_chunks.json"
-OFFICIAL_ARTICLES = OUTPUT_DIR / "knowledge_articles.json"
-OFFICIAL_CHUNKS = OUTPUT_DIR / "rag_chunks.json"
+OFFICIAL_ARTICLES = OUTPUT_ARTICLES
+OFFICIAL_CHUNKS = OUTPUT_CHUNKS
 OUTPUT_RESERVED_NAMING = OUTPUT_DIR / "reserved_future_naming.json"
 OUTPUT_MANIFEST = OUTPUT_DIR / "destiny_knowledge_manifest.json"
 OUTPUT_SQLITE = OUTPUT_DIR / "destiny_knowledge.sqlite"
@@ -1106,7 +1106,7 @@ def build_report(manifest: dict[str, Any]) -> str:
 
 ## 说明
 
-- 默认构建只生成 `destiny_*` 新产物；带 `--publish-official-resources` 运行时，才会将已通过自检的新内容同步到 `knowledge_articles.json` 和 `rag_chunks.json`。
+- App 默认读取 `destiny_knowledge_articles.json` 和 `destiny_rag_chunks.json`；不再额外生成旧名副本。
 - `reserved_future_naming.json` 仅用于未来命名方向评估，不进入正式知识库和 SQLite。
 - 数据源审计记录显示原始数据集 license 未声明；正式分发前仍建议保留人工 license 复核记录。
 - 所有正式 article / chunk 均保留 `usageBoundary` 字段；body 与 RAG text 不再内联重复边界。
@@ -1131,7 +1131,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--publish-official-resources",
         action="store_true",
-        help="Also publish validated outputs to the App's default knowledge_articles.json and rag_chunks.json resources.",
+        help="Keep compatibility with older build commands; App default resources are the destiny_* outputs.",
     )
     return parser.parse_args()
 

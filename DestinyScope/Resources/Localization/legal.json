@@ -11,9 +11,9 @@
       "en": "Privacy Policy"
     },
     "legal.privacy.summary.body": {
-      "zh-Hans": "适用于 DestinyScope 当前版本。应用以 Native、本地处理和无服务端为基础；本地模型润色仅在设备端处理已有模板文本。",
-      "zh-Hant": "適用於 DestinyScope 目前版本。應用以 Native、本地處理與無服務端為基礎；本地模型潤色僅在裝置端處理既有模板文字。",
-      "en": "Applies to the current version of DestinyScope. The app is native, local-first, and serverless. Local model refinement processes existing template text only on device."
+      "zh-Hans": "适用于 DestinyScope 当前版本。应用以 Native、本地处理和无服务端为基础。",
+      "zh-Hant": "適用於 DestinyScope 目前版本。應用以 Native、本地處理與無服務端為基礎。",
+      "en": "Applies to the current version of DestinyScope. The app is native, local-first, and serverless."
     },
     "legal.privacy.highlight.0": {
       "zh-Hans": "当前版本不创建账号、不需要登录。",
@@ -36,9 +36,9 @@
       "en": "Local data management clears only user data on this device."
     },
     "legal.privacy.highlight.4": {
-      "zh-Hans": "本地模型润色只在设备端处理已有模板文本，不上传模型输入或输出。",
-      "zh-Hant": "本地模型潤色只在裝置端處理既有模板文字，不上傳模型輸入或輸出。",
-      "en": "Local model refinement processes existing template text on device and does not upload model input or output."
+      "zh-Hans": "当前版本不接服务端，不进行云同步。",
+      "zh-Hant": "目前版本不接服務端，不進行雲端同步。",
+      "en": "The current version does not use a server or cloud sync."
     },
     "legal.privacy.section.account.title": {
       "zh-Hans": "账号与登录",
@@ -90,35 +90,15 @@
       "zh-Hant": "你可以在設定中的本地資料管理頁面清理歷史記錄、知識庫收藏、最近閱讀與首次使用說明狀態等本機資料。刪除僅影響目前裝置，不影響 App 內置知識庫、稱骨資料或本地計算規則。目前版本無帳號、無同步、無服務端。",
       "en": "You can use Local Data Management in Settings to clear history, knowledge favorites, recent reads, onboarding state, and other local data. Deletion affects only this device and does not affect bundled knowledge, weight data, or local calculation rules. The current version has no account, sync, or server."
     },
-    "legal.privacy.section.localModel.title": {
-      "zh-Hans": "本地模型润色",
-      "zh-Hant": "本地模型潤色",
-      "en": "Local Model Refinement"
-    },
-    "legal.privacy.section.localModel.body": {
-      "zh-Hans": "当前版本可内置本地模型用于设备端文本润色。设备评分达标时，App 可在设备端使用本地模型对已有模板文本做表达润色；设备不达标、低电量、过热、模型不可用、超时或安全检查失败时，会自动回退到本地模板文本。",
-      "zh-Hant": "目前版本可內置本地模型用於裝置端文字潤色。裝置評分達標時，App 可在裝置端使用本地模型對既有模板文字做表達潤色；裝置不達標、低電量、過熱、模型不可用、逾時或安全檢查失敗時，會自動回退到本地模板文字。",
-      "en": "The current version can bundle a local model for on-device text refinement. When the device score qualifies, the app may use the local model to polish existing template text on device. If the device is not qualified, battery is low, thermal state is high, the model is unavailable, the request times out, or safety checks fail, the app falls back to local template text."
-    },
-    "legal.privacy.section.localModelBoundary.title": {
-      "zh-Hans": "本地模型数据边界",
-      "zh-Hant": "本地模型資料邊界",
-      "en": "Local Model Data Boundaries"
-    },
-    "legal.privacy.section.localModelBoundary.body": {
-      "zh-Hans": "本地模型仅用于表达润色，不生成新的命理结论，不替代称骨计算、诗文匹配、命格洞察或模板问答。当前版本不上传模型输入，不上传模型输出，不上传出生信息，不上传命理结果，也不上传历史记录。润色结果默认不保存到历史记录。",
-      "zh-Hant": "本地模型僅用於表達潤色，不產生新的命理結論，不替代稱骨計算、詩文匹配、命格洞察或模板問答。目前版本不上傳模型輸入，不上傳模型輸出，不上傳出生資訊，不上傳命理結果，也不上傳歷史記錄。潤色結果預設不保存到歷史記錄。",
-      "en": "The local model is used only for expression refinement. It does not generate new numerology conclusions or replace weight calculation, poem matching, insight generation, or template Q&A. The current version does not upload model input, model output, birth information, results, or history. Refined text is not saved to history by default."
-    },
     "legal.privacy.section.network.title": {
       "zh-Hans": "网络与服务端",
       "zh-Hant": "網路與服務端",
       "en": "Network and Server"
     },
     "legal.privacy.section.network.body": {
-      "zh-Hans": "当前版本不接服务端，不接在线 AI，也不提供模型下载功能。本地模型文件如随 App 分发，会作为 App Bundle 内置资源在设备端读取。如果未来支持联网能力或模型下载，隐私政策会补充网络请求、模型文件大小、存储位置、删除方式和校验机制等说明。",
-      "zh-Hant": "目前版本不接服務端，不接線上 AI，也不提供模型下載功能。本地模型檔案如隨 App 分發，會作為 App Bundle 內置資源在裝置端讀取。如果未來支援連網能力或模型下載，隱私政策會補充網路請求、模型檔案大小、儲存位置、刪除方式與校驗機制等說明。",
-      "en": "The current version does not use a server, online AI, or model download feature. If a local model file is distributed with the app, it is read on device as a bundled app resource. If future versions add networking or model downloads, the privacy policy will describe network requests, model file size, storage location, deletion method, and verification mechanism."
+      "zh-Hans": "当前版本不接服务端，不接在线服务，也不提供资源下载功能。如果未来支持联网能力，隐私政策会补充网络请求、数据类型、存储位置、删除方式和退出方式等说明。",
+      "zh-Hant": "目前版本不接服務端，不接線上服務，也不提供資源下載功能。如果未來支援連網能力，隱私政策會補充網路請求、資料類型、儲存位置、刪除方式與退出方式等說明。",
+      "en": "The current version does not use a server, online services, or resource download features. If future versions add networking, the privacy policy will describe network requests, data types, storage location, deletion method, and opt-out path."
     },
     "legal.privacy.section.share.title": {
       "zh-Hans": "系统分享",
@@ -146,9 +126,9 @@
       "en": "Ads, Analytics, and Tracking"
     },
     "legal.privacy.section.tracking.body": {
-      "zh-Hans": "当前版本不接入广告追踪，不接入分析 SDK，不包含付费订阅，也不使用第三方在线模型服务处理用户输入。",
-      "zh-Hant": "目前版本不接入廣告追蹤，不接入分析 SDK，不包含付費訂閱，也不使用第三方線上模型服務處理使用者輸入。",
-      "en": "The current version does not include ad tracking, analytics SDKs, paid subscriptions, or third-party online model services that process user input."
+      "zh-Hans": "当前版本不接入广告追踪，不接入分析 SDK，不包含付费订阅，也不使用第三方在线服务处理用户输入。",
+      "zh-Hant": "目前版本不接入廣告追蹤，不接入分析 SDK，不包含付費訂閱，也不使用第三方線上服務處理使用者輸入。",
+      "en": "The current version does not include ad tracking, analytics SDKs, paid subscriptions, or third-party online services that process user input."
     },
     "legal.privacy.section.resources.title": {
       "zh-Hans": "本地资源",
@@ -166,9 +146,9 @@
       "en": "Future Versions"
     },
     "legal.privacy.section.future.body": {
-      "zh-Hans": "如果未来版本加入联网、账号、订阅、数据同步、分析 SDK、模型下载或其他需要处理用户数据的能力，隐私说明会在对应版本中更新，并重新说明数据类型、处理目的、保存位置、删除方式和退出方式。",
-      "zh-Hant": "如果未來版本加入連網、帳號、訂閱、資料同步、分析 SDK、模型下載或其他需要處理使用者資料的能力，隱私說明會在對應版本中更新，並重新說明資料類型、處理目的、保存位置、刪除方式與退出方式。",
-      "en": "If future versions add networking, accounts, subscriptions, data sync, analytics SDKs, model downloads, or other features that process user data, the privacy notice will be updated for that version and will describe data types, processing purposes, storage location, deletion method, and opt-out path."
+      "zh-Hans": "如果未来版本加入联网、账号、订阅、数据同步、分析 SDK 或其他需要处理用户数据的能力，隐私说明会在对应版本中更新，并重新说明数据类型、处理目的、保存位置、删除方式和退出方式。",
+      "zh-Hant": "如果未來版本加入連網、帳號、訂閱、資料同步、分析 SDK 或其他需要處理使用者資料的能力，隱私說明會在對應版本中更新，並重新說明資料類型、處理目的、保存位置、刪除方式與退出方式。",
+      "en": "If future versions add networking, accounts, subscriptions, data sync, analytics SDKs, or other features that process user data, the privacy notice will be updated for that version and will describe data types, processing purposes, storage location, deletion method, and opt-out path."
     },
     "legal.privacy.section.contact.title": {
       "zh-Hans": "联系方式",
@@ -206,9 +186,9 @@
       "en": "Content is not medical, legal, financial, investment, relationship, or career decision advice."
     },
     "legal.disclaimer.highlight.2": {
-      "zh-Hans": "本地模型润色只改变表达，不改变命理结论。",
-      "zh-Hant": "本地模型潤色只改變表達，不改變命理結論。",
-      "en": "Local model refinement changes wording only and does not change numerology conclusions."
+      "zh-Hans": "本地模板解释不改变称骨计算结果。",
+      "zh-Hant": "本地模板解釋不改變稱骨計算結果。",
+      "en": "Local template explanations do not change weight-based calculation results."
     },
     "legal.disclaimer.section.culture.title": {
       "zh-Hans": "传统文化与自我探索",
@@ -280,16 +260,6 @@
       "zh-Hant": "DestinyScope 不提供改命、化解、避災、轉運、保證發財或其他現實結果承諾。應用內容只能作為傳統文化與自我探索參考，不能作為現實行動的保證或依據。",
       "en": "DestinyScope does not promise fate changes, remedies, disaster avoidance, luck changes, guaranteed wealth, or other real-world outcomes. App content is only a reference for traditional culture and self-reflection, not a guarantee or basis for real-world action."
     },
-    "legal.disclaimer.section.localModel.title": {
-      "zh-Hans": "本地模型润色",
-      "zh-Hant": "本地模型潤色",
-      "en": "Local Model Refinement"
-    },
-    "legal.disclaimer.section.localModel.body": {
-      "zh-Hans": "如果启用本地模型润色，该能力只改变已有模板文本的表达方式，不改变命理结论，也不替代本地规则和模板。",
-      "zh-Hant": "如果啟用本地模型潤色，該能力只改變既有模板文字的表達方式，不改變命理結論，也不替代本地規則與模板。",
-      "en": "If local model refinement is enabled, it only changes the wording of existing template text. It does not change numerology conclusions or replace local rules and templates."
-    },
     "legal.disclaimer.section.majorDecision.title": {
       "zh-Hans": "重大决策",
       "zh-Hant": "重大決策",
@@ -311,134 +281,24 @@
       "en": "Open-Source Licenses"
     },
     "legal.openSource.summary.body": {
-      "zh-Hans": "DestinyScope 使用以下开源项目和模型组件。相关许可信息在本页面列出。",
-      "zh-Hant": "DestinyScope 使用以下開源專案與模型元件。相關授權資訊列於本頁面。",
-      "en": "DestinyScope uses the following open-source projects and model components. Related license information is listed on this page."
+      "zh-Hans": "DestinyScope 当前版本未额外内置需要单独列示的开源组件；如后续引入开源组件，许可信息会随版本更新。",
+      "zh-Hant": "DestinyScope 目前版本未額外內置需要單獨列示的開源元件；如後續引入開源元件，授權資訊會隨版本更新。",
+      "en": "The current version of DestinyScope does not bundle additional open-source components that require separate listing. If future versions add them, license information will be updated."
     },
     "legal.openSource.highlight.0": {
-      "zh-Hans": "本地模型只用于设备端文本表达润色。",
-      "zh-Hant": "本地模型只用於裝置端文字表達潤色。",
-      "en": "The local model is used only for on-device text expression refinement."
+      "zh-Hans": "当前版本以本地数据、规则和模板为基础。",
+      "zh-Hant": "目前版本以本地資料、規則與模板為基礎。",
+      "en": "The current version is based on local data, rules, and templates."
     },
     "legal.openSource.highlight.1": {
-      "zh-Hans": "本地润色不生成新的命理结论。",
-      "zh-Hant": "本地潤色不產生新的命理結論。",
-      "en": "Local refinement does not generate new numerology conclusions."
+      "zh-Hans": "知识库和称骨数据随 App Bundle 本地读取。",
+      "zh-Hant": "知識庫與稱骨資料隨 App Bundle 本地讀取。",
+      "en": "Knowledge and weight data are read locally from the app bundle."
     },
     "legal.openSource.highlight.2": {
-      "zh-Hans": "模型输入和输出不上传。",
-      "zh-Hant": "模型輸入與輸出不上傳。",
-      "en": "Model input and output are not uploaded."
-    },
-    "legal.info.license": {
-      "zh-Hans": "许可",
-      "zh-Hant": "授權",
-      "en": "License"
-    },
-    "legal.info.source": {
-      "zh-Hans": "来源",
-      "zh-Hant": "來源",
-      "en": "Source"
-    },
-    "legal.info.usage": {
-      "zh-Hans": "用途",
-      "zh-Hant": "用途",
-      "en": "Usage"
-    },
-    "legal.info.copyrightNotice": {
-      "zh-Hans": "版权 / 声明",
-      "zh-Hant": "版權 / 聲明",
-      "en": "Copyright / Notice"
-    },
-    "legal.info.notice": {
-      "zh-Hans": "说明",
-      "zh-Hant": "說明",
-      "en": "Note"
-    },
-    "legal.openSource.llama.usage": {
-      "zh-Hans": "用于在设备端运行本地 GGUF 模型。",
-      "zh-Hant": "用於在裝置端執行本地 GGUF 模型。",
-      "en": "Used to run local GGUF models on device."
-    },
-    "legal.openSource.llama.copyright": {
-      "zh-Hans": "版权声明和许可条款以 llama.cpp 项目提供的信息为准。",
-      "zh-Hant": "版權聲明與授權條款以 llama.cpp 專案提供的資訊為準。",
-      "en": "Copyright notices and license terms are provided by the llama.cpp project."
-    },
-    "legal.openSource.llama.notice": {
-      "zh-Hans": "DestinyScope 使用 llama.cpp 支持设备端本地文本润色，不接入服务端或模型下载。",
-      "zh-Hant": "DestinyScope 使用 llama.cpp 支援裝置端本地文字潤色，不接入服務端或模型下載。",
-      "en": "DestinyScope uses llama.cpp to support on-device local text refinement, without a server or model download."
-    },
-    "legal.openSource.gguf.source": {
-      "zh-Hans": "llama.cpp 项目相关组件",
-      "zh-Hant": "llama.cpp 專案相關元件",
-      "en": "Components related to the llama.cpp project"
-    },
-    "legal.openSource.gguf.license": {
-      "zh-Hans": "以 llama.cpp 仓库 LICENSE 为准",
-      "zh-Hant": "以 llama.cpp 倉庫 LICENSE 為準",
-      "en": "Subject to the LICENSE in the llama.cpp repository"
-    },
-    "legal.openSource.gguf.usage": {
-      "zh-Hans": "用于本地模型推理和 GGUF 模型格式支持。",
-      "zh-Hant": "用於本地模型推理與 GGUF 模型格式支援。",
-      "en": "Used for local model inference and GGUF model format support."
-    },
-    "legal.openSource.gguf.copyright": {
-      "zh-Hans": "相关版权声明遵循 llama.cpp 和 ggml 项目资料。",
-      "zh-Hant": "相關版權聲明遵循 llama.cpp 與 ggml 專案資料。",
-      "en": "Related copyright notices follow the llama.cpp and ggml project materials."
-    },
-    "legal.openSource.gguf.notice": {
-      "zh-Hans": "GGUF 格式用于在设备端读取和运行 App 内置本地模型文件。",
-      "zh-Hant": "GGUF 格式用於在裝置端讀取與執行 App 內置本地模型檔案。",
-      "en": "The GGUF format is used to read and run bundled local model files on device."
-    },
-    "legal.openSource.qwenBase.usage": {
-      "zh-Hans": "用于设备端本地文本润色能力。模型仅用于对已有模板文本做表达润色，不生成新的命理结论。",
-      "zh-Hant": "用於裝置端本地文字潤色能力。模型僅用於對既有模板文字做表達潤色，不產生新的命理結論。",
-      "en": "Used for on-device local text refinement. The model only polishes existing template text and does not generate new numerology conclusions."
-    },
-    "legal.openSource.qwenBase.copyright": {
-      "zh-Hans": "版权声明和许可条款以 Qwen 模型仓库提供的信息为准。",
-      "zh-Hant": "版權聲明與授權條款以 Qwen 模型倉庫提供的資訊為準。",
-      "en": "Copyright notices and license terms are provided by the Qwen model repository."
-    },
-    "legal.openSource.qwenBase.notice": {
-      "zh-Hans": "DestinyScope 不以该模型生成新的命理结论，不改变称骨计算结果。",
-      "zh-Hant": "DestinyScope 不以該模型產生新的命理結論，不改變稱骨計算結果。",
-      "en": "DestinyScope does not use this model to generate new numerology conclusions or change weight-based calculation results."
-    },
-    "legal.openSource.qwenGGUF.usage": {
-      "zh-Hans": "作为 App 内置 GGUF 格式本地模型文件的来源说明。",
-      "zh-Hant": "作為 App 內置 GGUF 格式本地模型檔案的來源說明。",
-      "en": "Used as the source reference for the bundled local GGUF model file."
-    },
-    "legal.openSource.qwenGGUF.copyright": {
-      "zh-Hans": "版权声明和许可条款以 Qwen GGUF 模型仓库提供的信息为准。",
-      "zh-Hant": "版權聲明與授權條款以 Qwen GGUF 模型倉庫提供的資訊為準。",
-      "en": "Copyright notices and license terms are provided by the Qwen GGUF model repository."
-    },
-    "legal.openSource.qwenGGUF.notice": {
-      "zh-Hans": "该 GGUF 模型文件用于设备端文本润色。",
-      "zh-Hant": "該 GGUF 模型檔案用於裝置端文字潤色。",
-      "en": "This GGUF model file is used for on-device text refinement."
-    },
-    "legal.openSource.bundledModel.usage": {
-      "zh-Hans": "App 内置的 GGUF 格式本地模型文件，用于设备端文本润色。",
-      "zh-Hant": "App 內置的 GGUF 格式本地模型檔案，用於裝置端文字潤色。",
-      "en": "A bundled local GGUF model file used for on-device text refinement."
-    },
-    "legal.openSource.bundledModel.copyright": {
-      "zh-Hans": "版权声明和许可条款遵循 Qwen2.5-0.5B-Instruct 与 Qwen GGUF 模型仓库。",
-      "zh-Hant": "版權聲明與授權條款遵循 Qwen2.5-0.5B-Instruct 與 Qwen GGUF 模型倉庫。",
-      "en": "Copyright notices and license terms follow the Qwen2.5-0.5B-Instruct and Qwen GGUF model repositories."
-    },
-    "legal.openSource.bundledModel.notice": {
-      "zh-Hans": "模型仅在设备端读取；失败或不可用时，App 会回退到本地模板文本。",
-      "zh-Hant": "模型僅在裝置端讀取；失敗或不可用時，App 會回退到本地模板文字。",
-      "en": "The model is read only on device. If it fails or is unavailable, the app falls back to local template text."
+      "zh-Hans": "如后续引入新的开源组件，许可信息会更新。",
+      "zh-Hant": "如後續引入新的開源元件，授權資訊會更新。",
+      "en": "If future versions add open-source components, license information will be updated."
     },
     "legal.openSource.additional.title": {
       "zh-Hans": "补充说明",
@@ -446,9 +306,9 @@
       "en": "Additional Notes"
     },
     "legal.openSource.additional.body": {
-      "zh-Hans": "本页面列出当前版本使用的开源组件和模型组件。后续如果更换模型、框架、量化文件或新增二进制组件，许可信息会随版本更新。",
-      "zh-Hant": "本頁面列出目前版本使用的開源元件與模型元件。後續如果更換模型、框架、量化檔案或新增二進位元件，授權資訊會隨版本更新。",
-      "en": "This page lists open-source components and model components used in the current version. If future versions change models, frameworks, quantized files, or add binary components, license information will be updated with that version."
+      "zh-Hans": "本页面列出当前版本需要说明的开源组件许可信息；如后续新增相关组件，许可信息会随版本更新。",
+      "zh-Hant": "本頁面列出目前版本需要說明的開源元件授權資訊；如後續新增相關元件，授權資訊會隨版本更新。",
+      "en": "This page lists open-source component license information that needs to be disclosed for the current version. If future versions add related components, license information will be updated."
     }
   }
 }

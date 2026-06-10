@@ -5,7 +5,7 @@
 - 阶段 2 补充后技术验收：Pass。
 - 五行、天干、地支覆盖缺口已补齐到每类 50 篇以上。
 - 正式产物结构、风险字段、使用边界、SQLite 完整性和 FTS5 检索均通过。
-- 已通过显式发布步骤接入 App 默认 JSON 读取路径，`knowledge_articles.json` / `rag_chunks.json` 已同步为 306 篇 / 306 chunks。
+- 已接入 App 默认 JSON 读取路径，`destiny_knowledge_articles.json` / `destiny_rag_chunks.json` 为 306 篇 / 306 chunks。
 - 文章 `body`、RAG `text`、SQLite `body/text` 已去掉重复的标题问题前缀和内联使用边界；使用边界只保留在 `usageBoundary` 字段。
 
 ## 联网资料与分析依据
@@ -39,7 +39,7 @@
   - Manifest 区分 `wuxingbaguaArticles` 和 `curatedSupplementArticles`。
   - FTS 关键词对天干 / 地支做类目命中和单字命中区分。
   - 新增 `--publish-official-resources`，仅在自检通过后同步 App 默认 JSON 资源。
-- 重建 `destiny_*` 产物，并将已验收内容同步到 `knowledge_articles.json` / `rag_chunks.json`。
+- 重建 `destiny_*` 产物，并将 App 默认读取路径切换到 `destiny_knowledge_articles.json` / `destiny_rag_chunks.json`。
 
 ## 最终数量
 

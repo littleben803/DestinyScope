@@ -100,41 +100,6 @@
       "zh-Hant": "關係",
       "en": "Relationships"
     },
-    "result.question.title": {
-      "zh-Hans": "命理问答",
-      "zh-Hant": "命理問答",
-      "en": "Q&A"
-    },
-    "result.question.description": {
-      "zh-Hans": "选择一个预设问题，基于本次结果生成本地模板回答。",
-      "zh-Hant": "選擇一個預設問題，基於本次結果產生本地模板回答。",
-      "en": "Choose a preset question to generate a local template answer from this result."
-    },
-    "result.question.career": {
-      "zh-Hans": "我适合什么职业？",
-      "zh-Hant": "我適合什麼職業？",
-      "en": "What kind of career suits me?"
-    },
-    "result.question.wealth": {
-      "zh-Hans": "我的财运特点是什么？",
-      "zh-Hant": "我的財運特點是什麼？",
-      "en": "What are my wealth tendencies?"
-    },
-    "result.question.personality": {
-      "zh-Hans": "我的性格倾向是什么？",
-      "zh-Hant": "我的性格傾向是什麼？",
-      "en": "What are my personality tendencies?"
-    },
-    "result.question.relationship": {
-      "zh-Hans": "关系中需要注意什么？",
-      "zh-Hant": "關係中需要注意什麼？",
-      "en": "What should I watch in relationships?"
-    },
-    "result.question.dailyAdvice": {
-      "zh-Hans": "今天给我一句建议",
-      "zh-Hant": "今天給我一句建議",
-      "en": "Give me one suggestion for today"
-    },
     "result.reading.title": {
       "zh-Hans": "命格详解",
       "zh-Hant": "命格詳解",
@@ -204,91 +169,6 @@
       "zh-Hans": "完整解读",
       "zh-Hant": "完整解讀",
       "en": "Full Reading"
-    },
-    "result.reading.question.title": {
-      "zh-Hans": "问问命格",
-      "zh-Hant": "問問命格",
-      "en": "Ask the Reading"
-    },
-    "result.reading.question.overall": {
-      "zh-Hans": "整体怎么看？",
-      "zh-Hant": "整體怎麼看？",
-      "en": "Overall view?"
-    },
-    "result.reading.question.personality": {
-      "zh-Hans": "性格重点？",
-      "zh-Hant": "性格重點？",
-      "en": "Personality focus?"
-    },
-    "result.reading.question.career": {
-      "zh-Hans": "事业适合什么？",
-      "zh-Hant": "事業適合什麼？",
-      "en": "Career fit?"
-    },
-    "result.reading.question.wealth": {
-      "zh-Hans": "财运要注意什么？",
-      "zh-Hant": "財運要注意什麼？",
-      "en": "Wealth cautions?"
-    },
-    "result.reading.question.relationship": {
-      "zh-Hans": "感情关系怎么看？",
-      "zh-Hant": "感情關係怎麼看？",
-      "en": "Relationship view?"
-    },
-    "result.reading.question.childrenFamily": {
-      "zh-Hans": "家庭晚辈怎么看？",
-      "zh-Hant": "家庭晚輩怎麼看？",
-      "en": "Family view?"
-    },
-    "result.reading.question.healthBlessing": {
-      "zh-Hans": "身心福泽怎么看？",
-      "zh-Hant": "身心福澤怎麼看？",
-      "en": "Wellbeing view?"
-    },
-    "result.reading.question.advice": {
-      "zh-Hans": "现在该怎么做？",
-      "zh-Hant": "現在該怎麼做？",
-      "en": "What now?"
-    },
-    "result.localRefining.title": {
-      "zh-Hans": "本地润色版",
-      "zh-Hant": "本地潤色版",
-      "en": "Local Refined Version"
-    },
-    "result.localRefining.description": {
-      "zh-Hans": "设备端生成，只做表达润色，不改变命理结论。模板结果始终保留。",
-      "zh-Hant": "裝置端產生，只做表達潤色，不改變命理結論。模板結果始終保留。",
-      "en": "Generated on device for wording refinement only. It does not change conclusions, and the template result is always kept."
-    },
-    "result.localRefining.generating": {
-      "zh-Hans": "正在生成本地润色版...",
-      "zh-Hant": "正在產生本地潤色版...",
-      "en": "Generating local refined version..."
-    },
-    "result.localRefining.status": {
-      "zh-Hans": "状态",
-      "zh-Hant": "狀態",
-      "en": "Status"
-    },
-    "result.localRefining.status.refined": {
-      "zh-Hans": "本地润色完成",
-      "zh-Hant": "本地潤色完成",
-      "en": "Local refinement complete"
-    },
-    "result.localRefining.status.fallback": {
-      "zh-Hans": "已回退模板",
-      "zh-Hant": "已回退模板",
-      "en": "Fell back to template"
-    },
-    "result.localRefining.duration": {
-      "zh-Hans": "耗时",
-      "zh-Hant": "耗時",
-      "en": "Duration"
-    },
-    "result.localRefining.fallbackReason": {
-      "zh-Hans": "本地润色暂不可用，已保留原始模板文本。",
-      "zh-Hant": "本地潤色暫不可用，已保留原始模板文字。",
-      "en": "Local refinement is unavailable. The original template text was kept."
     }
   }
 }

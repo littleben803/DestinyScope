@@ -36,7 +36,6 @@ struct AboutView: View {
                             bullet(localizationStore.string(.aboutCapabilityBirth))
                             bullet(localizationStore.string(.aboutCapabilityOffline))
                             bullet(localizationStore.string(.aboutCapabilityHistory))
-                            bullet(localizationStore.string(.aboutCapabilityLocalModel))
                         }
                     }
 

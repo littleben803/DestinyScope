@@ -18,7 +18,6 @@ struct DisclaimerView: View {
         ("legal.disclaimer.section.finance.title", "legal.disclaimer.section.finance.body"),
         ("legal.disclaimer.section.relationship.title", "legal.disclaimer.section.relationship.body"),
         ("legal.disclaimer.section.promise.title", "legal.disclaimer.section.promise.body"),
-        ("legal.disclaimer.section.localModel.title", "legal.disclaimer.section.localModel.body"),
         ("legal.disclaimer.section.majorDecision.title", "legal.disclaimer.section.majorDecision.body")
     ]
 

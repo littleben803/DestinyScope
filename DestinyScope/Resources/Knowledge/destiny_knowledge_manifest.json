@@ -168,8 +168,8 @@
   "files": {
     "articles": "DestinyScope/Resources/Knowledge/destiny_knowledge_articles.json",
     "chunks": "DestinyScope/Resources/Knowledge/destiny_rag_chunks.json",
-    "officialArticles": "DestinyScope/Resources/Knowledge/knowledge_articles.json",
-    "officialChunks": "DestinyScope/Resources/Knowledge/rag_chunks.json",
+    "officialArticles": "DestinyScope/Resources/Knowledge/destiny_knowledge_articles.json",
+    "officialChunks": "DestinyScope/Resources/Knowledge/destiny_rag_chunks.json",
     "reservedFutureNaming": "DestinyScope/Resources/Knowledge/reserved_future_naming.json",
     "manifest": "DestinyScope/Resources/Knowledge/destiny_knowledge_manifest.json",
     "sqlite": "DestinyScope/Resources/Knowledge/destiny_knowledge.sqlite",
@@ -177,8 +177,8 @@
   },
   "publication": {
     "publishedOfficialResources": true,
-    "officialArticles": "DestinyScope/Resources/Knowledge/knowledge_articles.json",
-    "officialChunks": "DestinyScope/Resources/Knowledge/rag_chunks.json"
+    "officialArticles": "DestinyScope/Resources/Knowledge/destiny_knowledge_articles.json",
+    "officialChunks": "DestinyScope/Resources/Knowledge/destiny_rag_chunks.json"
   },
   "source": {
     "dataset": "yico1211/wuxingbagua",

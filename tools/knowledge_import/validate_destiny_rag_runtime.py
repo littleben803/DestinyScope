@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-"""Validate DestinyScope runtime RAG data and source wiring.
+"""Validate DestinyScope local knowledge article and chunk resources.
 
-This script is intentionally lightweight: it does not load the GGUF model and
-does not require a simulator. It verifies the JSON-backed retrieval contract,
-prompt source requirements, safety terms, and fallback wiring expected by the
-runtime Swift implementation.
+This script intentionally verifies only JSON-backed local knowledge loading and
+search behavior. It does not validate any prompt, model, or generation path.
 """
 
 from __future__ import annotations
@@ -18,22 +16,51 @@ from typing import Any
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 KNOWLEDGE_DIR = ROOT / "DestinyScope/Resources/Knowledge"
-DOMAIN_DIR = ROOT / "DestinyScope/Domain/Knowledge"
+ARTICLES_PATH = KNOWLEDGE_DIR / "destiny_knowledge_articles.json"
+CHUNKS_PATH = KNOWLEDGE_DIR / "destiny_rag_chunks.json"
+
+FORBIDDEN_TERMS = (
+    "这个问题是新知识",
+    "tarot",
+    "face reading",
+    "ISBN",
+    "出版社",
+    "印刷",
+    "投资",
+    "疾病",
+    "化解",
+    "开光",
+    "取名",
+)
 
 
-def load_chunks() -> list[dict[str, Any]]:
-    return json.loads((KNOWLEDGE_DIR / "rag_chunks.json").read_text(encoding="utf-8"))
+def load_json(path: pathlib.Path) -> list[dict[str, Any]]:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
-def score_chunk(chunk: dict[str, Any], keywords: list[str], scene_aliases: set[str]) -> float:
+def assert_true(condition: bool, message: str) -> None:
+    if not condition:
+        raise AssertionError(message)
+
+
+def text_fields(record: dict[str, Any], keys: tuple[str, ...]) -> str:
+    values: list[str] = []
+    for key in keys:
+        value = record.get(key)
+        if isinstance(value, str):
+            values.append(value)
+        elif isinstance(value, list):
+            values.extend(str(item) for item in value)
+    return "\n".join(values)
+
+
+def score_chunk(chunk: dict[str, Any], keywords: list[str]) -> float:
     if chunk.get("riskLevel", "").strip().lower() != "safe":
         return 0
     if int(chunk.get("qualityScore", 0)) < 70:
         return 0
 
-    scenes = {scene.strip().lower().replace("-", "_") for scene in chunk.get("scenes", [])}
-    score = 6 if scenes.intersection(scene_aliases) else 0
-
+    score = 0.0
     for keyword in keywords:
         if keyword in chunk.get("title", ""):
             score += 22
@@ -53,78 +80,57 @@ def score_chunk(chunk: dict[str, Any], keywords: list[str], scene_aliases: set[s
 
 
 def search_chunks(chunks: list[dict[str, Any]], keywords: list[str], top_k: int) -> list[dict[str, Any]]:
-    aliases = {"wuxing_balance", "knowledge_library", "rag_retrieval", "traditional_culture", "wuxing_foundation", "yinyang_foundation"}
-    scored = [(score_chunk(chunk, keywords, aliases), chunk) for chunk in chunks]
+    scored = [(score_chunk(chunk, keywords), chunk) for chunk in chunks]
     scored = [(score, chunk) for score, chunk in scored if score > 0]
     scored.sort(key=lambda item: (-item[0], -int(item[1].get("qualityScore", 0)), item[1].get("id", "")))
-
-    seen_article_ids: set[str] = set()
-    output: list[dict[str, Any]] = []
-    for _, chunk in scored:
-        article_id = chunk.get("articleId")
-        if article_id in seen_article_ids:
-            continue
-        seen_article_ids.add(article_id)
-        output.append(chunk)
-        if len(output) >= top_k:
-            break
-    return output
+    return [chunk for _, chunk in scored[:top_k]]
 
 
-def build_rag_context(chunks: list[dict[str, Any]]) -> str:
-    lines = ["【知识片段】"]
-    for chunk in chunks:
-        text = re.sub(r"\s+", " ", chunk.get("text", "").replace("参考解读：", "")).strip()
-        if len(text) > 180:
-            text = text[:180] + "…"
-        candidate = "\n".join(lines + [f"{len(lines)}. {text}"])
-        if len(candidate) > 900:
-            break
-        lines.append(f"{len(lines)}. {text}")
-    return "\n".join(lines)
-
-
-def assert_true(condition: bool, message: str) -> None:
-    if not condition:
-        raise AssertionError(message)
+def validate_record_text(records: list[dict[str, Any]], keys: tuple[str, ...], label: str) -> None:
+    for record in records:
+        content = text_fields(record, keys)
+        assert_true("使用边界：" not in content, f"{label} {record.get('id')} contains inline usage boundary")
+        assert_true(not re.search(r"(^|\n)\s*问题：", content), f"{label} {record.get('id')} contains duplicated question prefix")
+        normalized = content.lower()
+        for term in FORBIDDEN_TERMS:
+            assert_true(term.lower() not in normalized, f"{label} {record.get('id')} contains forbidden term: {term}")
 
 
 def main() -> int:
-    chunks = load_chunks()
-    assert_true(len(chunks) == 306, f"expected 306 rag chunks, got {len(chunks)}")
+    articles = load_json(ARTICLES_PATH)
+    chunks = load_json(CHUNKS_PATH)
 
-    hits = search_chunks(chunks, ["五行"], 5)
-    assert_true(bool(hits), "searchChunks 五行 should return non-empty results")
-    assert_true(all(hit["riskLevel"] == "safe" for hit in hits), "unsafe chunks returned")
-    assert_true(all(hit["qualityScore"] >= 70 for hit in hits), "low quality chunks returned")
+    assert_true(len(articles) == 306, f"expected 306 articles, got {len(articles)}")
+    assert_true(len(chunks) == 306, f"expected 306 chunks, got {len(chunks)}")
 
-    rejected_fixture = [
-        dict(hits[0], id="unsafe_fixture", articleId="unsafe_fixture", riskLevel="review"),
-        dict(hits[0], id="low_quality_fixture", articleId="low_quality_fixture", qualityScore=69),
-    ]
-    fixture_hits = search_chunks(rejected_fixture, ["五行"], 5)
-    assert_true(not fixture_hits, "riskLevel != safe or qualityScore < 70 fixtures should be rejected")
+    article_ids = {article.get("id") for article in articles}
+    assert_true(len(article_ids) == len(articles), "duplicate article ids found")
+    assert_true(len({chunk.get("id") for chunk in chunks}) == len(chunks), "duplicate chunk ids found")
 
-    rag_context = build_rag_context(hits)
-    assert_true(len(rag_context) <= 900, f"RAG context too long: {len(rag_context)}")
+    for article in articles:
+        assert_true(article.get("riskLevel") == "safe", f"article {article.get('id')} is not safe")
+        assert_true(int(article.get("qualityScore", 0)) >= 70, f"article {article.get('id')} qualityScore < 70")
+        assert_true(bool(article.get("usageBoundary")), f"article {article.get('id')} missing usageBoundary")
 
-    prompt_source = (DOMAIN_DIR / "DestinyPromptBuilder.swift").read_text(encoding="utf-8")
-    assert_true("只输出一个 JSON 对象" in prompt_source, "PromptBuilder missing JSON-only instruction")
-    assert_true('"overview"' in prompt_source and '"answer"' in prompt_source, "PromptBuilder missing required JSON schemas")
+    for chunk in chunks:
+        assert_true(chunk.get("articleId") in article_ids, f"chunk {chunk.get('id')} has unknown articleId")
+        assert_true(chunk.get("riskLevel") == "safe", f"chunk {chunk.get('id')} is not safe")
+        assert_true(int(chunk.get("qualityScore", 0)) >= 70, f"chunk {chunk.get('id')} qualityScore < 70")
+        assert_true(bool(chunk.get("scenes")), f"chunk {chunk.get('id')} missing scenes")
+        assert_true(bool(chunk.get("usageBoundary")), f"chunk {chunk.get('id')} missing usageBoundary")
 
-    safety_source = (DOMAIN_DIR / "DestinySafetyPolicy.swift").read_text(encoding="utf-8")
-    for question_term in ["发财", "离婚", "有没有病", "化解", "取名"]:
-        assert_true(question_term in safety_source, f"SafetyPolicy missing term: {question_term}")
-    assert_true("当前版本暂未开放取名功能" in safety_source, "SafetyPolicy missing naming fallback message")
+    validate_record_text(articles, ("title", "body", "tags"), "article")
+    validate_record_text(chunks, ("title", "text", "tags"), "chunk")
 
-    service_source = (DOMAIN_DIR / "DestinyInterpretationService.swift").read_text(encoding="utf-8")
-    assert_true("fallbackTriggered: true" in service_source, "InterpretationService missing fallback log path")
-    assert_true("extractJSONObject" in service_source, "InterpretationService missing JSON extraction")
+    search_terms = ("五行", "阴阳", "天干", "地支", "八卦", "易学")
+    hits_by_term = {term: len(search_chunks(chunks, [term], 5)) for term in search_terms}
+    for term, hit_count in hits_by_term.items():
+        assert_true(hit_count > 0, f"searchChunks {term} should return non-empty results")
 
     print(json.dumps({
-        "ragChunks": len(chunks),
-        "wuxingHits": len(hits),
-        "ragContextLength": len(rag_context),
+        "articles": len(articles),
+        "chunks": len(chunks),
+        "hitsByTerm": hits_by_term,
         "validation": "pass",
     }, ensure_ascii=False, indent=2))
     return 0

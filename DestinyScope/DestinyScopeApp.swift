@@ -22,16 +22,6 @@ struct DestinyScopeApp: App {
                 .onReceive(NotificationCenter.default.publisher(for: NSLocale.currentLocaleDidChangeNotification)) { _ in
                     localizationStore.refreshSystemLanguageIfNeeded()
                 }
-                .task {
-                    await scheduleStartupTasks()
-                }
-        }
-    }
-
-    private func scheduleStartupTasks() async {
-        await LocalModelLoadingManager.shared.markScheduledIfNeeded()
-        await StartupTaskScheduler.shared.schedule(id: "local-model-preload", priority: .low) {
-            await LocalModelLoadingManager.shared.loadIfNeeded()
         }
     }
 }

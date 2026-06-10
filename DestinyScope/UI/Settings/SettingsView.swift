@@ -103,22 +103,6 @@ struct SettingsView: View {
                             LocalDataManagementView()
                         }
                     }
-
-                    #if DEBUG
-                    SettingsSectionCard(
-                        title: localizationStore.string(.settingsDebugSectionTitle),
-                        subtitle: localizationStore.string(.settingsDebugSectionSubtitle)
-                    ) {
-                        settingsLink(
-                            title: localizationStore.string(.settingsLocalModelDebugTitle),
-                            subtitle: localizationStore.string(.settingsLocalModelDebugSubtitle),
-                            systemImage: "cpu",
-                            accessibilityHint: localizationStore.string(.settingsLocalModelDebugAccessibilityHint)
-                        ) {
-                            LocalModelDebugView()
-                        }
-                    }
-                    #endif
                 }
                 .padding(AppTheme.Spacing.lg)
             }

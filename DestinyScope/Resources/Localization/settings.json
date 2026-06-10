@@ -136,9 +136,9 @@
       "en": "Open-Source Licenses"
     },
     "settings.openSource.subtitle": {
-      "zh-Hans": "查看本地模型和开源组件许可信息",
-      "zh-Hant": "查看本地模型與開源元件授權資訊",
-      "en": "Review local model and open-source component licenses"
+      "zh-Hans": "查看开源组件许可信息",
+      "zh-Hant": "查看開源元件授權資訊",
+      "en": "Review open-source component licenses"
     },
     "settings.openSource.accessibilityHint": {
       "zh-Hans": "打开开源许可页面。",
@@ -170,31 +170,6 @@
       "zh-Hant": "開啟本地資料管理頁面。",
       "en": "Open local data management."
     },
-    "settings.debug.section.title": {
-      "zh-Hans": "实验功能",
-      "zh-Hant": "實驗功能",
-      "en": "Experimental Features"
-    },
-    "settings.debug.section.subtitle": {
-      "zh-Hans": "仅用于 Debug 观察内置模型加载、润色和回退状态。",
-      "zh-Hant": "僅用於 Debug 觀察內置模型載入、潤色與回退狀態。",
-      "en": "Debug-only tools for observing bundled model loading, refinement, and fallback."
-    },
-    "settings.localModelDebug.title": {
-      "zh-Hans": "本地模型状态与测试",
-      "zh-Hant": "本地模型狀態與測試",
-      "en": "Local Model Status and Tests"
-    },
-    "settings.localModelDebug.subtitle": {
-      "zh-Hans": "查看内置模型后台加载、润色输出和模板回退",
-      "zh-Hant": "查看內置模型背景載入、潤色輸出與模板回退",
-      "en": "Review bundled model loading, refined output, and template fallback"
-    },
-    "settings.localModelDebug.accessibilityHint": {
-      "zh-Hans": "打开本地模型状态与测试页面。",
-      "zh-Hant": "開啟本地模型狀態與測試頁面。",
-      "en": "Open local model status and tests."
-    },
     "about.navigation.title": {
       "zh-Hans": "关于",
       "zh-Hant": "關於",
@@ -206,9 +181,9 @@
       "en": "An Eastern numerology, traditional culture, and self-reflection tool."
     },
     "about.body": {
-      "zh-Hans": "当前能力基于本地传统命理数据、本地模板和设备端文本润色生成结果，出生信息仅在设备端处理。",
-      "zh-Hant": "目前能力基於本地傳統命理資料、本地模板與裝置端文字潤色產生結果，出生資訊僅在裝置端處理。",
-      "en": "Current features use local traditional numerology data, local templates, and on-device text refinement. Birth information is processed only on device."
+      "zh-Hans": "当前能力基于本地传统命理数据、本地模板和本地知识资源生成结果，出生信息仅在设备端处理。",
+      "zh-Hant": "目前能力基於本地傳統命理資料、本地模板與本地知識資源產生結果，出生資訊僅在裝置端處理。",
+      "en": "Current features use local traditional numerology data, local templates, and local knowledge resources. Birth information is processed only on device."
     },
     "about.capabilities.title": {
       "zh-Hans": "当前能力",
@@ -221,19 +196,14 @@
       "en": "Birth information is used only for on-device calculation."
     },
     "about.capability.offline": {
-      "zh-Hans": "称骨结果、命格洞察、命理问答和知识库均可离线使用。",
-      "zh-Hant": "稱骨結果、命格洞察、命理問答與知識庫皆可離線使用。",
-      "en": "Weight-based results, insights, template Q&A, and the knowledge library all work offline."
+      "zh-Hans": "称骨结果、命格洞察和知识库均可离线使用。",
+      "zh-Hant": "稱骨結果、命格洞察與知識庫皆可離線使用。",
+      "en": "Weight-based results, insights, and the knowledge library all work offline."
     },
     "about.capability.history": {
       "zh-Hans": "历史记录仅保存在本设备，可在历史页删除。",
       "zh-Hant": "歷史記錄僅保存在本裝置，可在歷史頁刪除。",
       "en": "History is stored only on this device and can be deleted from the History page."
-    },
-    "about.capability.localModel": {
-      "zh-Hans": "本地模型润色仅用于对已有模板文本做表达润色，不生成新的命理结论。",
-      "zh-Hant": "本地模型潤色僅用於對既有模板文字做表達潤色，不產生新的命理結論。",
-      "en": "Local model refinement only polishes existing template text and does not generate new numerology conclusions."
     },
     "about.boundary.title": {
       "zh-Hans": "使用边界",
@@ -266,9 +236,9 @@
       "en": "For entertainment, self-reflection, and traditional culture learning only"
     },
     "about.openSource.subtitle": {
-      "zh-Hans": "查看本地模型和开源组件许可信息",
-      "zh-Hant": "查看本地模型與開源元件授權資訊",
-      "en": "Review local model and open-source component license information"
+      "zh-Hans": "查看开源组件许可信息",
+      "zh-Hant": "查看開源元件授權資訊",
+      "en": "Review open-source component license information"
     }
   }
 }

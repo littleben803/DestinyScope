@@ -328,7 +328,7 @@ def write_markdown_report(path: pathlib.Path, summary: dict[str, Any], raw_url: 
 
 ## 阶段边界
 
-本报告属于 DestinyScope 阶段 1：离线审计 + 清洗/转换脚本。当前阶段只处理外部数据源审计和候选转换，不修改正式 App 资源，不接入本地检索或 RAG，不写入 `DestinyScope/Resources/Knowledge/knowledge_articles.json` 或 `DestinyScope/Resources/Knowledge/rag_chunks.json`。
+本报告属于 DestinyScope 阶段 1：离线审计 + 清洗/转换脚本。当前阶段只处理外部数据源审计和候选转换，不修改正式 App 资源，不接入本地检索或 RAG，不写入 `DestinyScope/Resources/Knowledge/destiny_knowledge_articles.json` 或 `DestinyScope/Resources/Knowledge/destiny_rag_chunks.json`。
 
 ## 数据源
 

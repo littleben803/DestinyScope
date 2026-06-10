@@ -26,8 +26,8 @@ struct KnowledgeRepository {
 
     init(
         loader: JSONResourceLoader = JSONResourceLoader(),
-        resourceName: String = "knowledge_articles",
-        chunkResourceName: String = "rag_chunks",
+        resourceName: String = "destiny_knowledge_articles",
+        chunkResourceName: String = "destiny_rag_chunks",
         resourceSubdirectory: String? = nil
     ) {
         self.loader = loader
@@ -36,40 +36,86 @@ struct KnowledgeRepository {
         self.resourceSubdirectory = resourceSubdirectory
     }
 
-    func articles() throws -> [KnowledgeArticle] {
+    func loadArticles() throws -> [KnowledgeArticle] {
         try loader.load([KnowledgeArticle].self, named: resourceName, subdirectory: resourceSubdirectory)
     }
 
-    func article(id: String) throws -> KnowledgeArticle {
-        guard let article = try articles().first(where: { $0.id == id }) else {
+    func loadChunks() throws -> [KnowledgeChunk] {
+        try loader.load([KnowledgeChunk].self, named: chunkResourceName, subdirectory: resourceSubdirectory)
+    }
+
+    func article(by id: String) throws -> KnowledgeArticle {
+        guard let article = try loadArticles().first(where: { $0.id == id }) else {
             throw KnowledgeRepositoryError.articleNotFound(id)
         }
         return article
     }
 
-    func articles(category: String) throws -> [KnowledgeArticle] {
-        try articles().filter { $0.category == category }
+    func articles(for category: String) throws -> [KnowledgeArticle] {
+        try loadArticles().filter { Self.matches($0.category, category) }
     }
 
-    func chunks() throws -> [KnowledgeChunk] {
-        try loader.load([KnowledgeChunk].self, named: chunkResourceName, subdirectory: resourceSubdirectory)
-    }
+    func searchArticles(
+        keyword: String? = nil,
+        category: String? = nil,
+        tags: [String] = [],
+        limit: Int = 20
+    ) throws -> [KnowledgeArticle] {
+        let keywords = Self.keywords(from: keyword ?? "")
+        let normalizedCategory = Self.normalized(category)
+        let normalizedTags = Self.normalizedTags(tags)
+        let hasSearchTerms = !keywords.isEmpty || normalizedCategory != nil || !normalizedTags.isEmpty
 
-    func searchChunks(query: String, scene: KnowledgeScene, topK: Int) throws -> [KnowledgeChunk] {
-        try searchChunks(keywords: Self.keywords(from: query), scene: scene, topK: topK)
-    }
-
-    func searchChunks(keywords: [String], scene: KnowledgeScene, topK: Int) throws -> [KnowledgeChunk] {
-        let normalizedKeywords = Self.normalizedKeywords(keywords)
-        guard topK > 0, !normalizedKeywords.isEmpty else {
+        guard limit > 0 else {
             return []
         }
 
-        let scoredChunks = try chunks()
-            .filter(\.isSafeForRuntimeRAG)
+        return try loadArticles()
+            .filter { article in
+                Self.matchesCategory(article.category, normalizedCategory)
+                    && Self.matchesRequiredTags(article.tags, normalizedTags)
+            }
+            .compactMap { article -> ScoredKnowledgeArticle? in
+                let score = Self.score(article: article, keywords: keywords, requiredTags: normalizedTags)
+                guard !hasSearchTerms || score > 0 else {
+                    return nil
+                }
+                return ScoredKnowledgeArticle(article: article, score: score)
+            }
+            .sorted { left, right in
+                if left.score == right.score {
+                    return left.article.id < right.article.id
+                }
+                return left.score > right.score
+            }
+            .prefix(limit)
+            .map(\.article)
+    }
+
+    func searchChunks(
+        keyword: String? = nil,
+        category: String? = nil,
+        tags: [String] = [],
+        limit: Int = 20
+    ) throws -> [KnowledgeChunk] {
+        let keywords = Self.keywords(from: keyword ?? "")
+        let normalizedCategory = Self.normalized(category)
+        let normalizedTags = Self.normalizedTags(tags)
+        let hasSearchTerms = !keywords.isEmpty || normalizedCategory != nil || !normalizedTags.isEmpty
+
+        guard limit > 0 else {
+            return []
+        }
+
+        return try loadChunks()
+            .filter(\.isSafeForKnowledgeSearch)
+            .filter { chunk in
+                Self.matchesCategory(chunk.category, normalizedCategory)
+                    && Self.matchesRequiredTags(chunk.tags, normalizedTags)
+            }
             .compactMap { chunk -> ScoredKnowledgeChunk? in
-                let score = Self.score(chunk: chunk, keywords: normalizedKeywords, scene: scene)
-                guard score > 0 else {
+                let score = Self.score(chunk: chunk, keywords: keywords, requiredTags: normalizedTags)
+                guard !hasSearchTerms || score > 0 else {
                     return nil
                 }
                 return ScoredKnowledgeChunk(chunk: chunk, score: score)
@@ -83,25 +129,30 @@ struct KnowledgeRepository {
                 }
                 return left.score > right.score
             }
-
-        var seenArticleIDs = Set<String>()
-        var results: [KnowledgeChunk] = []
-
-        for scoredChunk in scoredChunks {
-            guard !seenArticleIDs.contains(scoredChunk.chunk.articleId) else {
-                continue
-            }
-
-            seenArticleIDs.insert(scoredChunk.chunk.articleId)
-            results.append(scoredChunk.chunk)
-
-            if results.count >= topK {
-                break
-            }
-        }
-
-        return results
+            .prefix(limit)
+            .map(\.chunk)
     }
+
+    func articles() throws -> [KnowledgeArticle] {
+        try loadArticles()
+    }
+
+    func article(id: String) throws -> KnowledgeArticle {
+        try article(by: id)
+    }
+
+    func articles(category: String) throws -> [KnowledgeArticle] {
+        try articles(for: category)
+    }
+
+    func chunks() throws -> [KnowledgeChunk] {
+        try loadChunks()
+    }
+}
+
+private struct ScoredKnowledgeArticle {
+    let article: KnowledgeArticle
+    let score: Double
 }
 
 private struct ScoredKnowledgeChunk {
@@ -143,8 +194,60 @@ private extension KnowledgeRepository {
         return output
     }
 
-    static func score(chunk: KnowledgeChunk, keywords: [String], scene: KnowledgeScene) -> Double {
-        var totalScore = scene.matchScore(for: chunk.scenes)
+    static func normalized(_ value: String?) -> String? {
+        guard let value else {
+            return nil
+        }
+
+        let normalized = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        return normalized.isEmpty ? nil : normalized
+    }
+
+    static func normalizedTags(_ tags: [String]) -> [String] {
+        normalizedKeywords(tags)
+    }
+
+    static func matches(_ left: String, _ right: String) -> Bool {
+        left.trimmingCharacters(in: .whitespacesAndNewlines)
+            .localizedCaseInsensitiveCompare(right.trimmingCharacters(in: .whitespacesAndNewlines)) == .orderedSame
+    }
+
+    static func matchesCategory(_ category: String, _ requiredCategory: String?) -> Bool {
+        guard let requiredCategory else {
+            return true
+        }
+        return matches(category, requiredCategory)
+    }
+
+    static func matchesRequiredTags(_ itemTags: [String], _ requiredTags: [String]) -> Bool {
+        guard !requiredTags.isEmpty else {
+            return true
+        }
+
+        return requiredTags.allSatisfy { requiredTag in
+            itemTags.contains { tag in
+                matches(tag, requiredTag)
+                    || tag.localizedCaseInsensitiveContains(requiredTag)
+            }
+        }
+    }
+
+    static func score(article: KnowledgeArticle, keywords: [String], requiredTags: [String]) -> Double {
+        var totalScore = requiredTags.reduce(0.0) { partialResult, tag in
+            partialResult + score(tag: tag, tags: article.tags)
+        }
+
+        for keyword in keywords {
+            totalScore += score(keyword: keyword, article: article)
+        }
+
+        return totalScore
+    }
+
+    static func score(chunk: KnowledgeChunk, keywords: [String], requiredTags: [String]) -> Double {
+        var totalScore = requiredTags.reduce(0.0) { partialResult, tag in
+            partialResult + score(tag: tag, tags: chunk.tags)
+        }
 
         for keyword in keywords {
             totalScore += score(keyword: keyword, chunk: chunk)
@@ -155,6 +258,35 @@ private extension KnowledgeRepository {
         }
 
         return totalScore
+    }
+
+    static func score(keyword: String, article: KnowledgeArticle) -> Double {
+        var score = 0.0
+        let keywordLowercased = keyword.lowercased()
+
+        if article.title == keyword {
+            score += 30
+        } else if article.title.localizedCaseInsensitiveContains(keyword) {
+            score += 22
+        } else if article.title.lowercased().contains(keywordLowercased) {
+            score += 18
+        }
+
+        if article.category.localizedCaseInsensitiveContains(keyword) {
+            score += 10
+        }
+
+        score += Self.score(tag: keyword, tags: article.tags)
+
+        if article.summary.localizedCaseInsensitiveContains(keyword) {
+            score += 8
+        }
+
+        if article.body.localizedCaseInsensitiveContains(keyword) {
+            score += 4
+        }
+
+        return score
     }
 
     static func score(keyword: String, chunk: KnowledgeChunk) -> Double {
@@ -173,18 +305,26 @@ private extension KnowledgeRepository {
             score += 10
         }
 
-        for tag in chunk.tags {
-            if tag == keyword {
-                score += 16
-            } else if tag.localizedCaseInsensitiveContains(keyword) {
-                score += 12
-            }
-        }
+        score += Self.score(tag: keyword, tags: chunk.tags)
 
         if chunk.text.localizedCaseInsensitiveContains(keyword) {
             score += 7
         } else if chunk.text.lowercased().contains(keywordLowercased) {
             score += 5
+        }
+
+        return score
+    }
+
+    static func score(tag requiredTag: String, tags: [String]) -> Double {
+        var score = 0.0
+
+        for tag in tags {
+            if matches(tag, requiredTag) {
+                score += 16
+            } else if tag.localizedCaseInsensitiveContains(requiredTag) {
+                score += 12
+            }
         }
 
         return score

@@ -28,6 +28,7 @@ extension L10nID {
 
     static let tabHome = L10nID("tab.home")
     static let tabKnowledge = L10nID("tab.knowledge")
+    static let tabQA = L10nID("tab.qa")
     static let tabHistory = L10nID("tab.history")
     static let tabSettings = L10nID("tab.settings")
 
@@ -68,11 +69,6 @@ extension L10nID {
     static let settingsLocalDataManagementTitle = L10nID("settings.localDataManagement.title")
     static let settingsLocalDataManagementSubtitle = L10nID("settings.localDataManagement.subtitle")
     static let settingsLocalDataManagementAccessibilityHint = L10nID("settings.localDataManagement.accessibilityHint")
-    static let settingsDebugSectionTitle = L10nID("settings.debug.section.title")
-    static let settingsDebugSectionSubtitle = L10nID("settings.debug.section.subtitle")
-    static let settingsLocalModelDebugTitle = L10nID("settings.localModelDebug.title")
-    static let settingsLocalModelDebugSubtitle = L10nID("settings.localModelDebug.subtitle")
-    static let settingsLocalModelDebugAccessibilityHint = L10nID("settings.localModelDebug.accessibilityHint")
 
     static let languageSettingsSectionTitle = L10nID("languageSettings.section.title")
     static let languageSettingsSectionSubtitle = L10nID("languageSettings.section.subtitle")
@@ -87,7 +83,6 @@ extension L10nID {
     static let aboutCapabilityBirth = L10nID("about.capability.birth")
     static let aboutCapabilityOffline = L10nID("about.capability.offline")
     static let aboutCapabilityHistory = L10nID("about.capability.history")
-    static let aboutCapabilityLocalModel = L10nID("about.capability.localModel")
     static let aboutBoundaryTitle = L10nID("about.boundary.title")
     static let aboutBoundaryBody = L10nID("about.boundary.body")
     static let aboutHelpTitle = L10nID("about.help.title")
@@ -132,9 +127,4 @@ extension L10nID {
     static let legalPrivacyNavigationTitle = L10nID("legal.privacy.navigation.title")
     static let legalDisclaimerNavigationTitle = L10nID("legal.disclaimer.navigation.title")
     static let legalOpenSourceNavigationTitle = L10nID("legal.openSource.navigation.title")
-    static let legalInfoLicense = L10nID("legal.info.license")
-    static let legalInfoSource = L10nID("legal.info.source")
-    static let legalInfoUsage = L10nID("legal.info.usage")
-    static let legalInfoCopyrightNotice = L10nID("legal.info.copyrightNotice")
-    static let legalInfoNotice = L10nID("legal.info.notice")
 }
