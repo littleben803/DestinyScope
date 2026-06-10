@@ -19,7 +19,6 @@ struct HomeView: View {
     @State private var insight: LifeWeightInsight?
     @State private var detailedReading: LifeWeightReading?
     @State private var errorMessage: String?
-    @State private var recentHistoryRecord: HistoryRecord?
     @State private var shouldShowResult = false
 
     private let hours = Array(0...23)
@@ -27,30 +26,35 @@ struct HomeView: View {
     private let lifeWeightReadingRepository = LifeWeightReadingRepository()
 
     var body: some View {
-        AppBackground {
-            ScrollView {
-                VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-                    HomeHeroCard()
+        AnimatedTitlePage(title: localizationStore.string(.appName)) { titleContext in
+            AppBackground {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
+                        HomeHeroCard(titleOpacity: titleContext.largeTitleOpacity)
 
-                    HomeInputCard(
-                        birthDate: $birthDate,
-                        selectedHour: $selectedHour,
-                        selectedGender: $selectedGender,
-                        hours: hours,
-                        errorMessage: errorMessage,
-                        onCalculate: calculateLifeWeight
-                    )
-                    .transition(.opacity.combined(with: .scale))
-                    .animation(.easeInOut, value: errorMessage)
+                        HomeInputCard(
+                            birthDate: $birthDate,
+                            selectedHour: $selectedHour,
+                            selectedGender: $selectedGender,
+                            hours: hours,
+                            errorMessage: errorMessage,
+                            onCalculate: calculateLifeWeight
+                        )
+                        .transition(.opacity.combined(with: .scale))
+                        .animation(.easeInOut, value: errorMessage)
 
-                    if let recentHistoryRecord {
-                        HomeRecentHistoryCard(record: recentHistoryRecord)
+                        HomeZodiacArtworkCard(
+                            artwork: HomeZodiacArtwork.zodiac(
+                                for: birthDate,
+                                hour: selectedHour
+                            )
+                        )
                     }
+                    .padding(AppTheme.Spacing.lg)
                 }
-                .padding(AppTheme.Spacing.lg)
+                .animatedTitleScrollTracking(titleContext)
             }
         }
-        .navigationTitle(localizationStore.string(.appName))
         .navigationDestination(isPresented: $shouldShowResult) {
             if let calculation, let interpretation, let insight {
                 DestinyResultView(
@@ -60,9 +64,6 @@ struct HomeView: View {
                     detailedReading: detailedReading
                 )
             }
-        }
-        .onAppear {
-            loadRecentHistory()
         }
     }
 
@@ -79,16 +80,13 @@ struct HomeView: View {
                 forWeightKey: calculation.readingWeightKey,
                 gender: selectedGender
             )
-            let savedRecord = saveHistoryRecord(result: calculation, insight: insight)
+            saveHistoryRecord(result: calculation, insight: insight)
 
             self.calculation = calculation
             self.interpretation = interpretation
             self.insight = insight
             self.detailedReading = detailedReading
             errorMessage = nil
-            if let savedRecord {
-                recentHistoryRecord = savedRecord
-            }
             shouldShowResult = true
         } catch {
             calculation = nil
@@ -126,14 +124,6 @@ struct HomeView: View {
         } catch {
             print("History record save failed: \(error.localizedDescription)")
             return nil
-        }
-    }
-
-    private func loadRecentHistory() {
-        do {
-            recentHistoryRecord = try historyRecordStore.load().first
-        } catch {
-            recentHistoryRecord = nil
         }
     }
 }

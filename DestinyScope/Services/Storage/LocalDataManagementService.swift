@@ -10,15 +10,18 @@ import Foundation
 struct LocalDataManagementService {
     private let historyRecordStore: HistoryRecordStore
     private let knowledgeLibraryStateStore: KnowledgeLibraryStateStore
+    private let knowledgeSearchHistoryStore: KnowledgeSearchHistoryStore
     private let onboardingStateStore: OnboardingStateStore
 
     init(
         historyRecordStore: HistoryRecordStore = HistoryRecordStore(),
         knowledgeLibraryStateStore: KnowledgeLibraryStateStore = KnowledgeLibraryStateStore(),
+        knowledgeSearchHistoryStore: KnowledgeSearchHistoryStore = KnowledgeSearchHistoryStore(),
         onboardingStateStore: OnboardingStateStore = OnboardingStateStore()
     ) {
         self.historyRecordStore = historyRecordStore
         self.knowledgeLibraryStateStore = knowledgeLibraryStateStore
+        self.knowledgeSearchHistoryStore = knowledgeSearchHistoryStore
         self.onboardingStateStore = onboardingStateStore
     }
 
@@ -47,6 +50,10 @@ struct LocalDataManagementService {
         try knowledgeLibraryStateStore.clearRecentReads()
     }
 
+    func clearKnowledgeSearchHistory() throws {
+        try knowledgeSearchHistoryStore.clear()
+    }
+
     func resetOnboarding() throws {
         onboardingStateStore.reset()
     }
@@ -56,6 +63,7 @@ struct LocalDataManagementService {
         try deleteLegacyBirthProfileFileIfNeeded()
         try clearKnowledgeFavorites()
         try clearKnowledgeRecentReads()
+        try clearKnowledgeSearchHistory()
         try resetOnboarding()
     }
 

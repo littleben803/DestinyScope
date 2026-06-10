@@ -118,6 +118,7 @@ extension L10nID {
     static let homeRecentWeight = L10nID("home.recent.weight")
     static let homeRecentBirthEightCharacters = L10nID("home.recent.birthEightCharacters")
     static let homeRecentDescription = L10nID("home.recent.description")
+    static let homeZodiacArtworkAccessibilityLabel = L10nID("home.zodiacArtwork.accessibilityLabel")
     static let homePrivacyTitle = L10nID("home.privacy.title")
     static let homePrivacyBody = L10nID("home.privacy.body")
     static let homeKnowledgeTitle = L10nID("home.knowledge.title")

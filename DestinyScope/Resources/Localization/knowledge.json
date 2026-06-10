@@ -85,6 +85,46 @@
       "zh-Hant": "搜尋標題、摘要、標籤",
       "en": "Search title, summary, or tags"
     },
+    "knowledge.search.close": {
+      "zh-Hans": "关闭",
+      "zh-Hant": "關閉",
+      "en": "Close"
+    },
+    "knowledge.search.launch.accessibilityLabel": {
+      "zh-Hans": "打开知识库搜索",
+      "zh-Hant": "打開知識庫搜尋",
+      "en": "Open knowledge search"
+    },
+    "knowledge.search.historyTitle": {
+      "zh-Hans": "搜索历史",
+      "zh-Hant": "搜尋歷史",
+      "en": "Search History"
+    },
+    "knowledge.search.clearHistory": {
+      "zh-Hans": "清空搜索历史",
+      "zh-Hant": "清空搜尋歷史",
+      "en": "Clear Search History"
+    },
+    "knowledge.search.initialTitle": {
+      "zh-Hans": "输入关键词开始搜索",
+      "zh-Hant": "輸入關鍵字開始搜尋",
+      "en": "Enter a keyword to search"
+    },
+    "knowledge.search.initialMessage": {
+      "zh-Hans": "可搜索标题、摘要、正文或标签。",
+      "zh-Hant": "可搜尋標題、摘要、正文或標籤。",
+      "en": "Search titles, summaries, body text, or tags."
+    },
+    "knowledge.search.historySaveFailed": {
+      "zh-Hans": "搜索历史保存失败，不影响本次搜索。",
+      "zh-Hant": "搜尋歷史保存失敗，不影響本次搜尋。",
+      "en": "Search history failed to save. This does not affect the current search."
+    },
+    "knowledge.search.historyClearFailed": {
+      "zh-Hans": "搜索历史清空失败，请稍后重试。",
+      "zh-Hant": "搜尋歷史清空失敗，請稍後重試。",
+      "en": "Search history failed to clear. Please try again later."
+    },
     "knowledge.clearRecent.confirmTitle": {
       "zh-Hans": "清空最近阅读？",
       "zh-Hant": "清空最近閱讀？",
@@ -229,31 +269,6 @@
       "zh-Hans": "从本机收藏中移除这篇知识文章。",
       "zh-Hant": "從本機收藏中移除這篇知識文章。",
       "en": "Remove this knowledge article from local favorites."
-    },
-    "knowledge.detail.bodyTitle": {
-      "zh-Hans": "正文",
-      "zh-Hant": "正文",
-      "en": "Body"
-    },
-    "knowledge.detail.tagsTitle": {
-      "zh-Hans": "标签",
-      "zh-Hant": "標籤",
-      "en": "Tags"
-    },
-    "knowledge.detail.sourceTitle": {
-      "zh-Hans": "来源",
-      "zh-Hant": "來源",
-      "en": "Source"
-    },
-    "knowledge.detail.sourceUnknown": {
-      "zh-Hans": "未注明",
-      "zh-Hant": "未註明",
-      "en": "Not specified"
-    },
-    "knowledge.detail.version": {
-      "zh-Hans": "版本：{version}",
-      "zh-Hant": "版本：{version}",
-      "en": "Version: {version}"
     },
     "knowledge.detail.recentSaveFailed": {
       "zh-Hans": "最近阅读记录保存失败，不影响文章阅读。",

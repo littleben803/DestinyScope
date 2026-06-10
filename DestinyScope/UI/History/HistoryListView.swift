@@ -24,25 +24,28 @@ struct HistoryListView: View {
     }
 
     var body: some View {
-        AppBackground {
-            Group {
-                if let errorMessage {
-                    AppCard {
-                        AppSectionHeader(title: localizationStore.string("common.loadFailed"))
-                        Text(errorMessage)
-                            .font(AppTheme.Typography.body)
-                            .foregroundColor(AppTheme.Colors.primaryText)
+        let pageTitle = localizationStore.string("history.navigation.title")
 
-                        Button(localizationStore.string("common.reload")) {
-                            loadRecords()
+        AnimatedTitlePage(title: pageTitle) { titleContext in
+            AppBackground {
+                Group {
+                    if let errorMessage {
+                        messageScrollView(title: pageTitle, titleContext: titleContext) {
+                            AppCard {
+                                AppSectionHeader(title: localizationStore.string("common.loadFailed"))
+                                Text(errorMessage)
+                                    .font(AppTheme.Typography.body)
+                                    .foregroundColor(AppTheme.Colors.primaryText)
+
+                                Button(localizationStore.string("common.reload")) {
+                                    loadRecords()
+                                }
+                                .font(AppTheme.Typography.body.weight(.semibold))
+                                .foregroundColor(AppTheme.Colors.cinnabar)
+                            }
                         }
-                        .font(AppTheme.Typography.body.weight(.semibold))
-                        .foregroundColor(AppTheme.Colors.cinnabar)
-                    }
-                    .padding(AppTheme.Spacing.lg)
-                } else if records.isEmpty {
-                    ScrollView {
-                        VStack(spacing: AppTheme.Spacing.md) {
+                    } else if records.isEmpty {
+                        messageScrollView(title: pageTitle, titleContext: titleContext) {
                             HistoryEmptyStateView()
                             if let stateMessage {
                                 AppCard {
@@ -53,59 +56,12 @@ struct HistoryListView: View {
                                 }
                             }
                         }
-                        .padding(AppTheme.Spacing.lg)
+                    } else {
+                        recordsListView(title: pageTitle, titleContext: titleContext)
                     }
-                } else {
-                    List {
-                        Group {
-                            if let stateMessage {
-                                AppCard {
-                                    Text(stateMessage)
-                                        .font(AppTheme.Typography.footnote)
-                                        .foregroundColor(AppTheme.Colors.secondaryText)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                }
-                                .historyListRowStyle()
-                            }
-
-                            ForEach(sortedRecords) { record in
-                                Button {
-                                    selectedRecord = record
-                                } label: {
-                                    HistoryRecordRowView(record: record)
-                                }
-                                .buttonStyle(.plain)
-                                .contentShape(Rectangle())
-                                .historyListRowStyle()
-                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                    Button(role: .destructive) {
-                                        delete(record)
-                                    } label: {
-                                        Label(localizationStore.string("common.delete"), systemImage: "trash")
-                                    }
-                                }
-                            }
-
-                            Button(role: .destructive) {
-                                isShowingDeleteAllConfirmation = true
-                            } label: {
-                                Text(localizationStore.string("common.clearAll"))
-                                    .font(AppTheme.Typography.body)
-                                    .foregroundColor(AppTheme.Colors.cinnabar)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, AppTheme.Spacing.md)
-                            }
-                            .buttonStyle(.plain)
-                            .historyListRowStyle()
-                        }
-                    }
-                    .listStyle(.plain)
-                    .listRowSpacing(AppTheme.Spacing.md)
-                    .scrollContentBackground(.hidden)
                 }
             }
         }
-        .navigationTitle(localizationStore.string("history.navigation.title"))
         .navigationDestination(isPresented: isDetailPresented) {
             if let selectedRecord {
                 HistoryDetailView(record: selectedRecord)
@@ -124,6 +80,72 @@ struct HistoryListView: View {
         } message: {
             Text(localizationStore.string("history.clearAll.confirmMessage"))
         }
+    }
+
+    private func messageScrollView<Content: View>(
+        title: String,
+        titleContext: AnimatedTitlePageContext,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        ScrollView {
+            VStack(spacing: AppTheme.Spacing.md) {
+                AnimatedTitleHeader(title: title, titleOpacity: titleContext.largeTitleOpacity)
+                content()
+            }
+            .padding(AppTheme.Spacing.lg)
+        }
+        .animatedTitleScrollTracking(titleContext)
+    }
+
+    private func recordsListView(title: String, titleContext: AnimatedTitlePageContext) -> some View {
+        List {
+            AnimatedTitleHeader(title: title, titleOpacity: titleContext.largeTitleOpacity)
+                .historyListRowStyle()
+
+            if let stateMessage {
+                AppCard {
+                    Text(stateMessage)
+                        .font(AppTheme.Typography.footnote)
+                        .foregroundColor(AppTheme.Colors.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .historyListRowStyle()
+            }
+
+            ForEach(sortedRecords) { record in
+                Button {
+                    selectedRecord = record
+                } label: {
+                    HistoryRecordRowView(record: record)
+                }
+                .buttonStyle(.plain)
+                .contentShape(Rectangle())
+                .historyListRowStyle()
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Button(role: .destructive) {
+                        delete(record)
+                    } label: {
+                        Label(localizationStore.string("common.delete"), systemImage: "trash")
+                    }
+                }
+            }
+
+            Button(role: .destructive) {
+                isShowingDeleteAllConfirmation = true
+            } label: {
+                Text(localizationStore.string("common.clearAll"))
+                    .font(AppTheme.Typography.body)
+                    .foregroundColor(AppTheme.Colors.cinnabar)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, AppTheme.Spacing.md)
+            }
+            .buttonStyle(.plain)
+            .historyListRowStyle()
+        }
+        .listStyle(.plain)
+        .listRowSpacing(AppTheme.Spacing.md)
+        .scrollContentBackground(.hidden)
+        .animatedTitleScrollTracking(titleContext)
     }
 
     private func loadRecords() {

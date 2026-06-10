@@ -13,7 +13,7 @@ struct KnowledgeListView: View {
     @State private var articles: [KnowledgeArticle] = []
     @State private var errorMessage: String?
     @State private var selectedCategory = KnowledgeArticleFilter.allCategory
-    @State private var searchText = ""
+    @State private var isShowingSearchResults = false
     @State private var libraryState = KnowledgeLibraryState.empty
     @State private var libraryStateMessage: String?
     @State private var isShowingClearRecentConfirmation = false
@@ -31,7 +31,7 @@ struct KnowledgeListView: View {
         filter.filteredArticles(
             articles: articles,
             selectedCategory: selectedCategory,
-            searchText: searchText,
+            searchText: "",
             favoriteArticleIDs: libraryState.favoriteArticleIDs
         )
     }
@@ -61,34 +61,42 @@ struct KnowledgeListView: View {
     }
 
     var body: some View {
-        AppBackground {
-            Group {
-                if let errorMessage {
-                    AppCard {
-                        AppSectionHeader(title: localizationStore.string("common.loadFailed"))
-                        Text(errorMessage)
-                            .font(AppTheme.Typography.body)
-                            .foregroundColor(AppTheme.Colors.primaryText)
+        let pageTitle = localizationStore.string(.tabKnowledge)
+
+        AnimatedTitlePage(title: pageTitle) { titleContext in
+            AppBackground {
+                Group {
+                    if let errorMessage {
+                        messageScrollView(title: pageTitle, titleContext: titleContext) {
+                            AppCard {
+                                AppSectionHeader(title: localizationStore.string("common.loadFailed"))
+                                Text(errorMessage)
+                                    .font(AppTheme.Typography.body)
+                                    .foregroundColor(AppTheme.Colors.primaryText)
+                            }
+                        }
+                    } else if articles.isEmpty {
+                        messageScrollView(title: pageTitle, titleContext: titleContext) {
+                            AppCard {
+                                Text(localizationStore.string("knowledge.empty.noContent"))
+                                    .font(AppTheme.Typography.body)
+                                    .foregroundColor(AppTheme.Colors.secondaryText)
+                            }
+                        }
+                    } else {
+                        contentView(title: pageTitle, titleContext: titleContext)
                     }
-                    .padding(AppTheme.Spacing.lg)
-                } else if articles.isEmpty {
-                    AppCard {
-                        Text(localizationStore.string("knowledge.empty.noContent"))
-                            .font(AppTheme.Typography.body)
-                            .foregroundColor(AppTheme.Colors.secondaryText)
-                    }
-                    .padding(AppTheme.Spacing.lg)
-                } else {
-                    contentView
                 }
             }
         }
-        .navigationTitle(localizationStore.string(.tabKnowledge))
-        .searchable(
-            text: $searchText,
-            placement: .navigationBarDrawer(displayMode: .automatic),
-            prompt: Text(localizationStore.string("knowledge.search.prompt"))
-        )
+        .fullScreenCover(isPresented: $isShowingSearchResults, onDismiss: loadLibraryState) {
+            NavigationStack {
+                KnowledgeSearchResultsView(
+                    articles: articles,
+                    initialCategory: selectedCategory
+                )
+            }
+        }
         .onAppear {
             loadArticles()
             loadLibraryState()
@@ -115,8 +123,30 @@ struct KnowledgeListView: View {
         }
     }
 
-    private var contentView: some View {
-        VStack(spacing: 0) {
+    private func messageScrollView<Content: View>(
+        title: String,
+        titleContext: AnimatedTitlePageContext,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
+                AnimatedTitleHeader(title: title, titleOpacity: titleContext.largeTitleOpacity)
+                content()
+            }
+            .padding(AppTheme.Spacing.lg)
+        }
+        .animatedTitleScrollTracking(titleContext)
+    }
+
+    private func contentView(title: String, titleContext: AnimatedTitlePageContext) -> some View {
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+                AnimatedTitleHeader(title: title, titleOpacity: titleContext.largeTitleOpacity)
+
+            KnowledgeSearchLaunchButton {
+                isShowingSearchResults = true
+            }
+
             KnowledgeCategoryFilterView(
                 categories: categories,
                 articleCount: { category in
@@ -129,49 +159,48 @@ struct KnowledgeListView: View {
                 displayTitle: localizedCategoryTitle,
                 selectedCategory: $selectedCategory
             )
+            .padding(.horizontal, -AppTheme.Spacing.lg)
 
-            ScrollView {
-                LazyVStack(spacing: AppTheme.Spacing.md) {
-                    KnowledgeLibrarySummaryView(
-                        favoriteCount: favoriteArticles.count,
-                        recentReadCount: recentArticles.count,
-                        recentArticles: Array(recentArticles.prefix(3)),
-                        onClearRecentReads: {
-                            isShowingClearRecentConfirmation = true
-                        },
-                        onClearFavorites: {
-                            isShowingClearFavoritesConfirmation = true
-                        }
-                    )
-
-                    if let libraryStateMessage {
-                        AppCard {
-                            Text(libraryStateMessage)
-                                .font(AppTheme.Typography.footnote)
-                                .foregroundColor(AppTheme.Colors.secondaryText)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
+                KnowledgeLibrarySummaryView(
+                    favoriteCount: favoriteArticles.count,
+                    recentReadCount: recentArticles.count,
+                    recentArticles: Array(recentArticles.prefix(3)),
+                    onClearRecentReads: {
+                        isShowingClearRecentConfirmation = true
+                    },
+                    onClearFavorites: {
+                        isShowingClearFavoritesConfirmation = true
                     }
+                )
 
-                    listSummaryView
-
-                    if filteredArticles.isEmpty {
-                        emptySearchView
-                    } else {
-                        ForEach(filteredArticles) { article in
-                            NavigationLink(destination: KnowledgeDetailView(article: article)) {
-                                KnowledgeArticleRowView(
-                                    article: article,
-                                    isFavorite: favoriteArticleIDs.contains(article.id)
-                                )
-                            }
-                            .buttonStyle(.plain)
-                        }
+                if let libraryStateMessage {
+                    AppCard {
+                        Text(libraryStateMessage)
+                            .font(AppTheme.Typography.footnote)
+                            .foregroundColor(AppTheme.Colors.secondaryText)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
-                .padding(AppTheme.Spacing.lg)
+
+                listSummaryView
+
+                if filteredArticles.isEmpty {
+                    emptySearchView
+                } else {
+                    ForEach(filteredArticles) { article in
+                        NavigationLink(destination: KnowledgeDetailView(article: article)) {
+                            KnowledgeArticleRowView(
+                                article: article,
+                                isFavorite: favoriteArticleIDs.contains(article.id)
+                            )
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
             }
+            .padding(AppTheme.Spacing.lg)
         }
+        .animatedTitleScrollTracking(titleContext)
     }
 
     private var listSummaryView: some View {
@@ -181,15 +210,10 @@ struct KnowledgeListView: View {
                     .font(AppTheme.Typography.sectionTitle)
                     .foregroundColor(AppTheme.Colors.primaryText)
 
-                Text(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-                     ? localizationStore.string(
+                Text(localizationStore.string(
                         "knowledge.summary.categoryCount",
                         replacements: ["count": "\(selectedCategoryCount)"]
-                     )
-                     : localizationStore.string(
-                        "knowledge.summary.searchCount",
-                        replacements: ["count": "\(filteredArticles.count)"]
-                     ))
+                ))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
             }
@@ -220,16 +244,14 @@ struct KnowledgeListView: View {
     }
 
     private var emptyStateTitle: String {
-        if selectedCategory == KnowledgeArticleFilter.favoriteCategory,
-           searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+        if selectedCategory == KnowledgeArticleFilter.favoriteCategory {
             return localizationStore.string("knowledge.empty.favoritesTitle")
         }
         return localizationStore.string("knowledge.empty.searchTitle")
     }
 
     private var emptyStateMessage: String {
-        if selectedCategory == KnowledgeArticleFilter.favoriteCategory,
-           searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+        if selectedCategory == KnowledgeArticleFilter.favoriteCategory {
             return localizationStore.string("knowledge.empty.favoritesMessage")
         }
         return localizationStore.string("knowledge.empty.searchMessage")
@@ -291,5 +313,40 @@ struct KnowledgeListView: View {
         } catch {
             libraryStateMessage = localizationStore.string("knowledge.error.clearFavoritesFailed")
         }
+    }
+}
+
+private struct KnowledgeSearchLaunchButton: View {
+    @EnvironmentObject private var localizationStore: LocalizationStore
+
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: AppTheme.Spacing.sm) {
+                Image(systemName: "magnifyingglass")
+                    .font(AppTheme.Typography.body)
+                    .foregroundColor(AppTheme.Colors.secondaryText)
+                    .accessibilityHidden(true)
+
+                Text(localizationStore.string("knowledge.search.prompt"))
+                    .font(AppTheme.Typography.body)
+                    .foregroundColor(AppTheme.Colors.secondaryText)
+                    .lineLimit(1)
+
+                Spacer()
+            }
+            .padding(.horizontal, AppTheme.Spacing.md)
+            .frame(height: 44)
+            .frame(maxWidth: .infinity)
+            .background(AppTheme.Colors.secondaryBackground.opacity(0.72))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(AppTheme.Colors.divider.opacity(0.55), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(localizationStore.string("knowledge.search.launch.accessibilityLabel"))
     }
 }

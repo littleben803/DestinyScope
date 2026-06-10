@@ -70,6 +70,11 @@
       "zh-Hant": "可在歷史頁查看歷史查詢記錄",
       "en": "View past query records on the History page."
     },
+    "home.zodiacArtwork.accessibilityLabel": {
+      "zh-Hans": "十二生肖图片",
+      "zh-Hant": "十二生肖圖片",
+      "en": "Chinese zodiac artwork"
+    },
     "home.privacy.title": {
       "zh-Hans": "本地计算",
       "zh-Hant": "本地計算",

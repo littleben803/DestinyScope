@@ -21,9 +21,7 @@ struct KnowledgeDetailView: View {
         AppBackground {
             ScrollView {
                 VStack(spacing: AppTheme.Spacing.md) {
-                    headerCard
                     bodyCard
-                    metadataCard
                 }
                 .padding(AppTheme.Spacing.lg)
             }
@@ -35,13 +33,14 @@ struct KnowledgeDetailView: View {
         }
     }
 
-    private var headerCard: some View {
+    private var bodyCard: some View {
         AppCard {
             HStack(alignment: .center, spacing: AppTheme.Spacing.sm) {
-                Text(localizationStore.string(KnowledgeArticleLocalization.categoryKind(for: article).titleID))
+                Text(primaryTagText)
                     .font(AppTheme.Typography.caption.weight(.semibold))
                     .foregroundColor(AppTheme.Colors.darkGold)
                     .lineLimit(1)
+                    .truncationMode(.tail)
                     .padding(.horizontal, AppTheme.Spacing.sm)
                     .padding(.vertical, AppTheme.Spacing.xs)
                     .background(AppTheme.Colors.secondaryBackground.opacity(0.55))
@@ -52,29 +51,12 @@ struct KnowledgeDetailView: View {
                 KnowledgeFavoriteButton(isFavorite: isFavorite, action: toggleFavorite)
             }
 
-            Text(article.title)
-                .font(AppTheme.Typography.pageTitle)
-                .foregroundColor(AppTheme.Colors.primaryText)
-                .fixedSize(horizontal: false, vertical: true)
-
-            Text(article.summary)
-                .font(AppTheme.Typography.secondary)
-                .foregroundColor(AppTheme.Colors.secondaryText)
-                .lineSpacing(3)
-                .fixedSize(horizontal: false, vertical: true)
-
             if let stateMessage {
                 Text(stateMessage)
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
             }
-        }
-    }
-
-    private var bodyCard: some View {
-        AppCard {
-            AppSectionHeader(title: localizationStore.string("knowledge.detail.bodyTitle"))
 
             ForEach(Array(bodyParagraphs.enumerated()), id: \.offset) { _, paragraph in
                 Text(paragraph)
@@ -86,35 +68,11 @@ struct KnowledgeDetailView: View {
         }
     }
 
-    private var metadataCard: some View {
-        AppCard {
-            if !article.tags.isEmpty {
-                VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                    Text(localizationStore.string("knowledge.detail.tagsTitle"))
-                        .font(AppTheme.Typography.footnote.weight(.semibold))
-                        .foregroundColor(AppTheme.Colors.secondaryText)
-                    KnowledgeTagFlowView(tags: article.tags)
-                }
-            }
-
-            Divider()
-                .background(AppTheme.Colors.divider)
-
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text(localizationStore.string("knowledge.detail.sourceTitle"))
-                    .font(AppTheme.Typography.footnote.weight(.semibold))
-                    .foregroundColor(AppTheme.Colors.secondaryText)
-                Text(article.source ?? localizationStore.string("knowledge.detail.sourceUnknown"))
-                    .font(AppTheme.Typography.footnote)
-                    .foregroundColor(AppTheme.Colors.secondaryText)
-                    .textSelection(.enabled)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-
-            Text(localizationStore.string("knowledge.detail.version", replacements: ["version": article.version]))
-                .font(AppTheme.Typography.footnote)
-                .foregroundColor(AppTheme.Colors.secondaryText)
-        }
+    private var primaryTagText: String {
+        article.tags
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .first(where: { !$0.isEmpty })
+        ?? localizationStore.string(KnowledgeArticleLocalization.categoryKind(for: article).titleID)
     }
 
     private var bodyParagraphs: [String] {

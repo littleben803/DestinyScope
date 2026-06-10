@@ -11,103 +11,109 @@ struct SettingsView: View {
     @EnvironmentObject private var localizationStore: LocalizationStore
 
     var body: some View {
-        AppBackground {
-            ScrollView {
-                VStack(spacing: AppTheme.Spacing.md) {
-                    SettingsSectionCard(
-                        title: localizationStore.string(.settingsApplicationSectionTitle),
-                        subtitle: localizationStore.string(.settingsApplicationSectionSubtitle)
-                    ) {
-                        settingsLink(
-                            title: localizationStore.string(.settingsAboutTitle),
-                            subtitle: localizationStore.string(.settingsAboutSubtitle),
-                            systemImage: "info.circle",
-                            accessibilityHint: localizationStore.string(.settingsAboutAccessibilityHint)
+        let pageTitle = localizationStore.string(.settingsNavigationTitle)
+
+        AnimatedTitlePage(title: pageTitle) { titleContext in
+            AppBackground {
+                ScrollView {
+                    VStack(spacing: AppTheme.Spacing.md) {
+                        AnimatedTitleHeader(title: pageTitle, titleOpacity: titleContext.largeTitleOpacity)
+
+                        SettingsSectionCard(
+                            title: localizationStore.string(.settingsApplicationSectionTitle),
+                            subtitle: localizationStore.string(.settingsApplicationSectionSubtitle)
                         ) {
-                            AboutView()
+                            settingsLink(
+                                title: localizationStore.string(.settingsAboutTitle),
+                                subtitle: localizationStore.string(.settingsAboutSubtitle),
+                                systemImage: "info.circle",
+                                accessibilityHint: localizationStore.string(.settingsAboutAccessibilityHint)
+                            ) {
+                                AboutView()
+                            }
+
+                            Divider()
+                                .background(AppTheme.Colors.divider)
+
+                            settingsLink(
+                                title: localizationStore.string(.settingsOnboardingTitle),
+                                subtitle: localizationStore.string(.settingsOnboardingSubtitle),
+                                systemImage: "book.closed",
+                                accessibilityHint: localizationStore.string(.settingsOnboardingAccessibilityHint)
+                            ) {
+                                OnboardingView(isReviewMode: true)
+                            }
+
+                            Divider()
+                                .background(AppTheme.Colors.divider)
+
+                            settingsLink(
+                                title: localizationStore.string(.settingsLanguageTitle),
+                                subtitle: languageSubtitle,
+                                systemImage: "globe",
+                                accessibilityHint: localizationStore.string(.settingsLanguageAccessibilityHint)
+                            ) {
+                                LanguageSettingsView()
+                            }
                         }
 
-                        Divider()
-                            .background(AppTheme.Colors.divider)
-
-                        settingsLink(
-                            title: localizationStore.string(.settingsOnboardingTitle),
-                            subtitle: localizationStore.string(.settingsOnboardingSubtitle),
-                            systemImage: "book.closed",
-                            accessibilityHint: localizationStore.string(.settingsOnboardingAccessibilityHint)
+                        SettingsSectionCard(
+                            title: localizationStore.string(.settingsPrivacySectionTitle),
+                            subtitle: localizationStore.string(.settingsPrivacySectionSubtitle)
                         ) {
-                            OnboardingView(isReviewMode: true)
+                            settingsLink(
+                                title: localizationStore.string(.settingsPrivacyPolicyTitle),
+                                subtitle: localizationStore.string(.settingsPrivacyPolicySubtitle),
+                                systemImage: "lock.shield",
+                                accessibilityHint: localizationStore.string(.settingsPrivacyPolicyAccessibilityHint)
+                            ) {
+                                PrivacyPolicyView()
+                            }
+
+                            Divider()
+                                .background(AppTheme.Colors.divider)
+
+                            settingsLink(
+                                title: localizationStore.string(.settingsDisclaimerTitle),
+                                subtitle: localizationStore.string(.settingsDisclaimerSubtitle),
+                                systemImage: "exclamationmark.triangle",
+                                accessibilityHint: localizationStore.string(.settingsDisclaimerAccessibilityHint)
+                            ) {
+                                DisclaimerView()
+                            }
+
+                            Divider()
+                                .background(AppTheme.Colors.divider)
+
+                            settingsLink(
+                                title: localizationStore.string(.settingsOpenSourceTitle),
+                                subtitle: localizationStore.string(.settingsOpenSourceSubtitle),
+                                systemImage: "doc.text",
+                                accessibilityHint: localizationStore.string(.settingsOpenSourceAccessibilityHint)
+                            ) {
+                                OpenSourceLicensesView()
+                            }
                         }
 
-                        Divider()
-                            .background(AppTheme.Colors.divider)
-
-                        settingsLink(
-                            title: localizationStore.string(.settingsLanguageTitle),
-                            subtitle: languageSubtitle,
-                            systemImage: "globe",
-                            accessibilityHint: localizationStore.string(.settingsLanguageAccessibilityHint)
+                        SettingsSectionCard(
+                            title: localizationStore.string(.settingsLocalDataSectionTitle),
+                            subtitle: localizationStore.string(.settingsLocalDataSectionSubtitle)
                         ) {
-                            LanguageSettingsView()
+                            settingsLink(
+                                title: localizationStore.string(.settingsLocalDataManagementTitle),
+                                subtitle: localizationStore.string(.settingsLocalDataManagementSubtitle),
+                                systemImage: "folder",
+                                accessibilityHint: localizationStore.string(.settingsLocalDataManagementAccessibilityHint)
+                            ) {
+                                LocalDataManagementView()
+                            }
                         }
                     }
-
-                    SettingsSectionCard(
-                        title: localizationStore.string(.settingsPrivacySectionTitle),
-                        subtitle: localizationStore.string(.settingsPrivacySectionSubtitle)
-                    ) {
-                        settingsLink(
-                            title: localizationStore.string(.settingsPrivacyPolicyTitle),
-                            subtitle: localizationStore.string(.settingsPrivacyPolicySubtitle),
-                            systemImage: "lock.shield",
-                            accessibilityHint: localizationStore.string(.settingsPrivacyPolicyAccessibilityHint)
-                        ) {
-                            PrivacyPolicyView()
-                        }
-
-                        Divider()
-                            .background(AppTheme.Colors.divider)
-
-                        settingsLink(
-                            title: localizationStore.string(.settingsDisclaimerTitle),
-                            subtitle: localizationStore.string(.settingsDisclaimerSubtitle),
-                            systemImage: "exclamationmark.triangle",
-                            accessibilityHint: localizationStore.string(.settingsDisclaimerAccessibilityHint)
-                        ) {
-                            DisclaimerView()
-                        }
-
-                        Divider()
-                            .background(AppTheme.Colors.divider)
-
-                        settingsLink(
-                            title: localizationStore.string(.settingsOpenSourceTitle),
-                            subtitle: localizationStore.string(.settingsOpenSourceSubtitle),
-                            systemImage: "doc.text",
-                            accessibilityHint: localizationStore.string(.settingsOpenSourceAccessibilityHint)
-                        ) {
-                            OpenSourceLicensesView()
-                        }
-                    }
-
-                    SettingsSectionCard(
-                        title: localizationStore.string(.settingsLocalDataSectionTitle),
-                        subtitle: localizationStore.string(.settingsLocalDataSectionSubtitle)
-                    ) {
-                        settingsLink(
-                            title: localizationStore.string(.settingsLocalDataManagementTitle),
-                            subtitle: localizationStore.string(.settingsLocalDataManagementSubtitle),
-                            systemImage: "folder",
-                            accessibilityHint: localizationStore.string(.settingsLocalDataManagementAccessibilityHint)
-                        ) {
-                            LocalDataManagementView()
-                        }
-                    }
+                    .padding(AppTheme.Spacing.lg)
                 }
-                .padding(AppTheme.Spacing.lg)
+                .animatedTitleScrollTracking(titleContext)
             }
         }
-        .navigationTitle(localizationStore.string(.settingsNavigationTitle))
     }
 
     private func settingsLink<Destination: View>(

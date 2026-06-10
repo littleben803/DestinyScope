@@ -26,9 +26,9 @@
       "en": "Birth information, results, and history are not uploaded."
     },
     "legal.privacy.highlight.2": {
-      "zh-Hans": "知识库收藏和最近阅读仅保存在当前设备。",
-      "zh-Hant": "知識庫收藏與最近閱讀僅保存在目前裝置。",
-      "en": "Knowledge favorites and recent reads are stored only on this device."
+      "zh-Hans": "知识库收藏、最近阅读和搜索历史仅保存在当前设备。",
+      "zh-Hant": "知識庫收藏、最近閱讀與搜尋歷史僅保存在目前裝置。",
+      "en": "Knowledge favorites, recent reads, and search history are stored only on this device."
     },
     "legal.privacy.highlight.3": {
       "zh-Hans": "本地数据管理只清理当前设备上的用户数据。",
@@ -71,14 +71,14 @@
       "en": "History is stored only on this device so you can review lightweight past results in the app. The current version does not upload history or sync it to the cloud. You can delete one record or clear all records from the History page."
     },
     "legal.privacy.section.knowledgeState.title": {
-      "zh-Hans": "知识库收藏与最近阅读",
-      "zh-Hant": "知識庫收藏與最近閱讀",
-      "en": "Knowledge Favorites and Recent Reads"
+      "zh-Hans": "知识库收藏、最近阅读与搜索历史",
+      "zh-Hant": "知識庫收藏、最近閱讀與搜尋歷史",
+      "en": "Knowledge Favorites, Recent Reads, and Search History"
     },
     "legal.privacy.section.knowledgeState.body": {
-      "zh-Hans": "如果你收藏知识库文章或浏览文章详情，当前版本只会在当前设备保存文章标识和阅读时间，用于展示收藏和最近阅读。当前版本不保存知识库文章全文，不保存搜索关键词，不上传、不同步、不需要账号。你可以在知识库页面取消收藏、清空收藏或清空最近阅读。",
-      "zh-Hant": "如果你收藏知識庫文章或瀏覽文章詳情，目前版本只會在目前裝置保存文章標識與閱讀時間，用於展示收藏與最近閱讀。目前版本不保存知識庫文章全文，不保存搜尋關鍵字，不上傳、不同步、不需要帳號。你可以在知識庫頁面取消收藏、清空收藏或清空最近閱讀。",
-      "en": "If you favorite knowledge articles or open article details, the current version stores only article IDs and read times on this device to show favorites and recent reads. It does not store full article text or search keywords, upload, sync, or require an account. You can unfavorite, clear favorites, or clear recent reads from the Knowledge page."
+      "zh-Hans": "如果你收藏知识库文章、浏览文章详情或使用知识库搜索历史，当前版本只会在当前设备保存文章标识、阅读时间和搜索关键词，用于展示收藏、最近阅读和搜索历史。当前版本不保存知识库文章全文，不上传、不同步、不需要账号。你可以在知识库页面取消收藏、清空收藏、清空最近阅读或清空搜索历史。",
+      "zh-Hant": "如果你收藏知識庫文章、瀏覽文章詳情或使用知識庫搜尋歷史，目前版本只會在目前裝置保存文章標識、閱讀時間與搜尋關鍵字，用於展示收藏、最近閱讀與搜尋歷史。目前版本不保存知識庫文章全文，不上傳、不同步、不需要帳號。你可以在知識庫頁面取消收藏、清空收藏、清空最近閱讀或清空搜尋歷史。",
+      "en": "If you favorite knowledge articles, open article details, or use knowledge search history, the current version stores only article IDs, read times, and search keywords on this device to show favorites, recent reads, and search history. It does not store full article text, upload, sync, or require an account. You can unfavorite, clear favorites, clear recent reads, or clear search history from the Knowledge page."
     },
     "legal.privacy.section.localData.title": {
       "zh-Hans": "本地数据管理",
@@ -86,9 +86,9 @@
       "en": "Local Data Management"
     },
     "legal.privacy.section.localData.body": {
-      "zh-Hans": "你可以在设置中的本地数据管理页面清理历史记录、知识库收藏、最近阅读和首次使用说明状态等本机数据。删除仅影响当前设备，不影响 App 内置知识库、称骨数据或本地计算规则。当前版本无账号、无同步、无服务端。",
-      "zh-Hant": "你可以在設定中的本地資料管理頁面清理歷史記錄、知識庫收藏、最近閱讀與首次使用說明狀態等本機資料。刪除僅影響目前裝置，不影響 App 內置知識庫、稱骨資料或本地計算規則。目前版本無帳號、無同步、無服務端。",
-      "en": "You can use Local Data Management in Settings to clear history, knowledge favorites, recent reads, onboarding state, and other local data. Deletion affects only this device and does not affect bundled knowledge, weight data, or local calculation rules. The current version has no account, sync, or server."
+      "zh-Hans": "你可以在设置中的本地数据管理页面清理历史记录、知识库收藏、最近阅读、搜索历史和首次使用说明状态等本机数据。删除仅影响当前设备，不影响 App 内置知识库、称骨数据或本地计算规则。当前版本无账号、无同步、无服务端。",
+      "zh-Hant": "你可以在設定中的本地資料管理頁面清理歷史記錄、知識庫收藏、最近閱讀、搜尋歷史與首次使用說明狀態等本機資料。刪除僅影響目前裝置，不影響 App 內置知識庫、稱骨資料或本地計算規則。目前版本無帳號、無同步、無服務端。",
+      "en": "You can use Local Data Management in Settings to clear history, knowledge favorites, recent reads, search history, onboarding state, and other local data. Deletion affects only this device and does not affect bundled knowledge, weight data, or local calculation rules. The current version has no account, sync, or server."
     },
     "legal.privacy.section.network.title": {
       "zh-Hans": "网络与服务端",

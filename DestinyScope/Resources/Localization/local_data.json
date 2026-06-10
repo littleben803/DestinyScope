@@ -166,14 +166,14 @@
       "en": "Clear All Local User Data"
     },
     "localData.action.clearAll.subtitle": {
-      "zh-Hans": "清空历史、知识库状态和首次使用说明状态，不删除内置资源。",
-      "zh-Hant": "清空歷史、知識庫狀態與首次使用說明狀態，不刪除內置資源。",
-      "en": "Clear history, knowledge state, and onboarding state without deleting bundled resources."
+      "zh-Hans": "清空历史、知识库状态、搜索历史和首次使用说明状态，不删除内置资源。",
+      "zh-Hant": "清空歷史、知識庫狀態、搜尋歷史與首次使用說明狀態，不刪除內置資源。",
+      "en": "Clear history, knowledge state, search history, and onboarding state without deleting bundled resources."
     },
     "localData.action.clearAll.confirmation": {
-      "zh-Hans": "此操作会清空本机历史记录、知识库收藏、最近阅读和首次使用说明状态。不会删除内置知识库、称骨数据或 App 资源。删除后无法恢复。",
-      "zh-Hant": "此操作會清空本機歷史記錄、知識庫收藏、最近閱讀與首次使用說明狀態。不會刪除內置知識庫、稱骨資料或 App 資源。刪除後無法恢復。",
-      "en": "This clears local history, knowledge favorites, recent reads, and onboarding state. It does not delete bundled knowledge, weight data, or app resources. It cannot be undone."
+      "zh-Hans": "此操作会清空本机历史记录、知识库收藏、最近阅读、搜索历史和首次使用说明状态。不会删除内置知识库、称骨数据或 App 资源。删除后无法恢复。",
+      "zh-Hant": "此操作會清空本機歷史記錄、知識庫收藏、最近閱讀、搜尋歷史與首次使用說明狀態。不會刪除內置知識庫、稱骨資料或 App 資源。刪除後無法恢復。",
+      "en": "This clears local history, knowledge favorites, recent reads, search history, and onboarding state. It does not delete bundled knowledge, weight data, or app resources. It cannot be undone."
     },
     "localData.action.clearAll.success": {
       "zh-Hans": "已清空本机用户数据。",

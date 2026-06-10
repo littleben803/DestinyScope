@@ -10,12 +10,17 @@ import SwiftUI
 struct HomeHeroCard: View {
     @EnvironmentObject private var localizationStore: LocalizationStore
 
+    let titleOpacity: Double
+
+    init(titleOpacity: Double = 1) {
+        self.titleOpacity = titleOpacity
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-            Text(localizationStore.string(.homeHeroSubtitle))
-                .font(AppTheme.Typography.sectionTitle)
-                .foregroundColor(AppTheme.Colors.darkGold)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        AnimatedTitleHeader(
+            title: localizationStore.string(.appName),
+            subtitle: localizationStore.string(.homeHeroSubtitle),
+            titleOpacity: titleOpacity
+        )
     }
 }
