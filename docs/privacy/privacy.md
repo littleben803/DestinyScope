@@ -68,7 +68,7 @@ This privacy policy applies to the current version of DestinyScope. DestinyScope
 - DestinyScope does not use a backend server for the current official features.
 - DestinyScope does not request Location, Camera, Photos, Contacts, Microphone, or other sensitive permissions.
 - DestinyScope does not include ad tracking, analytics SDKs, subscriptions, or in-app purchases.
-- Fortune data is bundled as local CSV files, and knowledge resources are bundled as local JSON and SQLite files.
+- Fortune data is bundled as local CSV files, and knowledge resources are bundled as local JSON files.
 - System sharing, when used, is initiated by the user through the iOS share sheet and does not upload data through DestinyScope.
 - If future versions add networking, accounts, subscriptions, or data sync, this privacy policy will be updated.
 

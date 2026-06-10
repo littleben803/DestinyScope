@@ -60,8 +60,8 @@ DestinyScope 已回退到本地优先、确定性算法和模板解释路线。
 
 - `DestinyScope/Resources/Knowledge/destiny_knowledge_articles.json`
 - `DestinyScope/Resources/Knowledge/destiny_rag_chunks.json`
-- `DestinyScope/Resources/Knowledge/knowledge.json`
-- `DestinyScope/Resources/Knowledge/destiny_knowledge.sqlite`
+- Knowledge 目录当前只保留运行时需要的正式 articles / chunks JSON。
+- SQLite、manifest、reserved naming 属于离线构建/审计产物，不再放入 App Resources。
 - `DestinyScope/Resources/Data/life_weight_readings.json`
 - 称骨、八字、权重计算相关本地数据和代码
 

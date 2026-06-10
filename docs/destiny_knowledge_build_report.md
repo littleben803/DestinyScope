@@ -5,8 +5,8 @@
 - 生成时间：2026-06-04T16:01:55+00:00
 - 新知识库 JSON：306 articles
 - 新 RAG JSON：306 chunks
-- 命名类保留：1 records
-- SQLite：`DestinyScope/Resources/Knowledge/destiny_knowledge.sqlite`
+- 命名类保留：1 records，默认生成到 `.build/knowledge_import/reserved_future_naming.json`，不进入 App Resources
+- SQLite 审计产物：默认生成到 `.build/knowledge_import/destiny_knowledge.sqlite`，不进入 App Resources
 - App 默认 JSON 资源：`DestinyScope/Resources/Knowledge/destiny_knowledge_articles.json` / `DestinyScope/Resources/Knowledge/destiny_rag_chunks.json`
 - 验收自检：Pass
 
@@ -107,6 +107,6 @@
 ## 说明
 
 - App 默认读取 `destiny_knowledge_articles.json` 和 `destiny_rag_chunks.json`；不再额外保留旧名副本。
-- `reserved_future_naming.json` 仅用于未来命名方向评估，不进入正式知识库和 SQLite。
+- `reserved_future_naming.json` 仅用于未来命名方向评估，默认生成到 `.build/knowledge_import`，不进入 App 资源、正式知识库和 SQLite。
 - 数据源审计记录显示原始数据集 license 未声明；正式分发前仍建议保留人工 license 复核记录。
 - 所有正式 article / chunk 均保留 `usageBoundary` 字段；body 与 RAG text 不再内联重复边界。

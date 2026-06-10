@@ -4,7 +4,7 @@
 
 - 阶段 2 补充后技术验收：Pass。
 - 五行、天干、地支覆盖缺口已补齐到每类 50 篇以上。
-- 正式产物结构、风险字段、使用边界、SQLite 完整性和 FTS5 检索均通过。
+- 正式 JSON 产物结构、风险字段和使用边界均通过；SQLite / FTS5 作为离线审计产物通过完整性校验，不进入 App Resources。
 - 已接入 App 默认 JSON 读取路径，`destiny_knowledge_articles.json` / `destiny_rag_chunks.json` 为 306 篇 / 306 chunks。
 - 文章 `body`、RAG `text`、SQLite `body/text` 已去掉重复的标题问题前缀和内联使用边界；使用边界只保留在 `usageBoundary` 字段。
 
@@ -72,7 +72,7 @@
 | 天干 | 62 |
 | 地支 | 60 |
 
-## SQLite / FTS5
+## SQLite / FTS5 离线审计
 
 | 检查项 | 结果 |
 | --- | --- |

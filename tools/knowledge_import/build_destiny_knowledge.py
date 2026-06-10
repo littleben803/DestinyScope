@@ -33,9 +33,9 @@ OUTPUT_ARTICLES = OUTPUT_DIR / "destiny_knowledge_articles.json"
 OUTPUT_CHUNKS = OUTPUT_DIR / "destiny_rag_chunks.json"
 OFFICIAL_ARTICLES = OUTPUT_ARTICLES
 OFFICIAL_CHUNKS = OUTPUT_CHUNKS
-OUTPUT_RESERVED_NAMING = OUTPUT_DIR / "reserved_future_naming.json"
-OUTPUT_MANIFEST = OUTPUT_DIR / "destiny_knowledge_manifest.json"
-OUTPUT_SQLITE = OUTPUT_DIR / "destiny_knowledge.sqlite"
+OUTPUT_RESERVED_NAMING = BUILD_DIR / "reserved_future_naming.json"
+OUTPUT_MANIFEST = BUILD_DIR / "destiny_knowledge_manifest.json"
+OUTPUT_SQLITE = BUILD_DIR / "destiny_knowledge.sqlite"
 OUTPUT_REPORT = pathlib.Path("docs/destiny_knowledge_build_report.md")
 
 SOURCE_VERSION = "destiny-knowledge-2026-06-03"
@@ -1107,7 +1107,7 @@ def build_report(manifest: dict[str, Any]) -> str:
 ## 说明
 
 - App 默认读取 `destiny_knowledge_articles.json` 和 `destiny_rag_chunks.json`；不再额外生成旧名副本。
-- `reserved_future_naming.json` 仅用于未来命名方向评估，不进入正式知识库和 SQLite。
+- `reserved_future_naming.json` 仅用于未来命名方向评估，默认生成到 `.build/knowledge_import`，不进入 App 资源、正式知识库和 SQLite。
 - 数据源审计记录显示原始数据集 license 未声明；正式分发前仍建议保留人工 license 复核记录。
 - 所有正式 article / chunk 均保留 `usageBoundary` 字段；body 与 RAG text 不再内联重复边界。
 """
