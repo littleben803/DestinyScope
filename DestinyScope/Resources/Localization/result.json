@@ -71,9 +71,9 @@
       "en": "Interpretation"
     },
     "result.interpretation.description": {
-      "zh-Hans": "以下为本地模板生成的五类参考解读，原始命理结果保持不变。",
-      "zh-Hant": "以下為本地模板產生的五類參考解讀，原始命理結果保持不變。",
-      "en": "The following five reference interpretations are generated from local templates. The original result remains unchanged."
+      "zh-Hans": "以下为本地知识资源生成的五类参考解读，原始命理结果保持不变。",
+      "zh-Hant": "以下為本地知識資源產生的五類參考解讀，原始命理結果保持不變。",
+      "en": "The following five reference interpretations are generated from local knowledge resources. The original result remains unchanged."
     },
     "result.interpretation.summary": {
       "zh-Hans": "总评",

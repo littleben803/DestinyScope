@@ -29,6 +29,24 @@ DestinyScope 已回退到本地优先、确定性算法和模板解释路线。
 - 模板结果之外的新命理结论
 - 服务端、登录、同步、分析追踪、广告、订阅或敏感权限
 
+## 上线前阶段状态
+
+### V1.9 阶段 1：App 名称多语言 token 化
+
+- 当前目标：用户可见 App 主名称统一走 `app.name`，App 副标题统一走 `app.subtitle`，英文/内部品牌名统一走 `app.brand.internal`。
+- 简体中文主名称：八字命镜。
+- 繁体中文主名称：八字命鏡。
+- 英文/内部品牌名：DestinyScope。
+- 本阶段不修改 Bundle ID、签名、Team、Version / Build、称骨计算、本地数据或知识库资源。
+
+### V1.9 阶段 2：启动页重新设计
+
+- 启动页已按“八字命镜”上线口径改为静态图形方案。
+- `LaunchScreen.storyboard` 位于 `Base.lproj`，显示本地化 App 名称和 Subtitle，三语言文案由 `LaunchScreen.strings` 提供。
+- 中心视觉使用设计师提供的命镜罗盘 logo `LaunchLogoCenter`，启动页运行时引用顶层 bundle PNG `LaunchLogoCenter.png`，并保留同名 image set 作为工程内设计资源；品牌组整体略高于屏幕中心。
+- 背景使用浅宣纸色，与首页背景和原启动页背景保持一致。
+- 本阶段不修改首页业务逻辑、称骨计算、本地模型、Bundle ID、签名、Team、Version / Build。
+
 ## 已完成清理
 
 ### 阶段一

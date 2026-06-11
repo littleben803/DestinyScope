@@ -1,6 +1,6 @@
-# DestinyScope App Store 上架检查清单
+# 八字命镜 App Store 上架检查清单
 
-更新日期：2026-05-27
+更新日期：2026-06-11
 
 ## 1. App Icon
 
@@ -23,8 +23,10 @@
 当前状态：
 
 - 工程使用 `INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen` 指向自定义启动页。
-- 已新增 `DestinyScope/LaunchScreen.storyboard`。
-- 启动页为静态布局：宣纸米白背景、居中 `DestinyScope`、副标题 `东方命理 · 自我探索`。
+- 已新增 `DestinyScope/Base.lproj/LaunchScreen.storyboard`。
+- 启动页为静态布局：浅宣纸色背景、略高于中心的命镜罗盘 logo，运行时图片通过顶层 bundle PNG `LaunchLogoCenter.png` 引用。
+- 启动页显示本地化 App 名称和 Subtitle，文案由 `LaunchScreen.strings` 提供。
+- App 显示名由 `InfoPlist.strings` 提供简体中文、繁体中文和英文本地化。
 - 启动页不包含广告、复杂动画、网络图片或高风险营销文案。
 
 上架前待办：
@@ -149,7 +151,7 @@
 
 当前状态：
 
-- 已准备 `Docs/AppStoreMetadata.md`，包含 App 名称、副标题、宣传文本、描述、关键词、分类建议和高风险词避让清单。
+- 已准备 `docs/AppStoreMetadata.md`，包含 App 名称、副标题、英文/内部品牌名、繁体中文名称、宣传文本、描述、关键词、分类建议和高风险词避让清单。
 - 已准备 `Docs/AppReviewNotes.md`，包含中英文审核备注、无需测试账号说明、数据处理说明、网络说明、权限说明、免责声明和审核员测试步骤。
 - 已准备 `Docs/ScreenshotPlan.md`，包含 5 到 6 张截图的页面、标题、副文案和注意事项。
 - `Docs/AppStoreMetadata.md` 中的隐私政策 URL 已更新为 `https://littleben803.github.io/DestinyScope/privacy/`。

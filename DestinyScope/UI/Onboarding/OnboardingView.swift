@@ -8,6 +8,30 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    enum FromScene {
+        case firstLaunch
+        case about
+
+        var showsHeaderTitle: Bool {
+            switch self {
+            case .firstLaunch:
+                return true
+            case .about:
+                return false
+            }
+        }
+
+        var showsSkipButton: Bool {
+            switch self {
+            case .firstLaunch:
+                return true
+            case .about:
+                return false
+            }
+        }
+    }
+
+    let fromScene: FromScene
     let isReviewMode: Bool
     let onFinish: (() -> Void)?
 
@@ -17,7 +41,12 @@ struct OnboardingView: View {
 
     private let pages = OnboardingPage.v1_6Pages
 
-    init(isReviewMode: Bool = false, onFinish: (() -> Void)? = nil) {
+    init(
+        fromScene: FromScene = .firstLaunch,
+        isReviewMode: Bool = false,
+        onFinish: (() -> Void)? = nil
+    ) {
+        self.fromScene = fromScene
         self.isReviewMode = isReviewMode
         self.onFinish = onFinish
     }
@@ -53,9 +82,11 @@ struct OnboardingView: View {
 
     private var header: some View {
         VStack(spacing: AppTheme.Spacing.sm) {
-            Text(localizationStore.string(.onboardingHeaderTitle))
-                .font(AppTheme.Typography.pageTitle)
-                .foregroundColor(AppTheme.Colors.primaryText)
+            if fromScene.showsHeaderTitle {
+                Text(localizationStore.string(.onboardingHeaderTitle))
+                    .font(AppTheme.Typography.pageTitle)
+                    .foregroundColor(AppTheme.Colors.primaryText)
+            }
 
             Text(localizationStore.string(.onboardingHeaderSubtitle))
                 .font(AppTheme.Typography.secondary)
@@ -89,21 +120,19 @@ struct OnboardingView: View {
             .accessibilityLabel(isLastPage ? finishTitle : localizationStore.string(.onboardingNext))
             .accessibilityHint(isLastPage ? finishHint : localizationStore.string(.onboardingNextHint))
 
-            if selectedPage > 0 {
+            if fromScene.showsSkipButton {
                 Button {
-                    withAnimation {
-                        selectedPage -= 1
-                    }
+                    finish()
                 } label: {
-                    Text(localizationStore.string(.onboardingPrevious))
-                        .font(AppTheme.Typography.body)
+                    Text(localizationStore.string(.onboardingSkip))
+                        .font(AppTheme.Typography.body.weight(.semibold))
                         .foregroundColor(AppTheme.Colors.cinnabar)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, AppTheme.Spacing.sm)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(localizationStore.string(.onboardingPrevious))
-                .accessibilityHint(localizationStore.string(.onboardingPreviousHint))
+                .accessibilityLabel(localizationStore.string(.onboardingSkip))
+                .accessibilityHint(localizationStore.string(.onboardingSkipHint))
             }
         }
     }
@@ -134,6 +163,6 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView(isReviewMode: true)
+    OnboardingView(fromScene: .about, isReviewMode: true)
         .environmentObject(LocalizationStore())
 }

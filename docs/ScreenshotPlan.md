@@ -1,7 +1,7 @@
-# DestinyScope App Store Screenshot Plan
+# 八字命镜 App Store Screenshot Plan
 
-更新日期：2026-06-02
-适用版本：V1.8
+更新日期：2026-06-11
+适用版本：V1.9 上线前 App 名称本地化阶段
 
 建议截图数量：6 张。
 

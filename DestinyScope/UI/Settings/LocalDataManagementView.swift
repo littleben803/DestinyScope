@@ -114,8 +114,6 @@ struct LocalDataManagementView: View {
                 try service.clearKnowledgeFavorites()
             case .clearKnowledgeRecentReads:
                 try service.clearKnowledgeRecentReads()
-            case .resetOnboarding:
-                try service.resetOnboarding()
             case .clearAllUserLocalData:
                 try service.clearAllUserLocalData()
             }
@@ -135,7 +133,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
     case clearHistory
     case clearKnowledgeFavorites
     case clearKnowledgeRecentReads
-    case resetOnboarding
     case clearAllUserLocalData
 
     var id: String { rawValue }
@@ -148,8 +145,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
             return "localData.action.clearKnowledgeFavorites.title"
         case .clearKnowledgeRecentReads:
             return "localData.action.clearKnowledgeRecent.title"
-        case .resetOnboarding:
-            return "localData.action.resetOnboarding.title"
         case .clearAllUserLocalData:
             return "localData.action.clearAll.title"
         }
@@ -163,8 +158,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
             return "localData.action.clearKnowledgeFavorites.subtitle"
         case .clearKnowledgeRecentReads:
             return "localData.action.clearKnowledgeRecent.subtitle"
-        case .resetOnboarding:
-            return "localData.action.resetOnboarding.subtitle"
         case .clearAllUserLocalData:
             return "localData.action.clearAll.subtitle"
         }
@@ -178,8 +171,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
             return "star.slash"
         case .clearKnowledgeRecentReads:
             return "book.closed"
-        case .resetOnboarding:
-            return "arrow.counterclockwise.circle"
         case .clearAllUserLocalData:
             return "trash"
         }
@@ -201,20 +192,13 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
             return "localData.action.clearKnowledgeFavorites.confirmation"
         case .clearKnowledgeRecentReads:
             return "localData.action.clearKnowledgeRecent.confirmation"
-        case .resetOnboarding:
-            return "localData.action.resetOnboarding.confirmation"
         case .clearAllUserLocalData:
             return "localData.action.clearAll.confirmation"
         }
     }
 
     var confirmButtonTitleID: L10nID {
-        switch self {
-        case .resetOnboarding:
-            return "common.reset"
-        default:
-            return "localData.action.confirmClean"
-        }
+        return "localData.action.confirmClean"
     }
 
     var successMessageID: L10nID {
@@ -225,8 +209,6 @@ private enum LocalDataAction: String, CaseIterable, Identifiable {
             return "localData.action.clearKnowledgeFavorites.success"
         case .clearKnowledgeRecentReads:
             return "localData.action.clearKnowledgeRecent.success"
-        case .resetOnboarding:
-            return "localData.action.resetOnboarding.success"
         case .clearAllUserLocalData:
             return "localData.action.clearAll.success"
         }

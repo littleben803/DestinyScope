@@ -1,47 +1,49 @@
-# DestinyScope App Store Metadata
+# 八字命镜 App Store Metadata
 
-更新日期：2026-06-08
+更新日期：2026-06-11
 
 本文件用于准备 App Store Connect 上架文字材料。所有文案必须保持：传统文化、自我探索、本地处理、无账号、无服务端。
 
 ## App Name
 
 ```text
-DestinyScope
-```
-
-备选：
-
-```text
-DestinyScope 命镜
+八字命镜
 ```
 
 ## Subtitle
 
 ```text
-传统命理与本地文化解读
+称骨命格与传统解读
 ```
 
-备选：
+## English / Internal Brand
 
 ```text
-称骨命理与自我探索
+DestinyScope
 ```
 
+## Traditional Chinese App Name
+
 ```text
-出生时辰的本地参考解读
+八字命鏡
+```
+
+## Traditional Chinese Subtitle
+
+```text
+稱骨命格與傳統解讀
 ```
 
 ## Promotional Text
 
 ```text
-DestinyScope 基于内置称骨命理数据和传统文化知识库，提供出生日期与时辰的参考性解读。无需账号，无服务端，出生信息仅在设备端处理。
+八字命镜基于内置称骨命理数据和传统文化知识库，提供出生日期与时辰的参考性解读。无需账号，无服务端，出生信息仅在设备端处理。
 ```
 
 ## Description
 
 ```text
-DestinyScope 是一款完全 Native、本地优先的传统命理文化与自我探索工具。你可以输入出生日期与出生时辰，App 会基于内置称骨命理数据，在设备端生成称骨结果、命格诗文、年/月/日/时权重明细和命格详解。
+八字命镜是一款完全 Native、本地优先的传统命理文化与自我探索工具。你可以输入出生日期与出生时辰，App 会基于内置称骨命理数据，在设备端生成称骨结果、命格诗文、年/月/日/时权重明细和命格详解。
 
 你还可以在知识库中阅读称骨、农历时辰、生肖、五行和传统命理使用边界等入门内容，把它作为了解东方传统文化和自我探索的一种轻量入口。
 
@@ -55,7 +57,7 @@ DestinyScope 是一款完全 Native、本地优先的传统命理文化与自我
 - 不接入广告追踪、分析 SDK、内购或订阅
 
 内容边界：
-DestinyScope 的结果仅供娱乐、自我探索和传统文化学习参考，不构成医疗、法律、财务、投资、婚恋或职业决策建议。请勿仅依据 App 结果做重大现实决策。
+八字命镜的结果仅供娱乐、自我探索和传统文化学习参考，不构成医疗、法律、财务、投资、婚恋或职业决策建议。请勿仅依据 App 结果做重大现实决策。
 ```
 
 ## Keywords
@@ -126,7 +128,7 @@ https://littleben803.github.io/DestinyScope/privacy/
 ## Copyright
 
 ```text
-© 2026 DestinyScope. All rights reserved.
+© 2026 八字命镜 / DestinyScope. All rights reserved.
 ```
 
 如最终使用个人或公司主体，应以 App Store Connect 账号主体和法律材料为准。

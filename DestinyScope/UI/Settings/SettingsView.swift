@@ -19,10 +19,7 @@ struct SettingsView: View {
                     VStack(spacing: AppTheme.Spacing.md) {
                         AnimatedTitleHeader(title: pageTitle, titleOpacity: titleContext.largeTitleOpacity)
 
-                        SettingsSectionCard(
-                            title: localizationStore.string(.settingsApplicationSectionTitle),
-                            subtitle: localizationStore.string(.settingsApplicationSectionSubtitle)
-                        ) {
+                        SettingsSectionCard(title: localizationStore.string(.settingsApplicationSectionTitle)) {
                             settingsLink(
                                 title: localizationStore.string(.settingsAboutTitle),
                                 subtitle: localizationStore.string(.settingsAboutSubtitle),
@@ -41,7 +38,7 @@ struct SettingsView: View {
                                 systemImage: "book.closed",
                                 accessibilityHint: localizationStore.string(.settingsOnboardingAccessibilityHint)
                             ) {
-                                OnboardingView(isReviewMode: true)
+                                OnboardingView(fromScene: .about, isReviewMode: true)
                             }
 
                             Divider()
@@ -57,10 +54,7 @@ struct SettingsView: View {
                             }
                         }
 
-                        SettingsSectionCard(
-                            title: localizationStore.string(.settingsPrivacySectionTitle),
-                            subtitle: localizationStore.string(.settingsPrivacySectionSubtitle)
-                        ) {
+                        SettingsSectionCard(title: localizationStore.string(.settingsPrivacySectionTitle)) {
                             settingsLink(
                                 title: localizationStore.string(.settingsPrivacyPolicyTitle),
                                 subtitle: localizationStore.string(.settingsPrivacyPolicySubtitle),
@@ -95,10 +89,7 @@ struct SettingsView: View {
                             }
                         }
 
-                        SettingsSectionCard(
-                            title: localizationStore.string(.settingsLocalDataSectionTitle),
-                            subtitle: localizationStore.string(.settingsLocalDataSectionSubtitle)
-                        ) {
+                        SettingsSectionCard(title: localizationStore.string(.settingsLocalDataSectionTitle)) {
                             settingsLink(
                                 title: localizationStore.string(.settingsLocalDataManagementTitle),
                                 subtitle: localizationStore.string(.settingsLocalDataManagementSubtitle),

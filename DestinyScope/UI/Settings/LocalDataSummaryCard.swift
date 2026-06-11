@@ -29,12 +29,6 @@ struct LocalDataSummaryCard: View {
                     title: localizationStore.string("localData.summary.knowledgeRecent"),
                     value: countText("localData.count.records", summary.recentKnowledgeCount)
                 )
-                summaryRow(
-                    title: localizationStore.string("localData.summary.onboarding"),
-                    value: summary.hasCompletedOnboarding
-                        ? localizationStore.string("localData.summary.completed")
-                        : localizationStore.string("localData.summary.notCompleted")
-                )
             }
         }
     }

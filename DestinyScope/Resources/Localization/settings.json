@@ -55,25 +55,20 @@
       "zh-Hant": "應用資訊",
       "en": "App Information"
     },
-    "settings.application.section.subtitle": {
-      "zh-Hans": "了解 DestinyScope 的定位、当前能力和本地处理原则。",
-      "zh-Hant": "了解 DestinyScope 的定位、目前能力與本地處理原則。",
-      "en": "Learn about DestinyScope, current features, and local-first processing."
-    },
     "settings.about.title": {
-      "zh-Hans": "关于 DestinyScope",
-      "zh-Hant": "關於 DestinyScope",
-      "en": "About DestinyScope"
+      "zh-Hans": "关于 {appName}",
+      "zh-Hant": "關於 {appName}",
+      "en": "About {appName}"
     },
     "settings.about.subtitle": {
-      "zh-Hans": "传统文化、自我探索和本地优先",
-      "zh-Hant": "傳統文化、自我探索與本地優先",
-      "en": "Traditional culture, self-reflection, and local-first design"
+      "zh-Hans": "传统文化、自我探索和学习",
+      "zh-Hant": "傳統文化、自我探索與學習",
+      "en": "Traditional culture, self-reflection, and study"
     },
     "settings.about.accessibilityHint": {
-      "zh-Hans": "打开关于 DestinyScope 页面。",
-      "zh-Hant": "開啟關於 DestinyScope 頁面。",
-      "en": "Open the About DestinyScope page."
+      "zh-Hans": "打开关于 {appName} 页面。",
+      "zh-Hant": "開啟關於 {appName} 頁面。",
+      "en": "Open the About {appName} page."
     },
     "settings.onboarding.title": {
       "zh-Hans": "使用说明",
@@ -86,19 +81,14 @@
       "en": "Review the guide, privacy notes, and result boundaries"
     },
     "settings.onboarding.accessibilityHint": {
-      "zh-Hans": "打开 DestinyScope 使用说明页面。",
-      "zh-Hant": "開啟 DestinyScope 使用說明頁面。",
-      "en": "Open the DestinyScope guide."
+      "zh-Hans": "打开 {appName} 使用说明页面。",
+      "zh-Hant": "開啟 {appName} 使用說明頁面。",
+      "en": "Open the {appName} guide."
     },
     "settings.privacy.section.title": {
       "zh-Hans": "隐私与安全",
       "zh-Hant": "隱私與安全",
       "en": "Privacy and Safety"
-    },
-    "settings.privacy.section.subtitle": {
-      "zh-Hans": "查看数据处理边界、使用免责声明和开源许可说明。",
-      "zh-Hant": "查看資料處理邊界、使用免責聲明與開源授權說明。",
-      "en": "Review data boundaries, disclaimers, and open-source notices."
     },
     "settings.privacyPolicy.title": {
       "zh-Hans": "隐私政策",
@@ -150,11 +140,6 @@
       "zh-Hant": "本地資料",
       "en": "Local Data"
     },
-    "settings.localData.section.subtitle": {
-      "zh-Hans": "管理仅保存在当前设备上的资料。",
-      "zh-Hant": "管理僅保存在目前裝置上的資料。",
-      "en": "Manage data stored only on this device."
-    },
     "settings.localDataManagement.title": {
       "zh-Hans": "本地数据管理",
       "zh-Hant": "本地資料管理",
@@ -181,64 +166,9 @@
       "en": "An Eastern numerology, traditional culture, and self-reflection tool."
     },
     "about.body": {
-      "zh-Hans": "当前能力基于本地传统命理数据、本地模板和本地知识资源生成结果，出生信息仅在设备端处理。",
-      "zh-Hant": "目前能力基於本地傳統命理資料、本地模板與本地知識資源產生結果，出生資訊僅在裝置端處理。",
-      "en": "Current features use local traditional numerology data, local templates, and local knowledge resources. Birth information is processed only on device."
-    },
-    "about.capabilities.title": {
-      "zh-Hans": "当前能力",
-      "zh-Hant": "目前能力",
-      "en": "Current Capabilities"
-    },
-    "about.capability.birth": {
-      "zh-Hans": "生日信息仅用于设备端本地计算。",
-      "zh-Hant": "生日資訊僅用於裝置端本地計算。",
-      "en": "Birth information is used only for on-device calculation."
-    },
-    "about.capability.offline": {
-      "zh-Hans": "称骨结果、命格洞察和知识库均可离线使用。",
-      "zh-Hant": "稱骨結果、命格洞察與知識庫皆可離線使用。",
-      "en": "Weight-based results, insights, and the knowledge library all work offline."
-    },
-    "about.capability.history": {
-      "zh-Hans": "历史记录仅保存在本设备，可在历史页删除。",
-      "zh-Hant": "歷史記錄僅保存在本裝置，可在歷史頁刪除。",
-      "en": "History is stored only on this device and can be deleted from the History page."
-    },
-    "about.boundary.title": {
-      "zh-Hans": "使用边界",
-      "zh-Hant": "使用邊界",
-      "en": "Usage Boundaries"
-    },
-    "about.boundary.body": {
-      "zh-Hans": "内容仅供娱乐、自我探索和传统文化学习参考，不构成现实决策建议。",
-      "zh-Hant": "內容僅供娛樂、自我探索與傳統文化學習參考，不構成現實決策建議。",
-      "en": "Content is for entertainment, self-reflection, and traditional culture learning only. It is not real-world decision advice."
-    },
-    "about.help.title": {
-      "zh-Hans": "使用帮助",
-      "zh-Hant": "使用說明",
-      "en": "Help"
-    },
-    "about.legalPrivacy.title": {
-      "zh-Hans": "法律与隐私",
-      "zh-Hant": "法律與隱私",
-      "en": "Legal and Privacy"
-    },
-    "about.privacy.subtitle": {
-      "zh-Hans": "出生信息仅在设备端处理",
-      "zh-Hant": "出生資訊僅在裝置端處理",
-      "en": "Birth information is processed only on device"
-    },
-    "about.disclaimer.subtitle": {
-      "zh-Hans": "仅供娱乐、自我探索和传统文化学习参考",
-      "zh-Hant": "僅供娛樂、自我探索與傳統文化學習參考",
-      "en": "For entertainment, self-reflection, and traditional culture learning only"
-    },
-    "about.openSource.subtitle": {
-      "zh-Hans": "查看开源组件许可信息",
-      "zh-Hant": "查看開源元件授權資訊",
-      "en": "Review open-source component license information"
+      "zh-Hans": "当前能力基于本地传统命理数据、袁天罡称骨歌（男女命）全文及详解和本地知识资源生成结果，出生信息仅在设备端处理。",
+      "zh-Hant": "目前能力基於本地傳統命理資料、袁天罡稱骨歌（男女命）全文及詳解與本地知識資源產生結果，出生資訊僅在裝置端處理。",
+      "en": "Current features use local traditional numerology data, Yuan Tiangang Bone-Weight Verses: Male & Female Destiny Profiles, and local knowledge resources. Birth information is processed only on device."
     }
   }
 }

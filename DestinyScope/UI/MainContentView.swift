@@ -63,7 +63,7 @@ struct MainContentView: View {
         }
         .tint(AppTheme.Colors.cinnabar)
         .fullScreenCover(isPresented: $isOnboardingPresented) {
-            OnboardingView {
+            OnboardingView(fromScene: .firstLaunch) {
                 onboardingStore.markCompleted()
                 isOnboardingPresented = false
             }

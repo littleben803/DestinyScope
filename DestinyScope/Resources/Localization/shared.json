@@ -21,6 +21,16 @@
       "en": "English"
     },
     "app.name": {
+      "zh-Hans": "八字命镜",
+      "zh-Hant": "八字命鏡",
+      "en": "DestinyScope"
+    },
+    "app.subtitle": {
+      "zh-Hans": "称骨命格与传统解读",
+      "zh-Hant": "稱骨命格與傳統解讀",
+      "en": "Life Weight & Destiny Insights"
+    },
+    "app.brand.internal": {
       "zh-Hans": "DestinyScope",
       "zh-Hant": "DestinyScope",
       "en": "DestinyScope"

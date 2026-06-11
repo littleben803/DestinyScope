@@ -19,7 +19,7 @@ struct HomeHeroCard: View {
     var body: some View {
         AnimatedTitleHeader(
             title: localizationStore.string(.appName),
-            subtitle: localizationStore.string(.homeHeroSubtitle),
+            subtitle: localizationStore.string(.appSubtitle),
             titleOpacity: titleOpacity
         )
     }

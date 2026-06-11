@@ -52,7 +52,14 @@ final class LocalizationStore: ObservableObject {
 
     func string(_ id: L10nID, replacements: [String: String] = [:]) -> String {
         var value = catalog.string(for: id, language: currentLanguage)
-        for (key, replacement) in replacements {
+
+        let standardReplacements = [
+            "appName": catalog.string(for: .appName, language: currentLanguage),
+            "appSubtitle": catalog.string(for: .appSubtitle, language: currentLanguage),
+            "appBrandInternal": catalog.string(for: .appBrandInternal, language: currentLanguage)
+        ]
+
+        for (key, replacement) in standardReplacements.merging(replacements, uniquingKeysWith: { _, override in override }) {
             value = value.replacingOccurrences(of: "{\(key)}", with: replacement)
         }
         return value

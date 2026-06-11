@@ -40,21 +40,6 @@
       "zh-Hant": "知識庫最近閱讀",
       "en": "Knowledge Recent Reads"
     },
-    "localData.summary.onboarding": {
-      "zh-Hans": "首次使用说明",
-      "zh-Hant": "首次使用說明",
-      "en": "Onboarding"
-    },
-    "localData.summary.completed": {
-      "zh-Hans": "已完成",
-      "zh-Hant": "已完成",
-      "en": "Completed"
-    },
-    "localData.summary.notCompleted": {
-      "zh-Hans": "未完成",
-      "zh-Hant": "未完成",
-      "en": "Not Completed"
-    },
     "localData.count.records": {
       "zh-Hans": "{count} 条",
       "zh-Hant": "{count} 條",
@@ -139,26 +124,6 @@
       "zh-Hans": "已清空本机知识库最近阅读。",
       "zh-Hant": "已清空本機知識庫最近閱讀。",
       "en": "Local knowledge recent reads were cleared."
-    },
-    "localData.action.resetOnboarding.title": {
-      "zh-Hans": "重置首次使用说明",
-      "zh-Hant": "重置首次使用說明",
-      "en": "Reset Onboarding"
-    },
-    "localData.action.resetOnboarding.subtitle": {
-      "zh-Hans": "下次启动时重新展示首次使用说明，不删除其他数据。",
-      "zh-Hant": "下次啟動時重新展示首次使用說明，不刪除其他資料。",
-      "en": "Show onboarding again on next launch without deleting other data."
-    },
-    "localData.action.resetOnboarding.confirmation": {
-      "zh-Hans": "此操作只会重置本机首次使用说明状态，不删除历史或知识库状态。",
-      "zh-Hant": "此操作只會重置本機首次使用說明狀態，不刪除歷史或知識庫狀態。",
-      "en": "This only resets local onboarding state. It does not delete history or knowledge state."
-    },
-    "localData.action.resetOnboarding.success": {
-      "zh-Hans": "已重置首次使用说明状态。",
-      "zh-Hant": "已重置首次使用說明狀態。",
-      "en": "Onboarding state was reset."
     },
     "localData.action.clearAll.title": {
       "zh-Hans": "清空全部本地用户数据",

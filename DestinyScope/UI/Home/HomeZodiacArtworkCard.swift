@@ -19,10 +19,6 @@ struct HomeZodiacArtworkCard: View {
                 .aspectRatio(16.0 / 9.0, contentMode: .fit)
                 .frame(maxWidth: .infinity)
                 .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.card, style: .continuous))
-                .overlay(
-                    RoundedRectangle(cornerRadius: AppTheme.Radius.card, style: .continuous)
-                        .stroke(AppTheme.Colors.divider.opacity(0.45), lineWidth: 1)
-                )
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(localizationStore.string(.homeZodiacArtworkAccessibilityLabel))

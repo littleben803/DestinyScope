@@ -11,19 +11,14 @@
       "en": "Guide"
     },
     "onboarding.header.subtitle": {
-      "zh-Hans": "了解本地计算、隐私和结果边界",
-      "zh-Hant": "了解本地計算、隱私與結果邊界",
-      "en": "Understand local calculation, privacy, and result boundaries"
+      "zh-Hans": "了解命格解读、隐私和结果边界",
+      "zh-Hant": "了解命格解讀、隱私與結果邊界",
+      "en": "Understand Destiny Interpretation, privacy, and result boundaries"
     },
     "onboarding.button.next": {
       "zh-Hans": "下一步",
       "zh-Hant": "下一步",
       "en": "Next"
-    },
-    "onboarding.button.previous": {
-      "zh-Hans": "上一步",
-      "zh-Hant": "上一步",
-      "en": "Back"
     },
     "onboarding.button.done": {
       "zh-Hans": "完成",
@@ -35,15 +30,15 @@
       "zh-Hant": "開始使用",
       "en": "Get Started"
     },
+    "onboarding.button.skip": {
+      "zh-Hans": "跳过",
+      "zh-Hant": "跳過",
+      "en": "Skip"
+    },
     "onboarding.accessibility.nextHint": {
       "zh-Hans": "查看下一页使用说明。",
       "zh-Hant": "查看下一頁使用說明。",
       "en": "Show the next guide page."
-    },
-    "onboarding.accessibility.previousHint": {
-      "zh-Hans": "返回上一页使用说明。",
-      "zh-Hant": "返回上一頁使用說明。",
-      "en": "Return to the previous guide page."
     },
     "onboarding.accessibility.doneHint": {
       "zh-Hans": "关闭使用说明。",
@@ -55,15 +50,20 @@
       "zh-Hant": "完成使用說明並進入應用。",
       "en": "Finish the guide and enter the app."
     },
+    "onboarding.accessibility.skipHint": {
+      "zh-Hans": "跳过使用说明并进入应用。",
+      "zh-Hant": "跳過使用說明並進入應用。",
+      "en": "Skip the guide and enter the app."
+    },
     "onboarding.page.0.title": {
       "zh-Hans": "东方命理 · 自我探索",
       "zh-Hant": "東方命理 · 自我探索",
       "en": "Eastern Numerology · Self-Reflection"
     },
     "onboarding.page.0.body": {
-      "zh-Hans": "DestinyScope 基于传统命理文化和本地模板解读，帮助你以轻松方式了解称骨结果、命格诗文和相关知识。",
-      "zh-Hant": "DestinyScope 基於傳統命理文化與本地模板解讀，幫助你以輕鬆方式了解稱骨結果、命格詩文與相關知識。",
-      "en": "DestinyScope uses traditional numerology culture and local template interpretations to help you explore weight-based results, poems, and related knowledge in a relaxed way."
+      "zh-Hans": "{appName} 基于传统命理文化和袁天罡称骨歌解读，帮助你以轻松方式了解称骨结果、命格诗文和相关知识。",
+      "zh-Hant": "{appName} 基於傳統命理文化與袁天罡稱骨歌解讀，幫助你以輕鬆方式了解稱骨結果、命格詩文與相關知識。",
+      "en": "{appName} uses traditional numerology culture and Yuan Tiangang’s Bone-Weight Verses interpretations to help you explore weight-based results, poems, and related knowledge in a relaxed way."
     },
     "onboarding.page.1.title": {
       "zh-Hans": "出生信息仅在本机处理",

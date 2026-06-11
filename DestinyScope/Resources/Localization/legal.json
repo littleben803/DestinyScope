@@ -11,9 +11,9 @@
       "en": "Privacy Policy"
     },
     "legal.privacy.summary.body": {
-      "zh-Hans": "适用于 DestinyScope 当前版本。应用以 Native、本地处理和无服务端为基础。",
-      "zh-Hant": "適用於 DestinyScope 目前版本。應用以 Native、本地處理與無服務端為基礎。",
-      "en": "Applies to the current version of DestinyScope. The app is native, local-first, and serverless."
+      "zh-Hans": "适用于 {appName} 当前版本。",
+      "zh-Hant": "適用於 {appName} 目前版本。",
+      "en": "Applies to the current version of {appName}."
     },
     "legal.privacy.highlight.0": {
       "zh-Hans": "当前版本不创建账号、不需要登录。",
@@ -46,9 +46,9 @@
       "en": "Accounts and Login"
     },
     "legal.privacy.section.account.body": {
-      "zh-Hans": "DestinyScope 当前版本不创建账号，也不需要登录。使用首页查询、结果页、知识库和历史记录功能时，不需要提供姓名、手机号、邮箱或其他账号信息。",
-      "zh-Hant": "DestinyScope 目前版本不建立帳號，也不需要登入。使用首頁查詢、結果頁、知識庫與歷史記錄功能時，不需要提供姓名、手機號、電子郵件或其他帳號資訊。",
-      "en": "The current version of DestinyScope does not create accounts or require login. Home queries, results, the knowledge library, and history do not require your name, phone number, email, or other account information."
+      "zh-Hans": "{appName} 当前版本不创建账号，也不需要登录。使用首页查询、结果页、知识库和历史记录功能时，不需要提供姓名、手机号、邮箱或其他账号信息。",
+      "zh-Hant": "{appName} 目前版本不建立帳號，也不需要登入。使用首頁查詢、結果頁、知識庫與歷史記錄功能時，不需要提供姓名、手機號、電子郵件或其他帳號資訊。",
+      "en": "The current version of {appName} does not create accounts or require login. Home queries, results, the knowledge library, and history do not require your name, phone number, email, or other account information."
     },
     "legal.privacy.section.birth.title": {
       "zh-Hans": "出生信息处理",
@@ -106,9 +106,9 @@
       "en": "System Sharing"
     },
     "legal.privacy.section.share.body": {
-      "zh-Hans": "当前版本如调用 iOS 系统分享面板，仅在你主动点击分享时把当前结果摘要交给系统分享能力处理。DestinyScope 不会自动分享内容，不会从其他 App 接收分享数据，也不会通过分享功能上传出生信息、命理结果或历史记录。",
-      "zh-Hant": "目前版本如呼叫 iOS 系統分享面板，僅在你主動點擊分享時把目前結果摘要交給系統分享能力處理。DestinyScope 不會自動分享內容，不會從其他 App 接收分享資料，也不會透過分享功能上傳出生資訊、命理結果或歷史記錄。",
-      "en": "If the current version opens the iOS share sheet, it passes the current result summary to system sharing only after you tap Share. DestinyScope does not share content automatically, receive shared data from other apps, or upload birth information, results, or history through sharing."
+      "zh-Hans": "当前版本如调用 iOS 系统分享面板，仅在你主动点击分享时把当前结果摘要交给系统分享能力处理。{appName} 不会自动分享内容，不会从其他 App 接收分享数据，也不会通过分享功能上传出生信息、命理结果或历史记录。",
+      "zh-Hant": "目前版本如呼叫 iOS 系統分享面板，僅在你主動點擊分享時把目前結果摘要交給系統分享能力處理。{appName} 不會自動分享內容，不會從其他 App 接收分享資料，也不會透過分享功能上傳出生資訊、命理結果或歷史記錄。",
+      "en": "If the current version opens the iOS share sheet, it passes the current result summary to system sharing only after you tap Share. {appName} does not share content automatically, receive shared data from other apps, or upload birth information, results, or history through sharing."
     },
     "legal.privacy.section.permissions.title": {
       "zh-Hans": "系统权限",
@@ -186,9 +186,9 @@
       "en": "Content is not medical, legal, financial, investment, relationship, or career decision advice."
     },
     "legal.disclaimer.highlight.2": {
-      "zh-Hans": "本地模板解释不改变称骨计算结果。",
-      "zh-Hant": "本地模板解釋不改變稱骨計算結果。",
-      "en": "Local template explanations do not change weight-based calculation results."
+      "zh-Hans": "袁天罡称骨命格解读不改变称骨计算结果。",
+      "zh-Hant": "袁天罡稱骨命格解讀不改變稱骨計算結果。",
+      "en": "Yuan Tiangang Bone-Weight Destiny Interpretation do not change weight-based calculation results."
     },
     "legal.disclaimer.section.culture.title": {
       "zh-Hans": "传统文化与自我探索",
@@ -196,9 +196,9 @@
       "en": "Traditional Culture and Self-Reflection"
     },
     "legal.disclaimer.section.culture.body": {
-      "zh-Hans": "DestinyScope 的内容基于传统命理文化、本地命理数据和本地模板生成，用于展示传统文化中的概念、诗文和参考性解读。",
-      "zh-Hant": "DestinyScope 的內容基於傳統命理文化、本地命理資料與本地模板產生，用於展示傳統文化中的概念、詩文與參考性解讀。",
-      "en": "DestinyScope content is generated from traditional numerology culture, local numerology data, and local templates. It is used to present concepts, poems, and reference interpretations from traditional culture."
+      "zh-Hans": "{appName} 的内容基于传统命理文化、本地命理数据和袁天罡称骨歌（男女命）全文及详解生成，用于展示传统文化中的概念、诗文和参考性解读。",
+      "zh-Hant": "{appName} 的內容基於傳統命理文化、本地命理資料與袁天罡稱骨歌（男女命）全文及詳解產生，用於展示傳統文化中的概念、詩文與參考性解讀。",
+      "en": "{appName} content is generated from traditional numerology culture, local numerology data, and Yuan Tiangang’s Bone-Weight Verses: Complete Text and Detailed Interpretations for Male and Female Destinies. It is used to present concepts, poems, and reference interpretations from traditional culture."
     },
     "legal.disclaimer.section.boundary.title": {
       "zh-Hans": "使用边界",
@@ -226,9 +226,9 @@
       "en": "Health, Lifespan, and Illness"
     },
     "legal.disclaimer.section.health.body": {
-      "zh-Hans": "DestinyScope 不提供健康、寿命或疾病方面的预测，也不应作为医疗相关判断依据。涉及现实健康问题时，请咨询相应专业人士。",
-      "zh-Hant": "DestinyScope 不提供健康、壽命或疾病方面的預測，也不應作為醫療相關判斷依據。涉及現實健康問題時，請諮詢相應專業人士。",
-      "en": "DestinyScope does not provide predictions about health, lifespan, or illness and should not be used as a basis for medical judgment. For real health concerns, consult an appropriate professional."
+      "zh-Hans": "{appName} 不提供健康、寿命或疾病方面的预测，也不应作为医疗相关判断依据。涉及现实健康问题时，请咨询相应专业人士。",
+      "zh-Hant": "{appName} 不提供健康、壽命或疾病方面的預測，也不應作為醫療相關判斷依據。涉及現實健康問題時，請諮詢相應專業人士。",
+      "en": "{appName} does not provide predictions about health, lifespan, or illness and should not be used as a basis for medical judgment. For real health concerns, consult an appropriate professional."
     },
     "legal.disclaimer.section.finance.title": {
       "zh-Hans": "财务、投资与职业",
@@ -236,9 +236,9 @@
       "en": "Finance, Investment, and Career"
     },
     "legal.disclaimer.section.finance.body": {
-      "zh-Hans": "DestinyScope 不提供投资收益、财务结果或职业选择的确定性判断。涉及现实财务、投资或职业问题时，请结合专业意见和自身情况判断。",
-      "zh-Hant": "DestinyScope 不提供投資收益、財務結果或職業選擇的確定性判斷。涉及現實財務、投資或職業問題時，請結合專業意見與自身情況判斷。",
-      "en": "DestinyScope does not provide deterministic judgments about investment returns, financial outcomes, or career choices. For real financial, investment, or career matters, use professional input and your own circumstances."
+      "zh-Hans": "{appName} 不提供投资收益、财务结果或职业选择的确定性判断。涉及现实财务、投资或职业问题时，请结合专业意见和自身情况判断。",
+      "zh-Hant": "{appName} 不提供投資收益、財務結果或職業選擇的確定性判斷。涉及現實財務、投資或職業問題時，請結合專業意見與自身情況判斷。",
+      "en": "{appName} does not provide deterministic judgments about investment returns, financial outcomes, or career choices. For real financial, investment, or career matters, use professional input and your own circumstances."
     },
     "legal.disclaimer.section.relationship.title": {
       "zh-Hans": "婚恋关系",
@@ -246,9 +246,9 @@
       "en": "Relationships"
     },
     "legal.disclaimer.section.relationship.body": {
-      "zh-Hans": "DestinyScope 不提供婚姻或关系结果的确定性判断。关系中的沟通、选择和现实处境需要由当事人结合实际情况处理。",
-      "zh-Hant": "DestinyScope 不提供婚姻或關係結果的確定性判斷。關係中的溝通、選擇與現實處境需要由當事人結合實際情況處理。",
-      "en": "DestinyScope does not provide deterministic judgments about marriage or relationship outcomes. Communication, choices, and real circumstances in relationships must be handled by the people involved."
+      "zh-Hans": "{appName} 不提供婚姻或关系结果的确定性判断。关系中的沟通、选择和现实处境需要由当事人结合实际情况处理。",
+      "zh-Hant": "{appName} 不提供婚姻或關係結果的確定性判斷。關係中的溝通、選擇與現實處境需要由當事人結合實際情況處理。",
+      "en": "{appName} does not provide deterministic judgments about marriage or relationship outcomes. Communication, choices, and real circumstances in relationships must be handled by the people involved."
     },
     "legal.disclaimer.section.promise.title": {
       "zh-Hans": "现实结果承诺",
@@ -256,9 +256,9 @@
       "en": "No Real-World Outcome Promises"
     },
     "legal.disclaimer.section.promise.body": {
-      "zh-Hans": "DestinyScope 不提供改命、化解、避灾、转运、保证发财或其他现实结果承诺。应用内容只能作为传统文化和自我探索参考，不能作为现实行动的保证或依据。",
-      "zh-Hant": "DestinyScope 不提供改命、化解、避災、轉運、保證發財或其他現實結果承諾。應用內容只能作為傳統文化與自我探索參考，不能作為現實行動的保證或依據。",
-      "en": "DestinyScope does not promise fate changes, remedies, disaster avoidance, luck changes, guaranteed wealth, or other real-world outcomes. App content is only a reference for traditional culture and self-reflection, not a guarantee or basis for real-world action."
+      "zh-Hans": "{appName} 不提供改命、化解、避灾、转运、保证发财或其他现实结果承诺。应用内容只能作为传统文化和自我探索参考，不能作为现实行动的保证或依据。",
+      "zh-Hant": "{appName} 不提供改命、化解、避災、轉運、保證發財或其他現實結果承諾。應用內容只能作為傳統文化與自我探索參考，不能作為現實行動的保證或依據。",
+      "en": "{appName} does not promise fate changes, remedies, disaster avoidance, luck changes, guaranteed wealth, or other real-world outcomes. App content is only a reference for traditional culture and self-reflection, not a guarantee or basis for real-world action."
     },
     "legal.disclaimer.section.majorDecision.title": {
       "zh-Hans": "重大决策",
@@ -281,14 +281,14 @@
       "en": "Open-Source Licenses"
     },
     "legal.openSource.summary.body": {
-      "zh-Hans": "DestinyScope 当前版本未额外内置需要单独列示的开源组件；如后续引入开源组件，许可信息会随版本更新。",
-      "zh-Hant": "DestinyScope 目前版本未額外內置需要單獨列示的開源元件；如後續引入開源元件，授權資訊會隨版本更新。",
-      "en": "The current version of DestinyScope does not bundle additional open-source components that require separate listing. If future versions add them, license information will be updated."
+      "zh-Hans": "{appName} 当前版本未额外内置需要单独列示的开源组件；如后续引入开源组件，许可信息会随版本更新。",
+      "zh-Hant": "{appName} 目前版本未額外內置需要單獨列示的開源元件；如後續引入開源元件，授權資訊會隨版本更新。",
+      "en": "The current version of {appName} does not bundle additional open-source components that require separate listing. If future versions add them, license information will be updated."
     },
     "legal.openSource.highlight.0": {
-      "zh-Hans": "当前版本以本地数据、规则和模板为基础。",
-      "zh-Hant": "目前版本以本地資料、規則與模板為基礎。",
-      "en": "The current version is based on local data, rules, and templates."
+      "zh-Hans": "当前版本以本地数据、规则和袁天罡称骨歌（男女命）全文及详解为基础。",
+      "zh-Hant": "目前版本以本地資料、規則與袁天罡稱骨歌（男女命）全文及詳解為基礎。",
+      "en": "The current version is based on local data, rules, and Yuan Tiangang’s Bone-Weight Verses: Complete Text and Detailed Interpretations for Male and Female Destinies."
     },
     "legal.openSource.highlight.1": {
       "zh-Hans": "知识库和称骨数据随 App Bundle 本地读取。",

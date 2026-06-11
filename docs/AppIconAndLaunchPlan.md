@@ -8,11 +8,11 @@
 
 - `ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon`
 
-当前 `DestinyScope/Assets.xcassets/AppIcon.appiconset/Contents.json` 只有 iOS 1024x1024 的 universal、dark、tinted 占位条目，未引用任何真实图片文件。
+当前 `DestinyScope/Assets.xcassets/AppIcon.appiconset/Contents.json` 已引用 `AppIcon-1024.png`。
 
-当前 `DestinyScope/Assets.xcassets/AppIcon.appiconset/` 目录内未发现 PNG 或其他图像文件。
+当前 `DestinyScope/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png` 存在，规格为 1024x1024 PNG，无 alpha 通道。
 
-结论：App Icon 名称已接入工程，但真实图标资源缺失，暂不满足上架资源要求。
+结论：App Icon 已有可构建资源；上架前仍需人工确认素材原创、授权和小尺寸识别度。
 
 ### AccentColor
 
@@ -29,11 +29,18 @@
 当前工程配置：
 
 - `GENERATE_INFOPLIST_FILE = YES`
-- `INFOPLIST_KEY_UILaunchScreen_Generation = YES`
+- `INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen`
 
-当前未发现自定义 `LaunchScreen.storyboard`、`LaunchScreen.swift`、`LaunchScreen.xib` 或同名资源文件。
+当前已使用自定义 `DestinyScope/Base.lproj/LaunchScreen.storyboard`。
 
-结论：Launch Screen 当前使用 Xcode 自动生成方式，不是自定义 Launch Screen。V1 上架前建议改为可控的自定义 Launch Screen，但本阶段不修改工程配置。
+当前启动页为静态图形方案：
+
+- 浅宣纸色背景，与首页和原启动页背景保持一致。
+- 略高于中心的 `LaunchLogoCenter` 命镜罗盘 logo。启动页运行时引用顶层 bundle PNG `LaunchLogoCenter.png`，同时保留 `LaunchLogoCenter.imageset` 作为工程内设计资源。
+- 图形下方显示本地化 App 名称和 Subtitle，不依赖运行时代码。
+- 不包含广告、长文案、联网资源或高风险营销词。
+
+结论：Launch Screen 已改为可控的自定义静态启动页；后续如提供专用命镜罗盘或更高清生肖资源，可替换中心图。
 
 ### 已知构建 Warning
 
@@ -144,29 +151,20 @@ AppIcon-Tinted-1024.png
 
 ## 5. Launch Screen 方案
 
-推荐方案：
+当前方案：
 
-- 使用纯色或轻微渐变背景。
-- 背景与首页视觉保持一致：宣纸米白、墨黑、朱砂红、暗金。
-- 中央展示简化 Logo。
-- Logo 下方展示 `DestinyScope` 文案。
+- 使用浅宣纸色背景。
+- 略高于中心展示命镜罗盘 logo，图片资源使用 1x/2x/3x image set。
+- 图形下方显示 App 名称和 Subtitle，使用 storyboard localization。
 - 不做广告页。
 - 不做复杂动画。
 - 不展示命理结果、营销承诺或“精准预测”等文案。
 
-建议 Launch Screen 文案：
+当前启动页本地化文案：
 
-```text
-DestinyScope
-```
-
-可选辅助文案：
-
-```text
-东方命理 · 自我探索
-```
-
-上架前需要人工确认辅助文案是否放入启动页；如果担心启动页信息过多，保留 App 名称即可。
+- 简体中文：八字命镜
+- 繁体中文：八字命鏡
+- 英文：DestinyScope
 
 ## 6. 后续 Codex 接入步骤
 
