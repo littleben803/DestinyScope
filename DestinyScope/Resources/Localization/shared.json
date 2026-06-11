@@ -45,11 +45,6 @@
       "zh-Hant": "知識庫",
       "en": "Knowledge"
     },
-    "tab.qa": {
-      "zh-Hans": "问答",
-      "zh-Hant": "問答",
-      "en": "Q&A"
-    },
     "tab.history": {
       "zh-Hans": "历史",
       "zh-Hant": "歷史",
@@ -90,50 +85,10 @@
       "zh-Hant": "取消",
       "en": "Cancel"
     },
-    "common.reset": {
-      "zh-Hans": "重置",
-      "zh-Hant": "重置",
-      "en": "Reset"
-    },
     "common.confirmAction": {
       "zh-Hans": "确认操作",
       "zh-Hant": "確認操作",
       "en": "Confirm Action"
-    },
-    "common.allowed": {
-      "zh-Hans": "允许",
-      "zh-Hant": "允許",
-      "en": "Allowed"
-    },
-    "common.notAllowed": {
-      "zh-Hans": "不允许",
-      "zh-Hant": "不允許",
-      "en": "Not Allowed"
-    },
-    "common.notEnabled": {
-      "zh-Hans": "不启用",
-      "zh-Hant": "不啟用",
-      "en": "Not Enabled"
-    },
-    "common.notRecorded": {
-      "zh-Hans": "未记录",
-      "zh-Hant": "未記錄",
-      "en": "Not Recorded"
-    },
-    "common.duration.seconds.integer": {
-      "zh-Hans": "{seconds} 秒",
-      "zh-Hant": "{seconds} 秒",
-      "en": "{seconds}s"
-    },
-    "common.duration.seconds.twoDecimals": {
-      "zh-Hans": "{seconds} 秒",
-      "zh-Hant": "{seconds} 秒",
-      "en": "{seconds}s"
-    },
-    "common.duration.seconds.threeDecimals": {
-      "zh-Hans": "{seconds} 秒",
-      "zh-Hant": "{seconds} 秒",
-      "en": "{seconds}s"
     },
     "gender.male": {
       "zh-Hans": "男",

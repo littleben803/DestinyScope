@@ -30,7 +30,6 @@ extension L10nID {
 
     static let tabHome = L10nID("tab.home")
     static let tabKnowledge = L10nID("tab.knowledge")
-    static let tabQA = L10nID("tab.qa")
     static let tabHistory = L10nID("tab.history")
     static let tabSettings = L10nID("tab.settings")
 
@@ -91,7 +90,6 @@ extension L10nID {
     static let onboardingStartHint = L10nID("onboarding.accessibility.startHint")
     static let onboardingSkipHint = L10nID("onboarding.accessibility.skipHint")
 
-    static let homeHeroSubtitle = L10nID("home.hero.subtitle")
     static let homeInputTitle = L10nID("home.input.title")
     static let homeBirthDateTitle = L10nID("home.input.birthDate")
     static let homeGenderTitle = L10nID("home.input.gender")
@@ -112,6 +110,13 @@ extension L10nID {
     static let homeKnowledgeTitle = L10nID("home.knowledge.title")
     static let homeKnowledgeBody = L10nID("home.knowledge.body")
     static let homeErrorCalculateFallback = L10nID("home.error.calculateFallback")
+    static let homeErrorInvalidHour = L10nID("home.error.invalidHour")
+    static let homeErrorLunarDateConversionFailed = L10nID("home.error.lunarDateConversionFailed")
+    static let homeErrorMissingYearInfo = L10nID("home.error.missingYearInfo")
+    static let homeErrorMissingMonthInfo = L10nID("home.error.missingMonthInfo")
+    static let homeErrorMissingDateInfo = L10nID("home.error.missingDateInfo")
+    static let homeErrorMissingHourInfo = L10nID("home.error.missingHourInfo")
+    static let homeErrorMissingPoemInfo = L10nID("home.error.missingPoemInfo")
 
     static let legalPrivacyNavigationTitle = L10nID("legal.privacy.navigation.title")
     static let legalDisclaimerNavigationTitle = L10nID("legal.disclaimer.navigation.title")

@@ -1,10 +1,5 @@
 {
   "strings": {
-    "home.hero.subtitle": {
-      "zh-Hans": "东方命理 · 自我探索",
-      "zh-Hant": "東方命理 · 自我探索",
-      "en": "Eastern Numerology · Self-Reflection"
-    },
     "home.input.title": {
       "zh-Hans": "开始查询",
       "zh-Hant": "開始查詢",
@@ -99,6 +94,41 @@
       "zh-Hans": "暂时无法计算，请稍后重试。",
       "zh-Hant": "暫時無法計算，請稍後重試。",
       "en": "Unable to calculate right now. Please try again later."
+    },
+    "home.error.invalidHour": {
+      "zh-Hans": "出生时辰无效，请重新选择。",
+      "zh-Hant": "出生時辰無效，請重新選擇。",
+      "en": "The birth hour is invalid. Please choose again."
+    },
+    "home.error.lunarDateConversionFailed": {
+      "zh-Hans": "农历日期转换失败，请稍后重试。",
+      "zh-Hant": "農曆日期轉換失敗，請稍後重試。",
+      "en": "Lunar date conversion failed. Please try again later."
+    },
+    "home.error.missingYearInfo": {
+      "zh-Hans": "缺少年份命理数据，暂时无法计算。",
+      "zh-Hant": "缺少年份命理資料，暫時無法計算。",
+      "en": "Year data is missing, so calculation is unavailable right now."
+    },
+    "home.error.missingMonthInfo": {
+      "zh-Hans": "缺少月份命理数据，暂时无法计算。",
+      "zh-Hant": "缺少月份命理資料，暫時無法計算。",
+      "en": "Month data is missing, so calculation is unavailable right now."
+    },
+    "home.error.missingDateInfo": {
+      "zh-Hans": "缺少日期命理数据，暂时无法计算。",
+      "zh-Hant": "缺少日期命理資料，暫時無法計算。",
+      "en": "Date data is missing, so calculation is unavailable right now."
+    },
+    "home.error.missingHourInfo": {
+      "zh-Hans": "缺少时辰命理数据，暂时无法计算。",
+      "zh-Hant": "缺少時辰命理資料，暫時無法計算。",
+      "en": "Hour data is missing, so calculation is unavailable right now."
+    },
+    "home.error.missingPoemInfo": {
+      "zh-Hans": "缺少对应命格诗文，暂时无法展示结果。",
+      "zh-Hant": "缺少對應命格詩文，暫時無法展示結果。",
+      "en": "The matching poem is missing, so the result cannot be shown right now."
     },
     "home.input.gender": {
       "zh-Hans": "性别",

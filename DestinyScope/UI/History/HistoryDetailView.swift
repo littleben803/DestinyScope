@@ -84,7 +84,7 @@ struct HistoryDetailView: View {
                 isLeapMonth: false,
                 displayText: record.lunarBirthday
             ),
-            hourText: record.hourDisplayText,
+            hourText: record.localizedHourText(localizationStore: localizationStore),
             breakdown: emptyBreakdown,
             totalWeight: record.totalWeightValue,
             totalWeightText: record.totalWeightText,
@@ -95,10 +95,10 @@ struct HistoryDetailView: View {
 
     private var emptyBreakdown: LifeWeightBreakdown {
         LifeWeightBreakdown(
-            year: emptyWeightItem(label: "年"),
-            month: emptyWeightItem(label: "月"),
-            day: emptyWeightItem(label: "日"),
-            hour: emptyWeightItem(label: "时")
+            year: emptyWeightItem(label: localizationStore.string("result.weightBreakdown.year")),
+            month: emptyWeightItem(label: localizationStore.string("result.weightBreakdown.month")),
+            day: emptyWeightItem(label: localizationStore.string("result.weightBreakdown.day")),
+            hour: emptyWeightItem(label: localizationStore.string("result.weightBreakdown.hour"))
         )
     }
 

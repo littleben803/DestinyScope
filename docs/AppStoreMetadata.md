@@ -125,6 +125,18 @@ https://littleben803.github.io/DestinyScope/privacy/
 
 上线前必须确认 GitHub Pages 可公开访问，且内容与 App 内隐私政策一致。
 
+## Support URL
+
+```text
+https://littleben803.github.io/DestinyScope/support/
+```
+
+上线前必须确认 GitHub Pages 可公开访问，且页面提供有效用户支持联系方式。
+
+## Marketing URL
+
+可选，当前版本暂不填写。
+
 ## Copyright
 
 ```text

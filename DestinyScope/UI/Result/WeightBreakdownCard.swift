@@ -12,12 +12,12 @@ struct WeightBreakdownCard: View {
 
     @EnvironmentObject private var localizationStore: LocalizationStore
 
-    private var items: [WeightItem] {
+    private var items: [BreakdownDisplayItem] {
         [
-            breakdown.year,
-            breakdown.month,
-            breakdown.day,
-            breakdown.hour
+            BreakdownDisplayItem(id: "year", labelID: "result.weightBreakdown.year", item: breakdown.year),
+            BreakdownDisplayItem(id: "month", labelID: "result.weightBreakdown.month", item: breakdown.month),
+            BreakdownDisplayItem(id: "day", labelID: "result.weightBreakdown.day", item: breakdown.day),
+            BreakdownDisplayItem(id: "hour", labelID: "result.weightBreakdown.hour", item: breakdown.hour)
         ]
     }
 
@@ -31,19 +31,19 @@ struct WeightBreakdownCard: View {
             AppSectionHeader(title: localizationStore.string("result.weightBreakdown.title"))
 
             LazyVGrid(columns: columns, alignment: .leading, spacing: AppTheme.Spacing.md) {
-                ForEach(items, id: \.label) { item in
+                ForEach(items) { displayItem in
                     VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                        Text(item.label)
+                        Text(localizationStore.string(L10nID(displayItem.labelID)))
                             .font(AppTheme.Typography.caption)
                             .foregroundColor(AppTheme.Colors.secondaryText)
 
-                        Text(item.valueText)
+                        Text(displayItem.item.valueText)
                             .font(AppTheme.Typography.body)
                             .foregroundColor(AppTheme.Colors.primaryText)
                             .lineLimit(2)
                             .minimumScaleFactor(0.85)
 
-                        Text(item.weightText)
+                        Text(displayItem.item.weightText)
                             .font(AppTheme.Typography.sectionTitle)
                             .foregroundColor(AppTheme.Colors.darkGold)
                     }
@@ -55,4 +55,10 @@ struct WeightBreakdownCard: View {
             }
         }
     }
+}
+
+private struct BreakdownDisplayItem: Identifiable {
+    let id: String
+    let labelID: String
+    let item: WeightItem
 }

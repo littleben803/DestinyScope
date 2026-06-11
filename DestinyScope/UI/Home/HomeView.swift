@@ -94,8 +94,30 @@ struct HomeView: View {
             insight = nil
             detailedReading = nil
             shouldShowResult = false
-            errorMessage = (error as? LocalizedError)?.errorDescription
-                ?? localizationStore.string(.homeErrorCalculateFallback)
+            errorMessage = localizedCalculationError(error)
+        }
+    }
+
+    private func localizedCalculationError(_ error: Error) -> String {
+        guard let lifeWeightError = error as? LifeWeightError else {
+            return localizationStore.string(.homeErrorCalculateFallback)
+        }
+
+        switch lifeWeightError {
+        case .invalidHour:
+            return localizationStore.string(.homeErrorInvalidHour)
+        case .lunarDateConversionFailed:
+            return localizationStore.string(.homeErrorLunarDateConversionFailed)
+        case .missingYearInfo:
+            return localizationStore.string(.homeErrorMissingYearInfo)
+        case .missingMonthInfo:
+            return localizationStore.string(.homeErrorMissingMonthInfo)
+        case .missingDateInfo:
+            return localizationStore.string(.homeErrorMissingDateInfo)
+        case .missingHourInfo:
+            return localizationStore.string(.homeErrorMissingHourInfo)
+        case .missingPoemInfo:
+            return localizationStore.string(.homeErrorMissingPoemInfo)
         }
     }
 

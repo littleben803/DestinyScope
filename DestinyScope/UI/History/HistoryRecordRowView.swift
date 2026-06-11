@@ -27,18 +27,22 @@ struct HistoryRecordRowView: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                Text(record.createdAtDisplayText)
+                Text(record.localizedCreatedAtText(locale: localizationStore.locale))
                     .font(AppTheme.Typography.caption)
                     .foregroundColor(AppTheme.Colors.secondaryText)
 
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                    Text(record.birthDisplayText)
+                    Text(record.localizedBirthInfoText(localizationStore: localizationStore))
                         .font(AppTheme.Typography.secondary)
                         .foregroundColor(AppTheme.Colors.primaryText)
 
                     Text(localizationStore.string(
                         "history.row.birthEightCharacters",
-                        replacements: ["value": record.birthEightCharacters.displayText]
+                        replacements: [
+                            "value": record.birthEightCharacters.localizedDisplayText(
+                                localizationStore: localizationStore
+                            )
+                        ]
                     ))
                         .font(AppTheme.Typography.secondary)
                         .foregroundColor(AppTheme.Colors.secondaryText)
@@ -52,6 +56,63 @@ struct HistoryRecordRowView: View {
                 }
             }
         }
+    }
+}
+
+extension BirthEightCharacters {
+    func localizedDisplayText(localizationStore: LocalizationStore) -> String {
+        localizationStore.string(
+            "history.row.birthEightCharactersValue",
+            replacements: [
+                "year": yearPillar,
+                "month": monthPillar,
+                "day": dayPillar,
+                "hour": hourPillar
+            ]
+        )
+    }
+}
+
+extension HistoryRecord {
+    func localizedCreatedAtText(locale: Locale) -> String {
+        Self.localizedDateTimeFormatter(locale: locale).string(from: createdAt)
+    }
+
+    func localizedSolarDateText(locale: Locale) -> String {
+        Self.localizedDateFormatter(locale: locale).string(from: solarDate)
+    }
+
+    func localizedHourText(localizationStore: LocalizationStore) -> String {
+        localizationStore.string(
+            "history.row.birthHourValue",
+            replacements: ["hour": String(format: "%02d", hour)]
+        )
+    }
+
+    func localizedBirthInfoText(localizationStore: LocalizationStore) -> String {
+        localizationStore.string(
+            "history.row.birthInfo",
+            replacements: [
+                "date": localizedSolarDateText(locale: localizationStore.locale),
+                "hour": localizedHourText(localizationStore: localizationStore)
+            ]
+        )
+    }
+
+    private static func localizedDateTimeFormatter(locale: Locale) -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }
+
+    private static func localizedDateFormatter(locale: Locale) -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
     }
 }
 

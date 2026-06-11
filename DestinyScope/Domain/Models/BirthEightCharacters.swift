@@ -19,8 +19,4 @@ struct BirthEightCharacters: Codable, Equatable {
         dayPillar: "--",
         hourPillar: "--"
     )
-
-    var displayText: String {
-        "\(yearPillar)年 \(monthPillar)月 \(dayPillar)日 \(hourPillar)时"
-    }
 }

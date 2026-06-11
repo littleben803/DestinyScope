@@ -45,25 +45,25 @@
       "zh-Hant": "權重明細",
       "en": "Weight Breakdown"
     },
-    "result.insight.title": {
-      "zh-Hans": "命格洞察",
-      "zh-Hant": "命格洞察",
-      "en": "Insights"
+    "result.weightBreakdown.year": {
+      "zh-Hans": "年",
+      "zh-Hant": "年",
+      "en": "Year"
     },
-    "result.insight.strengths": {
-      "zh-Hans": "优势倾向",
-      "zh-Hant": "優勢傾向",
-      "en": "Strengths"
+    "result.weightBreakdown.month": {
+      "zh-Hans": "月",
+      "zh-Hant": "月",
+      "en": "Month"
     },
-    "result.insight.cautions": {
-      "zh-Hans": "需要关注",
-      "zh-Hant": "需要關注",
-      "en": "Watch Points"
+    "result.weightBreakdown.day": {
+      "zh-Hans": "日",
+      "zh-Hant": "日",
+      "en": "Day"
     },
-    "result.insight.actionSuggestion": {
-      "zh-Hans": "行动建议",
-      "zh-Hant": "行動建議",
-      "en": "Action Suggestion"
+    "result.weightBreakdown.hour": {
+      "zh-Hans": "时",
+      "zh-Hant": "時",
+      "en": "Hour"
     },
     "result.interpretation.title": {
       "zh-Hans": "命理师解读",
@@ -110,26 +110,6 @@
       "zh-Hant": "基於稱骨結果的傳統文化解讀",
       "en": "Traditional cultural interpretation based on the bone-weight result"
     },
-    "result.reading.section.characterCareer": {
-      "zh-Hans": "性情与事业",
-      "zh-Hant": "性情與事業",
-      "en": "Character and Career"
-    },
-    "result.reading.section.wealthRelationship": {
-      "zh-Hans": "财帛与关系",
-      "zh-Hant": "財帛與關係",
-      "en": "Wealth and Relationships"
-    },
-    "result.reading.section.familyBlessing": {
-      "zh-Hans": "家庭与福泽",
-      "zh-Hant": "家庭與福澤",
-      "en": "Family and Blessing"
-    },
-    "result.reading.section.advice": {
-      "zh-Hans": "行动建议",
-      "zh-Hant": "行動建議",
-      "en": "Action Advice"
-    },
     "result.reading.field.personality": {
       "zh-Hans": "性情底色",
       "zh-Hant": "性情底色",
@@ -164,11 +144,6 @@
       "zh-Hans": "现在该怎么做",
       "zh-Hant": "現在該怎麼做",
       "en": "What to Do Now"
-    },
-    "result.reading.detail.title": {
-      "zh-Hans": "完整解读",
-      "zh-Hant": "完整解讀",
-      "en": "Full Reading"
     }
   }
 }

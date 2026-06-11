@@ -19,6 +19,8 @@
 数据处理说明：
 出生日期和出生时辰仅用于设备端本地计算。八字命镜不创建账号，不登录，不上传出生信息，不上传命理结果，不上传历史记录，不接服务端。
 
+App 内隐私政策路径：关于/设置 Tab -> 隐私与安全 -> 隐私政策。
+
 网络说明：
 当前版本无服务端，核心功能不依赖网络。命理数据和知识库来自 App Bundle 内置资源。
 
@@ -53,6 +55,8 @@ Core features:
 
 Data processing:
 Birth date and birth hour are used only for on-device calculation. DestinyScope does not create accounts, does not require login, does not upload birth information, fortune results, or history records, and does not use a backend server.
+
+In-app Privacy Policy path: About/Settings tab -> Privacy and Safety -> Privacy Policy.
 
 Network:
 The current version has no backend server. Core features do not depend on network access. Fortune data and knowledge resources are bundled in the app.

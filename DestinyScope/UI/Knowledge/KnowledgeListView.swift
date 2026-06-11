@@ -279,8 +279,7 @@ struct KnowledgeListView: View {
             errorMessage = nil
         } catch {
             articles = []
-            errorMessage = (error as? LocalizedError)?.errorDescription
-                ?? localizationStore.string("knowledge.error.loadFailed")
+            errorMessage = localizationStore.string("knowledge.error.loadFailed")
         }
     }
 

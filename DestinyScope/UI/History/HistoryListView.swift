@@ -100,6 +100,7 @@ struct HistoryListView: View {
     private func recordsListView(title: String, titleContext: AnimatedTitlePageContext) -> some View {
         List {
             AnimatedTitleHeader(title: title, titleOpacity: titleContext.largeTitleOpacity)
+                .padding(.top, AppTheme.Spacing.lg)
                 .historyListRowStyle()
 
             if let stateMessage {

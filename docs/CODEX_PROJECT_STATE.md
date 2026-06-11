@@ -47,6 +47,14 @@ DestinyScope 已回退到本地优先、确定性算法和模板解释路线。
 - 背景使用浅宣纸色，与首页背景和原启动页背景保持一致。
 - 本阶段不修改首页业务逻辑、称骨计算、本地模型、Bundle ID、签名、Team、Version / Build。
 
+### 上线前静态页面与 App Store URL
+
+- `docs/privacy/index.html` 和 `docs/privacy/privacy.md` 已同步 App 内 `legal.json` 当前隐私口径，覆盖知识库搜索历史、本地数据管理、网络与服务端、系统分享和本地资源说明。
+- App Store Connect Privacy Policy URL 规划为 `https://littleben803.github.io/DestinyScope/privacy/`。
+- App Store Connect Support URL 规划为 `https://littleben803.github.io/DestinyScope/support/`，对应静态页面 `docs/support/index.html`。
+- App Review Notes 已补充 App 内隐私政策路径：关于/设置 Tab -> 隐私与安全 -> 隐私政策。
+- GitHub Pages 部署和 App Store Connect 字段填写仍由人工后续执行。
+
 ## 已完成清理
 
 ### 阶段一

@@ -30,6 +30,21 @@
       "zh-Hant": "生辰八字：{value}",
       "en": "Eight characters: {value}"
     },
+    "history.row.birthEightCharactersValue": {
+      "zh-Hans": "{year}年 {month}月 {day}日 {hour}时",
+      "zh-Hant": "{year}年 {month}月 {day}日 {hour}時",
+      "en": "Year {year}, Month {month}, Day {day}, Hour {hour}"
+    },
+    "history.row.birthInfo": {
+      "zh-Hans": "出生：{date} {hour}",
+      "zh-Hant": "出生：{date} {hour}",
+      "en": "Birth: {date} {hour}"
+    },
+    "history.row.birthHourValue": {
+      "zh-Hans": "{hour} 时",
+      "zh-Hant": "{hour} 時",
+      "en": "{hour}:00"
+    },
     "history.clearAll.confirmTitle": {
       "zh-Hans": "清空全部历史记录？",
       "zh-Hant": "清空全部歷史記錄？",
@@ -44,16 +59,6 @@
       "zh-Hans": "历史详情",
       "zh-Hant": "歷史詳情",
       "en": "History Detail"
-    },
-    "history.detail.queryTime": {
-      "zh-Hans": "查询时间：{time}",
-      "zh-Hant": "查詢時間：{time}",
-      "en": "Query time: {time}"
-    },
-    "history.detail.lightweightNotice": {
-      "zh-Hans": "这是一次历史查询记录，完整报告请重新查询生成。",
-      "zh-Hant": "這是一次歷史查詢記錄，完整報告請重新查詢產生。",
-      "en": "This is a history record. Recalculate to generate the full report."
     },
     "history.detail.unknownValue": {
       "zh-Hans": "未知",

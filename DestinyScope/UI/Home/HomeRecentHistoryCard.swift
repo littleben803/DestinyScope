@@ -29,18 +29,22 @@ struct HomeRecentHistoryCard: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                Text(record.createdAtDisplayText)
+                Text(record.localizedCreatedAtText(locale: localizationStore.locale))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
 
-                Text(record.birthDisplayText)
+                Text(record.localizedBirthInfoText(localizationStore: localizationStore))
                     .font(AppTheme.Typography.footnote)
                     .foregroundColor(AppTheme.Colors.secondaryText)
 
                 Text(
                     localizationStore.string(
                         .homeRecentBirthEightCharacters,
-                        replacements: ["value": record.birthEightCharacters.displayText]
+                        replacements: [
+                            "value": record.birthEightCharacters.localizedDisplayText(
+                                localizationStore: localizationStore
+                            )
+                        ]
                     )
                 )
                     .font(AppTheme.Typography.footnote)
