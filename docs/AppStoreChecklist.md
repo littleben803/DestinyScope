@@ -43,12 +43,11 @@
 - 已准备 GitHub Pages 静态隐私政策网页文件：`docs/privacy/index.html`。
 - 已准备隐私政策 Markdown 源文件：`docs/privacy/privacy.md`。
 - 目标公开 URL 已规划为 `https://littleben803.github.io/DestinyScope/privacy/`。
+- 2026-06-11 已确认公网 URL 返回 HTTP 200，远端 HTML 与本地 `docs/privacy/index.html` 一致。
 
 上架前待办：
 
-- 在 GitHub 仓库中启用 GitHub Pages，并确认公网 URL 可访问。
 - 将 `https://littleben803.github.io/DestinyScope/privacy/` 填入 App Store Connect 的 Privacy Policy URL。
-- 确认隐私政策 URL 内容与 App 内文案一致。
 - 如未来加入联网、账号、AI、订阅、数据同步，需要同步更新。
 
 ## 4. 用户支持 URL
@@ -58,10 +57,10 @@
 - 已准备 GitHub Pages 静态用户支持网页文件：`docs/support/index.html`。
 - 目标公开 URL 已规划为 `https://littleben803.github.io/DestinyScope/support/`。
 - 页面提供联系邮箱和 App 内隐私政策、免责声明、开源许可入口说明。
+- 2026-06-11 已确认公网 URL 返回 HTTP 200，远端 HTML 与本地 `docs/support/index.html` 一致。
 
 上架前待办：
 
-- 在 GitHub Pages 部署后确认 `https://littleben803.github.io/DestinyScope/support/` 可访问。
 - 将 `https://littleben803.github.io/DestinyScope/support/` 填入 App Store Connect 的 Support URL。
 - Marketing URL 为可选字段，当前版本可不填写。
 
@@ -179,8 +178,8 @@
 
 ## 13. 当前缺失资源和人工确认项
 
-- 启用 GitHub Pages 并确认隐私政策公网 URL 可访问。
-- 将隐私政策 URL 填入 App Store Connect。
+- 确认 App Store Connect 中 Privacy Policy URL 填写为 `https://littleben803.github.io/DestinyScope/privacy/`。
+- 确认 App Store Connect 中 Support URL 填写为 `https://littleben803.github.io/DestinyScope/support/`。
 - App Icon 素材原创或授权确认。
 - Launch Screen 真机截图确认。
 - App Store Connect 创建 App。
@@ -715,3 +714,46 @@ V1.8 阶段 8 用户可见文案清理状态：
 - `keywords` 在卡片顶部以标签样式展示。
 - `original_poem`、`original_note`、`rewrite_notes` 仅作为内部参考字段，不在前端展示。
 - 当前阶段结果页不展示本地润色卡片，也不自动调用本地模型；默认文本润色工厂返回模板 refiner。
+
+## 22. V1.9 上线前 App Store 材料状态
+
+V1.9 阶段 1 App 名称本地化状态：
+
+- 简体中文 App Name：八字命镜。
+- 繁体中文 App Name：八字命鏡。
+- 英文 / 内部品牌名：DestinyScope。
+- Subtitle 已按三语言本地化。
+
+V1.9 阶段 2 Launch Screen 状态：
+
+- 启动页已使用“八字命镜 / 称骨命格与传统解读”上线口径。
+- Launch Screen 使用本地化字符串和静态命镜罗盘 logo。
+
+V1.9 阶段 3 App Store 上线材料准备状态：
+
+- 已新增 `docs/V1_9_AppStoreSubmissionPackage.md`。
+- 已新增 `docs/V1_9_ReviewNotesFinalDraft.md`。
+- 已新增 `docs/V1_9_PrivacyNutritionLabelDraft.md`。
+- 已新增 `docs/V1_9_ScreenshotCopyPlan.md`。
+- 已同步 `docs/AppStoreMetadata.md`、`docs/AppReviewNotes.md` 和 `docs/ScreenshotPlan.md` 到 V1.9 材料口径。
+- 当前只准备上线材料，未上传 App Store，未创建 App Store Connect 记录，未上传 TestFlight。
+- 本阶段未修改 Swift 代码、Xcode 工程、资源文件、签名、Bundle ID、Team、Version 或 Build。
+
+V1.9 阶段 4 最终一致性修复状态：
+
+- 已新增 `docs/V1_9_FinalSubmissionConsistencyReport.md`。
+- 已确认当前 App 不再包含常用出生资料用户功能。
+- `BirthProfile` 仍作为内部计算 / 历史详情模型存在，不代表常用出生资料功能。
+- `saved_birth_profiles.json` 仅作为旧版本遗留文件清理目标存在。
+- 已从最终上线材料中删除常用出生资料、常用资料、复用资料、saved birth profiles、saved profiles 和 Saved Birth Profiles 表述。
+- 最终材料已改为描述历史记录、知识库收藏、最近阅读、本地数据管理、结果页 / 历史详情分享、命格详解和本地处理。
+- 字段长度检查通过，英文 Subtitle 为 30/30。
+- 本阶段未修改 Swift 代码，未运行 Debug / Release build。
+- 当前仍未上传 App Store，未创建 App Store Connect 记录，未上传 TestFlight。
+
+上架前仍需人工确认：
+
+- App Store Connect 中手工填写 App Name、Subtitle、Promotional Text、Description、Keywords、Category、Age Rating、Support URL、Privacy URL、Copyright 和 Review contact。
+- App Store Connect Privacy Nutrition Label 最终问卷。
+- 截图实际页面、尺寸、素材授权和最终显示效果。
+- 最终 Archive / IPA 中 `PrivacyInfo.xcprivacy`、隐私政策 URL、Support URL 和包内容。

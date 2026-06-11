@@ -1,6 +1,8 @@
-# 八字命镜 App Review Notes
+# V1.9 Review Notes Final Draft
 
 更新日期：2026-06-11
+
+本文件用于 App Review Notes 手工填写前复核。当前阶段只准备文本，不上传 TestFlight，不创建 App Store Connect 记录，不修改代码、签名或版本号。
 
 ## 中文版本
 
@@ -86,8 +88,9 @@ Suggested review steps:
 7. Open Settings / About and review Privacy Policy, Disclaimer, Open Source Licenses, and local data management.
 ```
 
-## Manual Notes
+## Manual Submit Checklist
 
-- 不需要测试账号。
-- 上线前需要确认 `PrivacyInfo.xcprivacy` 已进入最终包。
-- V1.9 完整最终草案见 `docs/V1_9_ReviewNotesFinalDraft.md`。
+- 确认最终构建的实际功能仍为无账号、无登录、无服务端、无在线 AI、无广告追踪、无订阅。
+- 确认结果页没有恢复 AI 润色展示入口。
+- 确认 `PrivacyInfo.xcprivacy` 已进入最终 Archive / IPA。
+- 确认 App Store Connect Review contact 使用真实可联系信息。

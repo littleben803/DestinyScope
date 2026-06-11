@@ -47,13 +47,34 @@ DestinyScope 已回退到本地优先、确定性算法和模板解释路线。
 - 背景使用浅宣纸色，与首页背景和原启动页背景保持一致。
 - 本阶段不修改首页业务逻辑、称骨计算、本地模型、Bundle ID、签名、Team、Version / Build。
 
+### V1.9 阶段 3：App Store 上线材料准备
+
+- 已准备以“八字命镜”为中文主名的 App Store 上线材料包：`docs/V1_9_AppStoreSubmissionPackage.md`。
+- 已准备 Review Notes 最终草案：`docs/V1_9_ReviewNotesFinalDraft.md`。
+- 已准备 Privacy Nutrition Label 草案：`docs/V1_9_PrivacyNutritionLabelDraft.md`，当前建议 `Data Not Collected`，最终仍需用户在 App Store Connect 问卷中人工确认。
+- 已准备截图文案计划：`docs/V1_9_ScreenshotCopyPlan.md`。
+- 已同步 `docs/AppStoreMetadata.md`、`docs/AppReviewNotes.md` 和 `docs/ScreenshotPlan.md` 到 V1.9 上线材料口径。
+- 本阶段未修改 Swift 代码、Xcode 工程、资源文件、Bundle ID、签名、Team、Version / Build。
+- 本阶段未上传 TestFlight，未创建或填写 App Store Connect 记录。
+
+### V1.9 阶段 4：上线前最终一致性修复
+
+- 已新增 `docs/V1_9_FinalSubmissionConsistencyReport.md`。
+- 已确认当前 App 不再包含常用出生资料用户功能；`BirthProfile` 仅为内部计算 / 历史详情模型，`saved_birth_profiles.json` 仅作为旧版本遗留文件清理目标。
+- 已从 App Store Metadata、Review Notes、截图计划、V1.9 上线材料包和 Privacy Nutrition Label 草案中移除常用出生资料 / saved birth profiles 相关上线表述。
+- 最终上线材料改为描述历史记录、知识库收藏、最近阅读、本地数据管理、结果页 / 历史详情分享、命格详解和本地处理。
+- `docs/privacy/index.html` 和 `docs/privacy/privacy.md` 已复核，无需修改。
+- 本阶段未修改 Swift 代码、Xcode 工程、资源文件、Bundle ID、签名、Team、Version / Build。
+- 本阶段未上传 TestFlight，未创建或填写 App Store Connect 记录。
+
 ### 上线前静态页面与 App Store URL
 
 - `docs/privacy/index.html` 和 `docs/privacy/privacy.md` 已同步 App 内 `legal.json` 当前隐私口径，覆盖知识库搜索历史、本地数据管理、网络与服务端、系统分享和本地资源说明。
 - App Store Connect Privacy Policy URL 规划为 `https://littleben803.github.io/DestinyScope/privacy/`。
 - App Store Connect Support URL 规划为 `https://littleben803.github.io/DestinyScope/support/`，对应静态页面 `docs/support/index.html`。
 - App Review Notes 已补充 App 内隐私政策路径：关于/设置 Tab -> 隐私与安全 -> 隐私政策。
-- GitHub Pages 部署和 App Store Connect 字段填写仍由人工后续执行。
+- 2026-06-11 已验证 GitHub Pages 线上 Privacy Policy URL 和 Support URL 均返回 HTTP 200，远端 HTML 与本地文件一致。
+- App Store Connect 字段填写仍由人工后续执行。
 
 ## 已完成清理
 
